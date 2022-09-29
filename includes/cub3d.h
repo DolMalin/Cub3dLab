@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 13:20:23 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/29 16:33:39 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 16:39:30 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ typedef struct s_sprites
 typedef struct s_data
 {
 	t_sprites	sprites;
-	t_map		map;
-	t_pers		pers;
+	t_scene		scene;
+	t_player	player;
 }				t_data;
 
 /*init data with scene*/
