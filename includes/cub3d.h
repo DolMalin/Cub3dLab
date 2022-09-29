@@ -16,17 +16,19 @@
 # define KB_RIGHT 124
 # define ESCAPE_KC 53
 
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
+
+# define FLOOR 0
+# define CEIL 1
+
 typedef struct s_data
 {
-	char			*no_path;
-	char			*so_path;
-	char			*we_path;
-	char			*ea_path;
-
+	char			**textures_path;
 	/* Use of unsigned array of size 3 because RGB contains 3 values between 0 and 255*/
-	unsigned char	floor_color[3];
-	unsigned char	ceil_color[3];
-	
+	unsigned char	*colors[3];
 	char			**map;
 }				t_data;
 
