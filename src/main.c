@@ -6,9 +6,8 @@ int	main(int ac, char **av)
 	(void)ac;
 
 	// CHECK IF THE INPUT IS VALID
-	// if (!check_input(ac, av))
-	// 	return (NULL);
-
+	if (!check_input(ac, av))
+		return (NULL);
 	data = init_data(av[1]);
 	if (!data)
 	{

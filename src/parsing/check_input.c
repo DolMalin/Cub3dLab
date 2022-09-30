@@ -1,6 +1,6 @@
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	check_input(int ac, char **av)
+t_bool	check_arguments(int ac, char **av)
 {
 	if (ac < 2)
 	{
@@ -14,8 +14,18 @@ int	check_input(int ac, char **av)
 	}
 	if (open(av[1], O_RDONLY) < 0)
 	{
-		printf("Unreadable scene file");
+		printf("Can't access scene file");
 		return (0);
 	}
 	return (1);
+}
+
+
+
+t_bool	check_input(int ac, char **av)
+{
+	if (!check_arguments(ac, av))
+		return (0);
+	
+
 }
