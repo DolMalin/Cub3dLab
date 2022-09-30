@@ -1,13 +1,15 @@
 #include "../includes/cub3d.h"
 
 
-t_data	*init_data(char *map_file)
+static t_data	*init_data(char *map_file)
 {
 	t_data	*data;
 
+	(void)map_file;
 	data = malloc(sizeof(data));
 	if (!data)
 		return (NULL);
+	
 	/*  CHECK BEFORE IF PATH ARE VALID, COLORS ARE VALID, MAP IS VALID */
 
 	/* IMPLEMENT GET_PATH FUNCTION */
@@ -30,7 +32,6 @@ t_data	*init_data(char *map_file)
 
 int	main(int ac, char **av)
 {
-	(void)ac;
 	t_data	*data;
 
 	// CHECK IF THE INPUT IS VALID
@@ -38,9 +39,11 @@ int	main(int ac, char **av)
 	if (!data)
 	{
 		// free_data(data);
-		return (0);
+		return (1);
 	}
-
+	if (!check_input(ac, av))
+		return (1);
+	
 	// free_data(data);
 	return (0);
 }

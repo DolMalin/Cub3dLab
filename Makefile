@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/09/29 14:20:34 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/09/30 13:13:55 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT = ./libft/libft.a \
 MLX = ./mlx/libmlx.a \
 
 SRC_FILES =  	main.c \
-				cub3d.c \
+				check_input.c \
 
 SRC = 			${addprefix src/, ${SRC_FILES}}
 OBJS = 			${SRC:.c=.o}
