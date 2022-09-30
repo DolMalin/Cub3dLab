@@ -78,7 +78,7 @@ static t_bool	check_color(char *color_line, const char *color_id)
 
 static t_bool	check_colors(char **unparsed_scene)
 {
-	if (!check_color(get_line_from_key(unparsed_scene, "F"), "Floor"))
+	if (!check_color(get_line_from_key(unparsed_scene, "F"), "Floor")) // find a way to verify if the line is missing to have an error message "no floor color code indicated"
 		return (false);
 	if (!check_color(get_line_from_key(unparsed_scene, "C"), "Ceiling"))
 		return (false);
