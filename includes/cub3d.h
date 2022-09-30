@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 11:38:35 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/30 13:13:28 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 15:10:17 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /* ********************************LIBS************************************** */
 
 # include "../libft/libft.h"
-# include "../mlx/mlx.h"
+// # include "./mlx/mlx.h"
 
 /* *****************************DEFINES_KEYBOARD***************************** */
 
@@ -36,15 +36,28 @@
 # define FLOOR 0
 # define CEIL 1
 
+# define R 0
+# define G 1
+# define B 2
+
 typedef struct s_data
 {
 	char			**textures_path;
 	/* Use of unsigned array of size 3 because RGB contains 3 values between 0 and 255*/
-	unsigned char	*colors[3];
-	char			**map;
+	unsigned char	**colors;
+	char			**scene;
 }				t_data;
 
-/* **********************************PARSING********************************* */
-int	check_input(int ac, char **av);
 
+/****************PARSING*********************/
+t_data			*init_data(char *scene_file);
+void			free_data(t_data *data);
+char			*get_line_from_key(char	**parsed_scene, char *key);
+unsigned char	**get_colors(char **parsed_scene);
+char			**get_textures_paths(char **parsed_scene);
+char			**parse_scene_file(char *scene_file);
+
+/****************UTILS*********************/
+int		lines_count(char *file);
+void	free_array(void	**array);
 #endif
