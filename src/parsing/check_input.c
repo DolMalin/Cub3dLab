@@ -48,9 +48,27 @@ static t_bool	check_textures(char **unparsed_scene)
 	return (true);
 }
 
-static t_bool	check_color(char **unparsed_scene)
+static t_bool	check_color(char *color_line)
 {
-	
+	unsigned char	*color;
+	char			**splited_line;
+
+	splited_line = ft_split(color_line, ',');
+	if (!splited_line)
+		return (false);
+	color = malloc(sizeof(unsigned char) * 3);
+	if (!color)
+		return (false);
+	color[R] = (unsigned char)ft_atoi(&splited_line[0][2]);
+	color[G] = (unsigned char)ft_atoi(splited_line[1]);
+	color[B] = (unsigned char)ft_atoi(splited_line[2]);
+	if (!((color[R] >= 0 && color[R] <= 255) 
+		&& (color[G] >= 0 && color[R] <= 255) 
+			&& (color[B] >= 0 && color[R] <= 255)))
+			return (false);
+	free(color);
+	free(splited_line);
+	return (true); // think about the case when there is nothing between 2 "," example : "200,,300"
 }
 
 static t_bool	check_colors(char **unparsed_scene)
@@ -68,10 +86,21 @@ t_bool	check_input(int ac, char **av)
 
 	unparsed_scene = parse_scene_file(av[1]);
 	if (!check_arguments(ac, av))
-		return (0);
+	{
+		free(unparsed_scene);
+		return (false);
+	}
 	if (!check_textures(unparsed_scene))
-		return (0);
-	if (!check_colors(unparsed_scene(scene)))
+	{
+		free(unparsed_scene);
+		return (false);
+	}
+	if (!check_colors(unparsed_scene))
+	{
+		free(unparsed_scene);
+		return (false);
+	}
 	// check if duplicate texture : replace or return error
-	return (1);
+	free(unparsed_scene);
+	return (true);
 }
