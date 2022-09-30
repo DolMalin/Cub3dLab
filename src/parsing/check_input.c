@@ -9,7 +9,7 @@ static t_bool	check_arguments(int ac, char **av)
 	}
 	if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
 	{
-		printf("Not a .cub scene\n");
+		printf("Not a .cub scene file\n");
 		return (0);
 	}
 	if (open(av[1], O_RDONLY) < 0)
