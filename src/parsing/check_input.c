@@ -21,7 +21,6 @@ t_bool	check_arguments(int ac, char **av)
 }
 
 
-
 t_bool	check_input(int ac, char **av)
 {
 	if (!check_arguments(ac, av))

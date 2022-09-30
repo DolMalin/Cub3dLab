@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 11:38:35 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/30 15:19:25 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 15:20:16 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@
 # define R 0
 # define G 1
 # define B 2
+
+/* ================ ~ STRUCTURES ~ ================ */
+typedef enum e_bool
+{
+	false,
+	true
+}				t_bool;
 
 typedef struct s_data
 {
