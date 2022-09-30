@@ -53,7 +53,7 @@ char	**get_textures_paths(char **parsed_scene)
 	textures_paths[NO] = get_line_from_key(parsed_scene, "NO");
 	textures_paths[SO] = get_line_from_key(parsed_scene, "SO");
 	textures_paths[WE] = get_line_from_key(parsed_scene, "WE");
-	textures_paths[EA] = get_line_from_key(parsed_scene, "EA");
+	textures_paths[EA] = get_line_from_key(parsed_scene, "EA"); // check if path is right : after "NO", "SO" etc
 	return (textures_paths);
 }
 

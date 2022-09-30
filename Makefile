@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/09/30 15:10:26 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/09/30 16:01:02 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ LIBFT = ./libft/libft.a \
 MLX = ./mlx/libmlx.a \
 
 PARSING_FILES =	data.c \
+				check_input.c \
 				parse_scene.c
 				
 UTILS_FILES =	utils1.c

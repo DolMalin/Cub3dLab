@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 11:38:35 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/30 15:20:16 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 16:07:44 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_data
 
 /****************PARSING*********************/
 t_bool			check_input(int ac, char **av);
-t_bool			check_arguments(int ac, char **av);
 
 /****************DATA*********************/
 t_data			*init_data(char *scene_file);
