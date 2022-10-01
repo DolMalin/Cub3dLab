@@ -7,6 +7,7 @@ static t_bool	check_arguments(int ac, char **av)
 		printf("No scene in arguments\n");
 		return (0);
 	}
+	// This condition check if the .cub is only at the end on the file and has nothing after ? i.e michel.cubmichel
 	if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
 	{
 		printf("Not a .cub scene file\n");
@@ -62,6 +63,7 @@ static t_bool	check_color(char *color_line, const char *color_id)
 	color[R] = (unsigned char)ft_atoi(&splited_line[0][2]);
 	color[G] = (unsigned char)ft_atoi(splited_line[1]);
 	color[B] = (unsigned char)ft_atoi(splited_line[2]); // make a function to get the color and seperate from check_color
+	// the condition below condition condition simplified
 	if (!((color[R] >= 0 && color[R] <= 255) 
 		&& (color[G] >= 0 && color[R] <= 255) 
 			&& (color[B] >= 0 && color[R] <= 255)))
@@ -85,6 +87,7 @@ static t_bool	check_colors(char **unparsed_scene)
 	return (true);
 }
 
+// well done Ana, you killed the job ! (y)
 t_bool	check_input(int ac, char **av)
 {
 	char	**unparsed_scene;
