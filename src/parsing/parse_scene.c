@@ -28,6 +28,8 @@ unsigned char	*get_color(char *line)
 	color[R] = (unsigned char)ft_atoi(&splited_line[0][1]);
 	color[G] = (unsigned char)ft_atoi(splited_line[1]);
 	color[B] = (unsigned char)ft_atoi(splited_line[2]);
+	free_array((void **)splited_line);
+	free(line);
 	return (color);
 }
 
@@ -90,7 +92,6 @@ char	*trim_spaces(char	*line)
 	}
 	trimed_line[k] = '\0';
 	return (trimed_line);
-	
 }
 
 char	**trim_config_line(char **parsed_scene)
@@ -124,6 +125,8 @@ char	**parse_scene_file(char *scene_file)
 	i = 0;
 	fd = open(scene_file, O_RDONLY);
 	parsed_scene = malloc(sizeof(char *) * (lines_count(scene_file) + 1));
+	if (!parsed_scene)
+		return (NULL);
 	parsed_scene[i] = get_next_line(fd);
 	while(parsed_scene[i])
 	{

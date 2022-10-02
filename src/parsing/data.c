@@ -24,6 +24,25 @@ t_data	*init_data(char *scene_file)
 
 void	free_data(t_data *data)
 {
-	free_array((void **)data->textures_path);
+	// free_array((void **)data->textures_path);
 	// free_array((void **)data->colors);
+	// free(data->colors[FLOOR][R]);
+	// free(data->colors[FLOOR][G]);
+	// free(data->colors[FLOOR][G]);
+	free(data->colors[FLOOR]);
+
+	// free(data->colors[CEIL][R]);
+	// free(data->colors[CEIL][G]);
+	// free(data->colors[CEIL][G]);
+	free(data->colors[CEIL]);
+	free(data->colors);
+
+	free(data->textures_path[NO]);
+	free(data->textures_path[SO]);
+	free(data->textures_path[EA]);
+	free(data->textures_path[WE]);
+	free(data->textures_path);
+	free(data);
+
+
 }
