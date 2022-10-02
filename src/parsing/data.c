@@ -5,7 +5,7 @@ t_data	*init_data(char *scene_file)
 	t_data	*data;
 	char	**parsed_scene;
 
-	data = malloc(sizeof(data));
+	data = malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
 	parsed_scene = parse_scene_file(scene_file);
@@ -22,27 +22,29 @@ t_data	*init_data(char *scene_file)
 	return (data);
 }
 
+void	free_unterminated_array(void **array, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n <= 0)
+		return ;
+	while (i < n)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
 void	free_data(t_data *data)
 {
-	// free_array((void **)data->textures_path);
-	// free_array((void **)data->colors);
-	// free(data->colors[FLOOR][R]);
-	// free(data->colors[FLOOR][G]);
-	// free(data->colors[FLOOR][G]);
-	free(data->colors[FLOOR]);
-
-	// free(data->colors[CEIL][R]);
-	// free(data->colors[CEIL][G]);
-	// free(data->colors[CEIL][G]);
-	free(data->colors[CEIL]);
-	free(data->colors);
-
-	free(data->textures_path[NO]);
-	free(data->textures_path[SO]);
-	free(data->textures_path[EA]);
-	free(data->textures_path[WE]);
-	free(data->textures_path);
+	// // free_unterminated_array((void **)data->colors[FLOOR], 3);
+	// free(data->colors[FLOOR]);
+	// free(data->colors[CEIL]);
+	// free(data->colors);
+	free_unterminated_array((void **)data->colors, 2);
+	free_unterminated_array((void **)data->textures_path, 4);
 	free(data);
-
 
 }

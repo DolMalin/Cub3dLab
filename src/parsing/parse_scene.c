@@ -37,7 +37,7 @@ unsigned char	**get_colors(char **parsed_scene)
 {
 	unsigned char	**colors;
 
-	colors = malloc(sizeof(unsigned char *));
+	colors = malloc(sizeof(char *) * 3);
 	if (!colors)
 		return (NULL);
 	colors[FLOOR] = get_color(get_line_from_key(parsed_scene, "F"));
@@ -100,7 +100,7 @@ char	**trim_config_line(char **parsed_scene)
 	int		i;
 
 	i = 0;
-	trimed_scene = malloc(sizeof(char *) * array_len((void **)parsed_scene));
+	trimed_scene = malloc(sizeof(char *) * (array_len((void **)parsed_scene) + 1));
 	if (!trimed_scene)
 		return (NULL);
 	while(parsed_scene[i])
@@ -112,6 +112,7 @@ char	**trim_config_line(char **parsed_scene)
 		free(parsed_scene[i]);
 		i++;
 	}
+	trimed_scene[i] = '\0';
 	free(parsed_scene);
 	return (trimed_scene);
 }
