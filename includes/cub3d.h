@@ -36,6 +36,11 @@ typedef struct s_data
 	char			**scene;
 }				t_data;
 
+typedef enum e_bool
+{
+	false,
+	true
+}			t_bool;
 
 /****************PARSING*********************/
 t_data			*init_data(char *scene_file);
@@ -48,4 +53,6 @@ char			**parse_scene_file(char *scene_file);
 /****************UTILS*********************/
 int		lines_count(char *file);
 void	free_array(void	**array);
+int		array_len(void **array);
+t_bool	is_config_line(char	*line);
 #endif
