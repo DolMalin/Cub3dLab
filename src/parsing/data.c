@@ -22,29 +22,9 @@ t_data	*init_data(char *scene_file)
 	return (data);
 }
 
-void	free_unterminated_array(void **array, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if (n <= 0)
-		return ;
-	while (i < n)
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-
 void	free_data(t_data *data)
 {
-	// // free_unterminated_array((void **)data->colors[FLOOR], 3);
-	// free(data->colors[FLOOR]);
-	// free(data->colors[CEIL]);
-	// free(data->colors);
 	free_unterminated_array((void **)data->colors, 2);
 	free_unterminated_array((void **)data->textures_path, 4);
 	free(data);
-
 }

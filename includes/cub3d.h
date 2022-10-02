@@ -55,4 +55,5 @@ int		lines_count(char *file);
 void	free_array(void	**array);
 int		array_len(void **array);
 t_bool	is_config_line(char	*line);
+void	free_unterminated_array(void **array, size_t n);
 #endif

@@ -6,7 +6,7 @@
 #    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/09/30 14:51:27 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/02 20:08:35 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ LIBFT = ./libft/libft.a \
 MLX = ./mlx/libmlx.a \
 
 PARSING_FILES =	data.c \
-				parse_scene.c
+				parse_scene.c \
+				get_features_from_scene.c
 				
 UTILS_FILES =	utils1.c
 

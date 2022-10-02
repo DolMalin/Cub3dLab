@@ -31,6 +31,22 @@ void	free_array(void	**array)
 	free(array);
 }
 
+void	free_unterminated_array(void **array, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n <= 0)
+		return ;
+	while (i < n)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+
 int		array_len(void **array)
 {
 	int	i;
