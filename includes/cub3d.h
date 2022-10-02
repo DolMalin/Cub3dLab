@@ -33,7 +33,7 @@ typedef struct s_data
 	char			**textures_path;
 	/* Use of unsigned array of size 3 because RGB contains 3 values between 0 and 255*/
 	unsigned char	**colors;
-	char			**scene;
+	char			**map;
 }				t_data;
 
 typedef enum e_bool
@@ -48,6 +48,7 @@ void			free_data(t_data *data);
 char			*get_line_from_key(char	**parsed_scene, char *key);
 unsigned char	**get_colors(char **parsed_scene);
 char			**get_textures_paths(char **parsed_scene);
+char			**get_map(char	**parsed_scene);
 char			**parse_scene_file(char *scene_file);
 
 /****************UTILS*********************/

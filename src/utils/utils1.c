@@ -62,8 +62,6 @@ t_bool	is_config_line(char	*line)
 	size_t	len;
 
 	len = ft_strlen(line);
-	if (len == 0)
-		return (false);
 	if (ft_strnstr(line, "NO", len) || ft_strnstr(line, "SO", len))
 		return (true);
 	else if (ft_strnstr(line, "WE", len) || ft_strnstr(line, "EA", len))

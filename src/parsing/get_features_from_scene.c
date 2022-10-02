@@ -58,3 +58,38 @@ char	**get_textures_paths(char **parsed_scene)
 	textures_paths[EA] = get_line_from_key(parsed_scene, "EA");
 	return (textures_paths);
 }
+
+char	**get_map(char	**parsed_scene)
+{
+	char	**map;
+	int		i;
+	int		j;
+	int		map_len;
+
+	i = 0;
+	j = 0;
+	map_len = 0;
+	while (parsed_scene[i])
+	{
+		if (!is_config_line(parsed_scene[i]))
+			map_len++;
+		i++;
+	}
+	map = malloc(sizeof(char *) * (map_len + 1));
+	if (!map)
+		return (NULL);
+	i = 0;
+	while(parsed_scene[i])
+	{
+		if (!is_config_line(parsed_scene[i]))
+		{
+			map[j] = ft_strdup(parsed_scene[i]);
+			if (!map[j])
+				return (NULL);
+			j++;
+		}
+		i++;
+	}
+	map[j] = '\0';
+	return (map);
+}
