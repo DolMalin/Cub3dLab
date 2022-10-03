@@ -5,8 +5,8 @@ NO  .     /path_to_the_      north_texture
 
 EA ./path_to_       the_east_textu           re
 
-F 2       20,  10 0, 0
-       C     225,    30, 0
+F 2       21,  10 0, 0
+       C     205,    30, 0
 
 				1111111111111111111111111
 				1000000000110000000000001

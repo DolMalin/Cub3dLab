@@ -1,30 +1,24 @@
 #include "test.h"
 
-t_bool	test_data_struct(void)
+void	print_data_struct(char *path)
 {
-	t_data			*data;
-	DIR 			*d;
-    struct dirent 	*dir;
-    char 			full_path[1000];
-    char			path[18] = "unit-tests/scenes";
+	t_data	*data;
+	int		fd;
 
-    d = opendir(path);
-    if (d)
-    {
-		// THIS LOOP WILL ITERATE OVER ALL THE .cub maps in the scene folder
-        while ((dir = readdir(d)) != NULL)
-        {
-            if(dir->d_type==DT_REG){
-                full_path[0]='\0';
-                strcat(full_path,path);
-                strcat(full_path,"/");
-                strcat(full_path,dir->d_name);
-
-				data = init_data(full_path);
-				free_data(data);
-            }
-        }
-        closedir(d);
-    }
-    return(0);   
+	fd = open(path, O_RDONLY);
+	if (!fd)
+	{
+		printf("Error: path %s is not valid\n", path);
+		return ;
+	}
+	data = init_data(path);
+	if (!data)
+		return ;
+	printf("%s\n", data->textures_path[NO]);
+	printf("%s\n", data->textures_path[SO]);
+	printf("%s\n", data->textures_path[WE]);
+	printf("%s\n", data->textures_path[EA]);
+	printf("%d,%d,%d\n", data->colors[FLOOR][R], data->colors[FLOOR][G], data->colors[FLOOR][B]);
+	printf("%d,%d,%d\n", data->colors[CEIL][R], data->colors[CEIL][G], data->colors[CEIL][B]);
+	free_data(data);
 }

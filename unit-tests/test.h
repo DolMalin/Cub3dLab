@@ -11,6 +11,6 @@
 int countfiles(char *path);
 
 /************************PARSING**************************/
-t_bool	test_data_struct(void);
+void	print_data_struct(char *path);
 
 #endif
