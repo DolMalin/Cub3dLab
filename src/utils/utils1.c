@@ -30,3 +30,43 @@ void	free_array(void	**array)
 	}
 	free(array);
 }
+
+void	free_unterminated_array(void **array, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n <= 0)
+		return ;
+	while (i < n)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+
+int		array_len(void **array)
+{
+	int	i;
+
+	i = 0;
+	while(array[i])
+		i++;
+	return (i);
+}
+
+t_bool	is_config_line(char	*line)
+{
+	size_t	len;
+
+	len = ft_strlen(line);
+	if (ft_strnstr(line, "NO", len) || ft_strnstr(line, "SO", len))
+		return (true);
+	else if (ft_strnstr(line, "WE", len) || ft_strnstr(line, "EA", len))
+		return (true);
+	else if (ft_strnstr(line, "F", len) || ft_strnstr(line, "C", len))
+		return (true);
+	return (false);
+}
