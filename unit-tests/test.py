@@ -81,6 +81,7 @@ def	compare_scenes_config(scene_name: str) -> bool:
 		print(f"Diff: {difference(output, expected)}\n")
 		return False
 
+
 def	test_data_structure():
 	scenes = os.listdir(os.path.abspath(os.getcwd()) + "/unit-tests/scenes")
 	for scene in scenes:
@@ -94,7 +95,6 @@ if __name__ == "__main__":
 	# Compile the C functions
 	compile_command = "make test -C" + os.path.abspath(os.getcwd())
 	os.system(compile_command)
-	scene_name = "spaces.cub"
 	
 	# Start the test
 	test_data_structure()

@@ -1,6 +1,20 @@
 #include "../../includes/cub3d.h"
 
-char	*trim(char *line, char c)
+t_bool	is_in_charset(char c, char *charset)
+{
+	int	i;
+
+	i = 0;
+	while (charset[i])
+	{
+		if (c == charset[i])
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+char	*trim(char *line, char *charset)
 {
 	char 	*trimed_line;
 	int		i;
@@ -11,7 +25,7 @@ char	*trim(char *line, char c)
 	s_count = 0;
 	while(line[i])
 	{
-		if (line[i] != c)
+		if (!is_in_charset(line[i], charset))
 			s_count++;
 		i++;
 	}
@@ -24,7 +38,7 @@ char	*trim(char *line, char c)
 	k = 0;
 	while(line[i])
 	{
-		if (line[i] != c)
+		if (!is_in_charset(line[i], charset))
 		{
 			trimed_line[k] = line[i];
 			k++;
@@ -35,10 +49,11 @@ char	*trim(char *line, char c)
 	return (trimed_line);
 }
 
+
+
 char	**trim_config_line(char **parsed_scene)
 {
 	char	**trimed_scene;
-	char	*buffer;
 	int		i;
 
 	i = 0;
@@ -48,12 +63,7 @@ char	**trim_config_line(char **parsed_scene)
 	while(parsed_scene[i])
 	{
 		if (is_config_line(parsed_scene[i]))
-		{
-			trimed_scene[i] = trim(parsed_scene[i], ' ');
-			buffer = trimed_scene[i];
-			trimed_scene[i] = trim(trimed_scene[i], '\n');
-			free(buffer);
-		}
+			trimed_scene[i] = trim(parsed_scene[i], " \n\t");
 		else
 			trimed_scene[i] = ft_strdup(parsed_scene[i]);
 		free(parsed_scene[i]);

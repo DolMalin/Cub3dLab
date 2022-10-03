@@ -13,8 +13,6 @@ char	*get_line_from_key(char	**parsed_scene, char *key)
 				return (ft_strdup(&parsed_scene[i][1]));
 			return (ft_strdup(&parsed_scene[i][2]));
 		}
-			
-
 		i++;
 	}
 	return (NULL);
