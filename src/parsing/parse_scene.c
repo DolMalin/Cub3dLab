@@ -49,8 +49,6 @@ char	*trim(char *line, char *charset)
 	return (trimed_line);
 }
 
-
-
 char	**trim_config_line(char **parsed_scene)
 {
 	char	**trimed_scene;
@@ -93,6 +91,8 @@ char	**parse_scene_file(char *scene_file)
 	}
 	parsed_scene[i] = 0;
 	parsed_scene = trim_config_line(parsed_scene);
+	for (int i = 0; parsed_scene[i]; i++)
+		printf("%s\n", parsed_scene[i]);
 	if (!parsed_scene)
 		return (NULL);
 	return (parsed_scene);
