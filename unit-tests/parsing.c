@@ -11,9 +11,10 @@ void	print_data_struct(char *path)
 		printf("Error: path %s is not valid\n", path);
 		return ;
 	}
+	
 	data = init_data(path);
 	if (!data)
-		return ;
+		return;
 	printf("%s\n", data->textures_path[NO]);
 	printf("%s\n", data->textures_path[SO]);
 	printf("%s\n", data->textures_path[WE]);
@@ -21,4 +22,5 @@ void	print_data_struct(char *path)
 	printf("%d,%d,%d\n", data->colors[FLOOR][R], data->colors[FLOOR][G], data->colors[FLOOR][B]);
 	printf("%d,%d,%d\n", data->colors[CEIL][R], data->colors[CEIL][G], data->colors[CEIL][B]);
 	free_data(data);
+	return ;
 }

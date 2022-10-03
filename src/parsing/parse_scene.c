@@ -1,6 +1,6 @@
 #include "../../includes/cub3d.h"
 
-char	*trim_spaces(char	*line)
+char	*trim(char *line, char c)
 {
 	char 	*trimed_line;
 	int		i;
@@ -11,7 +11,7 @@ char	*trim_spaces(char	*line)
 	s_count = 0;
 	while(line[i])
 	{
-		if (line[i] != ' ')
+		if (line[i] != c)
 			s_count++;
 		i++;
 	}
@@ -24,7 +24,7 @@ char	*trim_spaces(char	*line)
 	k = 0;
 	while(line[i])
 	{
-		if (line[i] != ' ')
+		if (line[i] != c)
 		{
 			trimed_line[k] = line[i];
 			k++;
@@ -38,6 +38,7 @@ char	*trim_spaces(char	*line)
 char	**trim_config_line(char **parsed_scene)
 {
 	char	**trimed_scene;
+	char	*buffer;
 	int		i;
 
 	i = 0;
@@ -47,7 +48,12 @@ char	**trim_config_line(char **parsed_scene)
 	while(parsed_scene[i])
 	{
 		if (is_config_line(parsed_scene[i]))
-			trimed_scene[i] = trim_spaces(parsed_scene[i]);
+		{
+			trimed_scene[i] = trim(parsed_scene[i], ' ');
+			buffer = trimed_scene[i];
+			trimed_scene[i] = trim(trimed_scene[i], '\n');
+			free(buffer);
+		}
 		else
 			trimed_scene[i] = ft_strdup(parsed_scene[i]);
 		free(parsed_scene[i]);

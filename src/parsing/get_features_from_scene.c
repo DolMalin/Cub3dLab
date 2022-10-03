@@ -8,7 +8,13 @@ char	*get_line_from_key(char	**parsed_scene, char *key)
 	while(parsed_scene[i])
 	{
 		if (ft_strncmp(parsed_scene[i], key, ft_strlen(key)) == 0)
-			return (ft_strdup(parsed_scene[i]));
+		{
+			if (parsed_scene[i][0] == 'C' || parsed_scene[i][0] == 'F')
+				return (ft_strdup(&parsed_scene[i][1]));
+			return (ft_strdup(&parsed_scene[i][2]));
+		}
+			
+
 		i++;
 	}
 	return (NULL);
@@ -25,7 +31,7 @@ unsigned char	*get_color(char *line)
 	color = malloc(sizeof(unsigned char) * 3);
 	if (!color)
 		return (NULL);
-	color[R] = (unsigned char)ft_atoi(&splited_line[0][1]);
+	color[R] = (unsigned char)ft_atoi(splited_line[0]);
 	color[G] = (unsigned char)ft_atoi(splited_line[1]);
 	color[B] = (unsigned char)ft_atoi(splited_line[2]);
 	free_array((void **)splited_line);

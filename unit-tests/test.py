@@ -95,5 +95,6 @@ if __name__ == "__main__":
 	compile_command = "make test -C" + os.path.abspath(os.getcwd())
 	os.system(compile_command)
 	scene_name = "spaces.cub"
-
+	
+	# Start the test
 	test_data_structure()
