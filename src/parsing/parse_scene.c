@@ -45,7 +45,7 @@ char	*trim(char *line, char *charset)
 		}
 		i++;
 	}
-	trimed_line[k] = '\0';
+	trimed_line[k] = 0;
 	return (trimed_line);
 }
 
@@ -69,7 +69,7 @@ char	**trim_config_line(char **parsed_scene)
 		free(parsed_scene[i]);
 		i++;
 	}
-	trimed_scene[i] = '\0';
+	trimed_scene[i] = 0;
 	free(parsed_scene);
 	return (trimed_scene);
 }

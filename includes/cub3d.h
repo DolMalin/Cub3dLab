@@ -42,6 +42,9 @@ typedef enum e_bool
 	true
 }			t_bool;
 
+/****************CHECK_INPUT*********************/
+t_bool			check_input(int ac, char **av);
+
 /****************PARSING*********************/
 t_data			*init_data(char *scene_file);
 void			free_data(t_data *data);
@@ -54,7 +57,11 @@ char			**parse_scene_file(char *scene_file);
 /****************UTILS*********************/
 int		lines_count(char *file);
 void	free_array(void	**array);
-int		array_len(void **array);
+size_t	array_len(void **array);
 t_bool	is_config_line(char	*line);
 void	free_unterminated_array(void **array, size_t n);
+t_bool	is_empty_space(char c);
+t_bool	is_empty_line(char *line);
+t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j);
+
 #endif
