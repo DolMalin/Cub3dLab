@@ -91,8 +91,6 @@ char	**parse_scene_file(char *scene_file)
 	}
 	parsed_scene[i] = 0;
 	parsed_scene = trim_config_line(parsed_scene);
-	for (int i = 0; parsed_scene[i]; i++)
-		printf("%s\n", parsed_scene[i]);
 	if (!parsed_scene)
 		return (NULL);
 	return (parsed_scene);

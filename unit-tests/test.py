@@ -22,7 +22,7 @@ def	get_scene_config(scene_name: str) -> str:
 	# Get the config lines and remove withespaces
 	filtered_lines = []
 	for line in splited_data:
-		if search("NO|SO|EA|WE|F|C", line):
+		if search("N|O|S|O|E|A|W|E|F|C", line):
 			filtered_lines.append(line.translate(str.maketrans("", "", string.whitespace)))
 
 	# Remove the ID at the start of the liens
@@ -74,6 +74,7 @@ def	compare_scenes_config(scene_name: str) -> bool:
 	"""
 	expected = get_scene_config(scene_name)
 	output = exec_command("test", scene_name)
+	print(expected)
 	if output ==  expected:
 		return True
 	else:
