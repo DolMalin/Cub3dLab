@@ -74,12 +74,13 @@ def	compare_scenes_config(scene_name: str) -> bool:
 	"""
 	expected = get_scene_config(scene_name)
 	output = exec_command("test", scene_name)
-	print(expected)
 	if output ==  expected:
 		return True
 	else:
 		print(f"\n[Error] data structure: {scene_name}")
-		print(f"Diff: {difference(output, expected)}\n")
+		print(f"Diff: {difference(output, expected)}")
+		print(f"Expected: {expected}")
+		print(f"Output: {output}\n")
 		return False
 
 
@@ -89,7 +90,6 @@ def	test_data_structure():
 		if not compare_scenes_config(scene):
 			return
 	print("[Test OK] data structure")
-
 
 if __name__ == "__main__":
 
