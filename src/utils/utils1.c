@@ -11,8 +11,7 @@ int		lines_count(char *file)
 	buffer = get_next_line(fd);
 	while (buffer)
 	{
-		if (!is_empty_line(buffer))
-			len++;
+		len++;
 		free(buffer);
 		buffer = get_next_line(fd);
 	}

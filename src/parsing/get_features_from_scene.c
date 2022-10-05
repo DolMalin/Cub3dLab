@@ -87,9 +87,7 @@ char	**get_map(char	**parsed_scene)
 	{
 		if (!is_config_line(parsed_scene[i]))
 		{
-			//printf("%s\n", trim(parsed_scene[i], "\n"));
-			map[j] = ft_strdup(parsed_scene[i]);
-			//map[j] = trim(parsed_scene[i], "\n");
+			map[j] = trim(parsed_scene[i], "\n");
 			if (!map[j])
 				return (NULL);
 			j++;

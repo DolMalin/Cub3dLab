@@ -42,6 +42,9 @@ typedef enum e_bool
 	true
 }			t_bool;
 
+/******** TO REMOVE*********/
+void print_map(char **map);
+
 /****************CHECK_INPUT*********************/
 t_bool			check_input(int ac, char **av);
 

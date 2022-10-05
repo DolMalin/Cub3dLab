@@ -62,7 +62,7 @@ char	**trim_config_line(char **parsed_scene)
 		return (NULL);
 	while(parsed_scene[i])
 	{
-		if (is_config_line(parsed_scene[i]))// || (ft_strnstr(parsed_scene[i], "\n", ft_strlen(parsed_scene[i]))))
+		if (is_config_line(parsed_scene[i]))
 			trimed_scene[i] = trim(parsed_scene[i], " \n\t");
 		else
 			trimed_scene[i] = ft_strdup(parsed_scene[i]);
@@ -74,6 +74,40 @@ char	**trim_config_line(char **parsed_scene)
 	return (trimed_scene);
 }
 
+char	**remove_empty_lines(char	**parsed_scene)
+{
+	size_t	len;
+	size_t	i;
+	size_t	j;
+	char	**output;
+
+	i = 0;
+	j = 0;
+	len = 0;
+	while (parsed_scene[i])
+	{
+		if (!is_empty_line(parsed_scene[i]))
+			len++;
+		i++;
+	}
+	output = malloc(sizeof(char *) * (len + 1));
+	if (!output)
+		return (NULL);
+	i = 0;
+	while(parsed_scene[i])
+	{
+		if (!is_empty_line(parsed_scene[i]))
+		{
+			output[j] = ft_strdup(parsed_scene[i]);
+			j++;
+		}
+		i++;
+	}
+	output[j] = 0;
+	free_array((void **)parsed_scene);
+	return (output);
+}
+
 char	**parse_scene_file(char *scene_file)
 {
 	char	**parsed_scene;
@@ -82,20 +116,17 @@ char	**parse_scene_file(char *scene_file)
 
 	i = 0;
 	fd = open(scene_file, O_RDONLY);
-	// modif line count to skip the empty lines
 	parsed_scene = malloc(sizeof(char *) * (lines_count(scene_file) + 1));
-	printf("lines_count == %d\n", lines_count(scene_file) + 1);
 	if (!parsed_scene)
 		return (NULL);
 	parsed_scene[i] = get_next_line(fd);
 	while(parsed_scene[i])
 	{
 		i++;
-		if (!is_empty_line(parsed_scene[i]))
-			{printf("YO\n");
-			parsed_scene[i] = get_next_line(fd);}
+		parsed_scene[i] = get_next_line(fd);
 	}
 	parsed_scene[i] = 0;
+	parsed_scene = remove_empty_lines(parsed_scene);
 	parsed_scene = trim_config_line(parsed_scene);
 	if (!parsed_scene)
 		return (NULL);

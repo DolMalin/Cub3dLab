@@ -166,25 +166,6 @@ static t_bool	check_valid_characters(char **map)
 	return (true);
 }
 
-void print_map(char **map)
-{
-	int	i;
-	int j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			// printf("%c", map[i][j]);
-			j++;
-		}
-		//printf("\n");
-		i++;
-	}
-}
-
 static t_bool	check_map(char **unparsed_scene)
 {
 	char	**map;
@@ -220,7 +201,7 @@ t_bool  check_input(int ac, char **av)
     unparsed_scene = parse_scene_file(av[1]);
     if (!check_arguments(ac, av))
     {
-        free(unparsed_scene);
+        free_array((void**)unparsed_scene);
         return (false);
     }/*
     if (!check_textures(unparsed_scene))
