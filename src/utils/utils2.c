@@ -10,12 +10,12 @@ t_bool	is_empty_space(char c)
 t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j)
 {
 	if (is_empty_space(unparsed_scene[i + 1][j])
-		|| is_empty_space(unparsed_scene[i - 1][j]) || is_empty_space(unparsed_scene[i][j + 1]) 
+		|| is_empty_space(unparsed_scene[i - 1][j])
+		|| is_empty_space(unparsed_scene[i][j + 1]) 
 		|| is_empty_space(unparsed_scene[i][j - 1]))
 		return (true);
 	return (false);
 }
-
 
 t_bool	is_empty_line(char *line)
 {

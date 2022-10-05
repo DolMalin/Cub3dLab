@@ -87,6 +87,7 @@ static t_bool   check_arguments(int ac, char **av)
 //     return (true);
 // }
 
+
 static t_bool	check_map(char **unparsed_scene)
 {
 	size_t	i;
@@ -99,8 +100,8 @@ static t_bool	check_map(char **unparsed_scene)
 		i++;
 	}
 	map_array_len = array_len((void**)unparsed_scene) - i;
-	printf("array len : %zu\n", array_len((void**)unparsed_scene));
-	printf("first line map : %zu\n", i);
+	//printf("array len : %zu\n", array_len((void**)unparsed_scene));
+	//printf("first line map : %zu\n", i);
 	printf("map array len : %zu\n", map_array_len);
 	while (unparsed_scene[i])
 	{
@@ -109,13 +110,20 @@ static t_bool	check_map(char **unparsed_scene)
 		{
 			if (unparsed_scene[i][j] == '0')
 			{
-				if (i == 0 || j == 0 || j == ft_strlen(unparsed_scene[i]) || i == map_array_len)
+				if (i == 0 || j == 0 || j == (ft_strlen(unparsed_scene[i]) - 2) || i == map_array_len - 1) // be carefull > the strlen counts the line with \n at the end. see to get the map without \n and spaces ' '
 				{
+					printf("len line %zu : %zu\n", i, (ft_strlen(unparsed_scene[i]) - 2));
+					printf("je suis au bord\n");
+					printf("i==%zu j==%zu\n", i, j);
 					return (false);
 				}
 				if (is_near_void(unparsed_scene, i, j))
 				{
 					printf("i==%zu j==%zu\n", i, j);
+					printf("i am here :%c\n", unparsed_scene[i][j]);
+					//printf("\tlen line %zu : %zu\n", i, (ft_strlen(unparsed_scene[i]) - 1));
+					printf("\tlen line %zu : %zu - index j : %zu\n", i, (ft_strlen(unparsed_scene[i]) - 2), j);
+					printf("ya un trou\n");
 					return (false);
 				}
 			}
@@ -126,8 +134,6 @@ static t_bool	check_map(char **unparsed_scene)
 	return (true);
 }
 
-
-// well done Ana, you killed the job ! (y)
 t_bool  check_input(int ac, char **av)
 {
     char    **unparsed_scene;
@@ -154,6 +160,7 @@ t_bool  check_input(int ac, char **av)
 		free(unparsed_scene);
         return (false);
 	}
+	printf("map is ok\n");
     // check if duplicate texture : replace or return error
     free(unparsed_scene);
     return (true);
