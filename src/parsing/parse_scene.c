@@ -49,8 +49,6 @@ char	*trim(char *line, char *charset)
 	return (trimed_line);
 }
 
-
-
 char	**trim_config_line(char **parsed_scene)
 {
 	char	**trimed_scene;
