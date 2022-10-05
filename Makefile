@@ -6,7 +6,7 @@
 #    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/05 14:38:17 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/05 14:47:04 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +85,9 @@ clean:
 
 fclean: clean
 		rm -rf $(NAME)
+		make fclean -C ./libft
+		make fclean -C ./mlx
+		
 
 re: fclean all
 

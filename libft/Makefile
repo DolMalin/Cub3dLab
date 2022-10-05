@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/03 19:17:06 by aandric           #+#    #+#              #
-#    Updated: 2022/03/02 16:55:09 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/05 14:46:31 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,7 @@ clean:
  
 fclean: clean
 	rm -rf ${NAME}
+	
  
 re: fclean all
  
