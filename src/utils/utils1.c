@@ -57,10 +57,13 @@ size_t		array_len(void **array)
 	return (i);
 }
 
-t_bool	is_config_line(char	*line)
+t_bool is_config_line(char *line)
 {
+	char	*trim_line;
 	size_t	len;
+	t_bool	ret;
 
+<<<<<<< HEAD
 	len = ft_strlen(line);
 	if (ft_strnstr(line, "NO", len) || ft_strnstr(line, "SO", len))
 		return (true);
@@ -71,4 +74,19 @@ t_bool	is_config_line(char	*line)
 	else if (ft_strnstr(line, "\n", len))
 		return (true);
 	return (false);
+=======
+	ret = false;
+	trim_line = trim(line, " \t\r");
+	if (!trim_line)
+		return (false);
+	len = ft_strlen(trim_line);
+	if (ft_strnstr(trim_line, "NO", len) || ft_strnstr(trim_line, "SO", len))
+		ret = true;
+	else if (ft_strnstr(trim_line, "WE", len) || ft_strnstr(trim_line, "EA", len))
+		ret = true;
+	else if (ft_strnstr(trim_line, "F", len) || ft_strnstr(trim_line, "C", len))
+		ret = true;
+	free(trim_line);
+	return (ret);
+>>>>>>> 4f31988081d88c94d824fae3d136585f47d864b1
 }
