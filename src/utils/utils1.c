@@ -68,5 +68,7 @@ t_bool	is_config_line(char	*line)
 		return (true);
 	else if (ft_strnstr(line, "F", len) || ft_strnstr(line, "C", len))
 		return (true);
+	else if (ft_strnstr(line, "\n", len))
+		return (true);
 	return (false);
 }
