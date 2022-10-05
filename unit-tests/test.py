@@ -112,7 +112,7 @@ if __name__ == "__main__":
 	scene_path = "unit-tests/scenes"
 
 	# Compile the C functions
-	compile_command = "make test -C" + os.path.abspath(os.getcwd())
+	compile_command = "make test_parsing -C" + os.path.abspath(os.getcwd())
 	os.system(compile_command)
 	
 	# Start the test

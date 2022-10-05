@@ -6,7 +6,7 @@
 #    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/05 17:42:06 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/05 17:43:58 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ $(NAME): 		$(OBJS) $(LIBFT) Makefile
 
 				
 ## ======================= TO REMOVE ======================= ##
-test_parsing: 			$(OBJS_PARSING) $(LIBFT) Makefile
+test_parsing: 	$(OBJS_PARSING) libft $(LIBFT) Makefile
 				$(CMD) ${FLAGS} $(OBJS_PARSING) $(LIBFT) -o test
 
 testclean:
