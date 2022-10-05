@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/05 10:57:38 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/05 14:38:17 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = 			cub3d
 
 LIBFT = ./libft/libft.a \
 
-// MLX = ./mlx/libmlx.a \
+# MLX = ./mlx/libmlx.a \
 
 PARSING_FILES 		=	data.c \
 						parse_scene.c \
@@ -37,9 +37,7 @@ SRC_FILES_2 =	${addprefix parsing/, ${PARSING_FILES}} \
 
 TEST_PARSING = 	main.c \
 				parsing.c \
-				utils1.c \
-				utils2.c \
-				check_input.c \
+				utils.c \
 				
 TEST_UNITS =	${addprefix unit-tests/, ${TEST_PARSING}}
 
