@@ -47,9 +47,9 @@ void	free_unterminated_array(void **array, size_t n)
 }
 
 
-int		array_len(void **array)
+size_t		array_len(void **array)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while(array[i])

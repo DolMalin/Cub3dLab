@@ -94,6 +94,6 @@ char	**get_map(char	**parsed_scene)
 		}
 		i++;
 	}
-	map[j] = '\0';
+	map[j] = 0;
 	return (map);
 }
