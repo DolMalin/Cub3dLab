@@ -87,49 +87,55 @@ static t_bool   check_arguments(int ac, char **av)
 //     return (true);
 // }
 
-
-static t_bool	check_map(char **unparsed_scene)
+static	t_bool	check_map_closed(char **map)
 {
 	size_t	i;
 	size_t	j;
 	size_t	map_array_len;
 
 	i = 0;
-	while (is_config_line(unparsed_scene[i]))// || is_empty_line(unparsed_scene[i]))
-	{
-		i++;
-	}
-	map_array_len = array_len((void**)unparsed_scene) - i;
-	//printf("array len : %zu\n", array_len((void**)unparsed_scene));
-	//printf("first line map : %zu\n", i);
-	printf("map array len : %zu\n", map_array_len);
-	while (unparsed_scene[i])
+	map_array_len = array_len((void**)map) - i;
+	//printf("map array len : %zu\n", map_array_len);
+	while (map[i])
 	{
 		j = 0;
-		while (unparsed_scene[i][j])
+		while (map[i][j])
 		{
-			if (unparsed_scene[i][j] == '0')
+			if (map[i][j] == '0')
 			{
-				if (i == 0 || j == 0 || j == (ft_strlen(unparsed_scene[i]) - 2) || i == map_array_len - 1) // be carefull > the strlen counts the line with \n at the end. see to get the map without \n and spaces ' '
+				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 2) || i == map_array_len - 1) // be carefull > the strlen counts the line with \n at the end. see to get the map without \n and spaces ' '
 				{
-					printf("len line %zu : %zu\n", i, (ft_strlen(unparsed_scene[i]) - 2));
-					printf("je suis au bord\n");
-					printf("i==%zu j==%zu\n", i, j);
+					// printf("len line %zu : %zu\n", i, (ft_strlen(map[i]) - 2));
+					// printf("je suis au bord\n");
+					// printf("i==%zu j==%zu\n", i, j);
 					return (false);
 				}
-				if (is_near_void(unparsed_scene, i, j))
+				if (is_near_void(map, i, j))
 				{
-					printf("i==%zu j==%zu\n", i, j);
-					printf("i am here :%c\n", unparsed_scene[i][j]);
-					//printf("\tlen line %zu : %zu\n", i, (ft_strlen(unparsed_scene[i]) - 1));
-					printf("\tlen line %zu : %zu - index j : %zu\n", i, (ft_strlen(unparsed_scene[i]) - 2), j);
-					printf("ya un trou\n");
+					// printf("i==%zu j==%zu\n", i, j);
+					// printf("i am here :%c\n", map[i][j]);
+					// //printf("\tlen line %zu : %zu\n", i, (ft_strlen(unparsed_scene[i]) - 1));
+					// printf("\tlen line %zu : %zu - index j : %zu\n", i, (ft_strlen(map[i]) - 2), j);
+					// printf("ya un trou\n");
 					return (false);
 				}
 			}
 			j++;
 		}
 		i++;
+	}
+	return (true);
+}
+
+static t_bool	check_map(char **unparsed_scene)
+{
+	char	**map;
+
+	map = get_map(unparsed_scene);
+	if (!check_map_closed(map))
+	{
+		free(map);
+		return (false);
 	}
 	return (true);
 }
