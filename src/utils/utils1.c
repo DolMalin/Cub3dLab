@@ -63,20 +63,8 @@ t_bool is_config_line(char *line)
 	size_t	len;
 	t_bool	ret;
 
-<<<<<<< HEAD
-	len = ft_strlen(line);
-	if (ft_strnstr(line, "NO", len) || ft_strnstr(line, "SO", len))
-		return (true);
-	else if (ft_strnstr(line, "WE", len) || ft_strnstr(line, "EA", len))
-		return (true);
-	else if (ft_strnstr(line, "F", len) || ft_strnstr(line, "C", len))
-		return (true);
-	else if (ft_strnstr(line, "\n", len))
-		return (true);
-	return (false);
-=======
 	ret = false;
-	trim_line = trim(line, " \t\r");
+	trim_line = trim(line, " \t\r\n");
 	if (!trim_line)
 		return (false);
 	len = ft_strlen(trim_line);
@@ -88,5 +76,4 @@ t_bool is_config_line(char *line)
 		ret = true;
 	free(trim_line);
 	return (ret);
->>>>>>> 4f31988081d88c94d824fae3d136585f47d864b1
 }

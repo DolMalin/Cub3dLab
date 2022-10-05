@@ -120,7 +120,7 @@ static	t_bool	check_map_closed(char **map)
 	return (true);
 }
 
-static t_bool	check_valid_start_pos(char **map)
+static t_bool	check_one_start_pos(char **map)
 {
 	int	i;
 	int	j;
@@ -177,10 +177,10 @@ void print_map(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			printf("%c", map[i][j]);
+			// printf("%c", map[i][j]);
 			j++;
 		}
-		printf("\n");
+		//printf("\n");
 		i++;
 	}
 }
@@ -193,16 +193,19 @@ static t_bool	check_map(char **unparsed_scene)
 	print_map(map);
 	if (!check_map_closed(map))
 	{
+		printf("The map is not closed\n");
 		free(map);
 		return (false);
 	}
 	if (!check_valid_characters(map))
 	{
+		printf("Invalid characters in the map\n");
 		free(map);
 		return (false);
 	}
-	if (!check_valid_start_pos(map))
+	if (!check_one_start_pos(map))
 	{
+		printf("There is more than one or no starting position for player\n");
 		free(map);
 		return (false);
 	}

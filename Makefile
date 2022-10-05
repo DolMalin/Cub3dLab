@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
+#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/05 14:47:04 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/05 15:49:32 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ $(NAME): 		$(OBJS) $(LIBFT) Makefile
 
 				
 ## ======================= TO REMOVE ======================= ##
-test: 			$(OBJS_2) $(LIBFT) Makefile
+test: 			$(OBJS_2) libft $(LIBFT) Makefile
 				$(CMD) ${FLAGS} $(OBJS_2) $(LIBFT) -o test
 
 testclean:

@@ -62,7 +62,7 @@ char	**trim_config_line(char **parsed_scene)
 		return (NULL);
 	while(parsed_scene[i])
 	{
-		if (is_config_line(parsed_scene[i]))
+		if (is_config_line(parsed_scene[i]))// || (ft_strnstr(parsed_scene[i], "\n", ft_strlen(parsed_scene[i]))))
 			trimed_scene[i] = trim(parsed_scene[i], " \n\t");
 		else
 			trimed_scene[i] = ft_strdup(parsed_scene[i]);
@@ -82,6 +82,7 @@ char	**parse_scene_file(char *scene_file)
 
 	i = 0;
 	fd = open(scene_file, O_RDONLY);
+	// modif line count to skip the empty lines
 	parsed_scene = malloc(sizeof(char *) * (lines_count(scene_file) + 1));
 	if (!parsed_scene)
 		return (NULL);
@@ -89,6 +90,7 @@ char	**parse_scene_file(char *scene_file)
 	while(parsed_scene[i])
 	{
 		i++;
+		// if (!line_is_empty)
 		parsed_scene[i] = get_next_line(fd);
 	}
 	parsed_scene[i] = 0;
