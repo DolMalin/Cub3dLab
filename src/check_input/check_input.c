@@ -96,8 +96,7 @@ static	t_bool	check_map_closed(char **map)
 	size_t	map_array_len;
 
 	i = 0;
-	map_array_len = array_len((void**)map) - i;
-	//printf("map array len : %zu\n", map_array_len);
+	map_array_len = array_len((void**)map);
 	while (map[i])
 	{
 		j = 0;
@@ -105,20 +104,12 @@ static	t_bool	check_map_closed(char **map)
 		{
 			if (map[i][j] == '0')
 			{
-				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 2) || i == map_array_len - 1) // be carefull > the strlen counts the line with \n at the end. see to get the map without \n and spaces ' '
-				{
-					// printf("len line %zu : %zu\n", i, (ft_strlen(map[i]) - 2));
-					 printf("je suis au bord\n");
-					// printf("i==%zu j==%zu\n", i, j);
+				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 1) || i == map_array_len - 1)
 					return (false);
-				}
+		
 				if (is_near_void(map, i, j))
 				{
-					// printf("i==%zu j==%zu\n", i, j);
-					// printf("i am here :%c\n", map[i][j]);
-					// //printf("\tlen line %zu : %zu\n", i, (ft_strlen(unparsed_scene[i]) - 1));
-					// printf("\tlen line %zu : %zu - index j : %zu\n", i, (ft_strlen(map[i]) - 2), j);
-					 printf("ya un trou\n");
+					printf("ya un trou\n");
 					return (false);
 				}
 			}
@@ -129,7 +120,29 @@ static	t_bool	check_map_closed(char **map)
 	return (true);
 }
 
-static t_bool	check_valid
+static t_bool	check_valid_start_pos(char **map)
+{
+	int	i;
+	int	j;
+	int	start_pos;
+
+	i = 0;
+	start_pos = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] ==  'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
+				start_pos++;
+			j++;
+		}
+		i++;
+	}
+	if (start_pos != 1)
+		return (false);
+	return (true);
+}
 
 static t_bool	check_valid_characters(char **map)
 {
@@ -145,12 +158,7 @@ static t_bool	check_valid_characters(char **map)
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' 
 				&& map[i][j] != 'S' && map[i][j] != 'O' 
 					&& map[i][j] != 'E' && map[i][j] != 'W')
-			{
-				printf("i==%d j==%d\n", i, j);
-				printf("i am here :%c\n", map[i][j]);
-				printf("YO\n");
 				return (false);
-			}
 			j++;
 		}
 		i++;
@@ -158,17 +166,42 @@ static t_bool	check_valid_characters(char **map)
 	return (true);
 }
 
+void print_map(char **map)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			printf("%c", map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
 static t_bool	check_map(char **unparsed_scene)
 {
 	char	**map;
 
 	map = get_map(unparsed_scene);
+	print_map(map);
 	if (!check_map_closed(map))
 	{
 		free(map);
 		return (false);
 	}
 	if (!check_valid_characters(map))
+	{
+		free(map);
+		return (false);
+	}
+	if (!check_valid_start_pos(map))
 	{
 		free(map);
 		return (false);
@@ -203,7 +236,6 @@ t_bool  check_input(int ac, char **av)
 		free(unparsed_scene);
         return (false);
 	}
-	
     // check if duplicate texture : replace or return error
     free(unparsed_scene);
     return (true);
