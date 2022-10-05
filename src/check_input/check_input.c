@@ -175,22 +175,23 @@ static t_bool	check_map(char **unparsed_scene)
 	if (!check_map_closed(map))
 	{
 		printf("The map is not closed\n");
-		free(map);
+		free_array((void **)map);
 		return (false);
 	}
 	if (!check_valid_characters(map))
 	{
 		printf("Invalid characters in the map\n");
-		free(map);
+		free_array((void **)map);
 		return (false);
 	}
 	if (!check_one_start_pos(map))
 	{
 		printf("There is more than one or no starting position for player\n");
-		free(map);
+		free_array((void **)map);
 		return (false);
 	}
 	printf("map is ok\n");
+	free_array((void **)map);
 	return (true);
 }
 
@@ -217,10 +218,10 @@ t_bool  check_input(int ac, char **av)
 	if (!check_map(unparsed_scene))
 	{
 		printf("Map is incorrect \n");
-		free(unparsed_scene);
+		free_array((void **)unparsed_scene);
         return (false);
 	}
     // check if duplicate texture : replace or return error
-    free(unparsed_scene);
+    free_array((void **)unparsed_scene);
     return (true);
 }
