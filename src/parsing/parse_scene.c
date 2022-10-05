@@ -84,14 +84,16 @@ char	**parse_scene_file(char *scene_file)
 	fd = open(scene_file, O_RDONLY);
 	// modif line count to skip the empty lines
 	parsed_scene = malloc(sizeof(char *) * (lines_count(scene_file) + 1));
+	printf("lines_count == %d\n", lines_count(scene_file) + 1);
 	if (!parsed_scene)
 		return (NULL);
 	parsed_scene[i] = get_next_line(fd);
 	while(parsed_scene[i])
 	{
 		i++;
-		// if (!line_is_empty)
-		parsed_scene[i] = get_next_line(fd);
+		if (!is_empty_line(parsed_scene[i]))
+			{printf("YO\n");
+			parsed_scene[i] = get_next_line(fd);}
 	}
 	parsed_scene[i] = 0;
 	parsed_scene = trim_config_line(parsed_scene);

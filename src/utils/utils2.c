@@ -19,15 +19,22 @@ t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j)
 
 t_bool	is_empty_line(char *line)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-
-	while (line[i])
+	if (ft_strlen(line) == 1)
 	{
-		if (line[i] == '\n')
-			return (true);
-		i++;
+		if (line[0] != '\n')
+			return (false);
 	}
-	return (false);
+	else
+	{
+		while (line[i])
+		{
+			if (!is_empty_space(line[i]))
+				return (false);
+			i++;
+		}
+	}
+	return (true);
 }
