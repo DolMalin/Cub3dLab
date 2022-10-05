@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/05 15:49:32 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/05 17:42:06 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,17 +35,17 @@ SRC_FILES_2 =	${addprefix parsing/, ${PARSING_FILES}} \
 				${addprefix utils/, ${UTILS_FILES}} \
 				${addprefix check_input/, ${CHECK_INPUT_FILES}}
 
-TEST_PARSING = 	main.c \
-				parsing.c \
+TEST_PARSING = 	test_parsing.c \
+				test_functions.c \
 				utils.c \
 				
-TEST_UNITS =	${addprefix unit-tests/, ${TEST_PARSING}}
+TEST_UNIT_PARSING =	${addprefix unit-tests/, ${TEST_PARSING}}
 
-SRC_2 = 		${addprefix src/, ${SRC_FILES_2}}\
-				${TEST_UNITS}
+SRC_PARSING = 		${addprefix src/, ${SRC_FILES_2}}\
+					${TEST_UNIT_PARSING}
 
 HEADERS_2 = includes/cub3d.h unit-tests/test.h
-OBJS_2 = 			${SRC_2:.c=.o}
+OBJS_PARSING = 			${SRC_PARSING:.c=.o}
 ## ========================================================= ##
 
 SRC = 			${addprefix src/, ${SRC_FILES}}
@@ -68,11 +68,11 @@ $(NAME): 		$(OBJS) $(LIBFT) Makefile
 
 				
 ## ======================= TO REMOVE ======================= ##
-test: 			$(OBJS_2) libft $(LIBFT) Makefile
-				$(CMD) ${FLAGS} $(OBJS_2) $(LIBFT) -o test
+test_parsing: 			$(OBJS_PARSING) $(LIBFT) Makefile
+				$(CMD) ${FLAGS} $(OBJS_PARSING) $(LIBFT) -o test
 
 testclean:
-			rm -rf $(OBJS_2)
+			rm -rf $(OBJS_PARSING)
 			make clean -C ./libft
 			make clean -C ./mlx
 			rm -rf test
