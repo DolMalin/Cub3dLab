@@ -6,7 +6,7 @@
 #    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/05 17:43:58 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/05 19:28:49 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,17 +35,30 @@ SRC_FILES_2 =	${addprefix parsing/, ${PARSING_FILES}} \
 				${addprefix utils/, ${UTILS_FILES}} \
 				${addprefix check_input/, ${CHECK_INPUT_FILES}}
 
-TEST_PARSING = 	test_parsing.c \
-				test_functions.c \
-				utils.c \
-				
-TEST_UNIT_PARSING =	${addprefix unit-tests/, ${TEST_PARSING}}
-
-SRC_PARSING = 		${addprefix src/, ${SRC_FILES_2}}\
-					${TEST_UNIT_PARSING}
-
 HEADERS_2 = includes/cub3d.h unit-tests/test.h
+
+## TEST PARSING
+TEST_PARSING_FILES =	\
+						test_parsing.c \
+						test_functions.c \
+						utils.c \
+						
+TEST_PARSING =			${addprefix unit-tests/, ${TEST_PARSING_FILES}}
+SRC_PARSING = 			${addprefix src/, ${SRC_FILES_2}}\
+						${TEST_PARSING}
 OBJS_PARSING = 			${SRC_PARSING:.c=.o}
+
+## TEST INPUT
+TEST_INPUT_FILES =		test_input.c \
+						test_functions.c \
+						utils.c
+TEST_INPUT =			${addprefix unit-tests/, ${TEST_INPUT_FILES}}
+SRC_INPUT = 			${addprefix src/, ${SRC_FILES_2}}\
+						${TEST_INPUT}
+OBJS_INPUT = 			${SRC_INPUT:.c=.o}
+
+
+
 ## ========================================================= ##
 
 SRC = 			${addprefix src/, ${SRC_FILES}}
@@ -71,8 +84,11 @@ $(NAME): 		$(OBJS) $(LIBFT) Makefile
 test_parsing: 	$(OBJS_PARSING) libft $(LIBFT) Makefile
 				$(CMD) ${FLAGS} $(OBJS_PARSING) $(LIBFT) -o test
 
+test_input: 	$(OBJS_INPUT) libft $(LIBFT) Makefile
+				$(CMD) ${FLAGS} $(OBJS_INPUT) $(LIBFT) -o test
+
 testclean:
-			rm -rf $(OBJS_PARSING)
+			rm -rf $(OBJS_PARSING) $(OBJS_INPUT)
 			make clean -C ./libft
 			make clean -C ./mlx
 			rm -rf test

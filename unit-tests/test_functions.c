@@ -11,7 +11,7 @@ void	print_data_struct(char *path)
 		printf("Error: path %s is not valid\n", path);
 		return ;
 	}
-	
+
 	data = init_data(path);
 	if (!data)
 		return;

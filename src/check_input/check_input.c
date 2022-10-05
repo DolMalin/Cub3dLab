@@ -87,8 +87,6 @@ static t_bool   check_arguments(int ac, char **av)
 //     return (true);
 // }
 
-
-
 static	t_bool	check_map_closed(char **map)
 {
 	size_t	i;
@@ -171,7 +169,7 @@ static t_bool	check_map(char **unparsed_scene)
 	char	**map;
 
 	map = get_map(unparsed_scene);
-	print_map(map);
+	// print_map(map);
 	if (!check_map_closed(map))
 	{
 		printf("The map is not closed\n");
@@ -190,7 +188,7 @@ static t_bool	check_map(char **unparsed_scene)
 		free_array((void **)map);
 		return (false);
 	}
-	printf("map is ok\n");
+	// printf("map is ok\n");
 	free_array((void **)map);
 	return (true);
 }

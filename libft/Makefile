@@ -6,7 +6,7 @@
 #    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/03 19:17:06 by aandric           #+#    #+#              #
-#    Updated: 2022/10/05 14:46:31 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/05 17:50:52 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,6 @@ clean:
  
 fclean: clean
 	rm -rf ${NAME}
-	
  
 re: fclean all
  
