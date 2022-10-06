@@ -18,22 +18,23 @@ char	*get_line_from_key(char	**parsed_scene, char *key)
 	return (NULL);
 }
 
-unsigned char	*get_color(char *line)
+unsigned char	*get_color(char *color_line)
 {
 	unsigned char	*color;
-	char			**splited_line;
+	char			**seperated_colors;
 
-	splited_line = ft_split(line, ',');
-	if (!splited_line)
+	seperated_colors = ft_split(color_line, ',');
+	if (!seperated_colors)
 		return (NULL);
 	color = malloc(sizeof(unsigned char) * 3);
 	if (!color)
 		return (NULL);
-	color[R] = (unsigned char)ft_atoi(splited_line[0]);
-	color[G] = (unsigned char)ft_atoi(splited_line[1]);
-	color[B] = (unsigned char)ft_atoi(splited_line[2]);
-	free_array((void **)splited_line);
-	free(line);
+	color[R] = (unsigned char)ft_atoi(seperated_colors[0]);
+	color[G] = (unsigned char)ft_atoi(seperated_colors[1]);
+	color[B] = (unsigned char)ft_atoi(seperated_colors[2]);
+	color[4] = '\0';
+	free_array((void **)seperated_colors);
+	free(color_line);
 	return (color);
 }
 
@@ -46,6 +47,7 @@ unsigned char	**get_colors(char **parsed_scene)
 		return (NULL);
 	colors[FLOOR] = get_color(get_line_from_key(parsed_scene, "F"));
 	colors[CEIL] = get_color(get_line_from_key(parsed_scene, "C"));
+	colors[2] = 0;
 	return (colors);
 }
 

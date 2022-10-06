@@ -49,43 +49,35 @@ static t_bool   check_arguments(int ac, char **av)
 //     return (true);
 // }
 
-// static t_bool   check_color(char *color_line, const char *color_id)
-// {
-//     unsigned char   *color;
-//     char            **splited_line;
+static t_bool   check_color(unsigned char *color, const char *color_id)
+{
 
-//     splited_line = ft_split(color_line, ',');
-//     if (!splited_line)
-//         return (false);
-//     color = malloc(sizeof(unsigned char) * 3);
-//     if (!color)
-//         return (false);
-//     color[R] = (unsigned char)ft_atoi(&splited_line[0][2]);
-//     color[G] = (unsigned char)ft_atoi(splited_line[1]);
-//     color[B] = (unsigned char)ft_atoi(splited_line[2]); // make a function to get the color and seperate from check_color
-//     // the condition below condition condition simplified
-//     if (!((color[R] >= 0 && color[R] <= 255) 
-//         && (color[G] >= 0 && color[R] <= 255) 
-//             && (color[B] >= 0 && color[R] <= 255)))
-//     {
-//             free(color);
-//             free(splited_line);
-//             printf("Wrong RGB color code for %s definition\n", color_id);
-//             return (false);
-//     }
-//     free(color);
-//     free(splited_line);
-//     return (true); // think about the case when there is nothing between 2 "," example : "200,,300"
-// }
+    if (!((color[R] >= 0 && color[R] <= 255) 
+        && (color[G] >= 0 && color[R] <= 255) 
+            && (color[B] >= 0 && color[R] <= 255)))
+    {
+            printf("Wrong RGB color code for %s\n", color_id);
+            return (false);
+    }
+    return (true); // think about the case when there is nothing between 2 "," example : "200,,300"
+}
 
-// static t_bool   check_colors(char **unparsed_scene)
-// {
-//     if (!check_color(get_line_from_key(unparsed_scene, "F"), "Floor")) // find a way to verify if the line is missing to have an error message "no floor color code indicated"
-//         return (false);
-//     if (!check_color(get_line_from_key(unparsed_scene, "C"), "Ceiling"))
-//         return (false);
-//     return (true);
-// }
+static t_bool   check_colors(char **unparsed_scene)
+{
+	unsigned char **colors;
+
+	colors = get_colors(unparsed_scene);
+	if (!check_color(colors[FLOOR], "floor"))
+		return  (false);
+	if (!check_color(colors[CEIL], "ceiling"))
+		return (false);
+    // /*if (!check_color(get_line_from_key(unparsed_scene, "F"), "Floor")) // find a way to verify if the line is missing to have an error message "no floor color code indicated"
+    //     return (false);
+    // if (!check_color(get_line_from_key(unparsed_scene, "C"), "Ceiling"))
+    //     return (false);*/
+	free_array((void **)colors);
+    return (true);
+}
 
 static	t_bool	check_map_closed(char **map)
 {
@@ -104,7 +96,6 @@ static	t_bool	check_map_closed(char **map)
 			{
 				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 1) || i == map_array_len - 1)
 					return (false);
-		
 				if (is_near_void(map, i, j))
 				{
 					printf("ya un trou\n");
@@ -155,7 +146,7 @@ static t_bool	check_valid_characters(char **map)
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' 
 				&& map[i][j] != 'S' && map[i][j] != 'O' 
-					&& map[i][j] != 'E' && map[i][j] != 'W')
+					&& map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != ' ')
 				return (false);
 			j++;
 		}
@@ -169,7 +160,7 @@ static t_bool	check_map(char **unparsed_scene)
 	char	**map;
 
 	map = get_map(unparsed_scene);
-	// print_map(map);
+	//print_map(map);
 	if (!check_map_closed(map))
 	{
 		printf("The map is not closed\n");
@@ -188,7 +179,7 @@ static t_bool	check_map(char **unparsed_scene)
 		free_array((void **)map);
 		return (false);
 	}
-	// printf("map is ok\n");
+	printf("map is ok\n");
 	free_array((void **)map);
 	return (true);
 }
@@ -198,6 +189,7 @@ t_bool  check_input(int ac, char **av)
     char    **unparsed_scene;
     (void)ac;
     unparsed_scene = parse_scene_file(av[1]);
+	//print_map(unparsed_scene);
     if (!check_arguments(ac, av))
     {
         free_array((void**)unparsed_scene);
@@ -205,14 +197,15 @@ t_bool  check_input(int ac, char **av)
     }/*
     if (!check_textures(unparsed_scene))
     {
-        free(unparsed_scene);
-        return (false);
-    }
-    if (!check_colors(unparsed_scene))
-    {
-        free(unparsed_scene);
+        free_array((void **)unparsed_scene);
         return (false);
     }*/
+    if (!check_colors(unparsed_scene))
+    {
+        free_array((void **)unparsed_scene);
+        return (false);
+    }
+	printf("Colors are ok\n");
 	if (!check_map(unparsed_scene))
 	{
 		printf("Map is incorrect \n");
