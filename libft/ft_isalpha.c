@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:10:59 by aandric           #+#    #+#             */
-/*   Updated: 2021/11/06 14:19:43 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 15:23:18 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,3 @@ int	ft_isalpha(int c)
 {
 	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
-/*
-#include <stdio.h>
-int main()
-{
-    printf("%d", ft_isalpha('b'));
-}
-*/

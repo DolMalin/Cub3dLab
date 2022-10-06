@@ -47,6 +47,8 @@ void print_map(char **map);
 
 /****************CHECK_INPUT*********************/
 t_bool			check_input(int ac, char **av);
+t_bool			check_map(char **unparsed_scene);
+t_bool			check_colors(char **unparsed_scene);
 
 /****************PARSING*********************/
 t_data			*init_data(char *scene_file);

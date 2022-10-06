@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 17:32:44 by aandric           #+#    #+#             */
-/*   Updated: 2021/11/16 19:01:52 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 15:21:42 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,3 @@ char	*ft_itoa(int nb)
 	}
 	return (tab);
 }
-/*
-#include <stdio.h>
-int	main()
-{
-	printf("%s\n", ft_itoa(-2147483648));
-}
-*/

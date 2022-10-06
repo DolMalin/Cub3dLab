@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 17:16:53 by aandric           #+#    #+#             */
-/*   Updated: 2021/11/17 14:50:24 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 15:22:17 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 		end--;
 	return (ft_substr(s1, start, end - start + 1));
 }
-/*
-#include <stdio.h>
-int main ()
-{
-	printf("%s\n", ft_strtrim("lolllcavloalll", "lo"));
-}
-*/
