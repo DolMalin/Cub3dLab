@@ -104,12 +104,8 @@ static	t_bool	check_map_closed(char **map)
 			{
 				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 1) || i == map_array_len - 1)
 					return (false);
-		
 				if (is_near_void(map, i, j))
-				{
-					printf("ya un trou\n");
 					return (false);
-				}
 			}
 			j++;
 		}
