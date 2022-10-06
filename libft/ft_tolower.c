@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 15:06:48 by aandric           #+#    #+#             */
-/*   Updated: 2021/11/05 15:08:44 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 15:22:22 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,3 @@ int	ft_tolower(int c)
 	else
 		return (c);
 }
-/*
-#include <stdio.h>
-int main ()
-{
-	char	c;
-	c = 'X';
-	printf("%c", ft_tolower(c));
-}
-*/

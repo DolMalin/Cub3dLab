@@ -49,138 +49,19 @@ static t_bool   check_arguments(int ac, char **av)
 //     return (true);
 // }
 
-static t_bool   check_color(unsigned char *color, const char *color_id)
+static t_bool	check_config_line_missing(char **unparsed_scene)
 {
-
-    if (!((color[R] >= 0 && color[R] <= 255) 
-        && (color[G] >= 0 && color[R] <= 255) 
-            && (color[B] >= 0 && color[R] <= 255)))
-    {
-            printf("Wrong RGB color code for %s\n", color_id);
-            return (false);
-    }
-    return (true); // think about the case when there is nothing between 2 "," example : "200,,300"
-}
-
-static t_bool   check_colors(char **unparsed_scene)
-{
-	unsigned char **colors;
-
-	colors = get_colors(unparsed_scene);
-	if (!check_color(colors[FLOOR], "floor"))
-		return  (false);
-	if (!check_color(colors[CEIL], "ceiling"))
-		return (false);
-    // /*if (!check_color(get_line_from_key(unparsed_scene, "F"), "Floor")) // find a way to verify if the line is missing to have an error message "no floor color code indicated"
-    //     return (false);
-    // if (!check_color(get_line_from_key(unparsed_scene, "C"), "Ceiling"))
-    //     return (false);*/
-	free_array((void **)colors);
-    return (true);
-}
-
-static	t_bool	check_map_closed(char **map)
-{
-	size_t	i;
-	size_t	j;
-	size_t	map_array_len;
-
-	i = 0;
-	map_array_len = array_len((void**)map);
-	while (map[i])
+	if (!get_line_from_key(unparsed_scene, "NO") || !get_line_from_key(unparsed_scene, "SO")
+		|| !get_line_from_key(unparsed_scene, "EA") || !get_line_from_key(unparsed_scene, "WE"))
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == '0')
-			{
-				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 1) || i == map_array_len - 1)
-					return (false);
-				if (is_near_void(map, i, j))
-				{
-					printf("ya un trou\n");
-					return (false);
-				}
-			}
-			j++;
-		}
-		i++;
-	}
-	return (true);
-}
-
-static t_bool	check_one_start_pos(char **map)
-{
-	int	i;
-	int	j;
-	int	start_pos;
-
-	i = 0;
-	start_pos = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] ==  'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
-				start_pos++;
-			j++;
-		}
-		i++;
-	}
-	if (start_pos != 1)
-		return (false);
-	return (true);
-}
-
-static t_bool	check_valid_characters(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' 
-				&& map[i][j] != 'S' && map[i][j] != 'O' 
-					&& map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != ' ')
-				return (false);
-			j++;
-		}
-		i++;
-	}
-	return (true);
-}
-
-static t_bool	check_map(char **unparsed_scene)
-{
-	char	**map;
-
-	map = get_map(unparsed_scene);
-	//print_map(map);
-	if (!check_map_closed(map))
-	{
-		printf("The map is not closed\n");
-		free_array((void **)map);
+		printf("Missing configuration line about walls texture : NO, SO, EA or WE\n");
 		return (false);
 	}
-	if (!check_valid_characters(map))
+	if (!get_line_from_key(unparsed_scene, "C") || !get_line_from_key(unparsed_scene, "F"))
 	{
-		printf("Invalid characters in the map\n");
-		free_array((void **)map);
+		printf("Missing configuration line about colors: floor or ceiling\n");
 		return (false);
 	}
-	if (!check_one_start_pos(map))
-	{
-		printf("There is more than one or no starting position for player\n");
-		free_array((void **)map);
-		return (false);
-	}
-	printf("map is ok\n");
-	free_array((void **)map);
 	return (true);
 }
 
@@ -189,30 +70,33 @@ t_bool  check_input(int ac, char **av)
     char    **unparsed_scene;
     (void)ac;
     unparsed_scene = parse_scene_file(av[1]);
-	//print_map(unparsed_scene);
     if (!check_arguments(ac, av))
     {
         free_array((void**)unparsed_scene);
         return (false);
-    }/*
-    if (!check_textures(unparsed_scene))
-    {
-        free_array((void **)unparsed_scene);
-        return (false);
-    }*/
+    }
+	if (!check_config_line_missing(unparsed_scene))
+	{
+		free_array((void **)unparsed_scene);
+		return (false);
+	}
+    // if (!check_textures(unparsed_scene))
+    // {
+    //     free_array((void **)unparsed_scene);
+    //     return (false);
+    // }
     if (!check_colors(unparsed_scene))
     {
+		
         free_array((void **)unparsed_scene);
         return (false);
     }
-	printf("Colors are ok\n");
 	if (!check_map(unparsed_scene))
 	{
 		printf("Map is incorrect \n");
 		free_array((void **)unparsed_scene);
         return (false);
 	}
-    // check if duplicate texture : replace or return error
     free_array((void **)unparsed_scene);
     return (true);
 }

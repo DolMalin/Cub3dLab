@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
+#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/05 19:28:49 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/06 15:45:09 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ PARSING_FILES 		=	data.c \
 						get_features_from_scene.c \
 				
 CHECK_INPUT_FILES 	=	check_input.c \
+						check_map.c \
+						check_colors.c \
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \

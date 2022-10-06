@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 18:15:24 by aandric           #+#    #+#             */
-/*   Updated: 2021/11/22 12:48:59 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 15:21:21 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,3 @@ int	ft_atoi(const char *str)
 	return (nbr * sign);
 }
 
-/*
-#include <stdio.h>
-int main ()
-{
-	printf("%d\n", ft_atoi("-21474836465488"));
-	printf("%d\n", atoi("-21474836465488"));
-}
-*/

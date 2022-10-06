@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:04:32 by aandric           #+#    #+#             */
-/*   Updated: 2022/09/30 11:49:31 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:23:55 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_strlcpy(subs, (char *)s, len + 1);
 	return (subs);
 }
-/*
-#include <stdio.h>
-int main ()
-{
-	printf("%s\n", ft_substr("HelloHello", 2, 6));
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:44:38 by aandric           #+#    #+#             */
-/*   Updated: 2021/11/09 19:04:30 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 15:22:12 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,3 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (0);
 }
-
-/*
-#include <string.h>
-#include <stdio.h>
-int main ()
-{
-	printf("%s\n", ft_strnstr("FF", "see F your F return F now F", 15));
-	printf("%s\n", strnstr("FF", "see F your F return F now F", 15));
-}
-*/
