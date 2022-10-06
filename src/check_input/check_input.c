@@ -76,7 +76,7 @@ static t_bool check_structure(char **unparsed_scene)
 	{
 		if (is_config_line(unparsed_scene[i]))
 		{
-			printf("Configuration lines must be at the begin of the file followed by the map.\n");
+			printf("Configuration lines must be at the begining of the file followed by the map.\n");
 			return (false);
 		}
 		i++;
@@ -89,7 +89,7 @@ t_bool  check_input(int ac, char **av)
     char    **unparsed_scene;
     (void)ac;
     unparsed_scene = parse_scene_file(av[1]);
-	print_map(unparsed_scene);
+	//print_map(unparsed_scene);
     if (!check_arguments(ac, av))
     {
         free_array((void**)unparsed_scene);
