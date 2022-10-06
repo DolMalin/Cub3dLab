@@ -54,13 +54,32 @@ static t_bool	check_config_line_missing(char **unparsed_scene)
 	if (!get_line_from_key(unparsed_scene, "NO") || !get_line_from_key(unparsed_scene, "SO")
 		|| !get_line_from_key(unparsed_scene, "EA") || !get_line_from_key(unparsed_scene, "WE"))
 	{
-		printf("Missing configuration line about walls texture : NO, SO, EA or WE\n");
+		printf("Missing configuration line about walls texture : NO, SO, EA or WE.\n");
 		return (false);
 	}
 	if (!get_line_from_key(unparsed_scene, "C") || !get_line_from_key(unparsed_scene, "F"))
 	{
-		printf("Missing configuration line about colors: floor or ceiling\n");
+		printf("Missing configuration line about colors: floor or ceiling.\n");
 		return (false);
+	}
+	return (true);
+}
+
+static t_bool check_structure(char **unparsed_scene)
+{
+	int	i;
+
+	i = 0;
+	while (is_config_line(unparsed_scene[i]))
+		i++;
+	while (unparsed_scene[i])
+	{
+		if (is_config_line(unparsed_scene[i]))
+		{
+			printf("Configuration lines must be at the begin of the file followed by the map.\n");
+			return (false);
+		}
+		i++;
 	}
 	return (true);
 }
@@ -70,12 +89,18 @@ t_bool  check_input(int ac, char **av)
     char    **unparsed_scene;
     (void)ac;
     unparsed_scene = parse_scene_file(av[1]);
+	print_map(unparsed_scene);
     if (!check_arguments(ac, av))
     {
         free_array((void**)unparsed_scene);
         return (false);
     }
 	if (!check_config_line_missing(unparsed_scene))
+	{
+		free_array((void **)unparsed_scene);
+		return (false);
+	}
+	if (!check_structure(unparsed_scene))
 	{
 		free_array((void **)unparsed_scene);
 		return (false);
@@ -87,7 +112,6 @@ t_bool  check_input(int ac, char **av)
     // }
     if (!check_colors(unparsed_scene))
     {
-		
         free_array((void **)unparsed_scene);
         return (false);
     }
@@ -97,6 +121,7 @@ t_bool  check_input(int ac, char **av)
 		free_array((void **)unparsed_scene);
         return (false);
 	}
+	printf("Everything ok\n");
     free_array((void **)unparsed_scene);
     return (true);
 }
