@@ -1,0 +1,9 @@
+NO ./textures/texture_ea.xpm 
+SO ./t extures/texture_so.xpm      
+WE ./textures/texture_we.xpm 
+
+F 220,100,2
+C 225,30,2
+111111111111
+1E00000001
+11111111111

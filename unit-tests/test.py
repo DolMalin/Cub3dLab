@@ -3,7 +3,6 @@ import subprocess
 from re import search
 import string
 
-## EXPECTED FUNCTIONS
 def	parsing(scene_name: str, scene_path: str) -> str:
 	"""A function that takes a scene path and remove useless spaces, useless lines and reshape in correct order the elements.
 	The goal of that function is to provide an example of what our c program must do.
@@ -39,7 +38,6 @@ def	parsing(scene_name: str, scene_path: str) -> str:
 	return joined_lines
 
 
-
 def	check_input(scene_name: str, scene_path: str) -> str:
 	scene = os.path.abspath(os.getcwd()) + "/" + scene_path + "/" + "unvalid" + "/" + scene_name
 	with open(scene, 'r') as file:
@@ -53,6 +51,17 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 	# Check if the extension is .cub
 	if scene_name[-4 :] != ".cub":
 		return "Not a .cub scene file"
+
+	# Check if there is all identifiers
+	for key in ["NO", "SO", "EA", "WE", "C", "F"]:
+		find_key = False
+		for line in splited_data:
+			trim_line = line.translate(str.maketrans("", "", string.whitespace))
+			if search(key, trim_line):
+				find_key = True
+		if not find_key:
+			return "Error: texture missing for NO, SO, EA or WE."
+
 	# Get the map lines and remove the empty ones
 	map = []
 	for line in splited_data:
@@ -169,6 +178,8 @@ def	run_test(scene_path: str, test_name: str):
 	folder = "valid" if test_name == "parsing" else "unvalid"
 	scenes = os.listdir(os.path.abspath(os.getcwd()) + "/"  + scene_path + "/" + folder + "/")
 	for scene in scenes:
+		if scene == ".DS_Store":
+			continue
 		if not compare_commands(scene, scene_path, test_name):
 			return
 	print("===================================")
@@ -197,5 +208,5 @@ if __name__ == "__main__":
 	os.system(input_command)
 	run_test(scene_path, "input")
 
-	# print("expected : " + check_input("wrong_textures_path.cub", "unit-tests/scenes"))
+	# print("expected : " + check_input("mi.cub", "unit-tests/scenes"))
 	# print("our : " + exec_command("test", "wrong_textures_path.cub", "unit-tests/scenes", "input"))
