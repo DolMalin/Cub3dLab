@@ -1,43 +1,46 @@
 #include "../../includes/cub3d.h"
 
-static t_bool   check_arguments(int ac, char **av)
+static t_bool	check_arguments(int ac, char **av)
 {
-    if (ac < 2)
-    {
-        printf("No scene in arguments\n");
-        return (0);
-    }
-    // This condition check if the .cub is only at the end on the file and has nothing after ? i.e michel.cubmichel
-    if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
-    {
-        printf("Not a .cub scene file\n");
-        return (0);
-    }
-    if (open(av[1], O_RDONLY) < 0)
-    {
-        printf("Can't access scene file\n");
-        return (0);
-    }
-    return (1);
+	if (ac < 2)
+	{
+		printf("No scene in arguments\n");
+		return (0);
+	}
+	// This condition check if the .cub is only at the end on the file and has nothing after ? i.e michel.cubmichel
+	if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
+	{
+		printf("Not a .cub scene file\n");
+		return (0);
+	}
+	if (open(av[1], O_RDONLY) < 0)
+	{
+		printf("Can't access scene file\n");
+		return (0);
+	}
+	return (1);
 }
 
 static t_bool	check_config_line_missing(char **unparsed_scene)
 {
-	if (!get_line_from_key(unparsed_scene, "NO") || !get_line_from_key(unparsed_scene, "SO")
-		|| !get_line_from_key(unparsed_scene, "EA") || !get_line_from_key(unparsed_scene, "WE"))
+	if (!get_line_from_key(unparsed_scene, "NO")
+		||!get_line_from_key(unparsed_scene, "SO")
+		|| !get_line_from_key(unparsed_scene, "EA")
+		|| !get_line_from_key(unparsed_scene, "WE"))
 	{
-		printf("Missing configuration line about walls texture : NO, SO, EA or WE.\n");
+		printf("Error: texture missing for NO, SO, EA or WE.\n");
 		return (false);
 	}
-	if (!get_line_from_key(unparsed_scene, "C") || !get_line_from_key(unparsed_scene, "F"))
+	if (!get_line_from_key(unparsed_scene, "C")
+		|| !get_line_from_key(unparsed_scene, "F"))
 	{
-		printf("Missing configuration line about colors: floor or ceiling.\n");
+		printf("Error: color missing for floor or cieling.\n");
 		return (false);
 	}
 	return (true);
 }
 
-static t_bool check_structure(char **unparsed_scene)
+static t_bool	check_structure(char **unparsed_scene)
 {
 	int	i;
 
@@ -48,7 +51,7 @@ static t_bool check_structure(char **unparsed_scene)
 	{
 		if (is_config_line(unparsed_scene[i]))
 		{
-			printf("Configuration lines must be at the begining of the file followed by the map.\n");
+			printf("Error: incorrect structure of scene.\n");
 			return (false);
 		}
 		i++;
@@ -56,42 +59,47 @@ static t_bool check_structure(char **unparsed_scene)
 	return (true);
 }
 
-t_bool  check_input(int ac, char **av)
+static t_bool	check_config_structure(char **unparsed_scene)
 {
-    char    **unparsed_scene;
-    unparsed_scene = parse_scene_file(av[1]);
-    if (!check_arguments(ac, av))
-    {
-        free_array((void**)unparsed_scene);
-        return (false);
-    }
 	if (!check_config_line_missing(unparsed_scene))
-	{
-		free_array((void **)unparsed_scene);
 		return (false);
-	}
 	if (!check_structure(unparsed_scene))
+		return (false);
+	return (true);
+}
+
+t_bool	check_input(int ac, char **av)
+{
+	char	**unparsed_scene;
+
+	unparsed_scene = parse_scene_file(av[1]);
+	if (!check_arguments(ac, av))
 	{
 		free_array((void **)unparsed_scene);
 		return (false);
 	}
-    // if (!check_textures(unparsed_scene))
-    // {
-    //     free_array((void **)unparsed_scene);
-    //     return (false);
-    // }
-    if (!check_colors(unparsed_scene))
-    {
-        free_array((void **)unparsed_scene);
-        return (false);
-    }
+	if (!check_config_structure(unparsed_scene))
+	{
+		free_array((void **)unparsed_scene);
+		return (false);
+	}
+	// if (!check_textures(unparsed_scene))
+	// {
+	//     free_array((void **)unparsed_scene);
+	//     return (false);
+	// }
+	if (!check_colors(unparsed_scene))
+	{
+		free_array((void **)unparsed_scene);
+		return (false);
+	}
 	if (!check_map(unparsed_scene))
 	{
 		printf("Map is incorrect \n");
 		free_array((void **)unparsed_scene);
-        return (false);
+		return (false);
 	}
 	printf("Everything ok\n");
-    free_array((void **)unparsed_scene);
-    return (true);
+	free_array((void **)unparsed_scene);
+	return (true);
 }

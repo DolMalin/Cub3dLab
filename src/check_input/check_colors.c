@@ -75,7 +75,7 @@ t_bool	check_colors(char **unparsed_scene)
 	char	**colors;
 
 	colors = get_colors_to_check(unparsed_scene);
-	if (check_comas(colors))
+	if (!check_comas(colors))
 		return (false);
 	if (!check_color_code(colors[FLOOR]))
 		return (false);
