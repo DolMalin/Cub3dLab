@@ -1,4 +1,18 @@
+
+
 #include "../../includes/cub3d.h"
+
+static t_bool	check_extension(const char *file_path)
+{
+	size_t	i;
+
+	i = ft_strlen(file_path) - 1;
+	while (i && file_path[i] != '.')
+		i--;
+	if (ft_strncmp(&file_path[i], ".cub", 5) != 0)
+		return (false);
+	return (true);
+}
 
 static t_bool	check_arguments(int ac, char **av)
 {
@@ -7,8 +21,7 @@ static t_bool	check_arguments(int ac, char **av)
 		printf("No scene in arguments\n");
 		return (0);
 	}
-	// This condition check if the .cub is only at the end on the file and has nothing after ? i.e michel.cubmichel
-	if (!ft_strnstr(av[1], ".cub", ft_strlen(av[1])))
+	if (!check_extension(av[1]))
 	{
 		printf("Not a .cub scene file\n");
 		return (0);
@@ -95,11 +108,11 @@ t_bool	check_input(int ac, char **av)
 	}
 	if (!check_map(scene))
 	{
-		printf("Map is incorrect \n");
+		//printf("Map is incorrect \n");
 		free_array((void **)scene);
 		return (false);
 	}
-	printf("Everything ok\n");
+	//printf("Everything ok\n");
 	free_array((void **)scene);
 	return (true);
 }
