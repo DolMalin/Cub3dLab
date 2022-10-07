@@ -1,9 +1,9 @@
-	NO  .     /path_to_the_      north_texture  
+	NO  .     /textures/texture_ea .   xpm 
          
-                    SO ./ pa th_to_the_         south _t ex ture       
-         W   	E ./path_to_       the_we			st_texture
+                    SO ./t  extu res/ t e x 	tu r e _so.xpm      
+         W   	E ./textures/texture    _we.  x   p m 
 
-EA ./path_to_       the_east_textu           re
+EA ./textures/ texture_ea.xpm
 
 	F 2       21,  10 0, 			0
           	 	C     205,    30, 0
