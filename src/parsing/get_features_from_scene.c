@@ -1,11 +1,11 @@
 #include "../../includes/cub3d.h"
 
-char	*get_line_from_key(char	**parsed_scene, char *key)
+char	*get_line_from_key(char **parsed_scene, char *key)
 {
 	int		i;
 
 	i = 0;
-	while(parsed_scene[i])
+	while (parsed_scene[i])
 	{
 		if (ft_strncmp(parsed_scene[i], key, ft_strlen(key)) == 0)
 		{
@@ -63,7 +63,7 @@ char	**get_textures_paths(char **parsed_scene)
 	return (textures_paths);
 }
 
-char	**get_map(char	**parsed_scene)
+char	**get_map(char **parsed_scene)
 {
 	char	**map;
 	int		i;
@@ -83,7 +83,7 @@ char	**get_map(char	**parsed_scene)
 	if (!map)
 		return (NULL);
 	i = 0;
-	while(parsed_scene[i])
+	while (parsed_scene[i])
 	{
 		if (!is_config_line(parsed_scene[i]))
 		{

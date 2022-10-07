@@ -16,14 +16,14 @@ t_bool	is_in_charset(char c, char *charset)
 
 char	*trim(char *line, char *charset)
 {
-	char 	*trimed_line;
+	char	*trimed_line;
 	int		i;
 	int		s_count;
 	int		k;
 
 	i = 0;
 	s_count = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (!is_in_charset(line[i], charset))
 			s_count++;
@@ -36,7 +36,7 @@ char	*trim(char *line, char *charset)
 		return (NULL);
 	i = 0;
 	k = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (!is_in_charset(line[i], charset))
 		{
@@ -55,10 +55,11 @@ char	**trim_config_line(char **parsed_scene)
 	int		i;
 
 	i = 0;
-	trimed_scene = malloc(sizeof(char *) * (array_len((void **)parsed_scene) + 1));
+	trimed_scene = malloc(sizeof(char *)
+			* (array_len((void **)parsed_scene) + 1));
 	if (!trimed_scene)
 		return (NULL);
-	while(parsed_scene[i])
+	while (parsed_scene[i])
 	{
 		if (is_config_line(parsed_scene[i]))
 			trimed_scene[i] = trim(parsed_scene[i], " \n\t");
@@ -92,7 +93,7 @@ char	**remove_empty_lines(char	**parsed_scene)
 	if (!output)
 		return (NULL);
 	i = 0;
-	while(parsed_scene[i])
+	while (parsed_scene[i])
 	{
 		if (!is_empty_line(parsed_scene[i]))
 		{
@@ -118,7 +119,7 @@ char	**parse_scene_file(char *scene_file)
 	if (!parsed_scene)
 		return (NULL);
 	parsed_scene[i] = get_next_line(fd);
-	while(parsed_scene[i])
+	while (parsed_scene[i])
 	{
 		i++;
 		parsed_scene[i] = get_next_line(fd);

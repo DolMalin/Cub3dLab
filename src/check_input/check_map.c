@@ -54,7 +54,7 @@ static	t_bool	check_map_closed(char **map)
 	size_t	map_array_len;
 
 	i = 0;
-	map_array_len = array_len((void** )map);
+	map_array_len = array_len((void **)map);
 	while (map[i])
 	{
 		j = 0;
@@ -62,7 +62,8 @@ static	t_bool	check_map_closed(char **map)
 		{
 			if (map[i][j] == '0')
 			{
-				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 1) || i == map_array_len - 1)
+				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 1)
+					|| i == map_array_len - 1)
 					return (false);
 				if (is_near_void(map, i, j))
 					return (false);
@@ -74,11 +75,11 @@ static	t_bool	check_map_closed(char **map)
 	return (true);
 }
 
-t_bool	check_map(char **unparsed_scene)
+t_bool	check_map(char **scene)
 {
 	char	**map;
 
-	map = get_map(unparsed_scene);
+	map = get_map(scene);
 	if (!check_map_closed(map))
 	{
 		printf("The map is not closed\n");
