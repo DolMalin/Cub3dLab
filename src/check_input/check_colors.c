@@ -146,12 +146,12 @@ static int coma_count(char *color)
 
 static t_bool check_comas(char **colors)
 {
-	if (coma_count(colors[CEIL]) > 2)
+	if (coma_count(colors[CEIL]) != 2)
 	{	
 		printf("Check comas in the color code, must be one to seperate each colour\n");
 		return (false);
 	}
-	if (coma_count(colors[FLOOR]) > 2)
+	if (coma_count(colors[FLOOR]) != 2)
 	{	
 		printf("Check comas in the color code, must be one to seperate each colour\n");
 		return (false);
@@ -164,14 +164,14 @@ t_bool	check_colors(char **unparsed_scene)
 	char **colors;
 
 	colors = get_colors_to_check(unparsed_scene);
-	if (check_comas(colors))
+	if (!check_comas(colors))
 		return (false);
 	if (!check_color_code(colors[FLOOR]))
 		return (false);
 	if (!check_color_code(colors[CEIL]))
 		return (false);
-	printf("\tcolor floor%s\n",colors[0]);
-	printf("\tcolor ceiling%s\n",colors[1]);
+	// printf("\tcolor floor%s\n",colors[0]);
+	// printf("\tcolor ceiling%s\n",colors[1]);
 	free_array((void **)colors);
 	return (true);
 }

@@ -66,8 +66,8 @@ static	t_bool	check_map_closed(char **map)
 				if (is_near_void(map, i, j))
 				{
 					//print_map(map);
-					printf("i=%zu j=%zu\n", i, j);
-					printf("ya un trou\n");
+					// printf("i=%zu j=%zu\n", i, j);
+					// printf("ya un trou\n");
 					return (false);
 				}
 			}
@@ -102,7 +102,6 @@ t_bool	check_map(char **unparsed_scene)
 		free_array((void **)map);
 		return (false);
 	}
-	printf("map is ok\n");
 	free_array((void **)map);
 	return (true);
 }

@@ -35,6 +35,10 @@ def	parsing(scene_name: str, scene_path: str) -> str:
 		if search("F|C", line[:1]):
 			idless_lines.append(line[1:])
 
+	for line in idless_lines:
+		if not line.count(',') == 2:
+			print()
+
 	# Join the lines
 	joined_lines = "\n".join(idless_lines)
 	return joined_lines
@@ -147,16 +151,16 @@ if __name__ == "__main__":
 	input_command = "make test_input -C" + os.path.abspath(os.getcwd() + " > /dev/null")
 
 	# run parsing test
-	# print("\nPARSING")
-	# os.system(testclean_command)
-	# os.system(parsing_command)
-	# run_test(scene_path, "parsing")
+	print("\nPARSING")
+	os.system(testclean_command)
+	os.system(parsing_command)
+	run_test(scene_path, "parsing")
 
 	# # run input test
-	# print("\nINPUT")
-	# os.system(testclean_command)
-	# os.system(input_command)
-	# run_test(scene_path, "input")
+	print("\nINPUT")
+	os.system(testclean_command)
+	os.system(input_command)
+	run_test(scene_path, "input")
 
-	print(check_input("valid_map.cub", "unit-tests/scenes"))
-	print(exec_command("test", "valid_map.cub", "unit-tests/scenes"))
+	# print("expected : " + check_input("valid_map.cub", "unit-tests/scenes"))
+	# print("our : " + exec_command("test", "valid_map.cub", "unit-tests/scenes"))

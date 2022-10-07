@@ -117,11 +117,12 @@ t_bool  check_input(int ac, char **av)
     }
 	if (!check_map(unparsed_scene))
 	{
-		printf("Map is incorrect \n");
+		// printf("Map is incorrect \n");
 		free_array((void **)unparsed_scene);
         return (false);
 	}
-	printf("Everything ok\n");
+	// printf("Everything ok\n");
     free_array((void **)unparsed_scene);
+
     return (true);
 }
