@@ -1,7 +1,8 @@
-NO ./textures/texture_ea.xpm 
-SO ./t extures/texture_so.xpm      
-WE ./textures/texture_we.xpm 
-EA ./textures/texture_ea.xpm
+NO ./textures/floor_overlook_hotel_1.xpm
+SO ./t extures/floor_overlook_hotel_2.xpm      
+WE ./textures/floor_overlook_hotel_1.xpm 
+EA ./textures/floor_overlook_hotel_2.xpm
+
 F 220,100,2
 C 225,30,2
 111111111111

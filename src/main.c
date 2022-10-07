@@ -3,7 +3,6 @@
 int	main(int ac, char **av)
 {
 	//t_data	*data;
-	(void)ac;
 
 	// CHECK IF THE INPUT IS VALID
 	if (!check_input(ac, av))
