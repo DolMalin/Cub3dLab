@@ -34,18 +34,58 @@ static t_bool	check_arguments(int ac, char **av)
 	return (1);
 }
 
+static t_bool	check_config_textures(char **scene)
+{
+	char	*buffer;
+	int		i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (i == NO)
+			buffer = get_line_from_key(scene,"NO");
+		else if (i == SO)
+			buffer = get_line_from_key(scene,"SO");
+		else if (i == WE)
+			buffer = get_line_from_key(scene,"WE");
+		else if (i == EA)
+			buffer = get_line_from_key(scene,"EA");
+		if (!buffer)
+			return (false);
+		free(buffer);
+		i++;
+	}
+	return (true);
+}
+
+static t_bool	check_line_color(char **scene)
+{
+	char	*buffer;
+	int		i;
+
+	i = 0;
+	while (i < 2)
+	{
+		if (i == FLOOR)
+			buffer = get_line_from_key(scene, "F");
+		else if (i == CEIL)
+			buffer = get_line_from_key(scene, "C");
+		if (!buffer)
+			return (false);
+		free(buffer);
+		i++;
+	}
+	return (true);
+}
+
 static t_bool	check_config_line_missing(char **scene)
 {
-	if (!get_line_from_key(scene, "NO")
-		||!get_line_from_key(scene, "SO")
-		|| !get_line_from_key(scene, "EA")
-		|| !get_line_from_key(scene, "WE"))
+	if (!check_config_textures(scene))
 	{
 		printf("Error: texture missing for NO, SO, EA or WE.\n");
 		return (false);
 	}
-	if (!get_line_from_key(scene, "C")
-		|| !get_line_from_key(scene, "F"))
+	if (!check_line_color(scene))
 	{
 		printf("Error: color missing for floor or cieling.\n");
 		return (false);
@@ -96,11 +136,11 @@ t_bool	check_input(int ac, char **av)
 		free_array((void **)scene);
 		return (false);
 	}
-	// if (!check_textures(scene))
-	// {
-	//     free_array((void **)scene);
-	//     return (false);
-	// }
+	if (!check_textures(scene))
+	{
+	    free_array((void **)scene);
+	    return (false);
+	}
 	if (!check_colors(scene))
 	{
 		free_array((void **)scene);
