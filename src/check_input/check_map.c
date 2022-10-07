@@ -75,11 +75,11 @@ static	t_bool	check_map_closed(char **map)
 	return (true);
 }
 
-t_bool	check_map(char **unparsed_scene)
+t_bool	check_map(char **scene)
 {
 	char	**map;
 
-	map = get_map(unparsed_scene);
+	map = get_map(scene);
 	if (!check_map_closed(map))
 	{
 		printf("The map is not closed\n");

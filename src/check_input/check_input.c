@@ -21,18 +21,18 @@ static t_bool	check_arguments(int ac, char **av)
 	return (1);
 }
 
-static t_bool	check_config_line_missing(char **unparsed_scene)
+static t_bool	check_config_line_missing(char **scene)
 {
-	if (!get_line_from_key(unparsed_scene, "NO")
-		||!get_line_from_key(unparsed_scene, "SO")
-		|| !get_line_from_key(unparsed_scene, "EA")
-		|| !get_line_from_key(unparsed_scene, "WE"))
+	if (!get_line_from_key(scene, "NO")
+		||!get_line_from_key(scene, "SO")
+		|| !get_line_from_key(scene, "EA")
+		|| !get_line_from_key(scene, "WE"))
 	{
 		printf("Error: texture missing for NO, SO, EA or WE.\n");
 		return (false);
 	}
-	if (!get_line_from_key(unparsed_scene, "C")
-		|| !get_line_from_key(unparsed_scene, "F"))
+	if (!get_line_from_key(scene, "C")
+		|| !get_line_from_key(scene, "F"))
 	{
 		printf("Error: color missing for floor or cieling.\n");
 		return (false);
@@ -40,16 +40,16 @@ static t_bool	check_config_line_missing(char **unparsed_scene)
 	return (true);
 }
 
-static t_bool	check_structure(char **unparsed_scene)
+static t_bool	check_structure(char **scene)
 {
 	int	i;
 
 	i = 0;
-	while (is_config_line(unparsed_scene[i]))
+	while (is_config_line(scene[i]))
 		i++;
-	while (unparsed_scene[i])
+	while (scene[i])
 	{
-		if (is_config_line(unparsed_scene[i]))
+		if (is_config_line(scene[i]))
 		{
 			printf("Error: incorrect structure of scene.\n");
 			return (false);
@@ -59,47 +59,47 @@ static t_bool	check_structure(char **unparsed_scene)
 	return (true);
 }
 
-static t_bool	check_config_structure(char **unparsed_scene)
+static t_bool	check_config_structure(char **scene)
 {
-	if (!check_config_line_missing(unparsed_scene))
+	if (!check_config_line_missing(scene))
 		return (false);
-	if (!check_structure(unparsed_scene))
+	if (!check_structure(scene))
 		return (false);
 	return (true);
 }
 
 t_bool	check_input(int ac, char **av)
 {
-	char	**unparsed_scene;
+	char	**scene;
 
-	unparsed_scene = parse_scene_file(av[1]);
+	scene = parse_scene_file(av[1]);
 	if (!check_arguments(ac, av))
 	{
-		free_array((void **)unparsed_scene);
+		free_array((void **)scene);
 		return (false);
 	}
-	if (!check_config_structure(unparsed_scene))
+	if (!check_config_structure(scene))
 	{
-		free_array((void **)unparsed_scene);
+		free_array((void **)scene);
 		return (false);
 	}
-	// if (!check_textures(unparsed_scene))
+	// if (!check_textures(scene))
 	// {
-	//     free_array((void **)unparsed_scene);
+	//     free_array((void **)scene);
 	//     return (false);
 	// }
-	if (!check_colors(unparsed_scene))
+	if (!check_colors(scene))
 	{
-		free_array((void **)unparsed_scene);
+		free_array((void **)scene);
 		return (false);
 	}
-	if (!check_map(unparsed_scene))
+	if (!check_map(scene))
 	{
 		printf("Map is incorrect \n");
-		free_array((void **)unparsed_scene);
+		free_array((void **)scene);
 		return (false);
 	}
 	printf("Everything ok\n");
-	free_array((void **)unparsed_scene);
+	free_array((void **)scene);
 	return (true);
 }

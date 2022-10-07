@@ -15,15 +15,15 @@
 //     return (true);
 // }
 
-// static t_bool   check_textures(char **unparsed_scene)
+// static t_bool   check_textures(char **scene)
 // {
-//     if (!check_texture(get_line_from_key(unparsed_scene, "NO"), "NO")) // verify if get_line_from_key gives path or line cf get path seems like it does
+//     if (!check_texture(get_line_from_key(scene, "NO"), "NO")) // verify if get_line_from_key gives path or line cf get path seems like it does
 //         return (false);
-//     if (!check_texture(get_line_from_key(unparsed_scene, "SO"), "SO")) // verify how to free linke from key
+//     if (!check_texture(get_line_from_key(scene, "SO"), "SO")) // verify how to free linke from key
 //         return (false);
-//     if (!check_texture(get_line_from_key(unparsed_scene, "ES"), "ES"))
+//     if (!check_texture(get_line_from_key(scene, "ES"), "ES"))
 //         return (false);
-//     if (!check_texture(get_line_from_key(unparsed_scene, "WE"), "WE"))
+//     if (!check_texture(get_line_from_key(scene, "WE"), "WE"))
 //         return (false);
 //     return (true);
 // }

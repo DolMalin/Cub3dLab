@@ -1,14 +1,14 @@
 #include "../../includes/cub3d.h"
 
-static char	**get_colors_to_check(char **unparsed_scene)
+static char	**get_colors_to_check(char **scene)
 {
 	char	**colors;
 
 	colors = malloc(sizeof(char *) * 4);
 	if (!colors)
 		return (NULL);
-	colors[FLOOR] = get_line_from_key(unparsed_scene, "F");
-	colors[CEIL] = get_line_from_key(unparsed_scene, "C");
+	colors[FLOOR] = get_line_from_key(scene, "F");
+	colors[CEIL] = get_line_from_key(scene, "C");
 	colors[2] = 0;
 	return (colors);
 }
@@ -70,11 +70,11 @@ static t_bool	check_comas(char **colors)
 	return (true);
 }
 
-t_bool	check_colors(char **unparsed_scene)
+t_bool	check_colors(char **scene)
 {
 	char	**colors;
 
-	colors = get_colors_to_check(unparsed_scene);
+	colors = get_colors_to_check(scene);
 	if (!check_comas(colors))
 		return (false);
 	if (!check_color_code(colors[FLOOR]))
