@@ -11,8 +11,8 @@ static t_bool	check_valid_characters(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' 
-				&& map[i][j] != 'S' && map[i][j] != 'O' 
+			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N'
+				&& map[i][j] != 'S' && map[i][j] != 'O'
 					&& map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != ' ')
 				return (false);
 			j++;
@@ -35,7 +35,8 @@ static t_bool	check_one_start_pos(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] ==  'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
+			if (map[i][j] == 'N' || map[i][j] == 'S' ||
+				map[i][j] == 'E' || map[i][j] == 'W')
 				start_pos++;
 			j++;
 		}
@@ -53,7 +54,7 @@ static	t_bool	check_map_closed(char **map)
 	size_t	map_array_len;
 
 	i = 0;
-	map_array_len = array_len((void**)map);
+	map_array_len = array_len((void** )map);
 	while (map[i])
 	{
 		j = 0;
@@ -64,12 +65,7 @@ static	t_bool	check_map_closed(char **map)
 				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 1) || i == map_array_len - 1)
 					return (false);
 				if (is_near_void(map, i, j))
-				{
-					//print_map(map);
-					printf("i=%zu j=%zu\n", i, j);
-					printf("ya un trou\n");
 					return (false);
-				}
 			}
 			j++;
 		}
@@ -83,7 +79,6 @@ t_bool	check_map(char **unparsed_scene)
 	char	**map;
 
 	map = get_map(unparsed_scene);
-	//print_map(map);
 	if (!check_map_closed(map))
 	{
 		printf("The map is not closed\n");
