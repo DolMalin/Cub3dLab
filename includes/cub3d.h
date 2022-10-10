@@ -70,5 +70,6 @@ void	free_unterminated_array(void **array, size_t n);
 t_bool	is_empty_space(char c);
 t_bool	is_empty_line(char *line);
 t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j);
+t_bool	ft_strisdigit(char *str);
 
 #endif

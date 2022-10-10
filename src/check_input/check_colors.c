@@ -22,6 +22,12 @@ static t_bool	check_color_code(char *color)
 	i = 0;
 	while (split_color[i])
 	{
+		if (!ft_strisdigit(split_color[i]))
+		{
+			printf("Error: color code contains unvalid characters");
+			free_array((void **)split_color);
+			return (false);
+		}
 		if (!(ft_atoi(split_color[i]) >= 0 && (ft_atoi(split_color[i]) <= 255)))
 		{
 			printf("Error: color code must be between 0 and 255.\n");

@@ -50,3 +50,17 @@ void print_map(char **map)
 		i++;
 	}
 }
+
+t_bool	ft_strisdigit(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}

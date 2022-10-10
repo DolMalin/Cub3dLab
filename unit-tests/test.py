@@ -229,5 +229,5 @@ if __name__ == "__main__":
 	os.system(input_command)
 	run_test(scene_path, "input")
 
-	# print("expected : " + check_input("wrong_color1.cub", "unit-tests/scenes"))
-	# print("our : " + exec_command("test", "wrong_color1.cub", "unit-tests/scenes", "input"))
+	# print("expected : " + check_input("wrong_color4.cub", "unit-tests/scenes"))
+	# print("our : " + exec_command("test", "wrong_color4.cub", "unit-tests/scenes", "input"))
