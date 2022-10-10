@@ -82,7 +82,7 @@ static t_bool	check_config_line_missing(char **scene)
 {
 	if (!check_config_textures(scene))
 	{
-		printf("Error: texture missing for NO, SO, EA o WE.\n");
+		printf("Error: texture missing for NO, SO, EA or WE.\n");
 		return (false);
 	}
 	if (!check_line_color(scene))
