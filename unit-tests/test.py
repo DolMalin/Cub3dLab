@@ -3,6 +3,17 @@ import subprocess
 from re import search
 import string
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def	parsing(scene_name: str, scene_path: str) -> str:
 	"""A function that takes a scene path and remove useless spaces, useless lines and reshape in correct order the elements.
 	The goal of that function is to provide an example of what our c program must do.
@@ -96,7 +107,6 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 		if search("NO|SO|EA|WE", line[:2]):
 			idless_textures_lines.append(line[2:])
 
-
 	# Remove the ID at the start of the textures lines
 	idless_color_lines = []	
 	for line in filtered_lines:
@@ -123,7 +133,6 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 					return "Error: color code must be between 0 and 255."
 			else:
 				return "Error: color code contains unvalid characters"
-			
 	
 	return "Test OK"
 
@@ -182,10 +191,10 @@ def	compare_commands(scene_name: str, scene_path: str, test_name: str) -> bool:
 		return True
 	else:
 		print("===================================")
-		print(f"[Error] data structure: {scene_name}")
-		print(f"Diff: {difference(output, expected)}")
-		print(f"Expected: {expected}")
-		print(f"Output: {output}")
+		print(bcolors.BOLD + bcolors.FAIL + "[Error] data structure: " + bcolors.ENDC + scene_name)
+		print(bcolors.BOLD + "Diff: " + bcolors.ENDC + f"{difference(output, expected)}")
+		print(bcolors.BOLD + "Expected: " + bcolors.ENDC + expected)
+		print(bcolors.BOLD + "Output: " + bcolors.ENDC + output)
 		print("===================================\n")
 		return False
 
@@ -204,7 +213,7 @@ def	run_test(scene_path: str, test_name: str):
 		if not compare_commands(scene, scene_path, test_name):
 			return
 	print("===================================")
-	print(f"[Test OK]")
+	print(bcolors.BOLD + bcolors.OKGREEN + "[Test OK]" + bcolors.ENDC)
 	print("===================================\n")
 
 
@@ -218,13 +227,13 @@ if __name__ == "__main__":
 	input_command = "make test_input -C" + os.path.abspath(os.getcwd() + " > /dev/null")
 
 	# run parsing test
-	print("\nPARSING")
+	print(bcolors.BOLD + "\nPARSING" + bcolors.ENDC)
 	os.system(testclean_command)
 	os.system(parsing_command)
 	run_test(scene_path, "parsing")
 
 	# # run input test
-	print("\nINPUT")
+	print(bcolors.BOLD + "\nINPUT" + bcolors.ENDC)
 	os.system(testclean_command)
 	os.system(input_command)
 	run_test(scene_path, "input")
