@@ -53,7 +53,7 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 		return "Not a .cub scene file"
 
 	# Check if there is all identifiers
-	for key in ["NO", "SO", "EA", "WE", "C", "F"]:
+	for key in ["NO", "SO", "EA", "WE"]:
 		find_key = False
 		for line in splited_data:
 			trim_line = line.translate(str.maketrans("", "", string.whitespace))
@@ -61,6 +61,15 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 				find_key = True
 		if not find_key:
 			return "Error: texture missing for NO, SO, EA or WE."
+
+	for key in ["C", "F"]:
+		find_key = False
+		for line in splited_data:
+			trim_line = line.translate(str.maketrans("", "", string.whitespace))
+			if search(key, trim_line):
+				find_key = True
+		if not find_key:
+			return "Error: color missing for floor or cieling."
 
 	# Get the map lines and remove the empty ones
 	map = []
@@ -97,12 +106,24 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 	# Check if the textures path are valid
 	for line in idless_textures_lines:
 		if not os.path.exists(os.getcwd() + "/" + line):
-			return f"Can't access the {line} texture file"
+			return f"Can't access the texture file"
 
 	# Check if there is the correct number of comas in code
 	for line in idless_color_lines:
 		if line.count(',') != 2:
 			return "Error: check comas in color code"
+
+	for line in idless_color_lines:
+		color_split = list(filter(None, line.split(',')))
+		if len(color_split) != 3:
+			return "Error: color code must be composed of 3 colors RGB."
+		for color in color_split:
+			if color.isdigit():
+				if int(color) < 0 or int(color) > 255:
+					return "Error: color code must be between 0 and 255."
+			else:
+				return "Error: color code contains unvalid characters"
+			
 	
 	return "Test OK"
 
@@ -208,5 +229,5 @@ if __name__ == "__main__":
 	os.system(input_command)
 	run_test(scene_path, "input")
 
-	# print("expected : " + check_input("mi.cub", "unit-tests/scenes"))
-	# print("our : " + exec_command("test", "wrong_textures_path.cub", "unit-tests/scenes", "input"))
+	# print("expected : " + check_input("wrong_color1.cub", "unit-tests/scenes"))
+	# print("our : " + exec_command("test", "wrong_color1.cub", "unit-tests/scenes", "input"))
