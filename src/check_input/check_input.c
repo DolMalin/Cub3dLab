@@ -32,13 +32,11 @@ static t_bool	check_arguments(int ac, char **av)
 	return (true);
 }
 
-
 t_bool	check_input(int ac, char **av)
 {
 	char	**scene;
 
 	scene = parse_scene_file(av[1]);
-	print_map(scene);
 	if (!check_arguments(ac, av))
 		return (error(OTHER_ERRORS, scene));
 	if (!check_config_structure(scene))
