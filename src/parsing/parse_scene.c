@@ -110,7 +110,7 @@ char	**parse_scene_file(char *scene_file)
 		i++;
 		parsed_scene[i] = get_next_line(fd);
 	}
-	//parsed_scene[i + 1] = NULL;
+	parsed_scene[i] = NULL;
 	parsed_scene = remove_empty_lines(parsed_scene);
 	parsed_scene = trim_config_line(parsed_scene);
 	if (!parsed_scene)
