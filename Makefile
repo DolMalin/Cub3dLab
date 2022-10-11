@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/11 16:58:25 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/11 17:54:32 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ CHECK_INPUT_FILES 	=	check_input.c \
 						check_map.c \
 						check_colors.c \
 						check_textures.c \
+						check_config_structure.c \
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \

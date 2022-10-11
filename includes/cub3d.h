@@ -60,6 +60,7 @@ void print_map(char **map);
 
 /****************CHECK_INPUT*********************/
 t_bool			check_input(int ac, char **av);
+t_bool			check_config_structure(char **scene);
 t_bool			check_map(char **unparsed_scene);
 t_bool			check_colors(char **unparsed_scene);
 t_bool			check_textures(char **scene);
