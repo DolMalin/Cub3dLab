@@ -87,8 +87,6 @@ t_bool	check_colors(char **scene)
 		return (false);
 	if (!check_color_code(colors[CEIL]))
 		return (false);
-	// printf("\tcolor floor%s\n",colors[0]);
-	// printf("\tcolor ceiling%s\n",colors[1]);
 	free_array((void **)colors);
 	return (true);
 }

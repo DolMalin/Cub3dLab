@@ -16,6 +16,8 @@
 # define KB_RIGHT 124
 # define ESCAPE_KC 53
 
+/****************DEFINES_SCENE*********************/
+
 # define NO 0
 # define SO 1
 # define EA 2
@@ -27,6 +29,12 @@
 # define R 0
 # define G 1
 # define B 2
+
+/****************DEFINES_ERRORS*********************/
+
+# define MAP_NOT_CLOSED 0
+# define INVALID_CHARS 1
+# define OTHER_ERRORS 2
 
 typedef struct s_data
 {
@@ -71,6 +79,9 @@ t_bool	is_empty_space(char c);
 t_bool	is_empty_line(char *line);
 t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j);
 t_bool	ft_strisdigit(char *str);
-t_bool is_in_charset(char c, char *charset);
+t_bool	is_in_charset(char c, char *charset);
+
+/****************ERRORS*********************/
+t_bool	error(int error_id, char **scene);
 
 #endif

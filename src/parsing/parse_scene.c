@@ -1,19 +1,5 @@
 #include "../../includes/cub3d.h"
 
-t_bool	is_in_charset(char c, char *charset)
-{
-	int	i;
-
-	i = 0;
-	while (charset[i])
-	{
-		if (c == charset[i])
-			return (true);
-		i++;
-	}
-	return (false);
-}
-
 char	*trim(char *line, char *charset)
 {
 	char	*trimed_line;

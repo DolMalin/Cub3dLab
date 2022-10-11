@@ -37,10 +37,10 @@ t_bool   check_textures(char **scene)
 			buffer = get_line_from_key(scene,"NO");
 		else if (i == SO)
 			buffer = get_line_from_key(scene,"SO");
-		else if (i == WE)
-			buffer = get_line_from_key(scene,"WE");
 		else if (i == EA)
 			buffer = get_line_from_key(scene,"EA");
+		else if (i == WE)
+			buffer = get_line_from_key(scene,"WE");
 		if (!buffer)
 			return (false);
 		if (!check_texture(buffer))

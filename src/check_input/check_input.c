@@ -16,20 +16,20 @@ static t_bool	check_arguments(int ac, char **av)
 {
 	if (ac < 2)
 	{
-		printf("No scene in arguments\n");
-		return (0);
+		printf("Error: no scene in arguments\n");
+		return (false);
 	}
 	if (!check_extension(av[1]))
 	{
-		printf("Not a .cub scene file\n");
-		return (0);
+		printf("Error: not a .cub scene file\n");
+		return (false);
 	}
 	if (open(av[1], O_RDONLY) < 0)
 	{
-		printf("Can't access scene file\n");
-		return (0);
+		printf("Error: can't access scene file\n");
+		return (false);
 	}
-	return (1);
+	return (true);
 }
 
 static t_bool	check_config_textures(char **scene)
@@ -44,14 +44,15 @@ static t_bool	check_config_textures(char **scene)
 			buffer = get_line_from_key(scene,"NO");
 		else if (i == SO)
 			buffer = get_line_from_key(scene,"SO");
-		else if (i == WE)
-			buffer = get_line_from_key(scene,"WE");
 		else if (i == EA)
 			buffer = get_line_from_key(scene,"EA");
+		else if (i == WE)
+			buffer = get_line_from_key(scene,"WE");
+
 		if (!buffer)
 			return (false);
-		free(buffer);
 		i++;
+		free(buffer);
 	}
 	return (true);
 }
@@ -125,34 +126,37 @@ t_bool	check_input(int ac, char **av)
 	char	**scene;
 
 	scene = parse_scene_file(av[1]);
+	//print_map(scene);
 	if (!check_arguments(ac, av))
-	{
-		free_array((void **)scene);
-		return (false);
-	}
+	// {
+	// 	free_array((void **)scene);
+	// 	return (false);
+	// }
+		return (error(OTHER_ERRORS, scene));
 	if (!check_config_structure(scene))
-	{
-		free_array((void **)scene);
-		return (false);
-	}
-	
+	// {
+	// 	free_array((void **)scene);
+	// 	return (false);
+	// }
+		return (error(OTHER_ERRORS, scene));
 	if (!check_map(scene))
-	{
-		//printf("Map is incorrect \n");
-		free_array((void **)scene);
-		return (false);
-	}
+	// {
+	// 	free_array((void **)scene);
+	// 	return (false);
+	// }
+		return (error(OTHER_ERRORS, scene));
 	if (!check_textures(scene))
-	{
-	    free_array((void **)scene);
-	    return (false);
-	}
+	// {
+	//     free_array((void **)scene);
+	//     return (false);
+	// }
+		return (error(OTHER_ERRORS, scene));
 	if (!check_colors(scene))
-	{
-		free_array((void **)scene);
-		return (false);
-	}
-	//printf("Everything ok\n");
+	// {
+	// 	free_array((void **)scene);
+	// 	return (false);
+	// }
+		return (error(OTHER_ERRORS, scene));
 	free_array((void **)scene);
 	return (true);
 }

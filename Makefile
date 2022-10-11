@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/07 17:11:28 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/11 14:14:37 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,10 @@ CHECK_INPUT_FILES 	=	check_input.c \
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \
+						utils3.c \
 
 SRC_FILES 			=	main.c \
+						error.c \
 			${addprefix parsing/, ${PARSING_FILES}} \
 			${addprefix utils/, ${UTILS_FILES}} \
 			${addprefix check_input/, ${CHECK_INPUT_FILES}}
