@@ -14,6 +14,8 @@ t_bool	error(int error_id, char **array)
 		printf("Error: color code contains invalid characters.\n");
 	else if (error_id == COLOR_RGB)
 		printf("Error: color code must be composed of 3 colors RGB.\n");
+	else if (error_id == COLOR_COMA_COUNT)
+		printf("Error: check comas in color code.\n");
 	free_array((void **)array);
 	return (false);
 }

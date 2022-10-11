@@ -53,15 +53,9 @@ static int	coma_count(char *color)
 static t_bool	check_comas(char **colors)
 {
 	if (coma_count(colors[CEIL]) != 2)
-	{	
-		printf("Error: check comas in color code.\n");
-		return (false);
-	}
+		return (error(COLOR_COMA_COUNT, colors));
 	if (coma_count(colors[FLOOR]) != 2)
-	{	
-		printf("Error: check comas in color code.\n");
-		return (false);
-	}
+		return (error(COLOR_COMA_COUNT, colors));
 	return (true);
 }
 

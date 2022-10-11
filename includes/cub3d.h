@@ -39,6 +39,7 @@
 # define COLOR_OVERFLOW 4
 # define COLOR_INV_CHARS 5
 # define COLOR_RGB 6
+# define COLOR_COMA_COUNT 7
 
 typedef struct s_data
 {
