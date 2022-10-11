@@ -41,14 +41,13 @@ static t_bool	check_config_textures(char **scene)
 	while (i < 4)
 	{
 		if (i == NO)
-			buffer = get_line_from_key(scene,"NO");
+			buffer = get_line_from_key(scene, "NO");
 		else if (i == SO)
-			buffer = get_line_from_key(scene,"SO");
+			buffer = get_line_from_key(scene, "SO");
 		else if (i == EA)
-			buffer = get_line_from_key(scene,"EA");
+			buffer = get_line_from_key(scene, "EA");
 		else if (i == WE)
-			buffer = get_line_from_key(scene,"WE");
-
+			buffer = get_line_from_key(scene, "WE");
 		if (!buffer)
 			return (false);
 		i++;
@@ -79,7 +78,6 @@ static t_bool	check_line_color(char **scene)
 
 static t_bool	check_config_line_missing(char **scene)
 {
-	
 	if (!check_config_textures(scene))
 	{
 		printf("Error: texture missing for NO, SO, EA or WE.\n");

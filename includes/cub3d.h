@@ -32,10 +32,13 @@
 
 /****************DEFINES_ERRORS*********************/
 
-# define MAP_NOT_CLOSED 0
-# define INVALID_CHARS 1
-# define INVALID_MAP_LEN 2
-# define OTHER_ERRORS 3
+# define OTHER_ERRORS 0
+# define MAP_NOT_CLOSED 1
+# define INVALID_CHARS 2
+# define INVALID_MAP_LEN 3
+# define COLOR_OVERFLOW 4
+# define COLOR_INV_CHARS 5
+# define COLOR_RGB 6
 
 typedef struct s_data
 {

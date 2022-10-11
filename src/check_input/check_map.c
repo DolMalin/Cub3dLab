@@ -82,7 +82,7 @@ static	t_bool	check_map_closed(char **map)
 	return (true);
 }
 
-t_bool check_map_len(char **scene)
+t_bool	check_map_len(char **scene)
 {
 	int		i;
 	size_t	map_len;
@@ -108,25 +108,11 @@ t_bool	check_map(char **scene)
 	if (!check_map_len(scene))
 		return (error(INVALID_MAP_LEN, map));
 	if (!check_map_closed(map))
-	{
 		return (error(MAP_NOT_CLOSED, map));
-		// printf("Error: map is not closed\n");
-		// free_array((void **)map);
-		// return (false);
-	}
 	if (!check_valid_characters(map))
-	{
 		return (error(INVALID_CHARS, map));
-		// printf("Error: invalid characters in the map\n");
-		// free_array((void **)map);
-		// return (false);
-	}
 	if (!check_start_pos(map))
-	{
 		return (error(OTHER_ERRORS, map));
-		// free_array((void **)map);
-		// return (false);
-	}
 	free_array((void **)map);
 	return (true);
 }

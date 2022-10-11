@@ -23,24 +23,13 @@ static t_bool	check_color_code(char *color)
 	while (split_color[i])
 	{
 		if (!ft_strisdigit(split_color[i]))
-		{
-			printf("Error: color code contains unvalid characters");
-			free_array((void **)split_color);
-			return (false);
-		}
+			return (error(COLOR_INV_CHARS, split_color));
 		if (!(ft_atoi(split_color[i]) >= 0 && (ft_atoi(split_color[i]) <= 255)))
-		{
-			printf("Error: color code must be between 0 and 255.\n");
-			free_array((void **)split_color);
-			return (false);
-		}
+			return (error(COLOR_OVERFLOW, split_color));
 		i++;
 	}
 	if (i != 3)
-	{
-		printf("Error: color code must be composed of 3 colors RGB.\n");
-		return (false);
-	}
+		return (error(COLOR_RGB, split_color));
 	free_array((void **)split_color);
 	return (true);
 }
@@ -65,12 +54,12 @@ static t_bool	check_comas(char **colors)
 {
 	if (coma_count(colors[CEIL]) != 2)
 	{	
-		printf("Error: check comas in color code\n");
+		printf("Error: check comas in color code.\n");
 		return (false);
 	}
 	if (coma_count(colors[FLOOR]) != 2)
 	{	
-		printf("Error: check comas in color code\n");
+		printf("Error: check comas in color code.\n");
 		return (false);
 	}
 	return (true);
