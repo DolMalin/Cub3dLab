@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/11 14:14:37 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/11 16:58:25 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ OBJS = 			${SRC:.c=.o}
 HEADERS = 		includes/cub3d.h
 
 CMD = 			gcc
-FLAGS = 		-Wall -Werror -Wextra
+FLAGS = 		-Wall -Werror -Wextra -g3 -fsanitize=address
 
 %.o: 			%.c $(HEADERS)
 				$(CMD) $(FLAGS) -c $< -o $@

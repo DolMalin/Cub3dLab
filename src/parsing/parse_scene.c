@@ -31,7 +31,7 @@ char	*trim(char *line, char *charset)
 		}
 		i++;
 	}
-	trimed_line[k] = 0;
+	trimed_line[k] = '\0';
 	return (trimed_line);
 }
 
@@ -54,7 +54,7 @@ char	**trim_config_line(char **parsed_scene)
 		free(parsed_scene[i]);
 		i++;
 	}
-	trimed_scene[i] = 0;
+	trimed_scene[i] = 0; // verifier taille tableau on envoie derniere ligne nulle dans trim
 	free(parsed_scene);
 	return (trimed_scene);
 }
@@ -110,7 +110,7 @@ char	**parse_scene_file(char *scene_file)
 		i++;
 		parsed_scene[i] = get_next_line(fd);
 	}
-	parsed_scene[i + 1] = 0;
+	//parsed_scene[i + 1] = NULL;
 	parsed_scene = remove_empty_lines(parsed_scene);
 	parsed_scene = trim_config_line(parsed_scene);
 	if (!parsed_scene)

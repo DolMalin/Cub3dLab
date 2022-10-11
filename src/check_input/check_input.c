@@ -126,36 +126,16 @@ t_bool	check_input(int ac, char **av)
 	char	**scene;
 
 	scene = parse_scene_file(av[1]);
-	//print_map(scene);
+	print_map(scene);
 	if (!check_arguments(ac, av))
-	// {
-	// 	free_array((void **)scene);
-	// 	return (false);
-	// }
 		return (error(OTHER_ERRORS, scene));
 	if (!check_config_structure(scene))
-	// {
-	// 	free_array((void **)scene);
-	// 	return (false);
-	// }
 		return (error(OTHER_ERRORS, scene));
 	if (!check_map(scene))
-	// {
-	// 	free_array((void **)scene);
-	// 	return (false);
-	// }
 		return (error(OTHER_ERRORS, scene));
 	if (!check_textures(scene))
-	// {
-	//     free_array((void **)scene);
-	//     return (false);
-	// }
 		return (error(OTHER_ERRORS, scene));
 	if (!check_colors(scene))
-	// {
-	// 	free_array((void **)scene);
-	// 	return (false);
-	// }
 		return (error(OTHER_ERRORS, scene));
 	free_array((void **)scene);
 	return (true);

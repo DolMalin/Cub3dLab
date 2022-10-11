@@ -82,11 +82,31 @@ static	t_bool	check_map_closed(char **map)
 	return (true);
 }
 
+t_bool check_map_len(char **scene)
+{
+	int		i;
+	size_t	map_len;
+
+	i = 0;
+	map_len = 0;
+	while (scene[i])
+	{
+		if (!is_config_line(scene[i]))
+			map_len++;
+		i++;
+	}
+	if (map_len < 3)
+		return (false);
+	return (true);
+}
+
 t_bool	check_map(char **scene)
 {
 	char	**map;
 
 	map = get_map(scene);
+	if (!check_map_len(scene))
+		return (error(INVALID_MAP_LEN, map));
 	if (!check_map_closed(map))
 	{
 		return (error(MAP_NOT_CLOSED, map));

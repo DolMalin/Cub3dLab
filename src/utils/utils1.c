@@ -63,6 +63,8 @@ t_bool is_config_line(char *line)
 	t_bool	ret;
 
 	ret = false;
+	if (!line)
+		return (true); // return true or false ? - added this condition to avoid seg fault when no map
 	trim_line = trim(line, " \t\r\n");
 	if (!trim_line)
 		return (false);

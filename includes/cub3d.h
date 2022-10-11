@@ -34,7 +34,8 @@
 
 # define MAP_NOT_CLOSED 0
 # define INVALID_CHARS 1
-# define OTHER_ERRORS 2
+# define INVALID_MAP_LEN 2
+# define OTHER_ERRORS 3
 
 typedef struct s_data
 {
@@ -82,6 +83,6 @@ t_bool	ft_strisdigit(char *str);
 t_bool	is_in_charset(char c, char *charset);
 
 /****************ERRORS*********************/
-t_bool	error(int error_id, char **scene);
+t_bool	error(int error_id, char **array);
 
 #endif

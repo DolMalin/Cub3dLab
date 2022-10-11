@@ -79,6 +79,7 @@ char	**get_map(char **parsed_scene)
 			map_len++;
 		i++;
 	}
+	//printf("\tmap_len: %d\n", map_len);
 	map = malloc(sizeof(char *) * (map_len + 1));
 	if (!map)
 		return (NULL);
