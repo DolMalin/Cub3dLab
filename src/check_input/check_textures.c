@@ -1,15 +1,25 @@
 #include "../../includes/cub3d.h"
 
-static t_bool   check_texture(char *texture_line)
+static t_bool   check_texture(char *texture_path)
 {
-    if (!texture_line)
+	size_t	i;
+
+    if (!texture_path)
     {
-        printf("No texture found for walls\n");
+        printf("Error: no texture found for walls.\n");
         return (false);
     }
-    if (open(texture_line, O_RDONLY) < 0)
+	i = ft_strlen(texture_path) - 1;
+	while (i && texture_path[i] != '.')
+		i--;
+	if (ft_strncmp(&texture_path[i], ".xpm", 5) != 0)
+	{
+		printf("Error: not a .xpm extension for texture.\n");
+		return (false);
+	}
+	if (open(texture_path, O_RDONLY) < 0)
     {
-        printf("Can't access the texture file\n");
+        printf("Error: can't access the texture file\n");
         return (false);
     }
     return (true);

@@ -136,6 +136,12 @@ t_bool	check_input(int ac, char **av)
 		free_array((void **)scene);
 		return (false);
 	}
+	if (!check_map(scene))
+	{
+		//printf("Map is incorrect \n");
+		free_array((void **)scene);
+		return (false);
+	}
 	if (!check_textures(scene))
 	{
 	    free_array((void **)scene);
@@ -143,12 +149,6 @@ t_bool	check_input(int ac, char **av)
 	}
 	if (!check_colors(scene))
 	{
-		free_array((void **)scene);
-		return (false);
-	}
-	if (!check_map(scene))
-	{
-		//printf("Map is incorrect \n");
 		free_array((void **)scene);
 		return (false);
 	}

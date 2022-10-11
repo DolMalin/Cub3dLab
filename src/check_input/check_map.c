@@ -14,7 +14,8 @@ static t_bool	check_valid_characters(char **map)
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N'
 				&& map[i][j] != 'S' && map[i][j] != 'O'
 					&& map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != ' ')
-				return (false);
+			// if (!is_in_charset(map[i][j], "01NSEW "))
+			// 	return (false);
 			j++;
 		}
 		i++;
@@ -22,11 +23,11 @@ static t_bool	check_valid_characters(char **map)
 	return (true);
 }
 
-static t_bool	check_one_start_pos(char **map)
+static t_bool	check_start_pos(char **map)
 {
-	int	i;
-	int	j;
-	int	start_pos;
+	size_t	i;
+	size_t	j;
+	size_t	start_pos;
 
 	i = 0;
 	start_pos = 0;
@@ -37,13 +38,24 @@ static t_bool	check_one_start_pos(char **map)
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' ||
 				map[i][j] == 'E' || map[i][j] == 'W')
+			if (is_in_charset(map[i][j], "NSEW"))
+			{
+				if (i == array_len((void **)map) || j == ft_strlen(map[i]) - 1)
+				{
+					printf("Error: player is outside the map.\n");
+					return (false);
+				}
 				start_pos++;
+			}
 			j++;
 		}
 		i++;
 	}
 	if (start_pos != 1)
+	{
+		printf("Error: only one player possible on the map.\n");
 		return (false);
+	}
 	return (true);
 }
 
@@ -82,19 +94,18 @@ t_bool	check_map(char **scene)
 	map = get_map(scene);
 	if (!check_map_closed(map))
 	{
-		printf("The map is not closed\n");
+		printf("Error: map is not closed\n");
 		free_array((void **)map);
 		return (false);
 	}
 	if (!check_valid_characters(map))
 	{
-		printf("Invalid characters in the map\n");
+		printf("Error: invalid characters in the map\n");
 		free_array((void **)map);
 		return (false);
 	}
-	if (!check_one_start_pos(map))
+	if (!check_start_pos(map))
 	{
-		printf("There is more than one or no starting position for player\n");
 		free_array((void **)map);
 		return (false);
 	}
