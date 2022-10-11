@@ -11,11 +11,11 @@ static t_bool	check_valid_characters(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N'
-				&& map[i][j] != 'S' && map[i][j] != 'O'
-					&& map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != ' ')
-			// if (!is_in_charset(map[i][j], "01NSEW "))
-			// 	return (false);
+			// if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N'
+			// 	&& map[i][j] != 'S' && map[i][j] != 'O'
+			// 		&& map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != ' ')
+			if (!is_in_charset(map[i][j], "01NSEW "))
+				return (false);
 			j++;
 		}
 		i++;
@@ -36,8 +36,8 @@ static t_bool	check_start_pos(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' ||
-				map[i][j] == 'E' || map[i][j] == 'W')
+			// if (map[i][j] == 'N' || map[i][j] == 'S' ||
+			// 	map[i][j] == 'E' || map[i][j] == 'W')
 			if (is_in_charset(map[i][j], "NSEW"))
 			{
 				if (i == array_len((void **)map) || j == ft_strlen(map[i]) - 1)

@@ -1,5 +1,3 @@
-
-
 #include "../../includes/cub3d.h"
 
 static t_bool	check_extension(const char *file_path)
