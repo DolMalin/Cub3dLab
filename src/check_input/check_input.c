@@ -78,6 +78,7 @@ static t_bool	check_line_color(char **scene)
 
 static t_bool	check_config_line_missing(char **scene)
 {
+	
 	if (!check_config_textures(scene))
 	{
 		printf("Error: texture missing for NO, SO, EA or WE.\n");
@@ -96,7 +97,7 @@ static t_bool	check_structure(char **scene)
 	int	i;
 
 	i = 0;
-	while (is_config_line(scene[i]))
+	while (is_config_line(scene[i]) && scene[i])
 		i++;
 	while (scene[i])
 	{
@@ -134,6 +135,7 @@ t_bool	check_input(int ac, char **av)
 		free_array((void **)scene);
 		return (false);
 	}
+	
 	if (!check_map(scene))
 	{
 		//printf("Map is incorrect \n");

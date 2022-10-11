@@ -68,11 +68,11 @@ t_bool is_config_line(char *line)
 		return (false);
 	len = ft_strlen(trim_line);
 	if (ft_strnstr(trim_line, "NO", len) || ft_strnstr(trim_line, "SO", len))
-		ret = true;
+			ret = true;
 	else if (ft_strnstr(trim_line, "WE", len) || ft_strnstr(trim_line, "EA", len))
-		ret = true;
+			ret = true;
 	else if (ft_strnstr(trim_line, "F", len) || ft_strnstr(trim_line, "C", len))
-		ret = true;
+			ret = true;
 	free(trim_line);
 	return (ret);
 }
