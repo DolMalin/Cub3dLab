@@ -14,21 +14,12 @@ static t_bool	check_extension(const char *file_path)
 
 static t_bool	check_arguments(int ac, char **av)
 {
-	if (ac < 2)
-	{
-		printf("Error: no scene in arguments\n");
+	if (ac < 0)
 		return (false);
-	}
 	if (!check_extension(av[1]))
-	{
-		printf("Error: not a .cub scene file\n");
 		return (false);
-	}
 	if (open(av[1], O_RDONLY) < 0)
-	{
-		printf("Error: can't access scene file\n");
 		return (false);
-	}
 	return (true);
 }
 
@@ -38,15 +29,15 @@ t_bool	check_input(int ac, char **av)
 
 	scene = parse_scene_file(av[1]);
 	if (!check_arguments(ac, av))
-		return (error(OTHER_ERRORS, scene));
-	if (!check_config_structure(scene))
-		return (error(OTHER_ERRORS, scene));
-	if (!check_map(scene))
-		return (error(OTHER_ERRORS, scene));
-	if (!check_textures(scene))
-		return (error(OTHER_ERRORS, scene));
-	if (!check_colors(scene))
-		return (error(OTHER_ERRORS, scene));
+		error(ARGS, (void **)scene);
+	else if (!check_config_structure(scene))
+		error(CONFIG_STRUCT, (void **)scene);
+	else if (!check_map(scene))
+		error(MAP, (void **)scene);
+	else if (!check_textures(scene))
+		error(TEXTURES, (void **)scene);
+	else if (!check_colors(scene))
+		error(RGB_CODES, (void **)scene);
 	free_array((void **)scene);
 	return (true);
 }

@@ -32,19 +32,15 @@
 
 /****************DEFINES_ERRORS*********************/
 
-# define OTHER_ERRORS 0
-# define MAP_NOT_CLOSED 1
-# define INVALID_CHARS 2
-# define INVALID_MAP_LEN 3
-# define COLOR_OVERFLOW 4
-# define COLOR_INV_CHARS 5
-# define COLOR_RGB 6
-# define COLOR_COMA_COUNT 7
+# define ARGS "Error: incorrect arguments.\n"
+# define CONFIG_STRUCT "Error: in configuration lines or structure of scene.\n"
+# define MAP "Error: in map.\n"
+# define TEXTURES "Error: in textures paths.\n"
+# define RGB_CODES "Error: in RGB color codes.\n"
 
 typedef struct s_data
 {
 	char			**textures_path;
-	/* Use of unsigned array of size 3 because RGB contains 3 values between 0 and 255*/
 	unsigned char	**colors;
 	char			**map;
 }				t_data;
@@ -88,6 +84,6 @@ t_bool	ft_strisdigit(char *str);
 t_bool	is_in_charset(char c, char *charset);
 
 /****************ERRORS*********************/
-t_bool	error(int error_id, char **array);
+void	error(char *error_msg, void **array);
 
 #endif

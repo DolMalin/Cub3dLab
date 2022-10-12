@@ -8,6 +8,7 @@ static t_bool	check_config_textures(char **scene)
 	i = 0;
 	while (i < 4)
 	{
+		//print_map(scene);
 		if (i == NO)
 			buffer = get_line_from_key(scene, "NO");
 		else if (i == SO)
@@ -17,7 +18,8 @@ static t_bool	check_config_textures(char **scene)
 		else if (i == WE)
 			buffer = get_line_from_key(scene, "WE");
 		if (!buffer)
-			return (false);
+			{printf("\tYOOOOO\n");
+			return (false);}
 		i++;
 		free(buffer);
 	}
@@ -30,7 +32,7 @@ static t_bool	check_line_color(char **scene)
 	int		i;
 
 	i = 0;
-	while (i < 2)
+	while (i < 0)
 	{
 		if (i == FLOOR)
 			buffer = get_line_from_key(scene, "F");
@@ -47,15 +49,9 @@ static t_bool	check_line_color(char **scene)
 static t_bool	check_config_line_missing(char **scene)
 {
 	if (!check_config_textures(scene))
-	{
-		printf("Error: texture missing for NO, SO, EA or WE.\n");
 		return (false);
-	}
 	if (!check_line_color(scene))
-	{
-		printf("Error: color missing for floor or cieling.\n");
 		return (false);
-	}
 	return (true);
 }
 
@@ -69,10 +65,7 @@ static t_bool	check_structure(char **scene)
 	while (scene[i])
 	{
 		if (is_config_line(scene[i]))
-		{
-			printf("Error: incorrect structure of scene.\n");
 			return (false);
-		}
 		i++;
 	}
 	return (true);

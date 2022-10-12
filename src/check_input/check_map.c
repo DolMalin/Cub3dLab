@@ -36,10 +36,7 @@ static t_bool	check_start_pos(char **map)
 			if (is_in_charset(map[i][j], "NSEW"))
 			{
 				if (i == array_len((void **)map) || j == ft_strlen(map[i]) - 1)
-				{
-					printf("Error: player is outside the map.\n");
 					return (false);
-				}
 				start_pos++;
 			}
 			j++;
@@ -47,10 +44,7 @@ static t_bool	check_start_pos(char **map)
 		i++;
 	}
 	if (start_pos != 1)
-	{
-		printf("Error: only one player possible on the map.\n");
 		return (false);
-	}
 	return (true);
 }
 
@@ -106,13 +100,25 @@ t_bool	check_map(char **scene)
 
 	map = get_map(scene);
 	if (!check_map_len(scene))
-		return (error(INVALID_MAP_LEN, map));
+	{
+		free_array((void **)map);
+		return (false);
+	}
 	if (!check_map_closed(map))
-		return (error(MAP_NOT_CLOSED, map));
+	{
+		free_array((void **)map);
+		return (false);
+	}
 	if (!check_valid_characters(map))
-		return (error(INVALID_CHARS, map));
+	{
+		free_array((void **)map);
+		return (false);
+	}
 	if (!check_start_pos(map))
-		return (error(OTHER_ERRORS, map));
+	{
+		free_array((void **)map);
+		return (false);
+	}
 	free_array((void **)map);
 	return (true);
 }
