@@ -57,13 +57,13 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 
 	# Check if the .cub file exists
 	if not os.path.exists(os.getcwd() + "/" + scene_path + "/" + "unvalid" + "/" + scene_name):
-		return "Can't access scene file"
+		return "Error: in arguments."
 
 	# Check if the extension is .cub
 	if scene_name[-4 :] != ".cub":
-		return "Not a .cub scene file"
+		return "Error: in arguments."
 
-	# Check if there is all identifiers
+	# Check if there is all identifiers for textures path
 	for key in ["NO", "SO", "EA", "WE"]:
 		find_key = False
 		for line in splited_data:
@@ -71,8 +71,9 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 			if search(key, trim_line):
 				find_key = True
 		if not find_key:
-			return "Error: texture missing for NO, SO, EA or WE."
+			return "Error: in configuration lines or structure of scene."
 
+	# Check if there is all identifiers for colors
 	for key in ["C", "F"]:
 		find_key = False
 		for line in splited_data:
@@ -80,7 +81,7 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 			if search(key, trim_line):
 				find_key = True
 		if not find_key:
-			return "Error: color missing for floor or cieling."
+			return "Error: in configuration lines or structure of scene."
 
 	# Get the map lines and remove the empty ones
 	map = []
@@ -92,7 +93,20 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 	# Check for unvalid characters
 	for line in map:
 		if search("[^0|1|N|S|E|W| ]", line):
-			return "Invalid characters in the map\nMap is incorrect"
+			return "Error: in map."
+
+	#Check for starting position
+	player_pos_nb = 0
+	for line in map:
+		if search("N|S|E|W", line):
+			player_pos_nb += 1
+	if player_pos_nb != 1:
+		return "Error: in map."
+
+	#Check if starting position is outside
+	# for line in map:
+
+
 
 	# Get the config lines and remove withespaces
 	filtered_lines = []
@@ -116,23 +130,23 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 	# Check if the textures path are valid
 	for line in idless_textures_lines:
 		if not os.path.exists(os.getcwd() + "/" + line):
-			return f"Can't access the texture file"
+			return f"Error: in textures paths."
 
 	# Check if there is the correct number of comas in code
 	for line in idless_color_lines:
 		if line.count(',') != 2:
-			return "Error: check comas in color code"
+			return "Error: in RGB color codes."
 
 	for line in idless_color_lines:
 		color_split = list(filter(None, line.split(',')))
 		if len(color_split) != 3:
-			return "Error: color code must be composed of 3 colors RGB."
+			return "Error: in RGB color codes."
 		for color in color_split:
 			if color.isdigit():
 				if int(color) < 0 or int(color) > 255:
-					return "Error: color code must be between 0 and 255."
+					return "Error: in RGB color codes."
 			else:
-				return "Error: color code contains unvalid characters"
+				return "Error: in RGB color codes."
 	
 	return "Test OK"
 

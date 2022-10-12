@@ -75,17 +75,17 @@ t_bool	check_colors(char **scene)
 	colors = get_colors_to_check(scene);
 	if (!check_comas(colors))
 	{
-		free_array((void **)colors);
+		free_unterminated_array((void **)colors, 2);
 		return (false);
 	}
 	if (!check_color_code(colors[FLOOR]))
 	{
-		free_array((void **)colors);
+		free_unterminated_array((void **)colors, 2);
 		return (false);
 	}
 	if (!check_color_code(colors[CEIL]))
 	{
-		free_array((void **)colors);
+		free_unterminated_array((void **)colors, 2);
 		return (false);
 	}
 	free_unterminated_array((void **)colors, 2);

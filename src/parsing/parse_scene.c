@@ -9,6 +9,8 @@ char	*trim(char *line, char *charset)
 
 	i = 0;
 	s_count = 0;
+	if (ft_strlen(line) <= 0)
+		return (NULL);
 	while (line[i])
 	{
 		if (!is_in_charset(line[i], charset))

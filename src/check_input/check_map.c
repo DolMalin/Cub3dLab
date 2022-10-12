@@ -20,14 +20,12 @@ static t_bool	check_valid_characters(char **map)
 	return (true);
 }
 
-static t_bool	check_start_pos(char **map)
+static t_bool	check_player_is_in_map(char **map)
 {
 	size_t	i;
 	size_t	j;
-	size_t	start_pos;
 
 	i = 0;
-	start_pos = 0;
 	while (map[i])
 	{
 		j = 0;
@@ -35,15 +33,51 @@ static t_bool	check_start_pos(char **map)
 		{
 			if (is_in_charset(map[i][j], "NSEW"))
 			{
-				if (i == array_len((void **)map) || j == ft_strlen(map[i]) - 1)
+				if (i == 0 || j == 0)
 					return (false);
-				start_pos++;
+				else if (i == array_len((void **)map) || j == ft_strlen(map[i]) - 1)
+					return (false);
+				else if (ft_strlen(map[i - 1]) < j || ft_strlen(map[i + 1]) < j)
+					return (false);
+				else if (is_near_charset(map, i, j, " "))
+					return (false);
 			}
 			j++;
 		}
 		i++;
 	}
-	if (start_pos != 1)
+	return (true);
+}
+
+static t_bool	check_one_player(char **map)
+{
+	size_t	i;
+	size_t	j;
+	size_t	player_nb;
+
+	i = 0;
+	player_nb = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (is_in_charset(map[i][j], "NSEW"))
+				player_nb ++;
+			j++;
+		}
+		i++;
+	}
+	if (player_nb != 1)
+		return (false);
+	return (true);
+}
+
+static t_bool	check_player(char **map)
+{
+	if (!check_one_player(map))
+		return (false);
+	if (!check_player_is_in_map(map))
 		return (false);
 	return (true);
 }
@@ -66,7 +100,7 @@ static	t_bool	check_map_closed(char **map)
 				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 1)
 					|| i == map_array_len - 1)
 					return (false);
-				if (is_near_void(map, i, j))
+				if (is_near_charset(map, i, j, " \0\n"))
 					return (false);
 			}
 			j++;
@@ -114,7 +148,7 @@ t_bool	check_map(char **scene)
 		free_array((void **)map);
 		return (false);
 	}
-	if (!check_start_pos(map))
+	if (!check_player(map))
 	{
 		free_array((void **)map);
 		return (false);

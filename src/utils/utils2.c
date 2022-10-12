@@ -1,18 +1,33 @@
 #include "../../includes/cub3d.h"
 
-t_bool	is_empty_space(char c)
-{
-	if (c == '\n' || c == ' ' || c == 0) // check if only cases of empty spaces in map - add '\t' ?
-		return (true);
-	return (false);
-}
+// t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j)
+// {
+// 	if (is_empty_space(unparsed_scene[i + 1][j])
+// 		|| is_empty_space(unparsed_scene[i - 1][j])
+// 			|| is_empty_space(unparsed_scene[i][j + 1]) 
+// 				|| is_empty_space(unparsed_scene[i][j - 1]))
+// 		return (true);
+// 	return (false);
+// }
 
-t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j)
+// t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j)
+// {
+// 	if (is_empty_space(unparsed_scene[i + 1][j])
+// 		|| is_empty_space(unparsed_scene[i - 1][j])
+// 			|| is_empty_space(unparsed_scene[i][j + 1]) 
+// 				|| is_empty_space(unparsed_scene[i][j - 1]))
+// 		return (true);
+// 	return (false);
+// }
+
+
+
+t_bool	is_near_charset(char **unparsed_scene, size_t i, size_t j, char *charset)
 {
-	if (is_empty_space(unparsed_scene[i + 1][j])
-		|| is_empty_space(unparsed_scene[i - 1][j])
-			|| is_empty_space(unparsed_scene[i][j + 1]) 
-				|| is_empty_space(unparsed_scene[i][j - 1]))
+	if (is_in_charset(unparsed_scene[i + 1][j], charset)
+		|| is_in_charset(unparsed_scene[i - 1][j], charset)
+			|| is_in_charset(unparsed_scene[i][j + 1], charset) 
+				|| is_in_charset(unparsed_scene[i][j - 1], charset))
 		return (true);
 	return (false);
 }
@@ -31,7 +46,7 @@ t_bool	is_empty_line(char *line)
 	{
 		while (line[i])
 		{
-			if (!is_empty_space(line[i]))
+			if (!is_in_charset(line[i], " \0\n"))
 				return (false);
 			i++;
 		}

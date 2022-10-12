@@ -77,11 +77,12 @@ void	free_array(void	**array);
 size_t	array_len(void **array);
 t_bool	is_config_line(char	*line);
 void	free_unterminated_array(void **array, size_t n);
-t_bool	is_empty_space(char c);
+//t_bool	is_empty_space(char c);
 t_bool	is_empty_line(char *line);
-t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j);
+//t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j);
 t_bool	ft_strisdigit(char *str);
 t_bool	is_in_charset(char c, char *charset);
+t_bool	is_near_charset(char **unparsed_scene, size_t i, size_t j, char *charset);
 
 /****************ERRORS*********************/
 void	error(char *error_msg, void **array);

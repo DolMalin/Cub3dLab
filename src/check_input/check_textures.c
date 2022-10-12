@@ -5,23 +5,14 @@ static t_bool	check_texture(char *texture_path)
 	size_t	i;
 
 	if (!texture_path)
-	{
-		printf("Error: no texture found for walls.\n");
 		return (false);
-	}
 	i = ft_strlen(texture_path) - 1;
 	while (i && texture_path[i] != '.')
 		i--;
 	if (ft_strncmp(&texture_path[i], ".xpm", 5) != 0)
-	{
-		printf("Error: not a .xpm extension for texture.\n");
 		return (false);
-	}
 	if (open(texture_path, O_RDONLY) < 0)
-	{
-		printf("Error: can't access the texture file\n");
 		return (false);
-	}
 	return (true);
 }
 

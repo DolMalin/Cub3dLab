@@ -18,8 +18,7 @@ static t_bool	check_config_textures(char **scene)
 		else if (i == WE)
 			buffer = get_line_from_key(scene, "WE");
 		if (!buffer)
-			{printf("\tYOOOOO\n");
-			return (false);}
+			return (false);
 		i++;
 		free(buffer);
 	}

@@ -14,3 +14,10 @@ t_bool is_in_charset(char c, char *charset)
 	}
 	return (false);
 }
+
+// t_bool	is_empty_space(char c)
+// {
+// 	if (c == '\n' || c == ' ' || c == 0) // check if only cases of empty spaces in map - add '\t' ?
+// 		return (true);
+// 	return (false);
+// }
