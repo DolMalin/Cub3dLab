@@ -124,6 +124,27 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 			
 			if map[i - 1][player_pos] == ' ' or map[i + 1][player_pos] == ' ':
 				return "Error: in map."
+
+	for i, line in enumerate(map):
+		if search("0", line):
+			player_pos = search("0", line).span()[0]
+
+			# Check if player position is not on border of map
+			if player_pos + 1 >= len(line) or player_pos == 0:
+				return "Error: in map."
+			if i == 0 or i == len(map) - 1:
+				return "Error: in map."
+
+			# Check if there is void around player pos
+			if int(len(map[i - 1])) < player_pos or int(len(map[i + 1]) < player_pos):
+				return "Error: in map."
+
+			# Check if there is space around player pos
+			if map[i][player_pos - 1] == ' ' or map[i][player_pos + 1] == ' ':
+				return "Error: in map."
+			
+			if map[i - 1][player_pos] == ' ' or map[i + 1][player_pos] == ' ':
+				return "Error: in map."
 	
 
 	# Get the config lines and remove withespaces
