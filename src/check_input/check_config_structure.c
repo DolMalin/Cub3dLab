@@ -32,7 +32,7 @@ static t_bool	check_line_color(char **scene)
 	int		i;
 
 	i = 0;
-	while (i < 0)
+	while (i < 2)
 	{
 		if (i == FLOOR)
 			buffer = get_line_from_key(scene, "F");

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/11 17:54:32 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/12 15:23:36 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,15 +51,19 @@ TEST_PARSING_FILES =	\
 						
 TEST_PARSING =			${addprefix unit-tests/, ${TEST_PARSING_FILES}}
 SRC_PARSING = 			${addprefix src/, ${SRC_FILES_2}}\
-						${TEST_PARSING}
+						src/error.c \
+						${TEST_PARSING}\
+						
 OBJS_PARSING = 			${SRC_PARSING:.c=.o}
 
 ## TEST INPUT
 TEST_INPUT_FILES =		test_input.c \
 						test_functions.c \
-						utils.c
+						utils.c\
+					
 TEST_INPUT =			${addprefix unit-tests/, ${TEST_INPUT_FILES}}
 SRC_INPUT = 			${addprefix src/, ${SRC_FILES_2}}\
+						src/error.c \
 						${TEST_INPUT}
 OBJS_INPUT = 			${SRC_INPUT:.c=.o}
 
