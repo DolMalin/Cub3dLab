@@ -103,10 +103,28 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 	if player_pos_nb != 1:
 		return "Error: in map."
 
-	#Check if starting position is outside
-	# for line in map:
+	#Check player is in map
+	for i, line in enumerate(map):
+		if search("N|S|E|W", line):
+			player_pos = search("N|S|E|W", line).span()[0]
 
+			# Check if player position is not on border of map
+			if player_pos + 1 >= len(line) or player_pos == 0:
+				return "Error: in map."
+			if i == 0 or i == len(map) - 1:
+				return "Error: in map."
 
+			# Check if there is void around player pos
+			if int(len(map[i - 1])) < player_pos or int(len(map[i + 1]) < player_pos):
+				return "Error: in map."
+
+			# Check if there is space around player pos
+			if map[i][player_pos - 1] == ' ' or map[i][player_pos + 1] == ' ':
+				return "Error: in map."
+			
+			if map[i - 1][player_pos] == ' ' or map[i + 1][player_pos] == ' ':
+				return "Error: in map."
+	
 
 	# Get the config lines and remove withespaces
 	filtered_lines = []
@@ -252,5 +270,5 @@ if __name__ == "__main__":
 	os.system(input_command)
 	run_test(scene_path, "input")
 
-	# print("expected : " + check_input("wrong_color4.cub", "unit-tests/scenes"))
-	# print("our : " + exec_command("test", "wrong_color4.cub", "unit-tests/scenes", "input"))
+	# print("expected : " + check_input("missing_texture3.cub", "unit-tests/scenes"))
+	# print("our : " + exec_command("test", "startpos_outside6.cub", "unit-tests/scenes", "input"))
