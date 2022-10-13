@@ -1,25 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/13 16:40:15 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/10/13 16:42:38 by pdal-mol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int	main(int ac, char **av)
 {
-	//t_data	*data;
+	t_data	*data;
 
-	// CHECK IF THE INPUT IS VALID
 	if (!check_input(ac, av))
 		return (1);
-	//data = init_data(av[1]);
-	/*if (!data)
-	{
-		// free_data(data);
-		return (1);
-	}
-	printf("%s\n", data->textures_path[NO]);
-	printf("%s\n", data->textures_path[SO]);
-	printf("%s\n", data->textures_path[WE]);
-	printf("%s\n", data->textures_path[EA]);
-	printf("%d %d %d\n", data->colors[FLOOR][R], data->colors[FLOOR][G], data->colors[FLOOR][B]);
-	printf("%d %d %d\n", data->colors[CEIL][R], data->colors[CEIL][G], data->colors[CEIL][B]);
-	free_data(data);*/
+	data = init_data(av[1]);
+	if (!data)
+		exit(EXIT_FAILURE);
+	free_data(data);
 	return (0);
 }
-

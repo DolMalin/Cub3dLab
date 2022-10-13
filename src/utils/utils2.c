@@ -1,33 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/13 16:44:57 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/10/13 16:45:57 by pdal-mol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-// t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j)
-// {
-// 	if (is_empty_space(unparsed_scene[i + 1][j])
-// 		|| is_empty_space(unparsed_scene[i - 1][j])
-// 			|| is_empty_space(unparsed_scene[i][j + 1]) 
-// 				|| is_empty_space(unparsed_scene[i][j - 1]))
-// 		return (true);
-// 	return (false);
-// }
-
-// t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j)
-// {
-// 	if (is_empty_space(unparsed_scene[i + 1][j])
-// 		|| is_empty_space(unparsed_scene[i - 1][j])
-// 			|| is_empty_space(unparsed_scene[i][j + 1]) 
-// 				|| is_empty_space(unparsed_scene[i][j - 1]))
-// 		return (true);
-// 	return (false);
-// }
-
-
-
-t_bool	is_near_charset(char **unparsed_scene, size_t i, size_t j, char *charset)
+t_bool	is_near_charset(char **scene, size_t i, size_t j, char *charset)
 {
-	if (is_in_charset(unparsed_scene[i + 1][j], charset)
-		|| is_in_charset(unparsed_scene[i - 1][j], charset)
-			|| is_in_charset(unparsed_scene[i][j + 1], charset) 
-				|| is_in_charset(unparsed_scene[i][j - 1], charset))
+	if (is_in_charset(scene[i + 1][j], charset)
+		|| is_in_charset(scene[i - 1][j], charset)
+			|| is_in_charset(scene[i][j + 1], charset)
+				|| is_in_charset(scene[i][j - 1], charset))
 		return (true);
 	return (false);
 }
@@ -54,10 +44,10 @@ t_bool	is_empty_line(char *line)
 	return (true);
 }
 
-void print_map(char **map)
+void	print_map(char **map)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (map[i])
 	{
