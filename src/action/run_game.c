@@ -1,7 +1,5 @@
 #include "../../includes/cub3d.h"
 
-
-
 int	exec_action(int key, t_data *data)
 {
     (void)data;
@@ -11,11 +9,18 @@ int	exec_action(int key, t_data *data)
 	else if (key == KB_A)
 		printf("LEFT\n");
 	else if (key == KB_D)
-		printf("LEFT\n");
+		printf("RIGHT\n");
 	else if (key == KB_S)
 		printf("DOWN\n");
-	// else if (key == KEY_ESC)
-	// 	exit_program(data);
+	else if (key == KB_LEFT)
+		printf("ROTATE LEFT\n");
+	else if (key == KB_RIGHT)
+		printf("ROTATE RIGHT\n");
+	else if (key == ESCAPE_KC)
+    {
+        // free data clean svp
+        exit(EXIT_SUCCESS);
+    }
 	return (0);
 }
 
