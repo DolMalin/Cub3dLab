@@ -6,7 +6,7 @@
 #    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/13 16:27:01 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/13 18:06:33 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ CHECK_INPUT_FILES 	=	check_input.c \
 						check_colors2.c \
 						check_textures.c \
 						check_config_structure.c \
+						
+ACTION_FILES 	=		run_game.c
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \
@@ -38,7 +40,8 @@ SRC_FILES 			=	main.c \
 						error.c \
 			${addprefix parsing/, ${PARSING_FILES}} \
 			${addprefix utils/, ${UTILS_FILES}} \
-			${addprefix check_input/, ${CHECK_INPUT_FILES}}
+			${addprefix check_input/, ${CHECK_INPUT_FILES}}\
+			${addprefix action/, ${ACTION_FILES}}
 
 ## ======================= TO REMOVE ======================= ##
 SRC_FILES_2 =	${addprefix parsing/, ${PARSING_FILES}} \
@@ -71,8 +74,6 @@ SRC_INPUT = 			${addprefix src/, ${SRC_FILES_2}}\
 						${TEST_INPUT}
 OBJS_INPUT = 			${SRC_INPUT:.c=.o}
 
-
-
 ## ========================================================= ##
 
 SRC = 			${addprefix src/, ${SRC_FILES}}
@@ -80,20 +81,21 @@ OBJS = 			${SRC:.c=.o}
 HEADERS = 		includes/cub3d.h
 
 CMD = 			gcc
-FLAGS = 		-Wall -Werror -Wextra  -g3 -fsanitize=address
+FLAGS = 		-Wall -Werror -Wextra  #-g3 -fsanitize=address
 
-%.o: 			%.c $(HEADERS)
-				$(CMD) $(FLAGS) -c $< -o $@
-all: libft $(NAME)
-libft:
-		make -C ./libft
-mlx:
-		make -C ./mlx
+LIB =			./libft/libft.a ./mlx/libmlx.a
 
-$(NAME): 		$(OBJS) $(LIBFT) Makefile
-				$(CMD) ${FLAGS} $(OBJS) $(LIBFT) -o $(NAME)
+FLAGSX =		-L mlx -l mlx -framework OpenGL -framework Appkit
 
-				
+all: 			library $(NAME)
+
+%.o:			%.c $(HEADERS) $(LIB)
+				$(CMD) $(FLAGS) -Imlx -c $< -o $@
+
+$(NAME): 		$(OBJS) $(LIB) Makefile
+				$(CMD) $(FLAGS) $(OBJS) $(LIB) -o $(NAME) $(FLAGSX)
+
+
 ## ======================= TO REMOVE ======================= ##
 test_parsing: 	$(OBJS_PARSING) libft $(LIBFT) Makefile
 				$(CMD) ${FLAGS} $(OBJS_PARSING) $(LIBFT) -o test
@@ -107,6 +109,10 @@ testclean:
 			make clean -C ./mlx
 			rm -rf test
 ## ========================================================= ##
+
+library: 
+					make -C ./libft
+					make -C ./mlx
 
 clean:
 		rm -rf $(OBJS)

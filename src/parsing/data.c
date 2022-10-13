@@ -6,11 +6,17 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 16:10:08 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:04:14 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	init_window(t_data *data)
+{
+	data->mlx = mlx_init();
+	data->mlx_win = mlx_new_window(data->mlx, 1920, 1080, "CUB3D");
+}
 
 t_data	*init_data(char *scene_file)
 {
@@ -26,6 +32,7 @@ t_data	*init_data(char *scene_file)
 	data->textures_path = get_textures_paths(parsed_scene);
 	data->colors = get_colors(parsed_scene);
 	data->map = get_map(parsed_scene);
+	init_window(data);
 	free_array((void **)parsed_scene);
 	return (data);
 }

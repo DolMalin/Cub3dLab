@@ -4,7 +4,7 @@
 /************************LIBS**************************/
 
 # include "../libft/libft.h"
-// # include "./mlx/mlx.h"
+# include "../mlx/mlx.h"
 
 /****************DEFINES_KEYBOARD*********************/
 
@@ -43,6 +43,8 @@ typedef struct s_data
 	char			**textures_path;
 	unsigned char	**colors;
 	char			**map;
+	void			*mlx;
+	void			*mlx_win;
 }				t_data;
 
 typedef enum e_bool
@@ -73,6 +75,9 @@ char			**get_map(char	**parsed_scene);
 char			**parse_scene_file(char *scene_file);
 char			*trim(char *line, char *charset);
 char			**trim_config_line(char **parsed_scene);
+
+/****************PARSING*********************/
+void			run_game(t_data *data);
 
 /****************UTILS*********************/
 int		lines_count(char *file);
