@@ -35,12 +35,12 @@ t_bool	check_input(int ac, char **av)
 		error(ARGS, (void **)scene);
 	else if (!check_config_structure(scene))
 		error(CONFIG_STRUCT, (void **)scene);
+	else if (!check_colors(scene))
+		error(RGB_CODES, (void **)scene);
 	else if (!check_map(scene))
 		error(MAP, (void **)scene);
 	else if (!check_textures(scene))
 		error(TEXTURES, (void **)scene);
-	else if (!check_colors(scene))
-		error(RGB_CODES, (void **)scene);
 	free_array((void **)scene);
 	return (true);
 }

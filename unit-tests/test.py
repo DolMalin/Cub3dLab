@@ -65,6 +65,16 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 		return "Error: in arguments."
 
 	# CHECK CONFIG STRUCTURE
+	#Check if there is only config lines
+	is_config_line = True
+	for line in splited_data:
+		trim_line = line.translate(str.maketrans("", "", string.whitespace))
+		if not search("NO|SO|EA|WE|F|C", trim_line) and len(trim_line) > 0:
+			is_config_line = False
+		if search("NO|SO|EA|WE|F|C", trim_line) and not is_config_line:
+			return "Error: in configuration lines or structure of scene."
+
+
 	# Check if there is all identifiers for textures path
 	for key in ["NO", "SO", "EA", "WE"]:
 		find_key = False
@@ -73,7 +83,15 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 			if search(key, trim_line):
 				find_key = True
 		if not find_key:
-			return "Error: in configuration lines or structure of scene."
+			return "Error: in textures paths."
+
+	# Check if the identifiers for textures path are valid
+	for key in ["NO", "SO", "EA", "WE"]:
+		for line in splited_data:
+			trim_line = line.translate(str.maketrans("", "", string.whitespace))
+			if search(key, trim_line):
+				if not search(key, trim_line).start() == 0 and trim_line[search(key, trim_line).end() + 1]:
+					return "Error: in textures paths."
 
 	# Check if there is all identifiers for colors
 	for key in ["C", "F"]:
@@ -83,8 +101,30 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 			if search(key, trim_line):
 				find_key = True
 		if not find_key:
-			print (search(key, trim_line))
-			return "Error: in configuration lines or structure of scene."
+			return "Error: in RGB color codes."
+
+	# Get the config lines and remove withespaces
+	filtered_lines = []
+	for line in splited_data:
+		trim_line = line.translate(str.maketrans("", "", string.whitespace))
+		if search("NO|SO|EA|WE|F|C", trim_line):
+			filtered_lines.append(line.translate(str.maketrans("", "", string.whitespace)))
+
+	# Remove the ID at the start of the textures lines
+	idless_textures_lines = []
+	for line in filtered_lines:
+		if search("NO|SO|EA|WE", line[:2]):
+			if len(line) == 2:
+				return "Error: in textures paths."
+			idless_textures_lines.append(line[2:])
+
+	# Remove the ID at the start of the textures lines
+	idless_color_lines = []	
+	for line in filtered_lines:
+		if search("F|C", line[:1]):
+			if len(line) == 1:
+				return "Error: in RGB color codes."
+			idless_color_lines.append(line[1:])
 
 	# Get the map lines and remove the empty ones
 	map = []
@@ -150,25 +190,6 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 			if map[i - 1][player_pos] == ' ' or map[i + 1][player_pos] == ' ':
 				return "Error: in map."
 	
-
-	# Get the config lines and remove withespaces
-	filtered_lines = []
-	for line in splited_data:
-		trim_line = line.translate(str.maketrans("", "", string.whitespace))
-		if search("NO|SO|EA|WE|F|C", trim_line):
-			filtered_lines.append(line.translate(str.maketrans("", "", string.whitespace)))
-
-	# Remove the ID at the start of the textures lines
-	idless_textures_lines = []
-	for line in filtered_lines:
-		if search("NO|SO|EA|WE", line[:2]):
-			idless_textures_lines.append(line[2:])
-
-	# Remove the ID at the start of the textures lines
-	idless_color_lines = []	
-	for line in filtered_lines:
-		if search("F|C", line[:1]):
-			idless_color_lines.append(line[1:])
 	
 	# CHECK TEXTURES
 	# Check if the textures path are valid
@@ -188,11 +209,13 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 			return "Error: in RGB color codes."
 		for color in color_split:
 			if color.isdigit():
+				if len(color) > 3:
+					return "Error: in RGB color codes."
 				if int(color) < 0 or int(color) > 255:
 					return "Error: in RGB color codes."
 			else:
 				return "Error: in RGB color codes."
-	
+
 	return "Test OK"
 
 def	exec_command(command: str, scene_name: str, scene_path: str, test_name:str) -> str :
@@ -231,6 +254,32 @@ def difference(string1: str, string2: str) -> set:
 	str_diff = A.symmetric_difference(B)
 	return str_diff
 
+# def	compare_commands(scene_name: str, scene_path: str, test_name: str) -> bool:
+# 	""" Compare the data structure of our code with whats expected
+
+# 	Args:
+# 		scene_name (str): The name of the scene we wants to test
+
+# 	Returns:
+# 		bool: True if our code prints whats we expected
+# 	"""
+# 	if test_name == "parsing":
+# 		expected = parsing(scene_name, scene_path)
+# 	else:
+# 		expected = check_input(scene_name, scene_path)
+	
+# 	output = exec_command("test", scene_name, scene_path, test_name)
+# 	if output ==  expected:
+# 		return True
+# 	else:
+# 		print("===================================")
+# 		print(bcolors.BOLD + bcolors.FAIL + "[Error] data structure: " + bcolors.ENDC + scene_name)
+# 		print(bcolors.BOLD + "Diff: " + bcolors.ENDC + f"{difference(output, expected)}")
+# 		print(bcolors.BOLD + "Expected: " + bcolors.ENDC + expected)
+# 		print(bcolors.BOLD + "Output: " + bcolors.ENDC + output)
+# 		print("===================================\n")
+# 		return False
+
 def	compare_commands(scene_name: str, scene_path: str, test_name: str) -> bool:
 	""" Compare the data structure of our code with whats expected
 
@@ -246,9 +295,8 @@ def	compare_commands(scene_name: str, scene_path: str, test_name: str) -> bool:
 		expected = check_input(scene_name, scene_path)
 	
 	output = exec_command("test", scene_name, scene_path, test_name)
-	if output ==  expected:
-		return True
-	else:
+
+	if output != "Test OK" and expected == "Test OK":
 		print("===================================")
 		print(bcolors.BOLD + bcolors.FAIL + "[Error] data structure: " + bcolors.ENDC + scene_name)
 		print(bcolors.BOLD + "Diff: " + bcolors.ENDC + f"{difference(output, expected)}")
@@ -256,6 +304,16 @@ def	compare_commands(scene_name: str, scene_path: str, test_name: str) -> bool:
 		print(bcolors.BOLD + "Output: " + bcolors.ENDC + output)
 		print("===================================\n")
 		return False
+	if output == "Test OK" and expected != "Test OK":
+		print("===================================")
+		print(bcolors.BOLD + bcolors.FAIL + "[Error] data structure: " + bcolors.ENDC + scene_name)
+		print(bcolors.BOLD + "Diff: " + bcolors.ENDC + f"{difference(output, expected)}")
+		print(bcolors.BOLD + "Expected: " + bcolors.ENDC + expected)
+		print(bcolors.BOLD + "Output: " + bcolors.ENDC + output)
+		print("===================================\n")
+		return False
+
+	return True
 
 
 def	run_test(scene_path: str, test_name: str):
@@ -286,10 +344,10 @@ if __name__ == "__main__":
 	input_command = "make test_input -C" + os.path.abspath(os.getcwd() + " > /dev/null")
 
 	# run parsing test
-	print(bcolors.BOLD + "\nPARSING" + bcolors.ENDC)
-	os.system(testclean_command)
-	os.system(parsing_command)
-	run_test(scene_path, "parsing")
+	# print(bcolors.BOLD + "\nPARSING" + bcolors.ENDC)
+	# os.system(testclean_command)
+	# os.system(parsing_command)
+	# run_test(scene_path, "parsing")
 
 	# # run input test
 	print(bcolors.BOLD + "\nINPUT" + bcolors.ENDC)
@@ -297,5 +355,5 @@ if __name__ == "__main__":
 	os.system(input_command)
 	run_test(scene_path, "input")
 
-	# print("expected : " + check_input("invalild_RGB_007.cub", "unit-tests/scenes/invalid/"))
-	# print("our : " + exec_command("test", "startpos_outside6.cub", "unit-tests/scenes", "input"))
+	# print("expected : " + check_input("invalid_RGB_026.cub", "unit-tests/scenes"))
+	# print("our : " + exec_command("test", "invalid_RGB_026.cub", "unit-tests/scenes", "input"))

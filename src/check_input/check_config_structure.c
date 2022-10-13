@@ -1,65 +1,24 @@
 #include "../../includes/cub3d.h"
 
-static t_bool	check_config_textures(char **scene)
+t_bool	str_is_in_charset(char *str, char *charset)
 {
-	char	*buffer;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	while (i < 4)
+	while (str[i])
 	{
-		//print_map(scene);
-		if (i == NO)
-			buffer = get_line_from_key(scene, "NO");
-		else if (i == SO)
-			buffer = get_line_from_key(scene, "SO");
-		else if (i == EA)
-			buffer = get_line_from_key(scene, "EA");
-		else if (i == WE)
-			buffer = get_line_from_key(scene, "WE");
-		if (!buffer)
+		if (!is_in_charset(str[i], charset))
 			return (false);
-		i++;
-		free(buffer);
-	}
-	return (true);
-}
-
-static t_bool	check_line_color(char **scene)
-{
-	char	*buffer;
-	int		i;
-
-	i = 0;
-	while (i < 2)
-	{
-		if (i == FLOOR)
-			buffer = get_line_from_key(scene, "F");
-		else if (i == CEIL)
-			buffer = get_line_from_key(scene, "C");
-		if (!buffer)
-			return (false);
-		free(buffer);
 		i++;
 	}
 	return (true);
 }
-
-static t_bool	check_config_line_missing(char **scene)
-{
-	if (!check_config_textures(scene))
-		return (false);
-	if (!check_line_color(scene))
-		return (false);
-	return (true);
-}
-
 static t_bool	check_structure(char **scene)
 {
 	int	i;
 
 	i = 0;
-	while (is_config_line(scene[i]) && scene[i])
+	while (is_config_line(scene[i]) || str_is_in_charset(scene[i], " \n"))
 		i++;
 	while (scene[i])
 	{
@@ -72,8 +31,6 @@ static t_bool	check_structure(char **scene)
 
 t_bool	check_config_structure(char **scene)
 {
-	if (!check_config_line_missing(scene))
-		return (false);
 	if (!check_structure(scene))
 		return (false);
 	return (true);

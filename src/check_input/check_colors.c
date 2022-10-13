@@ -73,11 +73,33 @@ static t_bool	check_comas(char **colors)
 	return (true);
 }
 
+static t_bool	check_line_color(char **scene)
+{
+	char	*buffer;
+	int		i;
+
+	i = 0;
+	while (i < 2)
+	{
+		if (i == FLOOR)
+			buffer = get_line_from_key(scene, "F");
+		else if (i == CEIL)
+			buffer = get_line_from_key(scene, "C");
+		if (!buffer)
+			return (false);
+		free(buffer);
+		i++;
+	}
+	return (true);
+}
+
 t_bool	check_colors(char **scene)
 {
 	char	**colors;
 
 	colors = get_colors_to_check(scene);
+	if (!check_line_color(scene))
+	 	return (false);
 	if (!check_comas(colors))
 	{
 		free_unterminated_array((void **)colors, 2);
