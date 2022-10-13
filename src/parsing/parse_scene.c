@@ -56,7 +56,7 @@ char	**trim_config_line(char **parsed_scene)
 		free(parsed_scene[i]);
 		i++;
 	}
-	trimed_scene[i] = 0; // verifier taille tableau on envoie derniere ligne nulle dans trim
+	trimed_scene[i] = 0;
 	free(parsed_scene);
 	return (trimed_scene);
 }
