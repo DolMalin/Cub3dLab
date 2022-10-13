@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/13 10:21:14 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/13 16:04:14 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ PARSING_FILES 		=	data.c \
 				
 CHECK_INPUT_FILES 	=	check_input.c \
 						check_map.c \
+						check_map2.c \
 						check_colors.c \
+						check_colors2.c \
 						check_textures.c \
 						check_config_structure.c \
 

@@ -15,6 +15,7 @@ static t_bool	check_extension(const char *file_path)
 static t_bool	check_arguments(int ac, char **av)
 {
 	int		fd;
+
 	if (ac < 0)
 		return (false);
 	if (!check_extension(av[1]))

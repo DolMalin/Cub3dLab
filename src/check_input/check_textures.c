@@ -38,10 +38,7 @@ t_bool	check_textures(char **scene)
 		else if (i == WE)
 			buffer = get_line_from_key(scene, "WE");
 		if (!buffer)
-		{
-			free(buffer);
 			return (false);
-		}
 		if (!check_texture(buffer))
 		{
 			free(buffer);

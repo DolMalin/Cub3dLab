@@ -13,6 +13,7 @@ t_bool	str_is_in_charset(char *str, char *charset)
 	}
 	return (true);
 }
+
 static t_bool	check_structure(char **scene)
 {
 	int	i;
