@@ -32,7 +32,7 @@ static t_bool	check_color_code(char *color)
 			free_array((void **)split_color);
 			return (false);
 		}
-		if (!(ft_strlen(split_color[i]) > 3))
+		if (ft_strlen(split_color[i]) > 3)
 		{
 			free_array((void **)split_color);
 			return (false);
