@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:44:49 by aandric           #+#    #+#             */
-/*   Updated: 2021/11/15 13:22:38 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 15:23:37 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
-/*
-#include <stdio.h>
-int main ()
-{
-	printf("%s\n", ft_strmapi("Hello", )
-}
-*/

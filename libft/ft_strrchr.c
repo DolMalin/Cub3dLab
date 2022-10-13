@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 18:07:53 by aandric           #+#    #+#             */
-/*   Updated: 2021/11/17 17:42:15 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 15:23:42 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,3 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (0);
 }
-
-/*
-#include <string.h>
-#include <stdio.h>
-int main ()
-{
-	printf("%s\n", ft_strrchr("NULL", '\0'));
-	printf("%s\n", strrchr("NULL", '\0'));
-}
-*/

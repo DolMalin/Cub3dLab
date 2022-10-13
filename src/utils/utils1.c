@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/13 16:42:55 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/10/13 16:44:45 by pdal-mol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-int		lines_count(char *file)
+int	lines_count(char *file)
 {
 	int		len;
 	char	*buffer;
@@ -46,31 +58,15 @@ void	free_unterminated_array(void **array, size_t n)
 	free(array);
 }
 
-
-size_t		array_len(void **array)
+size_t	array_len(void **array)
 {
 	size_t	i;
 
 	i = 0;
-	while(array[i])
+	while (array[i])
 		i++;
 	return (i);
 }
-
-// t_bool	is_config_line(char	*line)
-// {
-// 	size_t	len;
-// 	char	*trim_line;
-
-// 	len = ft_strlen(line);
-// 	if (ft_strnstr(line, "NO", len) || ft_strnstr(line, "SO", len))
-// 		return (true);
-// 	else if (ft_strnstr(line, "WE", len) || ft_strnstr(line, "EA", len))
-// 		return (true);
-// 	else if (ft_strnstr(line, "F", len) || ft_strnstr(line, "C", len))
-// 		return (true);
-// 	return (false);
-// }
 
 t_bool is_config_line(char *line)
 {
@@ -79,30 +75,19 @@ t_bool is_config_line(char *line)
 	t_bool	ret;
 
 	ret = false;
-	trim_line = trim(line, " \t\r");
+	if (!line)
+		return (true);
+	trim_line = trim(line, " \t\r\n");
 	if (!trim_line)
 		return (false);
 	len = ft_strlen(trim_line);
 	if (ft_strnstr(trim_line, "NO", len) || ft_strnstr(trim_line, "SO", len))
-		ret = true;
-	else if (ft_strnstr(trim_line, "WE", len) || ft_strnstr(trim_line, "EA", len))
-		ret = true;
+			ret = true;
+	else if (ft_strnstr(trim_line, "WE", len)
+		|| ft_strnstr(trim_line, "EA", len))
+			ret = true;
 	else if (ft_strnstr(trim_line, "F", len) || ft_strnstr(trim_line, "C", len))
-		ret = true;
+			ret = true;
 	free(trim_line);
 	return (ret);
 }
-
-// int	get_map_start_index(char **parsed_scene)
-// {
-// 	int	i;
-
-// 	i = array_len((void **)parsed_scene) - 1;
-// 	while (parsed_scene[i] && i >= 0)
-// 	{
-// 		if (line_have_identifier(parsed_scene[i]))
-// 			return (i + 1);
-// 		i--;
-// 	}
-// 	return (i);
-// }
