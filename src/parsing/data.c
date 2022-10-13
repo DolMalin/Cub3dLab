@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 18:04:14 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:13:26 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_data	*init_data(char *scene_file)
 
 void	free_data(t_data *data)
 {
+	mlx_destroy_window(data->mlx, data->mlx_win);
 	free_unterminated_array((void **)data->colors, 2);
 	free_unterminated_array((void **)data->textures_path, 4);
 	free_array((void **)data->map);

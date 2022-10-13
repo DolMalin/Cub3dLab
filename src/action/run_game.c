@@ -18,7 +18,7 @@ int	exec_action(int key, t_data *data)
 		printf("ROTATE RIGHT\n");
 	else if (key == ESCAPE_KC)
     {
-        // free data clean svp
+        free_data(data);
         exit(EXIT_SUCCESS);
     }
 	return (0);
