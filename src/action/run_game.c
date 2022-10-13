@@ -123,6 +123,55 @@ int	exec_action(int key, t_data *data)
 	return (0);
 }
 
+
+typedef struct	s_image {
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_image;
+
+
+void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+t_image	*create_image(t_data *data)
+{
+	t_image	*image;
+
+	image = malloc(sizeof(image));
+	if (!image)
+		return (NULL);
+	image->ptr = mlx_new_image(data->mlx, 1920, 1080);
+	image->addr =mlx_get_data_addr(image->ptr, &image->bits_per_pixel, &image->line_length,&image->endian);
+	return (image);
+}
+
+void	draw_square(t_data *data)
+{
+	int i = 0;
+	int j = 0;
+
+	while (i < 10)
+	{
+		j = 0;
+		while (j < 10)
+		{
+			t_image *image = create_image(data);
+			my_mlx_pixel_put(image, 5, 5, 0x00FF0000);
+			mlx_put_image_to_window(data->mlx, data->mlx_win, image->ptr, 0, 0);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	run_game(t_data *data)
 {
 	// put_img(data, img, &data->mlx, &data->mlx_win);
