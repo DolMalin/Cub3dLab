@@ -16,7 +16,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-def	get_scene_config(scene_name: str, scene_path: str) -> str:
+def	parsing(scene_name: str, scene_path: str) -> str:
 	"""A function that takes a scene path and remove useless spaces, useless lines and reshape in correct order the elements.
 	The goal of that function is to provide an example of what our c program must do.
 

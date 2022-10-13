@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:14:00 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 16:38:44 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/13 17:00:16 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,6 @@ char	**remove_empty_lines(char **parsed_scene)
 	output[j] = 0;
 	free_array((void **)parsed_scene);
 	return (output);
-}
-
-char	**trim_config_line(char **parsed_scene)
-{
-	char	**trimed_scene;
-	int		i;
-
-	i = 0;
-	trimed_scene = malloc(sizeof(char *) * (array_len((void **)parsed_scene) + 1));
-	if (!trimed_scene)
-		return (NULL);
-	while(parsed_scene[i])
-	{
-		if (is_config_line(parsed_scene[i]))
-			trimed_scene[i] = trim(parsed_scene[i], " \n\t");
-		else
-			trimed_scene[i] = ft_strdup(parsed_scene[i]);
-		free(parsed_scene[i]);
-		i++;
-	}
-	trimed_scene[i] = 0;
-	free(parsed_scene);
-	return (trimed_scene);
 }
 
 char	**parse_scene_file(char *scene_file)
