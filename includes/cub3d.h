@@ -45,6 +45,8 @@ typedef struct s_data
 	char			**map;
 	void			*mlx;
 	void			*mlx_win;
+	int				x;
+	int				y;
 }				t_data;
 
 typedef enum e_bool
@@ -76,8 +78,9 @@ char			**parse_scene_file(char *scene_file);
 char			*trim(char *line, char *charset);
 char			**trim_config_line(char **parsed_scene);
 
-/****************PARSING*********************/
+/****************ACTION*********************/
 void			run_game(t_data *data);
+void			update_user_pos(t_data **data);
 
 /****************UTILS*********************/
 int		lines_count(char *file);
