@@ -14,13 +14,15 @@ static t_bool	check_extension(const char *file_path)
 
 static t_bool	check_arguments(int ac, char **av)
 {
+	int		fd;
 	if (ac < 0)
 		return (false);
 	if (!check_extension(av[1]))
 		return (false);
-	if (open(av[1], O_RDONLY) < 0)
+	fd = open(av[1], O_RDONLY);
+	if (fd < 0)
 	{
-		//close fd
+		close(fd);
 		return (false);
 	}
 	return (true);

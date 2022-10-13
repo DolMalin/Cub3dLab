@@ -3,6 +3,7 @@
 static t_bool	check_texture(char *texture_path)
 {
 	size_t	i;
+	int		fd;
 
 	if (!texture_path)
 		return (false);
@@ -11,37 +12,14 @@ static t_bool	check_texture(char *texture_path)
 		i--;
 	if (ft_strncmp(&texture_path[i], ".xpm", 5) != 0)
 		return (false);
-	if (open(texture_path, O_RDONLY) < 0)
+	fd = open(texture_path, O_RDONLY);
+	if (fd < 0)
 	{
-		// close
+		close(fd);
 		return (false);
 	}
 	return (true);
 }
-
-// static t_bool	check_config_textures(char **scene)
-// {
-// 	char	*buffer;
-// 	int		i;
-
-// 	i = 0;
-// 	while (i < 4)
-// 	{
-// 		if (i == NO)
-// 			buffer = get_line_from_key(scene, "NO");
-// 		else if (i == SO)
-// 			buffer = get_line_from_key(scene, "SO");
-// 		else if (i == EA)
-// 			buffer = get_line_from_key(scene, "EA");
-// 		else if (i == WE)
-// 			buffer = get_line_from_key(scene, "WE");
-// 		if (!buffer)
-// 			return (false);
-// 		i++;
-// 		free(buffer);
-// 	}
-// 	return (true);
-// }
 
 t_bool	check_textures(char **scene)
 {
@@ -49,8 +27,6 @@ t_bool	check_textures(char **scene)
 	int		i;
 
 	i = 0;
-	// if (!check_config_textures(scene))
-	// 	return (false);
 	while (i < 4)
 	{
 		if (i == NO)
@@ -63,7 +39,7 @@ t_bool	check_textures(char **scene)
 			buffer = get_line_from_key(scene, "WE");
 		if (!buffer)
 		{
-			free(buffer); // do we have to free if null ?
+			free(buffer);
 			return (false);
 		}
 		if (!check_texture(buffer))
