@@ -344,10 +344,10 @@ if __name__ == "__main__":
 	input_command = "make test_input -C" + os.path.abspath(os.getcwd() + " > /dev/null")
 
 	# run parsing test
-	# print(bcolors.BOLD + "\nPARSING" + bcolors.ENDC)
-	# os.system(testclean_command)
-	# os.system(parsing_command)
-	# run_test(scene_path, "parsing")
+	print(bcolors.BOLD + "\nPARSING" + bcolors.ENDC)
+	os.system(testclean_command)
+	os.system(parsing_command)
+	run_test(scene_path, "parsing")
 
 	# # run input test
 	print(bcolors.BOLD + "\nINPUT" + bcolors.ENDC)

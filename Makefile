@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/13 16:04:14 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/13 16:27:01 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ MLX = ./mlx/libmlx.a \
 PARSING_FILES 		=	data.c \
 						parse_scene.c \
 						get_features_from_scene.c \
+						trim_config_line.c \
+						get_map.c
 				
 CHECK_INPUT_FILES 	=	check_input.c \
 						check_map.c \

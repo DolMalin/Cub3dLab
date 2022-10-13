@@ -72,6 +72,7 @@ char			**get_textures_paths(char **parsed_scene);
 char			**get_map(char	**parsed_scene);
 char			**parse_scene_file(char *scene_file);
 char			*trim(char *line, char *charset);
+char			**trim_config_line(char **parsed_scene);
 
 /****************UTILS*********************/
 int		lines_count(char *file);
