@@ -68,7 +68,7 @@ size_t	array_len(void **array)
 	return (i);
 }
 
-t_bool	is_config_line(char *line)
+t_bool is_config_line(char *line)
 {
 	char	*trim_line;
 	size_t	len;

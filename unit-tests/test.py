@@ -3,6 +3,7 @@ import subprocess
 from re import search
 import string
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -14,7 +15,8 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def	parsing(scene_name: str, scene_path: str) -> str:
+
+def	get_scene_config(scene_name: str, scene_path: str) -> str:
 	"""A function that takes a scene path and remove useless spaces, useless lines and reshape in correct order the elements.
 	The goal of that function is to provide an example of what our c program must do.
 
@@ -228,8 +230,10 @@ def	exec_command(command: str, scene_name: str, scene_path: str, test_name:str) 
 	Returns:
 		bool: A formatted string of what our C program outputs
 	"""
+
 	folder = "valid" if test_name == "parsing" else "unvalid"
 	full_command = os.path.abspath(os.getcwd()) + "/" + command + " " + scene_path + "/" + folder + "/" + scene_name
+
 	output = subprocess.getoutput(full_command)
 	
 	return output
@@ -253,6 +257,7 @@ def difference(string1: str, string2: str) -> set:
  
 	str_diff = A.symmetric_difference(B)
 	return str_diff
+
 
 # def	compare_commands(scene_name: str, scene_path: str, test_name: str) -> bool:
 # 	""" Compare the data structure of our code with whats expected
@@ -281,6 +286,7 @@ def difference(string1: str, string2: str) -> set:
 # 		return False
 
 def	compare_commands(scene_name: str, scene_path: str, test_name: str) -> bool:
+
 	""" Compare the data structure of our code with whats expected
 
 	Args:
@@ -289,6 +295,7 @@ def	compare_commands(scene_name: str, scene_path: str, test_name: str) -> bool:
 	Returns:
 		bool: True if our code prints whats we expected
 	"""
+
 	if test_name == "parsing":
 		expected = parsing(scene_name, scene_path)
 	else:
@@ -357,3 +364,4 @@ if __name__ == "__main__":
 
 	# print("expected : " + check_input("invalid_RGB_026.cub", "unit-tests/scenes"))
 	# print("our : " + exec_command("test", "invalid_RGB_026.cub", "unit-tests/scenes", "input"))
+

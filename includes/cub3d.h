@@ -88,4 +88,5 @@ t_bool	is_near_charset(char **unparsed_scene, size_t i, size_t j, char *charset)
 /****************ERRORS*********************/
 void	error(char *error_msg, void **array);
 
+t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j);
 #endif
