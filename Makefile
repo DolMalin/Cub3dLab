@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
+#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/12 17:07:53 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/13 10:21:14 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = 			cub3d
 
 LIBFT = ./libft/libft.a \
 
-# MLX = ./mlx/libmlx.a \
+MLX = ./mlx/libmlx.a \
 
 PARSING_FILES 		=	data.c \
 						parse_scene.c \

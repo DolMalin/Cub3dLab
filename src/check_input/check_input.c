@@ -19,7 +19,10 @@ static t_bool	check_arguments(int ac, char **av)
 	if (!check_extension(av[1]))
 		return (false);
 	if (open(av[1], O_RDONLY) < 0)
+	{
+		//close fd
 		return (false);
+	}
 	return (true);
 }
 

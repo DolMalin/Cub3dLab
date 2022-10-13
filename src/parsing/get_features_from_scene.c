@@ -10,7 +10,13 @@ char	*get_line_from_key(char **parsed_scene, char *key)
 		if (ft_strncmp(parsed_scene[i], key, ft_strlen(key)) == 0)
 		{
 			if (parsed_scene[i][0] == 'C' || parsed_scene[i][0] == 'F')
+			{
+				if (ft_strlen(&parsed_scene[i][1]) == 0)
+					return (NULL);
 				return (ft_strdup(&parsed_scene[i][1]));
+			}
+			if (ft_strlen(&parsed_scene[i][2]) == 0)
+				return (NULL);
 			return (ft_strdup(&parsed_scene[i][2]));
 		}
 		i++;

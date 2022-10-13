@@ -55,6 +55,7 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 		data = file.read()
 	splited_data = data.split('\n')
 
+	#CHECK ARGUMENTS
 	# Check if the .cub file exists
 	if not os.path.exists(os.getcwd() + "/" + scene_path + "/" + "unvalid" + "/" + scene_name):
 		return "Error: in arguments."
@@ -63,6 +64,7 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 	if scene_name[-4 :] != ".cub":
 		return "Error: in arguments."
 
+	# CHECK CONFIG STRUCTURE
 	# Check if there is all identifiers for textures path
 	for key in ["NO", "SO", "EA", "WE"]:
 		find_key = False
@@ -81,6 +83,7 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 			if search(key, trim_line):
 				find_key = True
 		if not find_key:
+			print (search(key, trim_line))
 			return "Error: in configuration lines or structure of scene."
 
 	# Get the map lines and remove the empty ones
@@ -90,6 +93,7 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 		if not search("NO|SO|EA|WE|F|C", trim_line) and line.strip():
 				map.append(line)
 
+	# CHECK MAP
 	# Check for unvalid characters
 	for line in map:
 		if search("[^0|1|N|S|E|W| ]", line):
@@ -166,11 +170,13 @@ def	check_input(scene_name: str, scene_path: str) -> str:
 		if search("F|C", line[:1]):
 			idless_color_lines.append(line[1:])
 	
+	# CHECK TEXTURES
 	# Check if the textures path are valid
 	for line in idless_textures_lines:
 		if not os.path.exists(os.getcwd() + "/" + line):
 			return f"Error: in textures paths."
 
+	# CHECK COLORS
 	# Check if there is the correct number of comas in code
 	for line in idless_color_lines:
 		if line.count(',') != 2:
@@ -291,5 +297,5 @@ if __name__ == "__main__":
 	os.system(input_command)
 	run_test(scene_path, "input")
 
-	# print("expected : " + check_input("missing_texture3.cub", "unit-tests/scenes"))
+	# print("expected : " + check_input("invalild_RGB_007.cub", "unit-tests/scenes/invalid/"))
 	# print("our : " + exec_command("test", "startpos_outside6.cub", "unit-tests/scenes", "input"))
