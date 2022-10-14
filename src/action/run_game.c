@@ -34,25 +34,32 @@ t_image	create_image(t_data *data)
 	return (image);
 }
 
-// void	print_map(char **map)
-// {
-// 	int	i;
+void	print_bigger(t_image *image, int x, int y, int color_code)
+{
+	int i = 0;
+	int j = 0;
 
-// 	i = 0;
-// 	printf("\e[2J");
-// 	while (map[i])
-// 	{
-// 		printf("%s\n", map[i]);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (i < 10)
+	{
+		j = 0;
+		while (j < 10)
+		{
+			my_mlx_pixel_put(image, x + i, y + j, color_code);
+			j++;
+		}
+		i++;
+	}
+}
 
 void	draw_square(t_data *data)
 {
 	int i = 0;
 	int j = 0;
+	int	band;
+	int	bigger;
 
-	//printf("YO\n");
+	i = 0;
 	t_image image = create_image(data);
 	while (data->map[i])
 	{
@@ -60,8 +67,26 @@ void	draw_square(t_data *data)
 		while (data->map[i][j])
 		{
 			if (data->map[i][j] == '1')
-				my_mlx_pixel_put(&image, j, i, 0x0000ff00);
-			//my_mlx_pixel_put(image, i, j, 0x0000ff00);	
+			{
+				//print_bigger(&image, j, i, 0x0000ff00);
+				band = 10;
+				bigger = 0;
+				while (bigger < band)
+				{
+					my_mlx_pixel_put(&image, (j * band) + bigger, (i * band) + bigger, 0x0000ff00);
+					bigger++;
+				}
+			}
+			if (is_in_charset(data->map[i][j], "NSEW"))
+			{	
+				band = 10;
+				bigger = 0;
+				while (bigger < band)
+				{
+					my_mlx_pixel_put(&image, (j * band) + bigger, (i * band) + bigger, 0x00ff00ff);
+					bigger++;
+				}
+			}
 			j++;
 		}
 		i++;
