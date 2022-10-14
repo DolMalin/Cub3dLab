@@ -52,7 +52,7 @@ void	print_bigger(t_image *image, int x, int y, int color_code)
 	}
 }
 
-void	draw_square(t_data *data)
+void	print_mini_map(t_data *data)
 {
 	int i = 0;
 	int j = 0;
@@ -97,16 +97,14 @@ int	get_events(int key, t_data *data)
 		exit_program(data);
     print_map(data->map);
     printf("x = %d, y = %d\n", data->x, data->y);
-	//draw_square(data);
+	print_mini_map(data);
 	return (0);
 }
 
 void	run_game(t_data *data)
 {
-	//put_img(data, img, &data->mlx, &data->mlx_win);
-	draw_square(data);
+	print_mini_map(data);
 	mlx_hook(data->mlx_win, 2, 0, get_events, data);
-	// mlx_hook(data->mlx_win, 17, 0, exit_program, data);
 	mlx_hook(data->mlx_win, 17, 1L << 0, exit_program, &data);
 	mlx_loop(data->mlx);
 }
