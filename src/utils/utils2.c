@@ -1,18 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/13 16:44:57 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/10/13 16:45:57 by pdal-mol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-t_bool	is_empty_space(char c)
+t_bool	is_near_charset(char **scene, size_t i, size_t j, char *charset)
 {
-	if (c == '\n' || c == ' ' || c == 0) // check if only cases of empty spaces in map - add '\t' ?
-		return (true);
-	return (false);
-}
-
-t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j)
-{
-	if (is_empty_space(unparsed_scene[i + 1][j])
-		|| is_empty_space(unparsed_scene[i - 1][j])
-			|| is_empty_space(unparsed_scene[i][j + 1]) 
-				|| is_empty_space(unparsed_scene[i][j - 1]))
+	if (is_in_charset(scene[i + 1][j], charset)
+		|| is_in_charset(scene[i - 1][j], charset)
+			|| is_in_charset(scene[i][j + 1], charset)
+				|| is_in_charset(scene[i][j - 1], charset))
 		return (true);
 	return (false);
 }
@@ -31,7 +36,7 @@ t_bool	is_empty_line(char *line)
 	{
 		while (line[i])
 		{
-			if (!is_empty_space(line[i]))
+			if (!is_in_charset(line[i], " \0\n"))
 				return (false);
 			i++;
 		}
@@ -39,14 +44,28 @@ t_bool	is_empty_line(char *line)
 	return (true);
 }
 
-void print_map(char **map)
+void	print_map(char **map)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (map[i])
 	{
 		printf("%s\n", map[i]);
 		i++;
 	}
+}
+
+t_bool	ft_strisdigit(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }

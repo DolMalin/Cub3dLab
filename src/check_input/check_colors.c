@@ -1,46 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_colors.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/13 16:46:35 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/10/13 16:46:36 by pdal-mol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-static char	**get_colors_to_check(char **unparsed_scene)
+static char	**get_colors_to_check(char **scene)
 {
 	char	**colors;
 
-	colors = malloc(sizeof(char *) * 4);
+	colors = malloc(sizeof(char *) * 2);
 	if (!colors)
 		return (NULL);
-	colors[FLOOR] = get_line_from_key(unparsed_scene, "F");
-	colors[CEIL] = get_line_from_key(unparsed_scene, "C");
-	colors[2] = 0;
+	colors[FLOOR] = get_line_from_key(scene, "F");
+	colors[CEIL] = get_line_from_key(scene, "C");
 	return (colors);
 }
 
-static t_bool	check_color_code(char *color)
-{
-	char 	**split_color;
-	int		i;
-
-	split_color = ft_split(color, ',');
-	i = 0;
-	while (split_color[i])
-	{
-		//printf("color %d : %d\n", i, ft_atoi(split_color[i]));
-		if (!(ft_atoi(split_color[i]) >= 0 && (ft_atoi(split_color[i]) <= 255)))
-		{
-			printf("Error in color code. Color code must be between 0 and 255.\n");
-			free_array((void **)split_color);
-			return (false);
-		}
-		i++;
-	}
-	if (i != 3)
-	{
-		printf("Not the right structure for color code. Must be composed by 3 colors : RGB.\n");
-		return (false);
-	}
-	free_array((void **)split_color);
-	return (true);
-}
-
-static int coma_count(char *color)
+static int	coma_count(char *color)
 {
 	int	i;
 	int	coma_count;
@@ -56,34 +40,57 @@ static int coma_count(char *color)
 	return (coma_count);
 }
 
-static t_bool check_comas(char **colors)
+static t_bool	check_comas(char **colors)
 {
 	if (coma_count(colors[CEIL]) != 2)
-	{	
-		printf("Error: one coma must seperate each colour code\n");
 		return (false);
-	}
 	if (coma_count(colors[FLOOR]) != 2)
-	{	
-		printf("Error: one coma must seperate each colour code\n");
 		return (false);
+	return (true);
+}
+
+static t_bool	check_line_color(char **scene)
+{
+	char	*buffer;
+	int		i;
+
+	i = 0;
+	while (i < 2)
+	{
+		if (i == FLOOR)
+			buffer = get_line_from_key(scene, "F");
+		else if (i == CEIL)
+			buffer = get_line_from_key(scene, "C");
+		if (!buffer)
+			return (false);
+		free(buffer);
+		i++;
 	}
 	return (true);
 }
 
-t_bool	check_colors(char **unparsed_scene)
+t_bool	check_colors(char **scene)
 {
-	char **colors;
+	char	**colors;
 
-	colors = get_colors_to_check(unparsed_scene);
+	colors = get_colors_to_check(scene);
+	if (!check_line_color(scene))
+		return (false);
 	if (!check_comas(colors))
+	{
+		free_unterminated_array((void **)colors, 2);
 		return (false);
+	}
 	if (!check_color_code(colors[FLOOR]))
+	{
+		free_unterminated_array((void **)colors, 2);
 		return (false);
+	}
 	if (!check_color_code(colors[CEIL]))
+	{
+		free_unterminated_array((void **)colors, 2);
 		return (false);
-	//printf("\tcolor floor%s\n",colors[0]);
-	//printf("\tcolor ceiling%s\n",colors[1]);
-	free_array((void **)colors);
+	}
+	free_unterminated_array((void **)colors, 2);
 	return (true);
 }

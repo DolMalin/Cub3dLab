@@ -1,86 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_scene.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/13 16:14:00 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/10/13 17:00:16 by pdal-mol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-t_bool	is_in_charset(char c, char *charset)
+size_t	filled_lines_len(char **parsed_scene)
 {
-	int	i;
-
-	i = 0;
-	while (charset[i])
-	{
-		if (c == charset[i])
-			return (true);
-		i++;
-	}
-	return (false);
-}
-
-char	*trim(char *line, char *charset)
-{
-	char 	*trimed_line;
-	int		i;
-	int		s_count;
-	int		k;
-
-	i = 0;
-	s_count = 0;
-	while(line[i])
-	{
-		if (!is_in_charset(line[i], charset))
-			s_count++;
-		i++;
-	}
-	if (s_count == 0)
-		return (NULL);
-	trimed_line = malloc(sizeof(char) * (s_count + 1));
-	if (!trimed_line)
-		return (NULL);
-	i = 0;
-	k = 0;
-	while(line[i])
-	{
-		if (!is_in_charset(line[i], charset))
-		{
-			trimed_line[k] = line[i];
-			k++;
-		}
-		i++;
-	}
-	trimed_line[k] = 0;
-	return (trimed_line);
-}
-
-char	**trim_config_line(char **parsed_scene)
-{
-	char	**trimed_scene;
-	int		i;
-
-	i = 0;
-	trimed_scene = malloc(sizeof(char *) * (array_len((void **)parsed_scene) + 1));
-	if (!trimed_scene)
-		return (NULL);
-	while(parsed_scene[i])
-	{
-		if (is_config_line(parsed_scene[i]))
-			trimed_scene[i] = trim(parsed_scene[i], " \n\t");
-		else
-			trimed_scene[i] = ft_strdup(parsed_scene[i]);
-		free(parsed_scene[i]);
-		i++;
-	}
-	trimed_scene[i] = 0;
-	free(parsed_scene);
-	return (trimed_scene);
-}
-
-char	**remove_empty_lines(char	**parsed_scene)
-{
-	size_t	len;
 	size_t	i;
-	size_t	j;
-	char	**output;
+	size_t	len;
 
 	i = 0;
-	j = 0;
 	len = 0;
 	while (parsed_scene[i])
 	{
@@ -88,11 +25,21 @@ char	**remove_empty_lines(char	**parsed_scene)
 			len++;
 		i++;
 	}
-	output = malloc(sizeof(char *) * (len + 1));
+	return (len);
+}
+
+char	**remove_empty_lines(char **parsed_scene)
+{
+	size_t	i;
+	size_t	j;
+	char	**output;
+
+	i = 0;
+	j = 0;
+	output = malloc(sizeof(char *) * (filled_lines_len(parsed_scene) + 1));
 	if (!output)
 		return (NULL);
-	i = 0;
-	while(parsed_scene[i])
+	while (parsed_scene[i])
 	{
 		if (!is_empty_line(parsed_scene[i]))
 		{
@@ -118,12 +65,12 @@ char	**parse_scene_file(char *scene_file)
 	if (!parsed_scene)
 		return (NULL);
 	parsed_scene[i] = get_next_line(fd);
-	while(parsed_scene[i])
+	while (parsed_scene[i])
 	{
 		i++;
 		parsed_scene[i] = get_next_line(fd);
 	}
-	parsed_scene[i] = 0;
+	parsed_scene[i] = NULL;
 	parsed_scene = remove_empty_lines(parsed_scene);
 	parsed_scene = trim_config_line(parsed_scene);
 	if (!parsed_scene)

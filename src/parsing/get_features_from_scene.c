@@ -1,16 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_features_from_scene.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/13 16:25:27 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/10/13 16:36:25 by pdal-mol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-char	*get_line_from_key(char	**parsed_scene, char *key)
+char	*get_line_from_key(char **parsed_scene, char *key)
 {
 	int		i;
 
 	i = 0;
-	while(parsed_scene[i])
+	while (parsed_scene[i])
 	{
 		if (ft_strncmp(parsed_scene[i], key, ft_strlen(key)) == 0)
 		{
 			if (parsed_scene[i][0] == 'C' || parsed_scene[i][0] == 'F')
+			{
+				if (ft_strlen(&parsed_scene[i][1]) == 0)
+					return (NULL);
 				return (ft_strdup(&parsed_scene[i][1]));
+			}
+			if (ft_strlen(&parsed_scene[i][2]) == 0)
+				return (NULL);
 			return (ft_strdup(&parsed_scene[i][2]));
 		}
 		i++;
@@ -58,42 +76,7 @@ char	**get_textures_paths(char **parsed_scene)
 		return (NULL);
 	textures_paths[NO] = get_line_from_key(parsed_scene, "NO");
 	textures_paths[SO] = get_line_from_key(parsed_scene, "SO");
-	textures_paths[WE] = get_line_from_key(parsed_scene, "WE");
 	textures_paths[EA] = get_line_from_key(parsed_scene, "EA");
+	textures_paths[WE] = get_line_from_key(parsed_scene, "WE");
 	return (textures_paths);
-}
-
-char	**get_map(char	**parsed_scene)
-{
-	char	**map;
-	int		i;
-	int		j;
-	int		map_len;
-
-	i = 0;
-	j = 0;
-	map_len = 0;
-	while (parsed_scene[i])
-	{
-		if (!is_config_line(parsed_scene[i]))
-			map_len++;
-		i++;
-	}
-	map = malloc(sizeof(char *) * (map_len + 1));
-	if (!map)
-		return (NULL);
-	i = 0;
-	while(parsed_scene[i])
-	{
-		if (!is_config_line(parsed_scene[i]))
-		{
-			map[j] = trim(parsed_scene[i], "\n");
-			if (!map[j])
-				return (NULL);
-			j++;
-		}
-		i++;
-	}
-	map[j] = 0;
-	return (map);
 }

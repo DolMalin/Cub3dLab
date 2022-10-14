@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/13 16:46:47 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/10/13 16:46:48 by pdal-mol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static t_bool	check_valid_characters(char **map)
@@ -11,38 +23,12 @@ static t_bool	check_valid_characters(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' 
-				&& map[i][j] != 'S' && map[i][j] != 'O' 
-					&& map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != ' ')
+			if (!is_in_charset(map[i][j], "01NSEW "))
 				return (false);
 			j++;
 		}
 		i++;
 	}
-	return (true);
-}
-
-static t_bool	check_one_start_pos(char **map)
-{
-	int	i;
-	int	j;
-	int	start_pos;
-
-	i = 0;
-	start_pos = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] ==  'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
-				start_pos++;
-			j++;
-		}
-		i++;
-	}
-	if (start_pos != 1)
-		return (false);
 	return (true);
 }
 
@@ -53,7 +39,7 @@ static	t_bool	check_map_closed(char **map)
 	size_t	map_array_len;
 
 	i = 0;
-	map_array_len = array_len((void**)map);
+	map_array_len = array_len((void **)map);
 	while (map[i])
 	{
 		j = 0;
@@ -61,15 +47,11 @@ static	t_bool	check_map_closed(char **map)
 		{
 			if (map[i][j] == '0')
 			{
-				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 1) || i == map_array_len - 1)
+				if (i == 0 || j == 0 || j == (ft_strlen(map[i]) - 1)
+					|| i == map_array_len - 1)
 					return (false);
-				if (is_near_void(map, i, j))
-				{
-					//print_map(map);
-					printf("i=%zu j=%zu\n", i, j);
-					printf("ya un trou\n");
+				if (is_near_charset(map, i, j, " \0\n"))
 					return (false);
-				}
 			}
 			j++;
 		}
@@ -78,31 +60,49 @@ static	t_bool	check_map_closed(char **map)
 	return (true);
 }
 
-t_bool	check_map(char **unparsed_scene)
+t_bool	check_map_len(char **scene)
+{
+	int		i;
+	size_t	map_len;
+
+	i = 0;
+	map_len = 0;
+	while (scene[i])
+	{
+		if (!is_config_line(scene[i]))
+			map_len++;
+		i++;
+	}
+	if (map_len < 3)
+		return (false);
+	return (true);
+}
+
+t_bool	check_map(char **scene)
 {
 	char	**map;
 
-	map = get_map(unparsed_scene);
-	//print_map(map);
+	map = get_map(scene);
+	if (!check_map_len(scene))
+	{
+		free_array((void **)map);
+		return (false);
+	}
 	if (!check_map_closed(map))
 	{
-		printf("The map is not closed\n");
 		free_array((void **)map);
 		return (false);
 	}
 	if (!check_valid_characters(map))
 	{
-		printf("Invalid characters in the map\n");
 		free_array((void **)map);
 		return (false);
 	}
-	if (!check_one_start_pos(map))
+	if (!check_player(map))
 	{
-		printf("There is more than one or no starting position for player\n");
 		free_array((void **)map);
 		return (false);
 	}
-	printf("map is ok\n");
 	free_array((void **)map);
 	return (true);
 }
