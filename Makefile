@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/14 13:33:36 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/14 15:19:59 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ CHECK_INPUT_FILES 	=	check_input.c \
 						
 ACTION_FILES 	=		run_game.c \
 						move_player.c \
+						move_player2.c \
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \
@@ -82,7 +83,7 @@ OBJS = 			${SRC:.c=.o}
 HEADERS = 		includes/cub3d.h
 
 CMD = 			gcc
-FLAGS = 		-Wall -Werror -Wextra  #-g3 -fsanitize=address
+FLAGS = 		-Wall -Werror -Wextra  -g3 -fsanitize=address
 
 LIB =			./libft/libft.a ./mlx/libmlx.a
 
