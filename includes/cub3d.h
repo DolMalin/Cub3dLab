@@ -6,6 +6,9 @@
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
+/****************DEFINES_PREFERENCES******************/
+# define COEF_MAP 10
+
 /****************DEFINES_KEYBOARD*********************/
 
 # define KB_D 2

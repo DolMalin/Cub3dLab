@@ -40,12 +40,12 @@ void	print_bigger(t_image *image, int x, int y, int color_code)
 	int j = 0;
 
 	i = 0;
-	while (i < 10)
+	while (i < COEF_MAP)
 	{
 		j = 0;
-		while (j < 10)
+		while (j < COEF_MAP)
 		{
-			my_mlx_pixel_put(image, x + i, y + j, color_code);
+			my_mlx_pixel_put(image, (x * COEF_MAP) + i, (y * COEF_MAP) + j, color_code);
 			j++;
 		}
 		i++;
@@ -56,8 +56,8 @@ void	draw_square(t_data *data)
 {
 	int i = 0;
 	int j = 0;
-	int	band;
-	int	bigger;
+	// int	band;
+	// int	bigger;
 
 	i = 0;
 	t_image image = create_image(data);
@@ -67,26 +67,9 @@ void	draw_square(t_data *data)
 		while (data->map[i][j])
 		{
 			if (data->map[i][j] == '1')
-			{
-				//print_bigger(&image, j, i, 0x0000ff00);
-				band = 10;
-				bigger = 0;
-				while (bigger < band)
-				{
-					my_mlx_pixel_put(&image, (j * band) + bigger, (i * band) + bigger, 0x0000ff00);
-					bigger++;
-				}
-			}
+				print_bigger(&image, j, i, 0x34A145);
 			if (is_in_charset(data->map[i][j], "NSEW"))
-			{	
-				band = 10;
-				bigger = 0;
-				while (bigger < band)
-				{
-					my_mlx_pixel_put(&image, (j * band) + bigger, (i * band) + bigger, 0x00ff00ff);
-					bigger++;
-				}
-			}
+				print_bigger(&image, j, i, 0x6C207D);
 			j++;
 		}
 		i++;
