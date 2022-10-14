@@ -28,7 +28,7 @@ static t_bool	check_arguments(int ac, char **av)
 {
 	int		fd;
 
-	if (ac < 0)
+	if (ac < 2)
 		return (false);
 	if (!check_extension(av[1]))
 		return (false);
@@ -45,10 +45,15 @@ t_bool	check_input(int ac, char **av)
 {
 	char	**scene;
 
-	scene = parse_scene_file(av[1]);
 	if (!check_arguments(ac, av))
-		error(ARGS, (void **)scene);
-	else if (!check_config_structure(scene))
+	{
+		printf("%s", ARGS);
+		exit(EXIT_FAILURE);
+		return(false);
+	}
+	else
+		scene = parse_scene_file(av[1]);
+	if (!check_config_structure(scene))
 		error(CONFIG_STRUCT, (void **)scene);
 	else if (!check_colors(scene))
 		error(RGB_CODES, (void **)scene);
