@@ -87,7 +87,7 @@ static t_bool check_structure(char **unparsed_scene)
 t_bool  check_input(int ac, char **av)
 {
     char    **unparsed_scene;
-    (void)ac;
+	
     unparsed_scene = parse_scene_file(av[1]);
 	//print_map(unparsed_scene);
     if (!check_arguments(ac, av))
