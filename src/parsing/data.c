@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 18:57:47 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:56:19 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_window(t_data *data)
 	data->mlx_win = mlx_new_window(data->mlx, 1920, 1080, "CUB3D");
 }
 
-void	update_user_pos(t_data **data)
+void	update_player_pos(t_data **data)
 {
 	size_t	i;
 	size_t	j;
@@ -61,7 +61,6 @@ t_data	*init_data(char *scene_file)
 
 void	free_data(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->mlx_win);
 	free_unterminated_array((void **)data->colors, 2);
 	free_unterminated_array((void **)data->textures_path, 4);
 	free_array((void **)data->map);

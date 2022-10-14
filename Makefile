@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
+#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/13 18:14:42 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/14 13:33:36 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ CHECK_INPUT_FILES 	=	check_input.c \
 						check_textures.c \
 						check_config_structure.c \
 						
-ACTION_FILES 	=		run_game.c
+ACTION_FILES 	=		run_game.c \
+						move_player.c \
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \
