@@ -52,6 +52,12 @@ typedef struct	s_image {
 	int		endian;
 }				t_image;
 
+typedef struct s_player {
+	float	x;
+	float	y;
+	
+}				t_player;
+
 typedef struct s_data
 {
 	char			**textures_path;
@@ -72,9 +78,6 @@ typedef enum e_bool
 
 /******** TO REMOVE*********/
 void print_map(char **map);
-
-/******** TO MOVE*********/
-t_image	*create_image(t_data *data);
 
 /****************CHECK_INPUT*********************/
 t_bool			check_input(int ac, char **av);

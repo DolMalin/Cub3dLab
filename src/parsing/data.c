@@ -6,11 +6,21 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/17 15:10:52 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:27:28 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static t_image	*init_image(t_data *data)
+{
+	t_image	*image;
+
+	image = malloc(sizeof(t_image));
+	image->ptr = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
+	image->addr =mlx_get_data_addr(image->ptr, &image->bits_per_pixel, &image->line_length, &image->endian);
+	return (image);
+}
 
 void	init_window(t_data *data)
 {
@@ -55,7 +65,7 @@ t_data	*init_data(char *scene_file)
 	data->colors = get_colors(parsed_scene);
 	data->map = get_map(parsed_scene);
 	init_window(data);
-	data->image = create_image(data);
+	data->image = init_image(data);
 	free_array((void **)parsed_scene);
 	return (data);
 }
