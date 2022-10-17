@@ -8,8 +8,16 @@
 
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF 10
+# define ROT_COEF 2
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
+
+
+/****************DEFINES_MATHS******************/
+
+// # define M_PI 3.141592
+# define RAD2DEG M_PI/360.0*2.0
+# define DEG2RAD 360.0/M_PI/2.0
 
 /****************DEFINES_KEYBOARD*********************/
 
@@ -55,7 +63,7 @@ typedef struct	s_image {
 typedef struct s_player {
 	float	x;
 	float	y;
-	int		pov;
+	float	pov;
 }				t_player;
 
 typedef struct s_data
@@ -81,21 +89,24 @@ typedef enum e_bool
 void print_map(char **map);
 
 /****************GRAPHIC*********************/
-int		create_image(t_data *data);
-void	print_bigger(t_image *image, int x, int y, int color_code);
-void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
+int				create_image(t_data *data);
+void			print_bigger(t_image *image, int x, int y, int color_code);
+void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);
 
 int				move_player(t_data *data, int key);
 void			update_player_pos(t_data **data);
+// void			update_player_pov(t_data **data);
 char			get_player_token(t_data *data);
 
 void			move_right(t_data **data);
 void			move_left(t_data **data);
 void			move_down(t_data **data);
 void			move_up(t_data **data);
+void			rotate_left(t_data **data);
+void			rotate_right(t_data **data);
 
 /****************CHECK_INPUT*********************/
 t_bool			check_input(int ac, char **av);

@@ -1,5 +1,29 @@
 #include "../../includes/cub3d.h"
 
+void	get_player_pos(t_data **data)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while ((*data)->map[i])
+	{
+		j = 0;
+		while ((*data)->map[i][j])
+		{
+			if (is_in_charset((*data)->map[i][j], "NSEW"))
+			{
+				(*data)->y = i;
+				(*data)->x = j;
+				// (*data)->player->y = i;
+				// (*data)->player->x = j;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 char    get_player_token(t_data *data)
 {
     size_t	i;
@@ -107,8 +131,8 @@ int	move_player(t_data *data, int key)
 	else if (key == KB_S)
 		move_down(&data);
 	else if (key == KB_LEFT)
-		printf("ROTATE LEFT\n");
+		rotate_left(&data);
 	else if (key == KB_RIGHT)
-		printf("ROTATE RIGHT\n");
+		rotate_right(&data);
 	return (0);
 }

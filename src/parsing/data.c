@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/17 16:16:08 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:42:17 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,53 @@ static t_image	*init_image(t_data *data)
 	return (image);
 }
 
-void	init_window(t_data *data)
+void	get_player_pov(t_data **data)
 {
-	data->mlx = mlx_init();
-	data->mlx_win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
+	char		player_pov;
+	player_pov = get_player_token(data);
+	if (player_pov == 'N')
+		player->pov = M_PI_2;
+	if (player_pov == 'S')
+		player->pov = 3 * M_PI_2;
+	if (player_pov == 'E')
+		player->pov = M_PI;
+	if (player_pov == 'W')
+		player->pov = 0;
+					
 }
 
-void	update_player_pos(t_data **data)
+t_player	*init_player(t_data *data)
 {
-	size_t	i;
-	size_t	j;
+	t_player	*player;
+	size_t		i;
+	size_t		j;
 
+	
 	i = 0;
-	while ((*data)->map[i])
+	get_player_pos(&data);
+	
+	while (data->map[i])
 	{
 		j = 0;
-		while ((*data)->map[i][j])
+		while (data->map[i][j])
 		{
-			if (is_in_charset((*data)->map[i][j], "NSEW"))
+			if (is_in_charset(data->map[i][j], "NSEW"))
 			{
-				(*data)->y = i;
-				(*data)->x = j;
-				// (*data)->player->y = i;
-				// (*data)->player->x = j;
+				player->y = i;
+				player->x = j;
+				
 			}
 			j++;
 		}
 		i++;
 	}
+	return (player);
+}
+
+void	init_window(t_data *data)
+{
+	data->mlx = mlx_init();
+	data->mlx_win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
 }
 
 t_data	*init_data(char *scene_file)
