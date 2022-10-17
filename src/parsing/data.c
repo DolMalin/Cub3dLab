@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/17 15:27:28 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 16:16:08 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	update_player_pos(t_data **data)
 			{
 				(*data)->y = i;
 				(*data)->x = j;
+				// (*data)->player->y = i;
+				// (*data)->player->x = j;
 			}
 			j++;
 		}

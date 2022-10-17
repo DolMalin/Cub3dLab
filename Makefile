@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/14 15:19:59 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/17 16:28:57 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,9 @@ ACTION_FILES 	=		run_game.c \
 						move_player.c \
 						move_player2.c \
 
+GRAPHIC_FILES 	=		create_image.c \
+						graphic_utils.c \
+
 UTILS_FILES 		=	utils1.c \
 						utils2.c \
 						utils3.c \
@@ -43,7 +46,8 @@ SRC_FILES 			=	main.c \
 			${addprefix parsing/, ${PARSING_FILES}} \
 			${addprefix utils/, ${UTILS_FILES}} \
 			${addprefix check_input/, ${CHECK_INPUT_FILES}}\
-			${addprefix action/, ${ACTION_FILES}}
+			${addprefix action/, ${ACTION_FILES}} \
+			${addprefix graphic/, ${GRAPHIC_FILES}} \
 
 ## ======================= TO REMOVE ======================= ##
 SRC_FILES_2 =	${addprefix parsing/, ${PARSING_FILES}} \

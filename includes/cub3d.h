@@ -7,7 +7,7 @@
 # include "../mlx/mlx.h"
 
 /****************DEFINES_PREFERENCES******************/
-# define COEF_MAP 10
+# define PRINT_COEF 10
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
@@ -55,7 +55,7 @@ typedef struct	s_image {
 typedef struct s_player {
 	float	x;
 	float	y;
-	
+	int		pov;
 }				t_player;
 
 typedef struct s_data
@@ -66,6 +66,7 @@ typedef struct s_data
 	void			*mlx;
 	void			*mlx_win;
 	t_image			*image;
+	t_player		*player;
 	int				x;
 	int				y;
 }				t_data;
@@ -78,6 +79,23 @@ typedef enum e_bool
 
 /******** TO REMOVE*********/
 void print_map(char **map);
+
+/****************GRAPHIC*********************/
+int		create_image(t_data *data);
+void	print_bigger(t_image *image, int x, int y, int color_code);
+void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
+
+/****************ACTION*********************/
+void			run_game(t_data *data);
+
+int				move_player(t_data *data, int key);
+void			update_player_pos(t_data **data);
+char			get_player_token(t_data *data);
+
+void			move_right(t_data **data);
+void			move_left(t_data **data);
+void			move_down(t_data **data);
+void			move_up(t_data **data);
 
 /****************CHECK_INPUT*********************/
 t_bool			check_input(int ac, char **av);
@@ -98,18 +116,6 @@ char			**get_map(char	**parsed_scene);
 char			**parse_scene_file(char *scene_file);
 char			*trim(char *line, char *charset);
 char			**trim_config_line(char **parsed_scene);
-
-/****************ACTION*********************/
-void			run_game(t_data *data);
-
-int				move_player(t_data *data, int key);
-void			update_player_pos(t_data **data);
-char			get_player_token(t_data *data);
-
-void			move_right(t_data **data);
-void			move_left(t_data **data);
-void			move_down(t_data **data);
-void			move_up(t_data **data);
 
 /****************UTILS*********************/
 int				lines_count(char *file);
