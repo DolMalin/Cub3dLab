@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/14 17:26:38 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:10:52 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_data	*init_data(char *scene_file)
 	data->colors = get_colors(parsed_scene);
 	data->map = get_map(parsed_scene);
 	init_window(data);
+	data->image = create_image(data);
 	free_array((void **)parsed_scene);
 	return (data);
 }

@@ -73,6 +73,9 @@ typedef enum e_bool
 /******** TO REMOVE*********/
 void print_map(char **map);
 
+/******** TO MOVE*********/
+t_image	*create_image(t_data *data);
+
 /****************CHECK_INPUT*********************/
 t_bool			check_input(int ac, char **av);
 t_bool			check_config_structure(char **scene);
