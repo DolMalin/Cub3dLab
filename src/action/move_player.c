@@ -95,3 +95,20 @@ void	move_right(t_data **data)
     *dest_pos = get_player_token(*data);
     *player_pos = '0';
 }
+
+int	move_player(t_data *data, int key)
+{
+	if (key == KB_W)
+		move_up(&data);
+	else if (key == KB_A)
+		move_left(&data);
+	else if (key == KB_D)
+		move_right(&data);
+	else if (key == KB_S)
+		move_down(&data);
+	else if (key == KB_LEFT)
+		printf("ROTATE LEFT\n");
+	else if (key == KB_RIGHT)
+		printf("ROTATE RIGHT\n");
+	return (0);
+}

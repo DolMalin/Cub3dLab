@@ -8,6 +8,8 @@
 
 /****************DEFINES_PREFERENCES******************/
 # define COEF_MAP 10
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
 /****************DEFINES_KEYBOARD*********************/
 
@@ -41,6 +43,15 @@
 # define TEXTURES "Error: in textures paths.\n"
 # define RGB_CODES "Error: in RGB color codes.\n"
 
+
+typedef struct	s_image {
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_image;
+
 typedef struct s_data
 {
 	char			**textures_path;
@@ -48,6 +59,7 @@ typedef struct s_data
 	char			**map;
 	void			*mlx;
 	void			*mlx_win;
+	t_image			*image;
 	int				x;
 	int				y;
 }				t_data;
@@ -83,6 +95,8 @@ char			**trim_config_line(char **parsed_scene);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);
+
+int				move_player(t_data *data, int key);
 void			update_player_pos(t_data **data);
 char			get_player_token(t_data *data);
 
