@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/17 17:42:17 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/18 11:57:03 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,51 +19,52 @@ static t_image	*init_image(t_data *data)
 	image = malloc(sizeof(t_image));
 	image->ptr = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	image->addr =mlx_get_data_addr(image->ptr, &image->bits_per_pixel, &image->line_length, &image->endian);
-	return (image);
+	return (image); 
 }
 
-void	get_player_pov(t_data **data)
-{
-	char		player_pov;
-	player_pov = get_player_token(data);
-	if (player_pov == 'N')
-		player->pov = M_PI_2;
-	if (player_pov == 'S')
-		player->pov = 3 * M_PI_2;
-	if (player_pov == 'E')
-		player->pov = M_PI;
-	if (player_pov == 'W')
-		player->pov = 0;
+// void	get_player_pov(t_data **data)
+// {
+// 	char		player_pov;
+// 	player_pov = get_player_token(data);
+// 	if (player_pov == 'N')
+// 		player->pov = M_PI_2;
+// 	if (player_pov == 'S')
+// 		player->pov = 3 * M_PI_2;
+// 	if (player_pov == 'E')
+// 		player->pov = M_PI;
+// 	if (player_pov == 'W')
+// 		player->pov = 0;
+	
 					
-}
+// }
 
-t_player	*init_player(t_data *data)
-{
-	t_player	*player;
-	size_t		i;
-	size_t		j;
+// t_player	*init_player(t_data *data)
+// {
+// 	t_player	*player;
+// 	size_t		i;
+// 	size_t		j;
 
 	
-	i = 0;
-	get_player_pos(&data);
+// 	i = 0;
+// 	get_player_pos(&data);
 	
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j])
-		{
-			if (is_in_charset(data->map[i][j], "NSEW"))
-			{
-				player->y = i;
-				player->x = j;
+// 	while (data->map[i])
+// 	{
+// 		j = 0;
+// 		while (data->map[i][j])
+// 		{
+// 			if (is_in_charset(data->map[i][j], "NSEW"))
+// 			{
+// 				player->y = i;
+// 				player->x = j; // modify with float value
 				
-			}
-			j++;
-		}
-		i++;
-	}
-	return (player);
-}
+// 			}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (player);
+// }
 
 void	init_window(t_data *data)
 {
@@ -86,7 +87,7 @@ t_data	*init_data(char *scene_file)
 	data->colors = get_colors(parsed_scene);
 	data->map = get_map(parsed_scene);
 	init_window(data);
-	data->image = init_image(data);
+	data->image = init_image(data); // if data image null secure it
 	free_array((void **)parsed_scene);
 	return (data);
 }

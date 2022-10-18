@@ -15,7 +15,6 @@
 
 /****************DEFINES_MATHS******************/
 
-// # define M_PI 3.141592
 # define RAD2DEG M_PI/360.0*2.0
 # define DEG2RAD 360.0/M_PI/2.0
 
@@ -97,8 +96,8 @@ void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
 void			run_game(t_data *data);
 
 int				move_player(t_data *data, int key);
-void			update_player_pos(t_data **data);
-// void			update_player_pov(t_data **data);
+void			get_player_pos(t_data **data);
+void			update_player_pov(t_data **data);
 char			get_player_token(t_data *data);
 
 void			move_right(t_data **data);

@@ -1,7 +1,5 @@
 #include "../../includes/cub3d.h"
 
-
-
 static void	put_mini_map_to_image(t_data *data)
 {
 	int i = 0;

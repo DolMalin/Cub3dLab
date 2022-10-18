@@ -19,7 +19,7 @@ void	print_bigger(t_image *image, int x, int y, int color_code)
 		j = 0;
 		while (j < PRINT_COEF)
 		{
-			my_mlx_pixel_put(image, (x * PRINT_COEF) + i + 20, (y * PRINT_COEF) + j + 20, color_code);
+			my_mlx_pixel_put(image, (x * PRINT_COEF) + i + 20, (y * PRINT_COEF) + j + 20, color_code); // define + 20 with margin in .h
 			j++;
 		}
 		i++;

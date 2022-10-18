@@ -10,7 +10,7 @@ int	exit_program(t_data *data)
 
 int	get_events(int key, t_data *data)
 {
-	update_player_pos(&data);
+	get_player_pos(&data);
 	// update_player_pov(&data);
 	if (key == ESCAPE_KC)
 		exit_program(data);
