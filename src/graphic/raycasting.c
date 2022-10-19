@@ -21,8 +21,22 @@ void		draw_ray(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
 
+void	draw_rays(t_data *data)
+{
+	float	fov_angle;
+	fov_angle = -0.52;
+	while (fov_angle < 0.52)
+	{
+		data->player->ray_coef_x = cos(data->player->pov + fov_angle);
+		data->player->ray_coef_y = sin(data->player->pov + fov_angle);
+		draw_ray(data);
+		fov_angle += 0.1;
+	}
+
+}
+
 void    raycasting(t_data *data)
 {
-    draw_ray(data);
+    draw_rays(data);
 }
 
