@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:45 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 16:46:46 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/18 12:00:17 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_bool	check_arguments(int ac, char **av)
 {
 	int		fd;
 
-	if (ac < 0)
+	if (ac < 2)
 		return (false);
 	if (!check_extension(av[1]))
 		return (false);
