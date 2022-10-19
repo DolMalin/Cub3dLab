@@ -1,4 +1,12 @@
 #include "../../includes/cub3d.h"
+   
+
+static void	put_player_to_minimap(t_data *data)
+{
+	my_mlx_pixel_put(data->image, (data->player->x * PRINT_COEF) + 20 , (data->player->y * PRINT_COEF) + 20, 0xFFFFF);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
+	// what to free ?
+}
 
 static void	put_mini_map_to_image(t_data *data)
 {
@@ -13,12 +21,11 @@ static void	put_mini_map_to_image(t_data *data)
 		{
 			if (data->map[i][j] == '1')
 				print_bigger(data->image, j, i, 0x34A145);
-			if (is_in_charset(data->map[i][j], "NSEW"))
-				print_bigger(data->image, j, i, 0x6C207D);
 			j++;
 		}
 		i++;
 	}
+	put_player_to_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 	// what to free ?
 }
@@ -43,6 +50,7 @@ void put_background_to_image(t_data *data)
 		}
 		i++;
 	}
+	put_player_to_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
 

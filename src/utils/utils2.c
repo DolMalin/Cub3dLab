@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:44:57 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 19:09:11 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/18 13:10:25 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,20 @@ void	print_map(char **map)
 		printf("%s\n", map[i]);
 		i++;
 	}
+}
+
+void	print_config(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	printf("\e[2J");
+	while (data->map[i])
+	{
+		printf("%s\n", data->map[i]);
+		i++;
+	}
+	printf("\nx = %f, y = %f\n", data->player->x, data->player->y);
 }
 
 t_bool	ft_strisdigit(char *str)

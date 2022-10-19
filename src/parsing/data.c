@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/18 11:57:03 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/19 10:45:19 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,33 @@ static t_image	*init_image(t_data *data)
 					
 // }
 
-// t_player	*init_player(t_data *data)
-// {
-// 	t_player	*player;
-// 	size_t		i;
-// 	size_t		j;
+t_player	*init_player(t_data *data)
+{
+	t_player	*player;
+	size_t		i;
+	size_t		j;
 
-	
-// 	i = 0;
-// 	get_player_pos(&data);
-	
-// 	while (data->map[i])
-// 	{
-// 		j = 0;
-// 		while (data->map[i][j])
-// 		{
-// 			if (is_in_charset(data->map[i][j], "NSEW"))
-// 			{
-// 				player->y = i;
-// 				player->x = j; // modify with float value
+	i = 0;
+	player = malloc(sizeof(t_player));
+	if (!player)
+		return (NULL);
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (is_in_charset(data->map[i][j], "NSEW"))
+			{
+				player->y = (float)i + (PRINT_COEF / 2) * 0.1;
+				player->x = (float)j + (PRINT_COEF / 2) * 0.1; 
 				
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (player);
-// }
+			}
+			j++;
+		}
+		i++;
+	}
+	return (player);
+}
 
 void	init_window(t_data *data)
 {
@@ -87,6 +87,7 @@ t_data	*init_data(char *scene_file)
 	data->colors = get_colors(parsed_scene);
 	data->map = get_map(parsed_scene);
 	init_window(data);
+	data->player = init_player(data);
 	data->image = init_image(data); // if data image null secure it
 	free_array((void **)parsed_scene);
 	return (data);

@@ -9,6 +9,7 @@
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF 10
 # define ROT_COEF 2
+# define STEP_COEF 0.1
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
@@ -89,7 +90,7 @@ void print_map(char **map);
 
 /****************GRAPHIC*********************/
 int				create_image(t_data *data);
-void			print_bigger(t_image *image, int x, int y, int color_code);
+void			print_bigger(t_image *image, float x, float y, int color_code);
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
 
 /****************ACTION*********************/
@@ -137,6 +138,7 @@ t_bool			is_empty_line(char *line);
 t_bool			ft_strisdigit(char *str);
 t_bool			is_in_charset(char c, char *charset);
 t_bool			is_near_charset(char **unparsed_scene, size_t i, size_t j, char *charset);
+void			print_config(t_data *data);
 
 /****************ERRORS*********************/
 void	error(char *error_msg, void **array);

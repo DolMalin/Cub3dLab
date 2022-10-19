@@ -8,7 +8,7 @@ void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	print_bigger(t_image *image, int x, int y, int color_code)
+void	print_bigger(t_image *image, float x, float y, int color_code)
 {
 	int i = 0;
 	int j = 0;

@@ -1,123 +1,89 @@
 #include "../../includes/cub3d.h"
 
-void	get_player_pos(t_data **data)
-{
-	size_t	i;
-	size_t	j;
+// void	get_player_pos(t_data **data)
+// {
+// 	size_t	i;
+// 	size_t	j;
 
-	i = 0;
-	while ((*data)->map[i])
-	{
-		j = 0;
-		while ((*data)->map[i][j])
-		{
-			if (is_in_charset((*data)->map[i][j], "NSEW"))
-			{
-				(*data)->y = i;
-				(*data)->x = j;
-				// (*data)->player->y = i;
-				// (*data)->player->x = j;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-char    get_player_token(t_data *data)
-{
-    size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j])
-		{
-			if (is_in_charset(data->map[i][j], "NSEW"))
-			{
-                if (is_in_charset(data->map[i][j], "N"))
-                    return ('N');
-                else if (is_in_charset(data->map[i][j], "S"))
-                    return ('S');
-                else if (is_in_charset(data->map[i][j], "E"))
-                    return ('E');
-                return ('W');
-			}
-			j++;
-		}
-		i++;
-	}
-    return (0);
-}
+// 	i = 0;
+// 	while ((*data)->map[i])
+// 	{
+// 		j = 0;
+// 		while ((*data)->map[i][j])
+// 		{
+// 			if (is_in_charset((*data)->map[i][j], "NSEW"))
+// 			{
+// 				(*data)->y = i;
+// 				(*data)->x = j;
+// 			}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	move_up(t_data **data)
 {
-	int		pos_x;
-	int		pos_y;
-	char	*player_pos;
-	char	*dest_pos;
+	float next_x;
+	float next_y;
+	int	next_x_i;
+	int	next_y_i;
 
-	pos_x = (*data)->x;
-	pos_y = (*data)->y;
-	player_pos = &(*data)->map[pos_y][pos_x];
-	dest_pos = &(*data)->map[pos_y - 1][pos_x];
-	if (*dest_pos == '1' || *dest_pos == ' ')
+	next_x = (*data)->player->x;
+	next_y = (*data)->player->y - STEP_COEF;
+	next_x_i = (int)floor(next_x);
+	next_y_i = (int)floor(next_y);
+	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
-    *dest_pos = get_player_token(*data);
-    *player_pos = '0';
+	(*data)->player->y = next_y;
 }
 
 void	move_down(t_data **data)
 {
-	int		pos_x;
-	int		pos_y;
-	char	*player_pos;
-	char	*dest_pos;
+	float next_x;
+	float next_y;
+	int	next_x_i;
+	int	next_y_i;
 
-	pos_x = (*data)->x;
-	pos_y = (*data)->y;
-	player_pos = &(*data)->map[pos_y][pos_x];
-	dest_pos = &(*data)->map[pos_y + 1][pos_x];
-	if (*dest_pos == '1' || *dest_pos == ' ')
+	next_x = (*data)->player->x;
+	next_y = (*data)->player->y + STEP_COEF;
+	next_x_i = (int)floor(next_x);
+	next_y_i = (int)floor(next_y);
+	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
-    *dest_pos = get_player_token(*data);
-    *player_pos = '0';
+	(*data)->player->y = next_y;
 }
 
 void	move_left(t_data **data)
 {
-	int		pos_x;
-	int		pos_y;
-	char	*player_pos;
-	char	*dest_pos;
+	float next_x;
+	float next_y;
+	int	next_x_i;
+	int	next_y_i;
 
-	pos_x = (*data)->x;
-	pos_y = (*data)->y;
-	player_pos = &(*data)->map[pos_y][pos_x];
-	dest_pos = &(*data)->map[pos_y][pos_x - 1];
-	if (*dest_pos == '1' || *dest_pos == ' ')
+	next_x = (*data)->player->x - STEP_COEF;
+	next_y = (*data)->player->y;
+	next_x_i = (int)floor(next_x);
+	next_y_i = (int)floor(next_y);
+	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
-    *dest_pos = get_player_token(*data);
-    *player_pos = '0';
+	(*data)->player->x = next_x;
 }
 
 void	move_right(t_data **data)
 {
-	int		pos_x;
-	int		pos_y;
-	char	*player_pos;
-	char	*dest_pos;
+	float next_x;
+	float next_y;
+	int	next_x_i;
+	int	next_y_i;
 
-	pos_x = (*data)->x;
-	pos_y = (*data)->y;
-	player_pos = &(*data)->map[pos_y][pos_x];
-	dest_pos = &(*data)->map[pos_y][pos_x + 1];
-	if (*dest_pos == '1' || *dest_pos == ' ')
+	next_x = (*data)->player->x + STEP_COEF;
+	next_y = (*data)->player->y;
+	next_x_i = (int)floor(next_x);
+	next_y_i = (int)floor(next_y);
+	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
-    *dest_pos = get_player_token(*data);
-    *player_pos = '0';
+	(*data)->player->x = next_x;
 }
 
 int	move_player(t_data *data, int key)
