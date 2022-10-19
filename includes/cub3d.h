@@ -92,6 +92,7 @@ void print_map(char **map);
 int				create_image(t_data *data);
 void			print_bigger(t_image *image, float x, float y, int color_code);
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
+void    		raycasting(t_data *data);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);

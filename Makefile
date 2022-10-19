@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/17 16:28:57 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/10/19 11:57:02 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ ACTION_FILES 	=		run_game.c \
 
 GRAPHIC_FILES 	=		create_image.c \
 						graphic_utils.c \
+						raycasting.c
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \
