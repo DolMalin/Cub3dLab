@@ -21,6 +21,7 @@ void		draw_ray(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
 
+<<<<<<< HEAD
 void	draw_rays(t_data *data)
 {
 	float	fov_angle;
@@ -38,5 +39,39 @@ void	draw_rays(t_data *data)
 void    raycasting(t_data *data)
 {
     draw_rays(data);
+=======
+void    dda(t_data *data, float x_end, float y_end)
+{	
+	int	i;
+    float step;
+    float x;
+    float y;
+
+    if (fabs(x_end - data->player->x) > fabs(y_end - data->player->y))
+        step = fabs(x_end - data->player->x);
+    else
+        step = fabs(y_end - data->player->y);
+    x = data->player->x * PRINT_COEF + 20;
+    y = data->player->y * PRINT_COEF + 20;
+    i = 0;
+    while(i < step)
+    {
+        my_mlx_pixel_put(data->image, x, y, 0x0D062B);
+        x = x + ((x_end - data->player->x) / step);
+        y = y + ((y_end - data->player->y) / step);
+        i++;
+    }
+    mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
+>>>>>>> cbd5f7bf37ac257ee260f5faeb663591709f6b4f
 }
 
+get_wall_y()
+get_wall_x()
+
+void    raycasting(t_data *data)
+{
+    // draw_ray(data);
+    
+    dda(data, data->player->x - 50, data->player->y - 50);
+    dda(data, get_wall_y(), get_wall_x());
+}
