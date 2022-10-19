@@ -1,17 +1,15 @@
 #include "../../includes/cub3d.h"
    
-
 static void	put_player_to_minimap(t_data *data)
 {
-	my_mlx_pixel_put(data->image, (data->player->x * PRINT_COEF) + 20 , (data->player->y * PRINT_COEF) + 20, 0xFFFFF);
+	my_mlx_pixel_put(data->image, (data->player->x * PRINT_COEF) + 20, (data->player->y * PRINT_COEF) + 20, 0xFFFFF);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
-	// what to free ?
 }
 
 static void	put_mini_map_to_image(t_data *data)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (data->map[i])
@@ -27,7 +25,6 @@ static void	put_mini_map_to_image(t_data *data)
 	}
 	put_player_to_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
-	// what to free ?
 }
 
 void put_background_to_image(t_data *data)

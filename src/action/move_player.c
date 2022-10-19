@@ -1,33 +1,11 @@
 #include "../../includes/cub3d.h"
 
-// void	get_player_pos(t_data **data)
-// {
-// 	size_t	i;
-// 	size_t	j;
-
-// 	i = 0;
-// 	while ((*data)->map[i])
-// 	{
-// 		j = 0;
-// 		while ((*data)->map[i][j])
-// 		{
-// 			if (is_in_charset((*data)->map[i][j], "NSEW"))
-// 			{
-// 				(*data)->y = i;
-// 				(*data)->x = j;
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
 void	move_up(t_data **data)
 {
-	float next_x;
-	float next_y;
-	int	next_x_i;
-	int	next_y_i;
+	float	next_x;
+	float	next_y;
+	int		next_x_i;
+	int		next_y_i;
 
 	next_x = (*data)->player->x;
 	next_y = (*data)->player->y - STEP_COEF;
@@ -40,10 +18,10 @@ void	move_up(t_data **data)
 
 void	move_down(t_data **data)
 {
-	float next_x;
-	float next_y;
-	int	next_x_i;
-	int	next_y_i;
+	float	next_x;
+	float	next_y;
+	int		next_x_i;
+	int		next_y_i;
 
 	next_x = (*data)->player->x;
 	next_y = (*data)->player->y + STEP_COEF;
@@ -56,10 +34,10 @@ void	move_down(t_data **data)
 
 void	move_left(t_data **data)
 {
-	float next_x;
-	float next_y;
-	int	next_x_i;
-	int	next_y_i;
+	float	next_x;
+	float	next_y;
+	int		next_x_i;
+	int		next_y_i;
 
 	next_x = (*data)->player->x - STEP_COEF;
 	next_y = (*data)->player->y;
@@ -72,10 +50,10 @@ void	move_left(t_data **data)
 
 void	move_right(t_data **data)
 {
-	float next_x;
-	float next_y;
-	int	next_x_i;
-	int	next_y_i;
+	float	next_x;
+	float	next_y;
+	int		next_x_i;
+	int		next_y_i;
 
 	next_x = (*data)->player->x + STEP_COEF;
 	next_y = (*data)->player->y;

@@ -4,7 +4,7 @@ int	exit_program(t_data *data)
 {
 	if (data->mlx_win)
 		mlx_destroy_window(data->mlx, data->mlx_win);
-    free_data(data);
+	free_data(data);
 	exit(EXIT_SUCCESS);
 }
 
@@ -12,7 +12,6 @@ int	get_events(int key, t_data *data)
 {
 	if (key == ESCAPE_KC)
 		exit_program(data);
-	
 	print_config(data);
 	move_player(data, key);
 	return (0);
