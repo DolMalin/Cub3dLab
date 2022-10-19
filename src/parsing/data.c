@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/19 12:08:18 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/19 14:34:22 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_player	*init_player(t_data *data)
 	if (!player)
 		return (NULL);
 	player->pov = get_player_pov(data);
+	player->ray_coef_x = cos(player->pov);
+	player->ray_coef_y = sin(player->pov);
 	while (data->map[i])
 	{
 		j = 0;

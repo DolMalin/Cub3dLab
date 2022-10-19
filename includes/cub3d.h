@@ -64,6 +64,8 @@ typedef struct s_player {
 	float	x;
 	float	y;
 	float	pov;
+	float	ray_coef_x;
+	float	ray_coef_y;
 }				t_player;
 
 typedef struct s_data

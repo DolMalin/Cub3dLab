@@ -9,10 +9,12 @@ void		draw_ray(t_data *data)
 
 	ray_color = 0x0D062B;
 	i = 0;
-	while (i < 100)
+	ray_x = data->player->x * PRINT_COEF;
+	ray_y = data->player->y * PRINT_COEF;
+	while (i < 50)
 	{
-		ray_x = data->player->x * PRINT_COEF;
-		ray_y = (data->player->y * data->player->pov) * PRINT_COEF - i ;
+		ray_x = ray_x - data->player->ray_coef_x;
+		ray_y = ray_y - data->player->ray_coef_y;
 		my_mlx_pixel_put(data->image, ray_x + 20, ray_y + 20, ray_color);
 		i++;
 	}
