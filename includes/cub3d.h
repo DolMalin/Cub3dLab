@@ -8,7 +8,7 @@
 
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF 10
-# define ROT_COEF 2
+# define ROT_COEF 0.5
 # define STEP_COEF 0.1
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080

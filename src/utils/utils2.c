@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:44:57 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/18 13:10:25 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:39:01 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	print_config(t_data *data)
 		i++;
 	}
 	printf("\nx = %f, y = %f\n", data->player->x, data->player->y);
+	printf("POV Player = %f\n", data->player->pov);
+
 }
 
 t_bool	ft_strisdigit(char *str)
