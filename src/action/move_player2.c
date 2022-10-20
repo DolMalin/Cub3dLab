@@ -30,9 +30,9 @@ char    get_player_token(t_data *data)
 
 void	rotate_left(t_data **data)
 {
-	(*data)->player->pov -= 0.1 * ROT_COEF;
+	(*data)->player->pov -= ROT_COEF;
 	if ((*data)->player->pov < 0)
-		(*data)->player->pov = (2 * M_PI - (0.1 * ROT_COEF));
+		(*data)->player->pov = (2 * M_PI - (ROT_COEF));
 	(*data)->player->ray_coef_x = cos((*data)->player->pov);
 	(*data)->player->ray_coef_y = sin((*data)->player->pov);
 
@@ -40,9 +40,9 @@ void	rotate_left(t_data **data)
 
 void	rotate_right(t_data **data)
 {
-	(*data)->player->pov += 0.1 * ROT_COEF;
+	(*data)->player->pov += ROT_COEF;
 	if ((*data)->player->pov > 2 * M_PI)
-		(*data)->player->pov = (0 + (0.1 * ROT_COEF));
+		(*data)->player->pov = (0 + (ROT_COEF));
 	(*data)->player->ray_coef_x = cos((*data)->player->pov);
 	(*data)->player->ray_coef_y = sin((*data)->player->pov);
 }

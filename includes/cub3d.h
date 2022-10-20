@@ -8,7 +8,7 @@
 
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF 10
-# define ROT_COEF 0.5
+# define ROT_COEF 0.05
 # define STEP_COEF 0.1
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
@@ -51,6 +51,20 @@
 # define TEXTURES "Error: in textures paths.\n"
 # define RGB_CODES "Error: in RGB color codes.\n"
 
+typedef enum e_bool
+{
+	false,
+	true
+}			t_bool;
+
+typedef struct	s_ray {
+	float	x_start;
+	float	y_start;
+	float	x_end;
+	float	y_end;
+	float	angle;
+	t_bool	coll;
+}				t_ray;
 
 typedef struct	s_image {
 	void	*ptr;
@@ -81,11 +95,7 @@ typedef struct s_data
 	int				y;
 }				t_data;
 
-typedef enum e_bool
-{
-	false,
-	true
-}			t_bool;
+
 
 /******** TO REMOVE*********/
 void print_map(char **map);
