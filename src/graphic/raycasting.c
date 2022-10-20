@@ -91,9 +91,14 @@ t_ray	get_collision_coord(t_data *data)
 
 	ray_vertical =  get_vertical_collision(data);
 	ray_horizontal = get_horizontal_collision(data);
-	if (get_ray_len(ray_horizontal) < get_ray_len(ray_vertical) || !ray_vertical.coll)
+	printf(" ");
+	if (!ray_vertical.coll)
 		return (ray_horizontal);
-	else
+	if (!ray_horizontal.coll)
+		return (ray_vertical);
+	if (get_ray_len(ray_horizontal) < get_ray_len(ray_vertical))
+		return (ray_horizontal);
+	else if (get_ray_len(ray_vertical) < get_ray_len(ray_horizontal))
 		return (ray_vertical);
 
 }
@@ -113,7 +118,7 @@ void		draw_ray(t_data *data)
 	ray_y = data->player->y * PRINT_COEF;
 	printf("x_end = %f\n", ray.x_end);
 	printf("y_end = %f\n", ray.y_end);
-	while (ray_x > ray.x_end && ray_y > ray.y_end)
+	while (ray_x > (ray.x_end - 2) && ray_y > (ray.y_end - 2))
 	{
 		ray_x = ray_x - data->player->ray_coef_x;
 		ray_y = ray_y - data->player->ray_coef_y;
