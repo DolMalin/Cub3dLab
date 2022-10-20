@@ -33,7 +33,7 @@ t_ray	get_vertical_collision(t_data *data)
 		if (data->player->pov > M_PI)
 			ray.y_end = floor(ray.y_end + 1);
 		ray.x_end = floor(get_x_with_y(data, ray.y_end));
-		if (ray.x_end > 150)
+		if (ray.x_end > ft_strlen(data->map[(int)ray.y_end]))
 			return (ray) ;
 		printf("x = %f\n", ray.x_start);
 		printf("x_end = %f\n", ray.x_end);
@@ -62,7 +62,7 @@ t_ray	get_horizontal_collision(t_data *data)
 		if (data->player->pov > M_PI_2 && data->player->pov < 3 * M_PI_2)
 			ray.x_end = floor(ray.x_end - 1);
 		ray.y_end = floor(get_y_with_x(data, ray.x_end));
-		if (ray.y_end > 150)
+		if (ray.y_end > array_len((void **)data->map)) // replace with end map
 			return (ray);
 		// printf("x = %f\n", ray.x_start);
 		// printf("x_end = %f\n", ray.x_end);
