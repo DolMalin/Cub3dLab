@@ -90,7 +90,6 @@ t_ray	*get_collision_coord(t_data *data)
 
 	ray_vertical =  get_vertical_collision(data);
 	ray_horizontal = get_horizontal_collision(data);
-	printf(" ");
 	if (!ray_vertical->coll)
 		return (ray_horizontal);
 	if (!ray_horizontal->coll)
@@ -99,7 +98,7 @@ t_ray	*get_collision_coord(t_data *data)
 		return (ray_horizontal);
 	else if (get_ray_len(data, ray_vertical) < get_ray_len(data, ray_horizontal))
 		return (ray_vertical);
-	return (NULL);
+	return (NULL); // replace with 
 }
 
 void    dda(t_data *data, float x_end, float y_end)
@@ -128,20 +127,10 @@ void    dda(t_data *data, float x_end, float y_end)
     mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
 
-float	get_wall_height(t_ray *ray)
-{
-	float	distance;
-	float	wall_height;
-
-	distance = get_ray_len(ray);
-	wall_height = distance 
-
-}
-
 void		draw_ray(t_data *data)
 {
-	int	ray_color;
-	int	i;
+	int		ray_color;
+	int		i;
 	float	ray_x;
 	float	ray_y;
 	t_ray	*ray;
@@ -161,13 +150,13 @@ void		draw_ray(t_data *data)
 void	draw_rays(t_data *data)
 {
 	float	fov_angle;
-	fov_angle = -0.52;
-	while (fov_angle < 0.52)
+	fov_angle = - FOV * FOV_STEP;
+	while (fov_angle < FOV * FOV_STEP)
 	{
 		data->player->ray_coef_x = cos(data->player->pov + fov_angle);
 		data->player->ray_coef_y = sin(data->player->pov + fov_angle);
 		draw_ray(data);
-		fov_angle += 0.1;
+		fov_angle += FOV_STEP;
 	}
 }
 

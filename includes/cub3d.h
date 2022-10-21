@@ -7,12 +7,15 @@
 # include "../mlx/mlx.h"
 
 /****************DEFINES_PREFERENCES******************/
-# define PRINT_COEF 10
-# define ROT_COEF 0.05
-# define STEP_COEF 0.1
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
-
+# define PRINT_COEF	10
+# define ROT_COEF	0.05
+# define STEP_COEF	0.1
+# define WIN_WIDTH	1920
+# define WIN_HEIGHT	1080
+# define FOV		60
+# define FOV_STEP	0.0174533
+# define FLOAT_LINE	WIN_HEIGHT/2
+# define CUB_SIZE	1
 
 /****************DEFINES_MATHS******************/
 
