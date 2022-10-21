@@ -104,7 +104,7 @@ t_ray	*get_collision_coord(t_data *data)
 		return (ray_horizontal);
 	else if (get_ray_len(data, ray_vertical) < get_ray_len(data, ray_horizontal))
 		return (ray_vertical);
-	return (NULL);
+	return (NULL); // replace with 
 }
 
 void	draw_line(t_data *data, float end_x, float end_y)
