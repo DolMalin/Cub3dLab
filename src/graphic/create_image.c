@@ -1,5 +1,7 @@
 #include "../../includes/cub3d.h"
-   
+
+
+
 static void	put_player_to_minimap(t_data *data)
 {
 	my_mlx_pixel_put(data->image, (data->player->x * PRINT_COEF) + 20, (data->player->y * PRINT_COEF) + 20, 0xFFFFF);
@@ -25,8 +27,6 @@ static void	put_mini_map_to_image(t_data *data)
 	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
-
-
 
 void put_background_to_image(t_data *data)
 {

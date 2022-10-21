@@ -103,6 +103,16 @@ t_ray	get_collision_coord(t_data *data)
 
 }
 
+float	get_wall_height(t_ray *ray)
+{
+	float	distance;
+	float	wall_height;
+
+	distance = get_ray_len(ray);
+	wall_height = distance 
+
+}
+
 void		draw_ray(t_data *data)
 {
 	int	ray_color;
