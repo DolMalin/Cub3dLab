@@ -18,7 +18,7 @@ float	get_x_with_y(t_data *data, float next_y)
 t_ray	*get_horizontal_collision(t_data *data)
 {
 	t_ray	*ray;
-
+	
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
 		return (NULL);
@@ -30,7 +30,7 @@ t_ray	*get_horizontal_collision(t_data *data)
 	{
 		if (data->player->pov <= M_PI)
 			ray->y_end = floor(ray->y_end - 1);
-		if (data->player->pov > M_PI)
+		else
 			ray->y_end = floor(ray->y_end + 1);
 		ray->x_end = get_x_with_y(data, ray->y_end);
 		if (ray->x_end > ft_strlen(data->map[(int)ray->y_end]) || ray->x_end < 0)
@@ -43,13 +43,13 @@ t_ray	*get_horizontal_collision(t_data *data)
 			break ;
 		}
 	}
+	// if (data->player->pov <= M_PI )
+	// 	ray->y_end += 1;
 	return (ray);
 }
-
 t_ray	*get_vertical_collision(t_data *data)
 {
 	t_ray	*ray;
-
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
 		return (NULL);
@@ -60,9 +60,9 @@ t_ray	*get_vertical_collision(t_data *data)
 	while (!ray->coll)
 	{
 		if (data->player->pov <= M_PI_2 || data->player->pov >= 3 * M_PI_2)
-			ray->x_end = floor(ray->x_end + 1);
-		if (data->player->pov > M_PI_2 && data->player->pov < 3 * M_PI_2)
-			ray->x_end = floor(ray->x_end - 1);
+			ray->x_end = floorf(ray->x_end + 1);
+		else
+			ray->x_end = floorf(ray->x_end - 1);
 		ray->y_end = get_y_with_x(data, ray->x_end);
 		if (ray->y_end > array_len((void **)data->map) || ray->y_end < 0)
 			return (ray);
@@ -74,14 +74,15 @@ t_ray	*get_vertical_collision(t_data *data)
 			break ;
 		}
 	}
+	// if (data->player->pov >= M_PI_2 && data->player->pov <= 3 * M_PI_2)
+	// 	ray->x_end = ray->x_end + 1;
 	return (ray);
 }
-
 float	get_ray_len(t_data *data, t_ray *ray)
 {
 	float	ray_len;
 
-	ray_len = (ray->x_end - data->player->x) / cos(data->player->pov);
+	ray_len = sqrtf(pow(fabs(ray->y_end - data->player->y), 2) + pow(fabs(ray->x_end - data->player->x), 2));
 	return (ray_len);
 }
 
@@ -91,19 +92,24 @@ t_ray	*get_collision_coord(t_data *data)
 	t_ray	*ray_vertical;
 
 	ray_vertical = get_vertical_collision(data);
-
 	ray_horizontal = get_horizontal_collision(data);
 	if (!ray_vertical->coll)
 		return (ray_horizontal);
 	if (!ray_horizontal->coll)
 		return (ray_vertical);
-	if (get_ray_len(data, ray_horizontal) <= get_ray_len(data, ray_vertical))
-		return (ray_horizontal);
-	else if (get_ray_len(data, ray_vertical) < get_ray_len(data, ray_horizontal))
+	
+	if (get_ray_len(data, ray_horizontal) >= get_ray_len(data, ray_vertical))
+	{
+		printf("ray_vertical y %f ray_len horizontal %f\n", get_ray_len(data, ray_vertical), get_ray_len(data, ray_horizontal));
 		return (ray_vertical);
+	}
+	else
+	{
+		// printf("YO\n")
+		return (ray_horizontal);
+	}
 	return (NULL); // replace with 
 }
-
 void	draw_line(t_data *data, float end_x, float end_y)
 {
 	float	deltaX;
@@ -111,12 +117,9 @@ void	draw_line(t_data *data, float end_x, float end_y)
 	int		pixels;
 	float	pixel_x;
 	float	pixel_y;
-
-
 	deltaX = end_x - data->player->x;
 	deltaY = end_y - data->player->y;
 	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY)) * PRINT_COEF + 20;
-
 	deltaX = deltaX / pixels;
 	deltaY = deltaY / pixels;
 	pixel_x = data->player->x;
@@ -129,7 +132,6 @@ void	draw_line(t_data *data, float end_x, float end_y)
 		pixels--;
 	}
 }
-
 void	draw_rays(t_data *data)
 {
 	float	fov_angle;
@@ -143,13 +145,10 @@ void	draw_rays(t_data *data)
 		fov_angle += 0.1;
 	}
 }
-
 void    raycasting(t_data *data)
 {
 	t_ray *ray = get_collision_coord(data);
-
-
+	printf("ray_x = %f, ray_y = %f, ray_len = %f\n", ray->x_end, ray->y_end, get_ray_len(data, ray));
 	draw_line(data, ray->x_end, ray->y_end);
-
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
