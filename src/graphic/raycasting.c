@@ -1,24 +1,20 @@
 #include "../../includes/cub3d.h"
 
-float	get_x_with_y(t_data *data, float next_y)
-{
-	float	next_x;
-
-	next_x = ((next_y - data->player->y) / tan(data->player->pov)) + data->player->x;
-	//printf("next_x %f\n", next_x);
-	return (next_x);
-}
-
 float	get_y_with_x(t_data *data, float next_x)
 {
 	float	next_y;
 
-	next_y = tan(data->player->pov) * (next_x - data->player->x) + data->player->y;
-	//printf("next_y %f\n", next_y);
+	next_y = tan(data->player->pov) * (data->player->x - next_x) + data->player->y;
 	return (next_y);
 }
 
+float	get_x_with_y(t_data *data, float next_y)
+{
+	float	next_x;
 
+	next_x = (data->player->y - next_y) / tan(data->player->pov) + data->player->x;  
+	return (next_x);
+}
 t_ray	*get_horizontal_collision(t_data *data)
 {
 	t_ray	*ray;
@@ -95,6 +91,7 @@ t_ray	*get_collision_coord(t_data *data)
 	t_ray	*ray_vertical;
 
 	ray_vertical = get_vertical_collision(data);
+
 	ray_horizontal = get_horizontal_collision(data);
 	if (!ray_vertical->coll)
 		return (ray_horizontal);
