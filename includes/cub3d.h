@@ -63,6 +63,8 @@ typedef enum e_bool
 
 // Why start x and y assuming that all the ray are starting from player pos?
 typedef struct	s_ray {
+	float	x_start;
+	float	y_start;
 	float	x_end;
 	float	y_end;
 	float	angle;

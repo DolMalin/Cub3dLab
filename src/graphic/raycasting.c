@@ -4,7 +4,7 @@ float	get_x_with_y(t_data *data, float next_y)
 {
 	float	next_x;
 
-	next_x = ((next_y - data->player->y) / tan(data->player->pov)) + data->player->x;
+	next_x = ((data->player->y - next_y) * tan(data->player->pov)) + data->player->x;
 	//printf("next_x %f\n", next_x);
 	return (next_x);
 }
@@ -13,7 +13,7 @@ float	get_y_with_x(t_data *data, float next_x)
 {
 	float	next_y;
 
-	next_y = tan(data->player->pov) * (next_x - data->player->x) + data->player->y;
+	next_y = atan(data->player->pov) * (data->player->x - next_x) + data->player->y;
 	//printf("next_y %f\n", next_y);
 	return (next_y);
 }
@@ -153,6 +153,5 @@ void    raycasting(t_data *data)
 
 
 	draw_line(data, ray->x_end, ray->y_end);
-
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
