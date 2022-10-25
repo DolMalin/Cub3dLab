@@ -10,8 +10,8 @@
 # define PRINT_COEF			10
 # define ROT_COEF			0.05
 # define STEP_COEF			0.1
-# define WIN_WIDTH			1920
-# define WIN_HEIGHT			1080
+# define WIN_WIDTH			1000
+# define WIN_HEIGHT			600
 # define FOV				60
 # define FOV_STEP			0.0174533
 # define FOV_AMPLITUDE		FOV*FOV_STEP/2
@@ -65,11 +65,10 @@ typedef enum e_bool
 
 // Why start x and y assuming that all the ray are starting from player pos?
 typedef struct	s_ray {
-	float	x_start;
-	float	y_start;
 	float	x_end;
 	float	y_end;
 	float	angle;
+	float	len;
 	t_bool	coll;
 }				t_ray;
 

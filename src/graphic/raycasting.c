@@ -108,13 +108,14 @@ t_ray	*get_collision_coord(t_data *data)
 		return (ray_horizontal);
 	if (!ray_horizontal->coll)
 		return (ray_vertical);
-	
-	if (get_ray_len(data, ray_horizontal) >= get_ray_len(data, ray_vertical))
+	ray_vertical->len = get_ray_len(data, ray_vertical);
+	ray_horizontal->len = get_ray_len(data, ray_horizontal);
+	if (ray_horizontal->len >= ray_vertical->len)
 	{
 	//	printf("ray len horizontal %f ray len vertical %f\n", get_ray_len(data, ray_horizontal), get_ray_len(data, ray_vertical));
 		return (ray_vertical);
 	}
-	if (get_ray_len(data, ray_horizontal) < get_ray_len(data, ray_vertical))
+	if (ray_horizontal->len < ray_vertical->len)
 	{
 	//	printf("ray len horizontal %f ray len vertical %f\n", get_ray_len(data, ray_horizontal), get_ray_len(data, ray_vertical));
 		return (ray_horizontal);
@@ -156,10 +157,10 @@ void	draw_rays(t_data *data)
 
 	temp = data->player->pov;
 	i = 0;
-	data->player->pov -= FOV_AMPLITUDE;
+	data->player->pov += FOV_AMPLITUDE;
 	while (i < FOV)
 	{
-		data->player->pov += FOV_STEP;
+		data->player->pov -= FOV_STEP;
 		if (data->player->pov <= 0)
 			data->player->pov += 2 * M_PI;
 		if (data->player->pov >= 2 * M_PI)
@@ -171,19 +172,20 @@ void	draw_rays(t_data *data)
 	data->player->pov = temp;
 }
 
-void	put_stripe_to_image(t_data *data, float wall_height_coef)
+void	put_stripe_to_image(t_data *data, float wall_height_coef, int stripe_index)
 {
 	int		pixel_x;
 	int		pixel_y;
 	
-	pixel_x = 0;
+	pixel_x = stripe_index * STRIPE;
 	pixel_y = 0;
 	
-	while (pixel_x < STRIPE)
+	while (pixel_x < stripe_index * STRIPE + stripe_index)
 	{
-		while (pixel_y < WIN_HEIGHT)
+		while (pixel_y < wall_height_coef * WIN_HEIGHT)
+		//while (pixel_y < WIN_HEIGHT)
 		{
-			my_mlx_pixel_put(data->image, pixel_x, pixel_y, 0xfffff);
+			my_mlx_pixel_put(data->image, pixel_x, (pixel_y + wall_height_coef * WIN_HEIGHT / 2), 0xfffff);
 			pixel_y++;
 		}
 		pixel_x++;
@@ -199,17 +201,18 @@ void	get_wall_height(t_data *data)
 
 	temp = data->player->pov;
 	i = 0;
-	data->player->pov -= FOV_AMPLITUDE;
+	data->player->pov += FOV_AMPLITUDE;
 	while (i < FOV)
 	{
-		data->player->pov += FOV_STEP;
+		data->player->pov -= FOV_STEP;
 		if (data->player->pov <= 0)
 			data->player->pov += 2 * M_PI;
 		if (data->player->pov >= 2 * M_PI)
 			data->player->pov -= (2 * M_PI);
 		ray = get_collision_coord(data);
 		wall_height_coef = 1 / get_ray_len(data, ray);
-		put_stripe_to_image(data, wall_height_coef);
+		//printf("wall height coef : %f\n", wall_height_coef);
+		put_stripe_to_image(data, wall_height_coef, i);
 		i++;
 	}
 	data->player->pov = temp;
