@@ -131,7 +131,7 @@ t_ray	*get_collision_coord(t_data *data)
 		printf("ray len horizontal %f ray len vertical %f\n", get_ray_len(data, ray_horizontal), get_ray_len(data, ray_vertical));
 		return (ray_horizontal);
 	}
-	return (NULL); // replace with 
+	return (NULL);
 }
 void	draw_line(t_data *data, float end_x, float end_y)
 {
