@@ -16,6 +16,7 @@
 # define FOV_STEP			0.0174533
 # define FOV_AMPLITUDE		FOV*FOV_STEP/2
 # define FLOAT_LINE			WIN_HEIGHT/2
+# define STRIPE				WIN_WIDTH/FOV
 # define CUB_SIZE			1
 
 /****************DEFINES_MATHS******************/

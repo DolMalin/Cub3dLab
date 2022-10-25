@@ -53,6 +53,7 @@ t_ray	*get_collision_y(t_data *data)
 	}
 	return (ray);
 }
+
 t_ray	*get_collision_x(t_data *data)
 {
 	t_ray	*ray;
@@ -145,11 +146,12 @@ void	draw_line(t_data *data, float end_x, float end_y)
 		pixels--;
 	}
 }
+
+
 void	draw_rays(t_data *data)
 {
 	t_ray	*ray;
 	float	temp;
-	//float	fov_angle;
 	float	i;
 
 	temp = data->player->pov;
@@ -167,13 +169,55 @@ void	draw_rays(t_data *data)
 		i++;
 	}
 	data->player->pov = temp;
-
 }
+
+void	put_stripe_to_image(t_data *data, float wall_height_coef)
+{
+	int		pixel_x;
+	int		pixel_y;
+	
+	pixel_x = 0;
+	pixel_y = 0;
+	
+	while (pixel_x < STRIPE)
+	{
+		while (pixel_y < WIN_HEIGHT)
+		{
+			my_mlx_pixel_put(data->image, pixel_x, pixel_y, 0xfffff);
+			pixel_y++;
+		}
+		pixel_x++;
+	}
+}
+
+void	get_wall_height(t_data *data)
+{
+	t_ray	*ray;
+	float	temp;
+	float	wall_height_coef;
+	float	i;
+
+	temp = data->player->pov;
+	i = 0;
+	data->player->pov -= FOV_AMPLITUDE;
+	while (i < FOV)
+	{
+		data->player->pov += FOV_STEP;
+		if (data->player->pov <= 0)
+			data->player->pov += 2 * M_PI;
+		if (data->player->pov >= 2 * M_PI)
+			data->player->pov -= (2 * M_PI);
+		ray = get_collision_coord(data);
+		wall_height_coef = 1 / get_ray_len(data, ray);
+		put_stripe_to_image(data, wall_height_coef);
+		i++;
+	}
+	data->player->pov = temp;
+}
+
 void    raycasting(t_data *data)
 {
-	//t_ray *ray = get_collision_coord(data);
-	//printf("ray_x = %f, ray_y = %f, ray_len = %f\n", ray->x_end, ray->y_end, get_ray_len(data, ray));
-	//draw_line(data, ray->x_end, ray->y_end);
+	get_wall_height(data);
 	draw_rays(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
