@@ -1,7 +1,5 @@
 #include "../../includes/cub3d.h"
 
-
-
 static void	put_player_to_minimap(t_data *data)
 {
 	my_mlx_pixel_put(data->image, (data->player->x * PRINT_COEF) + 20, (data->player->y * PRINT_COEF) + 20, 0xFFFFF);
