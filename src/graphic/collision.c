@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/26 13:18:57 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:45:06 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_ray	*get_collision_y(t_data *data)
 		if (ray->x_end >= ft_strlen(data->map[(int)ray->y_end])
 			|| ray->x_end <= 0)
 			return (ray);
-		if (ray->y_end >= array_len((void **)data->map) || ray->y_end <= 0)
+		if (ray->y_end > array_len((void **)data->map) || ray->y_end <= 0)
 			return (ray);
 		if (check_collision_y(data, ray))
 			ray->coll = true;

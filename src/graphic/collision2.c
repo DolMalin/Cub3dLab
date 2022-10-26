@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:07:48 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/26 13:29:52 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:44:47 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ float	get_fixed_ray_end(t_data *data, t_ray *ray, char dir)
 	if (dir == 'y')
 	{
 		if (data->player->pov <= M_PI)
-			return (floor(ray->y_end - 1));
+			return (ceil(ray->y_end - 1));
 		else
 			return (floor(ray->y_end + 1));
 		return (ray->y_end);
@@ -35,6 +35,6 @@ float	get_fixed_ray_end(t_data *data, t_ray *ray, char dir)
 	if (data->player->pov <= M_PI_2 || data->player->pov >= 3 * M_PI_2)
 		return (floor(ray->x_end + 1));
 	else
-		return (floor(ray->x_end - 1));
+		return (ceil(ray->x_end - 1));
 	return (ray->x_end);
 }
