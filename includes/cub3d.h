@@ -7,12 +7,17 @@
 # include "../mlx/mlx.h"
 
 /****************DEFINES_PREFERENCES******************/
-# define PRINT_COEF 10
-# define ROT_COEF 2
-# define STEP_COEF 0.1
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
-
+# define PRINT_COEF			10
+// # define ROT_COEF			0.5
+# define STEP_COEF			0.1
+# define WIN_WIDTH			1000
+# define WIN_HEIGHT			600
+# define FOV				60
+# define FOV_STEP			0.0174533
+# define FOV_AMPLITUDE		FOV*FOV_STEP/2
+# define FLOAT_LINE			WIN_HEIGHT/2
+# define STRIPE				WIN_WIDTH/FOV
+# define CUB_SIZE			1
 
 /****************DEFINES_MATHS******************/
 
@@ -51,6 +56,21 @@
 # define TEXTURES "Error: in textures paths.\n"
 # define RGB_CODES "Error: in RGB color codes.\n"
 
+typedef enum e_bool
+{
+	false,
+	true
+}			t_bool;
+
+
+// Why start x and y assuming that all the ray are starting from player pos?
+typedef struct	s_ray {
+	float	x_end;
+	float	y_end;
+	float	angle;
+	float	len;
+	t_bool	coll;
+}				t_ray;
 
 typedef struct	s_image {
 	void	*ptr;
@@ -64,6 +84,8 @@ typedef struct s_player {
 	float	x;
 	float	y;
 	float	pov;
+	float	ray_coef_x;
+	float	ray_coef_y;
 }				t_player;
 
 typedef struct s_data
@@ -79,11 +101,7 @@ typedef struct s_data
 	int				y;
 }				t_data;
 
-typedef enum e_bool
-{
-	false,
-	true
-}			t_bool;
+
 
 /******** TO REMOVE*********/
 void print_map(char **map);
@@ -92,6 +110,13 @@ void print_map(char **map);
 int				create_image(t_data *data);
 void			print_bigger(t_image *image, float x, float y, int color_code);
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
+t_ray			*get_collision_coord(t_data *data);
+void    		raycasting(t_data *data);
+void			draw_line(t_data *data, float end_x, float end_y);
+float			get_y_with_x(t_data *data, float x);
+float			get_x_with_y(t_data *data, float y);
+float			get_fixed_ray_end(t_data *data, t_ray *ray, char dir);
+float			get_ray_len(t_data *data, t_ray *ray);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);

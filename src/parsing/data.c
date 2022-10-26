@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/19 10:45:19 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:52:33 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,30 @@ static t_image	*init_image(t_data *data)
 
 	image = malloc(sizeof(t_image));
 	image->ptr = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
-	image->addr =mlx_get_data_addr(image->ptr, &image->bits_per_pixel, &image->line_length, &image->endian);
-	return (image); 
+	image->addr = mlx_get_data_addr(
+			image->ptr,
+			&image->bits_per_pixel,
+			&image->line_length,
+			&image->endian
+			);
+	return (image);
 }
 
-// void	get_player_pov(t_data **data)
-// {
-// 	char		player_pov;
-// 	player_pov = get_player_token(data);
-// 	if (player_pov == 'N')
-// 		player->pov = M_PI_2;
-// 	if (player_pov == 'S')
-// 		player->pov = 3 * M_PI_2;
-// 	if (player_pov == 'E')
-// 		player->pov = M_PI;
-// 	if (player_pov == 'W')
-// 		player->pov = 0;
-	
-					
-// }
+float	get_player_pov(t_data *data)
+{
+	char		player_pov;
+
+	player_pov = get_player_token(data);
+	if (player_pov == 'N')
+		return (M_PI_2);
+	if (player_pov == 'S')
+		return (3 * M_PI_2);
+	if (player_pov == 'E')
+		return (2 * M_PI);
+	if (player_pov == 'W')
+		return (M_PI);
+	return (0);
+}
 
 t_player	*init_player(t_data *data)
 {
@@ -48,6 +53,9 @@ t_player	*init_player(t_data *data)
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
+	player->pov = get_player_pov(data);
+	player->ray_coef_x = cos(player->pov);
+	player->ray_coef_y = sin(player->pov);
 	while (data->map[i])
 	{
 		j = 0;
@@ -56,8 +64,7 @@ t_player	*init_player(t_data *data)
 			if (is_in_charset(data->map[i][j], "NSEW"))
 			{
 				player->y = (float)i + (PRINT_COEF / 2) * 0.1;
-				player->x = (float)j + (PRINT_COEF / 2) * 0.1; 
-				
+				player->x = (float)j + (PRINT_COEF / 2) * 0.1;
 			}
 			j++;
 		}
