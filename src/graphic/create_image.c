@@ -1,8 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_image.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/10/26 11:46:30 by pdal-mol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static void	put_player_to_minimap(t_data *data)
 {
-	my_mlx_pixel_put(data->image, (data->player->x * PRINT_COEF) + 20, (data->player->y * PRINT_COEF) + 20, 0xFFFFF);
+	my_mlx_pixel_put(
+		data->image,
+		(data->player->x * PRINT_COEF) + 20,
+		(data->player->y * PRINT_COEF) + 20,
+		0xFFFFF
+		);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
 
@@ -26,13 +43,13 @@ static void	put_mini_map_to_image(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
 
-void put_background_to_image(t_data *data)
+void	put_background_to_image(t_data *data)
 {
 	int		i;
 	int		j;
-	
+
 	i = 0;
-	while(i < WIN_HEIGHT)
+	while (i < WIN_HEIGHT)
 	{
 		j = 0;
 		while (j < WIN_WIDTH)

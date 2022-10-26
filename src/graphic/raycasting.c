@@ -1,25 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/10/26 11:55:50 by pdal-mol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-float	get_y_with_x(t_data *data, float next_x)
+float	get_y_with_x(t_data *data, float x)
 {
-	float	next_y;
-
-	next_y = tan(data->player->pov) * (data->player->x - next_x) + data->player->y;
-	return (next_y);
+	return (tan(data->player->pov) * (data->player->x - x) + data->player->y);
 }
 
-float	get_x_with_y(t_data *data, float next_y)
+float	get_x_with_y(t_data *data, float y)
 {
-	float	next_x;
-
-	next_x = (data->player->y - next_y) / tan(data->player->pov) + data->player->x;  
-	return (next_x);
+	return ((data->player->y - y) / tan(data->player->pov) + data->player->x);
 }
 
 t_ray	*get_collision_y(t_data *data)
 {
 	t_ray	*ray;
-	
+
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
 		return (NULL);
