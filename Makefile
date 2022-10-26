@@ -6,7 +6,7 @@
 #    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/19 11:57:02 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/10/26 13:20:02 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ ACTION_FILES 	=		run_game.c \
 
 GRAPHIC_FILES 	=		create_image.c \
 						graphic_utils.c \
-						raycasting.c
+						raycasting.c	\
+						collision.c		\
+						collision2.c
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \
@@ -129,7 +131,7 @@ clean:
 fclean: clean
 		rm -rf $(NAME)
 		make fclean -C ./libft
-		make fclean -C ./mlx
+		make clean -C ./mlx
 		
 
 re: fclean all

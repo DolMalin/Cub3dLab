@@ -8,8 +8,8 @@
 
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF			10
-# define ROT_COEF			0.05
-# define STEP_COEF			0.1
+// # define ROT_COEF			0.5
+# define STEP_COEF			0.5
 # define WIN_WIDTH			1000
 # define WIN_HEIGHT			600
 # define FOV				60
@@ -110,7 +110,13 @@ void print_map(char **map);
 int				create_image(t_data *data);
 void			print_bigger(t_image *image, float x, float y, int color_code);
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
+t_ray			*get_collision_coord(t_data *data);
 void    		raycasting(t_data *data);
+void			draw_line(t_data *data, float end_x, float end_y);
+float			get_y_with_x(t_data *data, float x);
+float			get_x_with_y(t_data *data, float y);
+float			get_fixed_ray_end(t_data *data, t_ray *ray, char dir);
+float			get_ray_len(t_data *data, t_ray *ray);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);
