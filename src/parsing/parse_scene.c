@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:14:00 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/27 14:46:50 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:30:21 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	**parse_scene_file(char *scene_file)
 		i++;
 		parsed_scene[i] = get_next_line(fd);
 	}
+	close(fd);
 	parsed_scene[i] = NULL;
 	parsed_scene = remove_empty_lines(parsed_scene);
 	parsed_scene = trim_config_line(parsed_scene);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:51 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/17 16:20:20 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/27 15:31:34 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ static t_bool	check_texture(char *texture_path)
 		return (false);
 	fd = open(texture_path, O_RDONLY);
 	if (fd < 0)
-	{
-		close(fd);
 		return (false);
-	}
+	close(fd);
 	return (true);
 }
 

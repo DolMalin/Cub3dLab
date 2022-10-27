@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:45 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/27 14:29:54 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:31:13 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ static t_bool	check_arguments(int ac, char **av)
 		return (false);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
-	{
-		close(fd);
 		return (false);
-	}
+	close(fd);
 	return (true);
 }
 

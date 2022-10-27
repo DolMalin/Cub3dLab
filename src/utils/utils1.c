@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:42:55 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 16:44:45 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:33:43 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	lines_count(char *file)
 
 	len = 0;
 	fd = open(file, O_RDONLY);
+	if (!fd)
+		error(OPENFILE);
 	buffer = get_next_line(fd);
 	while (buffer)
 	{
@@ -27,6 +29,7 @@ int	lines_count(char *file)
 		free(buffer);
 		buffer = get_next_line(fd);
 	}
+	close(fd);
 	return (len);
 }
 
