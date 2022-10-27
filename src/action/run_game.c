@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:40 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/26 14:47:23 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:28:03 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	exit_program(t_data *data)
 {
-	if (data->mlx_win)
-		mlx_destroy_window(data->mlx, data->mlx_win);
 	free_data(data);
 	exit(EXIT_SUCCESS);
 }

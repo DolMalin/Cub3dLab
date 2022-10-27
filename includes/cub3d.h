@@ -50,11 +50,13 @@
 
 /****************DEFINES_ERRORS*********************/
 
-# define ARGS "Error: incorrect arguments.\n"
-# define CONFIG_STRUCT "Error: in configuration lines or structure of scene.\n"
-# define MAP "Error: in map.\n"
-# define TEXTURES "Error: in textures paths.\n"
-# define RGB_CODES "Error: in RGB color codes.\n"
+# define ARGS "wrong arguments."
+# define CONFIG_STRUCT "wrong configuration lines or structure of scene."
+# define MAP "wrong map."
+# define TEXTURES "wrong textures paths or format."
+# define RGB_CODES "wrong RGB color codes."
+# define MEMALLOC "can't allocate memory."
+# define OPENFILE "can't open file."
 
 typedef enum e_bool
 {
@@ -166,7 +168,7 @@ t_bool			is_near_charset(char **unparsed_scene, size_t i, size_t j, char *charse
 void			print_config(t_data *data);
 
 /****************ERRORS*********************/
-void	error(char *error_msg, void **array);
+void	error(char *error_msg);
 
 t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j);
 #endif

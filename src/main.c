@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:40:15 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/18 11:52:28 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/27 14:40:54 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	main(int ac, char **av)
 	t_data	*data;
 
 	if (!check_input(ac, av))
-		return (1);
+		return (EXIT_FAILURE);
 	data = init_data(av[1]);
 	if (!data)
-		exit(EXIT_FAILURE);
+		error(MEMALLOC);
 	run_game(data);
 	free_data(data);
-	return (0);
+	return (EXIT_SUCCESS);
 }

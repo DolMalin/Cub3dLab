@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:45 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/18 12:00:17 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/27 14:29:54 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,18 @@ t_bool	check_input(int ac, char **av)
 	char	**scene;
 
 	scene = parse_scene_file(av[1]);
+	if (!scene)
+		error(MEMALLOC);
 	if (!check_arguments(ac, av))
-		error(ARGS, (void **)scene);
+		error(ARGS);
 	else if (!check_config_structure(scene))
-		error(CONFIG_STRUCT, (void **)scene);
+		error(CONFIG_STRUCT);
 	else if (!check_colors(scene))
-		error(RGB_CODES, (void **)scene);
+		error(RGB_CODES);
 	else if (!check_map(scene))
-		error(MAP, (void **)scene);
+		error(MAP);
 	else if (!check_textures(scene))
-		error(TEXTURES, (void **)scene);
+		error(TEXTURES);
 	free_array((void **)scene);
 	return (true);
 }

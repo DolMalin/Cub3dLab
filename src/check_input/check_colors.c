@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:35 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/17 16:19:46 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/10/27 14:34:09 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ static char	**get_colors_to_check(char **scene)
 
 	colors = malloc(sizeof(char *) * 2);
 	if (!colors)
-		return (NULL);
+		error(MEMALLOC);
 	colors[FLOOR] = get_line_from_key(scene, "F");
+	if (!colors[FLOOR])
+		error(MEMALLOC);
 	colors[CEIL] = get_line_from_key(scene, "C");
+	if (!colors[CEIL])
+		error(MEMALLOC);
 	return (colors);
 }
 
@@ -74,6 +78,8 @@ t_bool	check_colors(char **scene)
 	char	**colors;
 
 	colors = get_colors_to_check(scene);
+	if (!colors)
+		error(MEMALLOC);
 	if (!check_line_color(scene))
 		return (false);
 	if (!check_comas(colors))

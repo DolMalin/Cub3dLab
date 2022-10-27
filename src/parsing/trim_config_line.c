@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:19:54 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 16:25:19 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:51:33 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*trim(char *line, char *charset)
 		return (NULL);
 	trimed_line = malloc(sizeof(char) * (get_trim_len(line, charset) + 1));
 	if (!trimed_line)
-		return (NULL);
+		error (MEMALLOC);
 	k = 0;
 	while (line[i])
 	{
@@ -65,13 +65,15 @@ char	**trim_config_line(char **parsed_scene)
 	trimed_scene = malloc(sizeof(char *)
 			* (array_len((void **)parsed_scene) + 1));
 	if (!trimed_scene)
-		return (NULL);
+		error (MEMALLOC);
 	while (parsed_scene[i])
 	{
 		if (is_config_line(parsed_scene[i]))
 			trimed_scene[i] = trim(parsed_scene[i], " \n\t");
 		else
 			trimed_scene[i] = ft_strdup(parsed_scene[i]);
+		if (!trimed_scene[i])
+			error(MEMALLOC);
 		free(parsed_scene[i]);
 		i++;
 	}

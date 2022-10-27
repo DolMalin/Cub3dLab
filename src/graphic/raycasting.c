@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/27 14:02:00 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:23:56 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,9 @@ void	get_wall_height(t_data *data)
 		if (data->player->pov >= 2 * M_PI)
 			data->player->pov -= (2 * M_PI);
 		ray = get_collision_coord(data);
-		// ray_perp 
 		float delta_x = ray->x_end - data->player->x;
 		wall_height_coef = 1 / (get_ray_len(data, ray) - delta_x);
 
-		//printf("wall height coef : %f\n", wall_height_coef);
-
-		
-		// #2 : On a besoin de la distance du mur perpendiculaire, et de la coordonnee de la ou il va taper
-		// get_perp_ray -> nouveau rayon qui est le rayon perpendiculaire, ou le x_end et y_end est le nouveau point qui tape
 		put_stripe_to_image(data, wall_height_coef, i);
 		free(ray);
 		i++;
@@ -99,11 +93,9 @@ void	get_wall_height(t_data *data)
 	data->player->pov = temp;
 }
 
-
-
 void	raycasting(t_data *data)
 {
-	// get_wall_height(data);
+	get_wall_height(data);
 	draw_rays(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
