@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:25 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/26 14:29:38 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:08:20 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@ void	move_up(t_data **data)
 	int		next_x_i;
 	int		next_y_i;
 
-	next_x = (*data)->player->x;
+	next_x = (*data)->player->x ;
 	next_y = (*data)->player->y - STEP_COEF;
+	// next_x = (*data)->player->x - STEP_COEF * (*data)->player->ray_coef_x;
+	// next_y = (*data)->player->y + STEP_COEF * (*data)->player->ray_coef_y;
+	
 	next_x_i = (int)floor(next_x);
 	next_y_i = (int)floor(next_y);
 	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
+	(*data)->player->x = next_x;
 	(*data)->player->y = next_y;
 }
 

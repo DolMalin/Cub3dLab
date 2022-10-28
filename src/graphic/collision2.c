@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:07:48 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/26 14:44:47 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:46:19 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ float	get_x_with_y(t_data *data, float y)
 	return ((data->player->y - y) / tan(data->player->pov) + data->player->x);
 }
 
+
 float	get_fixed_ray_end(t_data *data, t_ray *ray, char dir)
 {
 	if (dir == 'y')
@@ -36,5 +37,5 @@ float	get_fixed_ray_end(t_data *data, t_ray *ray, char dir)
 		return (floor(ray->x_end + 1));
 	else
 		return (ceil(ray->x_end - 1));
-	return (ray->x_end);
+	return (ray->x_end); // case when pov = 0 || PI || 3 * PI / 4 || PI / 2
 }
