@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/26 14:45:06 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/01 16:11:47 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_bool	check_collision_y(t_data *data, t_ray *ray)
 	if (data->player->pov > 0 && data->player->pov <= M_PI_2)
 		if (data->map[(int)(ray->y_end - 1)][(int)floor(ray->x_end)] == '1')
 			return (true);
-	if (data->player->pov > M_PI_2 && data->player->pov <= M_PI)
+	if (data->player->pov >= M_PI_2 && data->player->pov < M_PI)
 		if (data->map[(int)(ray->y_end - 1)][(int)floor(ray->x_end)] == '1')
 			return (true);
 	if (data->player->pov > M_PI && data->player->pov <= 3 * M_PI_2)
@@ -31,6 +31,9 @@ static t_bool	check_collision_y(t_data *data, t_ray *ray)
 
 static t_bool	check_collision_x(t_data *data, t_ray *ray)
 {
+	// if (data->player->pov == 0 || data->player->pov == M_PI)
+	// 	if (data->map[(int)ray->y_end][(int)ray->x_end] == '1')
+	// 		return (true);
 	if (data->player->pov > 0 && data->player->pov <= M_PI_2)
 		if (data->map[(int)floor(ray->y_end)][(int)(ray->x_end)] == '1')
 			return (true);
@@ -53,7 +56,7 @@ static t_ray	*get_collision_y(t_data *data)
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
 		return (NULL);
-	ray->x_end = 9999999;
+	ray->x_end = 1000000;
 	ray->y_end = data->player->y;
 	ray->angle = data->player->pov;
 	ray->coll = false;
@@ -61,16 +64,19 @@ static t_ray	*get_collision_y(t_data *data)
 	{
 		ray->y_end = get_fixed_ray_end(data, ray, 'y');
 		ray->x_end = get_x_with_y(data, ray->y_end);
+		if (data->player->pov == M_PI || data->player->pov == 0)
+			return (ray);
 		if (ray->x_end >= ft_strlen(data->map[(int)ray->y_end])
 			|| ray->x_end <= 0)
 			return (ray);
-		if (ray->y_end > array_len((void **)data->map) || ray->y_end <= 0)
+		if (ray->y_end > array_len((void **)data->map) || ray->y_end < 0)
 			return (ray);
 		if (check_collision_y(data, ray))
 			ray->coll = true;
 	}
 	return (ray);
 }
+
 
 static t_ray	*get_collision_x(t_data *data)
 {
@@ -80,17 +86,19 @@ static t_ray	*get_collision_x(t_data *data)
 	if (!ray)
 		return (NULL);
 	ray->x_end = data->player->x;
-	ray->y_end = 999999999;
+	ray->y_end = 1000000;
 	ray->angle = data->player->pov;
 	ray->coll = false;
 	while (!ray->coll)
 	{
 		ray->x_end = get_fixed_ray_end(data, ray, 'x');
+		if (data->player->pov == M_PI_2 || data->player->pov == 3 * M_PI_2)
+			return (ray);
 		ray->y_end = get_y_with_x(data, ray->x_end);
-		if (ray->y_end >= array_len((void **)data->map) || ray->y_end <= 0)
+		if (ray->y_end >= array_len((void **)data->map) || ray->y_end < 0)
 			return (ray);
 		if (ray->x_end >= ft_strlen(data->map[(int)ray->y_end])
-			|| ray->x_end <= 0)
+			|| ray->x_end < 0)
 			return (ray);
 		if (check_collision_x(data, ray))
 			ray->coll = true;

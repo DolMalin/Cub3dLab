@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:34 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/28 16:59:54 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/01 16:25:35 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,9 @@ void	rotate_right(t_data **data)
 	(*data)->player->pov -= FOV_STEP;
 	if ((*data)->player->pov < 0)
 		(*data)->player->pov += 2 * M_PI;
-	// (*data)->player->ray_coef_x = cos((*data)->player->pov);
-	// (*data)->player->ray_coef_y = sin((*data)->player->pov);
-	(*data)->player->ray_coef_x = 1 / tan((*data)->player->pov);
-	(*data)->player->ray_coef_y = tan((*data)->player->pov);
+	///////
+	(*data)->player->ray_coef_x = cos((*data)->player->pov);
+	(*data)->player->ray_coef_y = sin((*data)->player->pov);
 }
 
 void	rotate_left(t_data **data)
@@ -56,8 +55,7 @@ void	rotate_left(t_data **data)
 	(*data)->player->pov += FOV_STEP;
 	if ((*data)->player->pov >= 2 * M_PI)
 		(*data)->player->pov -= 2 * M_PI;
-	// (*data)->player->ray_coef_x = cos((*data)->player->pov);
-	// (*data)->player->ray_coef_y = sin((*data)->player->pov);
-	(*data)->player->ray_coef_x = 1 / tan((*data)->player->pov);
-	(*data)->player->ray_coef_y = tan((*data)->player->pov);
+	//////
+	(*data)->player->ray_coef_x = cos((*data)->player->pov);
+	(*data)->player->ray_coef_y = sin((*data)->player->pov);
 }

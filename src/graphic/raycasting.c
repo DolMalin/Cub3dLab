@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/28 16:37:19 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/01 13:57:10 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,9 @@ void	get_wall_height(t_data *data)
 			fov_angle += 2 * M_PI;
 		if (fov_angle > 2 * M_PI)
 			fov_angle -= 2 * M_PI;
-		printf("ray_len before : %f\n", ray_len);
+		//printf("ray_len before : %f\n", ray_len);
 		ray_len = ray_len * cos(fabs(fov_angle));
-		printf("ray_len after : %f\n", ray_len);
+		//printf("ray_len after : %f\n", ray_len);
 		//ray_len = ray_len + (2 * tan(FOV / 2) / FOV);
 		wall_height_coef = 1 / ray_len;
 		data->player->pov -= FOV_STEP;
