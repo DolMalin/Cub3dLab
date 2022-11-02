@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:25 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/01 16:56:54 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/02 16:39:53 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	move_up(t_data **data)
 
 	next_x = (*data)->player->x + (*data)->player->ray_coef_x * STEP_COEF;
 	next_y = (*data)->player->y - (*data)->player->ray_coef_y * STEP_COEF;
-	next_x_i = (int)floor(next_x);
-	next_y_i = (int)floor(next_y);
+	next_x_i = (int)(next_x);
+	next_y_i = (int)(next_y);
 	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
 	(*data)->player->x = next_x;
@@ -39,8 +39,8 @@ void	move_down(t_data **data)
 
 	next_x = (*data)->player->x - (*data)->player->ray_coef_x * STEP_COEF;
 	next_y = (*data)->player->y + (*data)->player->ray_coef_y * STEP_COEF;
-	next_x_i = (int)floor(next_x);
-	next_y_i = (int)floor(next_y);
+	next_x_i = (int)(next_x);
+	next_y_i = (int)(next_y);
 	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
 	(*data)->player->x = next_x;
