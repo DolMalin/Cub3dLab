@@ -113,7 +113,7 @@ float			get_y_with_x(t_data *data, float x);
 float			get_x_with_y(t_data *data, float y);
 float			get_fixed_ray_end(t_data *data, t_ray *ray, char dir);
 float			get_ray_len(t_data *data, t_ray *ray);
-int				rgb_to_hex(unsigned char **rgb);
+int				rgb_to_hex(unsigned char *rgb);
 int				get_wall_dir(t_data *data, t_ray *ray, char dir);
 
 /****************ACTION*********************/
