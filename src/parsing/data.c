@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/01 16:59:17 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 13:03:15 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,13 @@ t_data	*init_data(char *scene_file)
 
 void	free_data(t_data *data)
 {
-	free_unterminated_array((void **)data->colors, 2);
 	free_unterminated_array((void **)data->textures_path, 4);
+	free_unterminated_array((void **)data->colors, 2);
 	free_array((void **)data->map);
+	mlx_destroy_window(data->mlx, data->mlx_win);
+	free(data->image->ptr);
+	free(data->image->addr);
+	free(data->image);
+	free(data->player);
 	free(data);
 }
