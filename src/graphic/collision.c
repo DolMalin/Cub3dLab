@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 11:53:58 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:04:20 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ static t_bool	check_collision_y(t_data *data, t_ray *ray)
 
 static t_bool	check_collision_x(t_data *data, t_ray *ray)
 {
-	// if (data->player->pov == 0 || data->player->pov == M_PI)
-	// 	if (data->map[(int)ray->y_end][(int)ray->x_end] == '1')
-	// 		return (true);
-	if (ray->x_end == 0 || ray->x_end == ft_strlen(data->map[(int)floor(ray->y_end)]))
+	if (data->player->pov == 0 || data->player->pov == M_PI)
+		if (data->map[(int)ray->y_end][(int)ray->x_end] == '1')
+			return (true);
+	if (ray->x_end == 0 || ray->x_end
+		== ft_strlen(data->map[(int)floor(ray->y_end)]))
 		return (true);
 	if (data->player->pov >= 0 && data->player->pov <= M_PI_2)
 		if (data->map[(int)floor(ray->y_end)][(int)(ray->x_end)] == '1')
@@ -51,23 +52,6 @@ static t_bool	check_collision_x(t_data *data, t_ray *ray)
 		if (data->map[(int)floor(ray->y_end)][(int)(ray->x_end)] == '1')
 			return (true);
 	return (false);
-}
-
-int	get_wall_dir(t_data *data, t_ray *ray, char dir)
-{
-	if (dir == 'y')
-	{
-		if (data->player->pov < M_PI)
-			return (SO);
-		else
-			return (NO);
-		return (ray->y_end);
-	}
-	if (data->player->pov < M_PI_2 || data->player->pov > 3 * M_PI_2)
-		return (WE);
-	else
-		return (EA);
-	return (NO);
 }
 
 static t_ray	*get_collision_y(t_data *data)

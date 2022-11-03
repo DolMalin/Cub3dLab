@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 12:55:10 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:04:23 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	put_background_to_image(t_data *data)
 		{
 			if (i / (WIN_HEIGHT * 0.5) <= 1)
 				my_mlx_pixel_put(data->image, j, i, 0x352F24);
-			 // replace by data->colors[CEIL]. need to convert RGB format with adding A in front in hexadecimal format
 			if (i / (WIN_HEIGHT * 0.5) > 1)
 				my_mlx_pixel_put(data->image, j, i, 0x822E18);
 			j++;
@@ -70,8 +69,8 @@ void	put_background_to_image(t_data *data)
 int	create_image(t_data *data)
 {
 	put_background_to_image(data);
+	raycasting(data);
 	put_player_to_minimap(data);
 	put_mini_map_to_image(data);
-	raycasting(data);
 	return (0);
 }

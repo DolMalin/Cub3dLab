@@ -8,12 +8,12 @@
 
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF			10
-# define ROT_COEF			3
+# define ROT_COEF			10
 # define STEP_COEF			0.2
-# define WIN_WIDTH			1000
-# define WIN_HEIGHT			600
-# define FOV				180
-# define FOV_STEP			0.00574533
+# define WIN_WIDTH			1024
+# define WIN_HEIGHT			768
+# define FOV				600
+# define FOV_STEP			0.00174533
 # define FOV_AMPLITUDE		FOV*FOV_STEP/2
 # define FLOAT_LINE			WIN_HEIGHT/2
 # define STRIPE				WIN_WIDTH/FOV
