@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
+#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/26 13:20:02 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/11/03 14:15:17 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ LIBFT = ./libft/libft.a \
 MLX = ./mlx/libmlx.a \
 
 PARSING_FILES 		=	data.c \
+						player.c \
 						parse_scene.c \
 						get_features_from_scene.c \
 						trim_config_line.c \
@@ -38,7 +39,8 @@ GRAPHIC_FILES 	=		create_image.c \
 						graphic_utils.c \
 						raycasting.c	\
 						collision.c		\
-						collision2.c
+						collision2.c	\
+						colors.c		\
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \
@@ -55,7 +57,10 @@ SRC_FILES 			=	main.c \
 ## ======================= TO REMOVE ======================= ##
 SRC_FILES_2 =	${addprefix parsing/, ${PARSING_FILES}} \
 				${addprefix utils/, ${UTILS_FILES}} \
-				${addprefix check_input/, ${CHECK_INPUT_FILES}}
+				${addprefix check_input/, ${CHECK_INPUT_FILES}} \
+				# ${addprefix action/, ${ACTION_FILES}} \
+				# ${addprefix graphic/, ${GRAPHIC_FILES}} \
+				error.c
 
 HEADERS_2 = includes/cub3d.h unit-tests/test.h
 
@@ -90,7 +95,7 @@ OBJS = 			${SRC:.c=.o}
 HEADERS = 		includes/cub3d.h
 
 CMD = 			gcc
-FLAGS = 		-Wall -Werror -Wextra  -g3 -fsanitize=address
+FLAGS = 		-Wall -Werror -Wextra  #-g3 -fsanitize=address
 
 LIB =			./libft/libft.a ./mlx/libmlx.a
 

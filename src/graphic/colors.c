@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 16:40:15 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 14:16:35 by aandric          ###   ########lyon.fr   */
+/*   Created: 2022/11/03 11:49:37 by aandric           #+#    #+#             */
+/*   Updated: 2022/11/03 13:33:24 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int ac, char **av)
+int	rgb_to_hex(unsigned char **rgb)
 {
-	t_data	*data;
-
-	if (!check_input(ac, av))
-		return (1);
-	data = init_data(av[1]);
-	if (!data)
-		exit(EXIT_FAILURE);
-	run_game(data);
-	free_data(data);
-	return (0);
+	return ((ft_atoi((const char *)rgb[0]) & 0xff) << 16) 
+		+ (ft_atoi((const char *)rgb[1]) & 0xff << 8)
+		+ (ft_atoi((const char *)rgb[2]) & 0xff);
 }

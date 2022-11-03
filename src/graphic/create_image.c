@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/26 11:46:30 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:31:06 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,12 @@ void	put_background_to_image(t_data *data)
 		{
 			if (i / (WIN_HEIGHT * 0.5) <= 1)
 				my_mlx_pixel_put(data->image, j, i, 0x352F24);
-			 // replace by data->colors[CEIL]. need to convert RGB format with adding A in front in hexadecimal format
 			if (i / (WIN_HEIGHT * 0.5) > 1)
 				my_mlx_pixel_put(data->image, j, i, 0x822E18);
+			// if (i / (WIN_HEIGHT * 0.5) <= 1)
+			// 	my_mlx_pixel_put(data->image, j, i, rgb_to_hex(&data->colors[CEIL]));
+			// if (i / (WIN_HEIGHT * 0.5) > 1)
+			// 	my_mlx_pixel_put(data->image, j, i, rgb_to_hex(&data->colors[FLOOR]));
 			j++;
 		}
 		i++;
@@ -70,8 +73,8 @@ void	put_background_to_image(t_data *data)
 int	create_image(t_data *data)
 {
 	put_background_to_image(data);
+	raycasting(data);
 	put_mini_map_to_image(data);
 	put_player_to_minimap(data);
-	raycasting(data);
 	return (0);
 }

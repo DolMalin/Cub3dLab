@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:25 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/26 14:29:38 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 14:07:05 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ void	move_up(t_data **data)
 	int		next_x_i;
 	int		next_y_i;
 
-	next_x = (*data)->player->x;
-	next_y = (*data)->player->y - STEP_COEF;
-	next_x_i = (int)floor(next_x);
-	next_y_i = (int)floor(next_y);
+	next_x = (*data)->player->x + (*data)->player->ray_coef_x * STEP_COEF;
+	next_y = (*data)->player->y - (*data)->player->ray_coef_y * STEP_COEF;
+	next_x_i = (int)(next_x);
+	next_y_i = (int)(next_y);
 	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
+	(*data)->player->x = next_x;
 	(*data)->player->y = next_y;
 }
 
@@ -35,12 +36,13 @@ void	move_down(t_data **data)
 	int		next_x_i;
 	int		next_y_i;
 
-	next_x = (*data)->player->x;
-	next_y = (*data)->player->y + STEP_COEF;
-	next_x_i = (int)floor(next_x);
-	next_y_i = (int)floor(next_y);
+	next_x = (*data)->player->x - (*data)->player->ray_coef_x * STEP_COEF;
+	next_y = (*data)->player->y + (*data)->player->ray_coef_y * STEP_COEF;
+	next_x_i = (int)(next_x);
+	next_y_i = (int)(next_y);
 	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
+	(*data)->player->x = next_x;
 	(*data)->player->y = next_y;
 }
 
@@ -51,13 +53,14 @@ void	move_left(t_data **data)
 	int		next_x_i;
 	int		next_y_i;
 
-	next_x = (*data)->player->x - STEP_COEF;
-	next_y = (*data)->player->y;
+	next_x = (*data)->player->x - (*data)->player->ray_coef_y * STEP_COEF;
+	next_y = (*data)->player->y - (*data)->player->ray_coef_x * STEP_COEF;
 	next_x_i = (int)floor(next_x);
 	next_y_i = (int)floor(next_y);
 	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
 	(*data)->player->x = next_x;
+	(*data)->player->y = next_y;
 }
 
 void	move_right(t_data **data)
@@ -67,13 +70,14 @@ void	move_right(t_data **data)
 	int		next_x_i;
 	int		next_y_i;
 
-	next_x = (*data)->player->x + STEP_COEF;
-	next_y = (*data)->player->y;
+	next_x = (*data)->player->x + (*data)->player->ray_coef_y * STEP_COEF;
+	next_y = (*data)->player->y + (*data)->player->ray_coef_x * STEP_COEF;
 	next_x_i = (int)floor(next_x);
 	next_y_i = (int)floor(next_y);
 	if ((*data)->map[next_y_i][next_x_i] == '1')
 		return ;
 	(*data)->player->x = next_x;
+	(*data)->player->y = next_y;
 }
 
 int	move_player(t_data *data, int key)

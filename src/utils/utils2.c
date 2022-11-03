@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:44:57 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/19 14:12:42 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 14:16:56 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	print_config(t_data *data)
 	printf("\nx = %f, y = %f\n", data->player->x, data->player->y);
 	printf("POV Player = %f\n", data->player->pov);
 	printf("ray_coef x = %f \t ray_coef y = %f\n", data->player->ray_coef_x, data->player->ray_coef_y);
-
 }
 
 t_bool	ft_strisdigit(char *str)

@@ -8,21 +8,16 @@
 
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF			10
-// # define ROT_COEF			0.5
-# define STEP_COEF			0.1
-# define WIN_WIDTH			1000
-# define WIN_HEIGHT			600
-# define FOV				60
-# define FOV_STEP			0.0174533
+# define ROT_COEF			10
+# define STEP_COEF			0.2
+# define WIN_WIDTH			1024
+# define WIN_HEIGHT			768
+# define FOV				600
+# define FOV_STEP			0.00174533
 # define FOV_AMPLITUDE		FOV*FOV_STEP/2
 # define FLOAT_LINE			WIN_HEIGHT/2
 # define STRIPE				WIN_WIDTH/FOV
 # define CUB_SIZE			1
-
-/****************DEFINES_MATHS******************/
-
-# define RAD2DEG M_PI/360.0*2.0
-# define DEG2RAD 360.0/M_PI/2.0
 
 /****************DEFINES_KEYBOARD*********************/
 
@@ -50,11 +45,13 @@
 
 /****************DEFINES_ERRORS*********************/
 
-# define ARGS "Error: incorrect arguments.\n"
-# define CONFIG_STRUCT "Error: in configuration lines or structure of scene.\n"
-# define MAP "Error: in map.\n"
-# define TEXTURES "Error: in textures paths.\n"
-# define RGB_CODES "Error: in RGB color codes.\n"
+# define ARGS "wrong arguments."
+# define CONFIG_STRUCT "wrong configuration lines or structure of scene."
+# define MAP "wrong map."
+# define TEXTURES "wrong textures paths or format."
+# define RGB_CODES "wrong RGB color codes."
+# define MEMALLOC "can't allocate memory."
+# define OPENFILE "can't open file."
 
 typedef enum e_bool
 {
@@ -67,6 +64,7 @@ typedef enum e_bool
 typedef struct	s_ray {
 	float	x_end;
 	float	y_end;
+	int		dir;
 	float	angle;
 	float	len;
 	t_bool	coll;
@@ -101,8 +99,6 @@ typedef struct s_data
 	int				y;
 }				t_data;
 
-
-
 /******** TO REMOVE*********/
 void print_map(char **map);
 
@@ -117,6 +113,8 @@ float			get_y_with_x(t_data *data, float x);
 float			get_x_with_y(t_data *data, float y);
 float			get_fixed_ray_end(t_data *data, t_ray *ray, char dir);
 float			get_ray_len(t_data *data, t_ray *ray);
+int				rgb_to_hex(unsigned char **rgb);
+int				get_wall_dir(t_data *data, t_ray *ray, char dir);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);
@@ -152,6 +150,7 @@ char			**get_map(char	**parsed_scene);
 char			**parse_scene_file(char *scene_file);
 char			*trim(char *line, char *charset);
 char			**trim_config_line(char **parsed_scene);
+t_player		*init_player(t_data *data);
 
 /****************UTILS*********************/
 int				lines_count(char *file);
@@ -166,7 +165,7 @@ t_bool			is_near_charset(char **unparsed_scene, size_t i, size_t j, char *charse
 void			print_config(t_data *data);
 
 /****************ERRORS*********************/
-void	error(char *error_msg, void **array);
+void	error(char *error_msg);
 
 t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j);
 #endif

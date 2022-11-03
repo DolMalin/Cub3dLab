@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/26 14:45:20 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:04:36 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 float	get_ray_len(t_data *data, t_ray *ray)
 {
 	return (
-		sqrtf((ray->y_end - data->player->y) * (ray->y_end - data->player->y))
-		+ (ray->x_end - data->player->x) * (ray->x_end - data->player->x)
+		sqrtf(((ray->y_end - data->player->y) * (ray->y_end - data->player->y))
+			+ ((ray->x_end - data->player->x) * (ray->x_end - data->player->x)))
 	);
 }
 
@@ -32,31 +32,46 @@ void	draw_rays(t_data *data)
 	while (i < FOV)
 	{
 		data->player->pov -= FOV_STEP;
-		if (data->player->pov <= 0)
+		if (data->player->pov < 0)
 			data->player->pov += 2 * M_PI;
-		if (data->player->pov >= 2 * M_PI)
+		if (data->player->pov > 2 * M_PI)
 			data->player->pov -= (2 * M_PI);
 		ray = get_collision_coord(data);
 		draw_line(data, ray->x_end, ray->y_end);
+		free(ray);
 		i++;
 	}
 	data->player->pov = temp;
 }
 
-void	put_stripe_to_image(t_data *data, float wall_height_coef, int stripe_index)
+void	put_stripe_to_image(t_data *data, float wall_height_coef,
+		int stripe_index, int wall_dir)
 {
+	float	wall_height;
 	int		pixel_x;
 	int		pixel_y;
-	
+	int		color;
+
+	if (wall_dir == NO)
+		color = 0xff0000;
+	if (wall_dir == SO)
+		color = 0xad0000;
+	if (wall_dir == WE)
+		color = 0x820000;
+	if (wall_dir == EA)
+		color = 0x450000;
+
+	wall_height = wall_height_coef * WIN_HEIGHT;
+	if (wall_height > WIN_HEIGHT)
+		wall_height = WIN_HEIGHT;
 	pixel_x = stripe_index * STRIPE;
-	pixel_y = 0;
-	
-	while (pixel_x < stripe_index * STRIPE + stripe_index)
+	pixel_y = FLOAT_LINE - wall_height / 2;
+	while (pixel_x < stripe_index * STRIPE + STRIPE + 1)
 	{
-		while (pixel_y < wall_height_coef * WIN_HEIGHT)
-		//while (pixel_y < WIN_HEIGHT)
+		pixel_y = FLOAT_LINE - wall_height / 2;
+		while (pixel_y < FLOAT_LINE + wall_height / 2)
 		{
-			my_mlx_pixel_put(data->image, pixel_x, (pixel_y + wall_height_coef * WIN_HEIGHT / 2), 0xfffff);
+			my_mlx_pixel_put(data->image, pixel_x, pixel_y, color);
 			pixel_y++;
 		}
 		pixel_x++;
@@ -66,32 +81,35 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef, int stripe_index)
 void	get_wall_height(t_data *data)
 {
 	t_ray	*ray;
-	float	temp;
+	float	mid_ray;
 	float	wall_height_coef;
+	float	ray_len;
 	float	i;
 
-	temp = data->player->pov;
 	i = 0;
+	mid_ray = data->player->pov;
 	data->player->pov += FOV_AMPLITUDE;
 	while (i < FOV)
 	{
-		data->player->pov -= FOV_STEP;
-		if (data->player->pov <= 0)
+		if (data->player->pov < 0)
 			data->player->pov += 2 * M_PI;
-		if (data->player->pov >= 2 * M_PI)
+		if (data->player->pov > 2 * M_PI)
 			data->player->pov -= (2 * M_PI);
 		ray = get_collision_coord(data);
-		wall_height_coef = 1 / get_ray_len(data, ray);
-		//printf("wall height coef : %f\n", wall_height_coef);
-		put_stripe_to_image(data, wall_height_coef, i);
+		ray_len = get_ray_len(data, ray)
+			* cos(fabs(data->player->pov - mid_ray));
+		wall_height_coef = 1 / ray_len;
+		put_stripe_to_image(data, wall_height_coef, i, ray->dir);
+		free(ray);
+		data->player->pov -= FOV_STEP;
 		i++;
 	}
-	data->player->pov = temp;
+	data->player->pov = mid_ray;
 }
 
 void	raycasting(t_data *data)
 {
-	// get_wall_height(data);
+	get_wall_height(data);
 	draw_rays(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
