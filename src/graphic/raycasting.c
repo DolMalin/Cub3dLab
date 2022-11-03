@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/02 17:38:17 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 11:19:03 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,9 @@
 float	get_ray_len(t_data *data, t_ray *ray)
 {
 
-	float b;
-	float c;
-	float bcarre;
-	float ccarre;
-	
-	b = ray->y_end - data->player->y;
-	c = ray->x_end - data->player->x;
-	bcarre = b * b;
-	ccarre = c * c;
-	return (
-		sqrtf(bcarre + ccarre)
+return (
+		sqrtf(((ray->y_end - data->player->y) * (ray->y_end - data->player->y))
+		+ ((ray->x_end - data->player->x) * (ray->x_end - data->player->x)))
 	);
 }
 
