@@ -6,12 +6,11 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:40:15 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/01 13:57:34 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 14:16:35 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
 
 int	main(int ac, char **av)
 {

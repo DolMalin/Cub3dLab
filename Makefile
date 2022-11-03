@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/11/03 13:30:41 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/11/03 14:15:17 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ LIBFT = ./libft/libft.a \
 MLX = ./mlx/libmlx.a \
 
 PARSING_FILES 		=	data.c \
+						player.c \
 						parse_scene.c \
 						get_features_from_scene.c \
 						trim_config_line.c \
@@ -56,7 +57,10 @@ SRC_FILES 			=	main.c \
 ## ======================= TO REMOVE ======================= ##
 SRC_FILES_2 =	${addprefix parsing/, ${PARSING_FILES}} \
 				${addprefix utils/, ${UTILS_FILES}} \
-				${addprefix check_input/, ${CHECK_INPUT_FILES}}
+				${addprefix check_input/, ${CHECK_INPUT_FILES}} \
+				# ${addprefix action/, ${ACTION_FILES}} \
+				# ${addprefix graphic/, ${GRAPHIC_FILES}} \
+				error.c
 
 HEADERS_2 = includes/cub3d.h unit-tests/test.h
 

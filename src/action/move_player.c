@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:25 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/02 16:39:53 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 14:07:05 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	move_up(t_data **data)
 	float	next_y;
 	int		next_x_i;
 	int		next_y_i;
-
 
 	next_x = (*data)->player->x + (*data)->player->ray_coef_x * STEP_COEF;
 	next_y = (*data)->player->y - (*data)->player->ray_coef_y * STEP_COEF;

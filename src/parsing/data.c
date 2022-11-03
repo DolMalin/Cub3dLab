@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 13:26:12 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 14:14:46 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,52 +31,6 @@ static t_image	*init_image(t_data *data)
 	if (!image->addr)
 		error(MEMALLOC);
 	return (image);
-}
-
-float	get_player_pov(t_data *data)
-{
-	char		player_pov;
-
-	player_pov = get_player_token(data);
-	if (player_pov == 'N')
-		return (M_PI_2);
-	if (player_pov == 'S')
-		return (3 * M_PI_2);
-	if (player_pov == 'E')
-		return (2 * M_PI);
-	if (player_pov == 'W')
-		return (M_PI);
-	return (0);
-}
-
-t_player	*init_player(t_data *data)
-{
-	t_player	*player;
-	size_t		i;
-	size_t		j;
-
-	i = 0;
-	player = malloc(sizeof(t_player));
-	if (!player)
-		error(MEMALLOC);
-	player->pov = get_player_pov(data);
-	player->ray_coef_x = cos(player->pov);
-	player->ray_coef_y = sin(player->pov);
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j])
-		{
-			if (is_in_charset(data->map[i][j], "NSEW"))
-			{
-				player->y = (float)i + (PRINT_COEF / 2) * 0.1;
-				player->x = (float)j + (PRINT_COEF / 2) * 0.1;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (player);
 }
 
 void	init_window(t_data *data)

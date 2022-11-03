@@ -150,6 +150,7 @@ char			**get_map(char	**parsed_scene);
 char			**parse_scene_file(char *scene_file);
 char			*trim(char *line, char *charset);
 char			**trim_config_line(char **parsed_scene);
+t_player		*init_player(t_data *data);
 
 /****************UTILS*********************/
 int				lines_count(char *file);
