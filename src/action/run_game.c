@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:40 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/01 13:58:00 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 13:19:36 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	exit_program(t_data *data)
 {
-	if (data->mlx_win)
-		mlx_destroy_window(data->mlx, data->mlx_win);
 	free_data(data);
 	exit(EXIT_SUCCESS);
 }

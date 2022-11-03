@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:14:00 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 17:00:16 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:22:50 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**remove_empty_lines(char **parsed_scene)
 	j = 0;
 	output = malloc(sizeof(char *) * (filled_lines_len(parsed_scene) + 1));
 	if (!output)
-		return (NULL);
+		error(MEMALLOC);
 	while (parsed_scene[i])
 	{
 		if (!is_empty_line(parsed_scene[i]))
@@ -63,7 +63,7 @@ char	**parse_scene_file(char *scene_file)
 	fd = open(scene_file, O_RDONLY);
 	parsed_scene = malloc(sizeof(char *) * (lines_count(scene_file) + 1));
 	if (!parsed_scene)
-		return (NULL);
+		error(MEMALLOC);
 	parsed_scene[i] = get_next_line(fd);
 	while (parsed_scene[i])
 	{

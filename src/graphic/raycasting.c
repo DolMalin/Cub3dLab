@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 11:56:21 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 13:04:36 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	draw_rays(t_data *data)
 			data->player->pov -= (2 * M_PI);
 		ray = get_collision_coord(data);
 		draw_line(data, ray->x_end, ray->y_end);
+		free(ray);
 		i++;
 	}
 	data->player->pov = temp;
@@ -99,6 +100,7 @@ void	get_wall_height(t_data *data)
 			* cos(fabs(data->player->pov - mid_ray));
 		wall_height_coef = 1 / ray_len;
 		put_stripe_to_image(data, wall_height_coef, i, ray->dir);
+		free(ray);
 		data->player->pov -= FOV_STEP;
 		i++;
 	}

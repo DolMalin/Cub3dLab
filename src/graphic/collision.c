@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 11:55:52 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 13:23:14 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_ray	*get_collision_y(t_data *data)
 
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
-		return (NULL);
+		error(MEMALLOC);
 	ray->x_end = 1000000;
 	ray->y_end = data->player->y;
 	ray->angle = data->player->pov;
@@ -89,7 +89,7 @@ static t_ray	*get_collision_x(t_data *data)
 
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
-		return (NULL);
+		error(MEMALLOC);
 	ray->x_end = data->player->x;
 	ray->y_end = 1000000;
 	ray->angle = data->player->pov;
@@ -116,18 +116,28 @@ t_ray	*get_collision_coord(t_data *data)
 {
 	t_ray	*ray_horizontal;
 	t_ray	*ray_vertical;
+	t_bool	is_horizontal;
 
 	ray_vertical = get_collision_x(data);
 	ray_horizontal = get_collision_y(data);
-	if (!ray_vertical->coll)
+	is_horizontal = false;
+	if (!ray_vertical->coll || !ray_horizontal->coll)
+	{
+		if (!ray_vertical->coll)
+			is_horizontal = true;
+	}
+	else
+	{
+		ray_vertical->len = get_ray_len(data, ray_vertical);
+		ray_horizontal->len = get_ray_len(data, ray_horizontal);
+		if (ray_horizontal->len < ray_vertical->len)
+			is_horizontal = true;
+	}
+	if (is_horizontal)
+	{
+		free(ray_vertical);
 		return (ray_horizontal);
-	if (!ray_horizontal->coll)
-		return (ray_vertical);
-	ray_vertical->len = get_ray_len(data, ray_vertical);
-	ray_horizontal->len = get_ray_len(data, ray_horizontal);
-	if (ray_horizontal->len >= ray_vertical->len)
-		return (ray_vertical);
-	if (ray_horizontal->len < ray_vertical->len)
-		return (ray_horizontal);
-	return (NULL);
+	}
+	free(ray_horizontal);
+	return (ray_vertical);
 }
