@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 13:04:20 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:23:14 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_ray	*get_collision_y(t_data *data)
 
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
-		return (NULL);
+		error(MEMALLOC);
 	ray->x_end = 1000000;
 	ray->y_end = data->player->y;
 	ray->angle = data->player->pov;
@@ -89,7 +89,7 @@ static t_ray	*get_collision_x(t_data *data)
 
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
-		return (NULL);
+		error(MEMALLOC);
 	ray->x_end = data->player->x;
 	ray->y_end = 1000000;
 	ray->angle = data->player->pov;

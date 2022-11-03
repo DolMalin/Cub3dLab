@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:26:05 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 16:36:17 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:24:06 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**get_map(char	**parsed_scene)
 		return (NULL);
 	map = malloc(sizeof(char *) * (map_len(parsed_scene) + 1));
 	if (!map)
-		return (NULL);
+		error(MEMALLOC);
 	while (parsed_scene[i])
 	{
 		if (!is_config_line(parsed_scene[i]))

@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 13:04:23 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:21:08 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	create_image(t_data *data)
 {
 	put_background_to_image(data);
 	raycasting(data);
-	put_player_to_minimap(data);
 	put_mini_map_to_image(data);
+	put_player_to_minimap(data);
 	return (0);
 }

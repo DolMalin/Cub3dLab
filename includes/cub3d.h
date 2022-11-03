@@ -45,11 +45,13 @@
 
 /****************DEFINES_ERRORS*********************/
 
-# define ARGS "Error: incorrect arguments.\n"
-# define CONFIG_STRUCT "Error: in configuration lines or structure of scene.\n"
-# define MAP "Error: in map.\n"
-# define TEXTURES "Error: in textures paths.\n"
-# define RGB_CODES "Error: in RGB color codes.\n"
+# define ARGS "wrong arguments."
+# define CONFIG_STRUCT "wrong configuration lines or structure of scene."
+# define MAP "wrong map."
+# define TEXTURES "wrong textures paths or format."
+# define RGB_CODES "wrong RGB color codes."
+# define MEMALLOC "can't allocate memory."
+# define OPENFILE "can't open file."
 
 typedef enum e_bool
 {
@@ -113,6 +115,7 @@ float			get_y_with_x(t_data *data, float x);
 float			get_x_with_y(t_data *data, float y);
 float			get_fixed_ray_end(t_data *data, t_ray *ray, char dir);
 float			get_ray_len(t_data *data, t_ray *ray);
+int				get_wall_dir(t_data *data, t_ray *ray, char dir);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);
@@ -162,7 +165,7 @@ t_bool			is_near_charset(char **unparsed_scene, size_t i, size_t j, char *charse
 void			print_config(t_data *data);
 
 /****************ERRORS*********************/
-void	error(char *error_msg, void **array);
+void	error(char *error_msg);
 
 t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j);
 #endif
