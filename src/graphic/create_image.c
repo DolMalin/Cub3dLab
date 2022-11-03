@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 15:38:38 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 15:47:07 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	put_background_to_image(t_data *data)
 {
 	int		i;
 	int		j;
-	int color;
+	// int color;
 
 	i = 0;
 	
@@ -57,18 +57,9 @@ void	put_background_to_image(t_data *data)
 		while (j < WIN_WIDTH)
 		{
 			if (i / (WIN_HEIGHT * 0.5) <= 1)
-			{
-				// color  = rgb_to_hex(data->colors[CEIL]);
-				// printf("color ceil = %d\n", color);
-				// my_mlx_pixel_put(data->image, j, i, 14753282);
-				my_mlx_pixel_put(data->image, j, i, rgb_to_hex(data->colors[CEIL]));
-			}
+				my_mlx_pixel_put(data->image, j, i, data->color_ceil);
 			if (i / (WIN_HEIGHT * 0.5) > 1)
-			{
-				// color = rgb_to_hex(data->colors[FLOOR]);
-				// printf("color floor = %x\n", color);
-				my_mlx_pixel_put(data->image, j, i, rgb_to_hex(data->colors[FLOOR]));
-			}
+				my_mlx_pixel_put(data->image, j, i, data->color_floor);
 			j++;
 		}
 		i++;

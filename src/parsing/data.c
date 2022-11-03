@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 14:14:46 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 15:46:44 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ t_data	*init_data(char *scene_file)
 		return (NULL);
 	data->textures_path = get_textures_paths(parsed_scene);
 	data->colors = get_colors(parsed_scene);
+	data->color_ceil = rgb_to_hex(data->colors[CEIL]);
+	data->color_floor = rgb_to_hex(data->colors[FLOOR]);
 	data->map = get_map(parsed_scene);
 	init_window(data);
 	data->player = init_player(data);

@@ -90,6 +90,8 @@ typedef struct s_data
 {
 	char			**textures_path;
 	unsigned char	**colors;
+	int				color_ceil;
+	int				color_floor;
 	char			**map;
 	void			*mlx;
 	void			*mlx_win;
