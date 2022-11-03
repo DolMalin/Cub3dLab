@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 11:19:03 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 11:36:31 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 float	get_ray_len(t_data *data, t_ray *ray)
 {
-
-return (
-		sqrtf(((ray->y_end - data->player->y) * (ray->y_end - data->player->y))
-		+ ((ray->x_end - data->player->x) * (ray->x_end - data->player->x)))
-	);
+	return (
+			sqrtf(((ray->y_end - data->player->y) * (ray->y_end - data->player->y))
+			+ ((ray->x_end - data->player->x) * (ray->x_end - data->player->x)))
+		);
 }
 
 void	draw_rays(t_data *data)
@@ -47,7 +46,7 @@ void	draw_rays(t_data *data)
 
 void	put_stripe_to_image(t_data *data, float wall_height_coef, int stripe_index, int wall_dir)
 {
-	float   wall_height;
+	float	wall_height;
 	int		pixel_x;
 	int		pixel_y;
 	int		color;
@@ -60,13 +59,12 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef, int stripe_index,
 		color = 0x820000;
 	if (wall_dir == EA)
 		color = 0x450000;
-			
+
 	wall_height = wall_height_coef * WIN_HEIGHT;
 	if (wall_height > WIN_HEIGHT)
 		wall_height = WIN_HEIGHT;
 	pixel_x = stripe_index * STRIPE;
 	pixel_y = FLOAT_LINE - wall_height / 2;
-	
 	while (pixel_x < stripe_index * STRIPE + STRIPE + 1)
 	{
 		pixel_y = FLOAT_LINE - wall_height / 2;
@@ -97,7 +95,8 @@ void	get_wall_height(t_data *data)
 		if (data->player->pov > 2 * M_PI)
 			data->player->pov -= (2 * M_PI);
 		ray = get_collision_coord(data);
-		ray_len = get_ray_len(data, ray) * cos(fabs(data->player->pov - mid_ray));
+		ray_len = get_ray_len(data, ray)
+			* cos(fabs(data->player->pov - mid_ray));
 		wall_height_coef = 1 / ray_len;
 		put_stripe_to_image(data, wall_height_coef, i, ray->dir);
 		data->player->pov -= FOV_STEP;
