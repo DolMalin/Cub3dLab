@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 11:36:31 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 11:56:21 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 float	get_ray_len(t_data *data, t_ray *ray)
 {
 	return (
-			sqrtf(((ray->y_end - data->player->y) * (ray->y_end - data->player->y))
+		sqrtf(((ray->y_end - data->player->y) * (ray->y_end - data->player->y))
 			+ ((ray->x_end - data->player->x) * (ray->x_end - data->player->x)))
-		);
+	);
 }
 
 void	draw_rays(t_data *data)
@@ -43,8 +43,8 @@ void	draw_rays(t_data *data)
 	data->player->pov = temp;
 }
 
-
-void	put_stripe_to_image(t_data *data, float wall_height_coef, int stripe_index, int wall_dir)
+void	put_stripe_to_image(t_data *data, float wall_height_coef,
+		int stripe_index, int wall_dir)
 {
 	float	wall_height;
 	int		pixel_x;

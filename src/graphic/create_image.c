@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 11:20:38 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 11:51:53 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	put_background_to_image(t_data *data)
 		{
 			if (i / (WIN_HEIGHT * 0.5) <= 1)
 				my_mlx_pixel_put(data->image, j, i, 0x352F24);
-			 // replace by data->colors[CEIL]. need to convert RGB format with adding A in front in hexadecimal format
 			if (i / (WIN_HEIGHT * 0.5) > 1)
 				my_mlx_pixel_put(data->image, j, i, 0x822E18);
 			j++;
