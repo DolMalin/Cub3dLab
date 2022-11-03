@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 11:51:53 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/03 13:29:12 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ void	put_background_to_image(t_data *data)
 				my_mlx_pixel_put(data->image, j, i, 0x352F24);
 			if (i / (WIN_HEIGHT * 0.5) > 1)
 				my_mlx_pixel_put(data->image, j, i, 0x822E18);
+			// if (i / (WIN_HEIGHT * 0.5) <= 1)
+			// 	my_mlx_pixel_put(data->image, j, i, rgb_to_hex(&data->colors[CEIL]));
+			// if (i / (WIN_HEIGHT * 0.5) > 1)
+			// 	my_mlx_pixel_put(data->image, j, i, rgb_to_hex(&data->colors[FLOOR]));
 			j++;
 		}
 		i++;

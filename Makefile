@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
+#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/10/26 13:20:02 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/11/03 13:22:20 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ GRAPHIC_FILES 	=		create_image.c \
 						graphic_utils.c \
 						raycasting.c	\
 						collision.c		\
-						collision2.c
+						collision2.c	\
+						colors.c		\
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \

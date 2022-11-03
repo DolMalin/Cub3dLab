@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_features_from_scene.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:25:27 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 16:36:25 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:28:43 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ unsigned char	*get_color(char *line)
 	color = malloc(sizeof(unsigned char) * 3);
 	if (!color)
 		return (NULL);
-	color[R] = (unsigned char)ft_atoi(splited_line[0]);
-	color[G] = (unsigned char)ft_atoi(splited_line[1]);
-	color[B] = (unsigned char)ft_atoi(splited_line[2]);
+	// color[R] = (unsigned char)ft_atoi(splited_line[0]);
+	// color[G] = (unsigned char)ft_atoi(splited_line[1]);
+	// color[B] = (unsigned char)ft_atoi(splited_line[2]);
+	color[R] = ft_atoi(splited_line[0]);
+	color[G] = ft_atoi(splited_line[1]);
+	color[B] = ft_atoi(splited_line[2]);
 	free_array((void **)splited_line);
 	free(line);
 	return (color);
