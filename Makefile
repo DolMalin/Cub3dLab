@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/11/03 14:15:17 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/11/04 16:12:15 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ OBJS = 			${SRC:.c=.o}
 HEADERS = 		includes/cub3d.h
 
 CMD = 			gcc
-FLAGS = 		-Wall -Werror -Wextra  #-g3 -fsanitize=address
+FLAGS = 		-Wall -Werror -Wextra  -O3 #-g3 -fsanitize=address
 
 LIB =			./libft/libft.a ./mlx/libmlx.a
 

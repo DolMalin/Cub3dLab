@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/04 15:30:25 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/04 17:26:42 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_rays(t_data *data)
 
 	temp = data->player->pov;
 	i = 0;
-	data->player->pov += FOV_AMPLITUDE;
+	data->player->pov += data->precomputed->fov_amplitude;
 	while (i < FOV)
 	{
 		data->player->pov -= FOV_STEP;
@@ -44,12 +44,12 @@ void	draw_rays(t_data *data)
 	data->player->pov = temp;
 }
 
-int	get_pixel_from_sprite_y(float wall_height, int wall_cursor_y)
+int	get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_y)
 {
 	int	pixel_y_sprite;
 
 	// pixel_y_sprite = wall_height / SPRITE_SIZE * wall_cursor_y;
-	pixel_y_sprite = (wall_cursor_y - (FLOAT_LINE - wall_height / 2)) / wall_height * SPRITE_SIZE;
+	pixel_y_sprite = (wall_cursor_y - (data->precomputed->float_line - wall_height * 0.5)) / wall_height * SPRITE_SIZE;
 	// printf("ratio pixel y : %f\n", (wall_cursor_y - (FLOAT_LINE - wall_height / 2)));
 	return (pixel_y_sprite);
 }
@@ -71,7 +71,7 @@ int	get_pixel_from_sprite_x(t_data *data)
 
 int ft_get_color_from_texture(t_texture *texture, int x, int y)
 {
-    return (*(int *)(texture->addr + (y * texture->line_length + x * (texture->bits_per_pixel / 8))));
+    return (*(int *)(texture->addr + (y * texture->line_length + x * texture->bp8)));
 }
 
 void	put_stripe_to_image(t_data *data, float wall_height_coef,
@@ -82,26 +82,21 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 	int		pixel_y;
 	int		color;
 
-	if (wall_dir == NO)
-		color = 0xff0000;
-	if (wall_dir == SO)
-		color = 0xad0000;
-	if (wall_dir == WE)
-		color = 0x820000;
-	if (wall_dir == EA)
-		color = 0x450000;
-
 	wall_height = wall_height_coef * WIN_HEIGHT;
 	if (wall_height > WIN_HEIGHT)
 		wall_height = WIN_HEIGHT;
 	pixel_x = stripe_index * STRIPE;
-	pixel_y = FLOAT_LINE - wall_height / 2;
-	while (pixel_x < stripe_index * STRIPE + STRIPE + 1)
+	pixel_y = data->precomputed->float_line - wall_height * 0.5;
+
+	int x_max = stripe_index * STRIPE + STRIPE + 1;
+	int	y_max = data->precomputed->float_line + wall_height * 0.5;
+	float	half_wall_height = wall_height * 0.5;
+	while (pixel_x < x_max)
 	{
-		pixel_y = FLOAT_LINE - wall_height / 2;
-		while (pixel_y < FLOAT_LINE + wall_height / 2)
+		pixel_y = data->precomputed->float_line - half_wall_height;
+		while (pixel_y < y_max)
 		{
-			color = ft_get_color_from_texture(data->textures[wall_dir], get_pixel_from_sprite_x(data), get_pixel_from_sprite_y(wall_height, pixel_y));
+			color = ft_get_color_from_texture(data->textures[wall_dir], get_pixel_from_sprite_x(data), get_pixel_from_sprite_y(data, wall_height, pixel_y));
 			my_mlx_pixel_put(data->image, pixel_x, pixel_y, color);
 			pixel_y++;
 		}
@@ -119,7 +114,7 @@ void	get_wall_height(t_data *data)
 
 	i = 0;
 	mid_ray = data->player->pov;
-	data->player->pov += FOV_AMPLITUDE;
+	data->player->pov += data->precomputed->fov_amplitude;
 	while (i < FOV)
 	{
 		if (data->player->pov < 0)
@@ -141,6 +136,7 @@ void	get_wall_height(t_data *data)
 void	raycasting(t_data *data)
 {
 	get_wall_height(data);
-	draw_rays(data);
+	// draw_rays(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
+	// mlx_destroy_image(data->mlx, data->image)
 }

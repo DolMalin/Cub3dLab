@@ -8,15 +8,15 @@
 
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF			10
-# define ROT_COEF			10
-# define STEP_COEF			0.2
+# define ROT_COEF			20
+# define STEP_COEF			0.1
 # define WIN_WIDTH			1024
 # define WIN_HEIGHT			768
 # define FOV				600
-# define FOV_STEP			0.00174533
-# define FOV_AMPLITUDE		FOV*FOV_STEP/2
-# define FLOAT_LINE			WIN_HEIGHT/2
-# define STRIPE				WIN_WIDTH/FOV
+# define FOV_STEP			0.002
+# define FOV_AMPLITUDE		FOV * FOV_STEP * 0.5
+# define FLOAT_LINE			WIN_HEIGHT * 0.5
+# define STRIPE				WIN_WIDTH / FOV
 # define CUB_SIZE			1
 # define SPRITE_SIZE		100
 
@@ -89,6 +89,7 @@ typedef struct s_texture
 	int		endian;
 	int		width;
 	int		height;
+	int		bp8;
 }				t_texture;
 
 typedef struct s_player 
@@ -99,6 +100,14 @@ typedef struct s_player
 	float	ray_coef_x;
 	float	ray_coef_y;
 }				t_player;
+
+typedef struct s_precomputed
+{
+	float			float_line;
+	float			fov_amplitude;
+	float			stripe;
+	// float			trigo_val[]
+}				t_precomputed;
 
 typedef struct s_data
 {
@@ -112,8 +121,7 @@ typedef struct s_data
 	void			*mlx_win;
 	t_image			*image;
 	t_player		*player;
-	int				x;
-	int				y;
+	t_precomputed	*precomputed;
 }				t_data;
 
 /******** TO REMOVE*********/
@@ -133,7 +141,7 @@ float			get_ray_len(t_data *data, t_ray *ray);
 int				rgb_to_hex(unsigned char *rgb);
 int				get_wall_dir(t_data *data, t_ray *ray, char dir);
 int				get_pixel_from_sprite_x(t_data *data);
-int				get_pixel_from_sprite_y(float wall_height, int wall_cursor_y);
+int				get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_y);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);

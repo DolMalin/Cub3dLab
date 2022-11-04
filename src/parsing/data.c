@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/04 15:06:59 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/04 17:19:20 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_texture	*init_texture(t_data *data, char *texture_path)
 			);
 	if (!texture->addr)
 		error(MEMALLOC);
+	texture->bp8 = texture->bits_per_pixel / 8;
 	return (texture);
 }
 
@@ -83,6 +84,21 @@ t_texture **init_textures(t_data *data, char **textures_path)
 	textures[EA] = init_texture(data, textures_path[EA]);
 	textures[WE] = init_texture(data, textures_path[WE]);
 	return (textures);
+}
+
+t_precomputed	*init_precomputed(t_data *data)
+{
+	t_precomputed	*precomputed;
+
+	(void)data;
+
+	precomputed = malloc(sizeof(precomputed));
+	if (!precomputed)
+		error(MEMALLOC);
+	precomputed->float_line = FLOAT_LINE;
+	precomputed->fov_amplitude = FOV_AMPLITUDE;
+	precomputed->stripe = STRIPE;
+	return (precomputed);
 }
 
 t_data	*init_data(char *scene_file)
@@ -105,6 +121,7 @@ t_data	*init_data(char *scene_file)
 	data->player = init_player(data);
 	data->image = init_image(data);
 	data->textures = init_textures(data, data->textures_path);
+	data->precomputed = init_precomputed(data);
 	free_array((void **)parsed_scene);
 	return (data);
 }
