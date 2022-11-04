@@ -89,7 +89,7 @@ typedef struct s_texture
 	int		endian;
 	int		width;
 	int		height;
-	int		bp8;
+
 }				t_texture;
 
 typedef struct s_player 
@@ -101,12 +101,30 @@ typedef struct s_player
 	float	ray_coef_y;
 }				t_player;
 
+#define PI_ON_SIX 0
+#define PI_ON_FOUR 1
+#define PI_ON_THREE 2
+#define PI_ON_TWO 3
+#define TWO_PI_ON_THREE 4
+#define THREE_PI_ON_FOUR 5
+#define FIVE_PI_ON_SIX 6
+#define PI 7
+#define SEVEN_PI_ON_SIX 8
+#define FIVE_PI_ON_FOUR 9
+#define FOUR_PI_ON_THREE 10
+#define THREE_PI_ON_TWO 11
+#define FIVE_PI_ON_THREE 12
+#define SEVEN_PI_ON_FOUR 13
+#define ELEVEN_PI_ON_SIX 14
+#define TWO_PI 15
+
+
 typedef struct s_precomputed
 {
 	float			float_line;
 	float			fov_amplitude;
 	float			stripe;
-	// float			trigo_val[]
+	float			radians[16];
 }				t_precomputed;
 
 typedef struct s_data

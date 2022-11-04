@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:34 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/02 16:53:37 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/04 17:56:25 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	rotate_right(t_data **data)
 {
 	(*data)->player->pov -= FOV_STEP * ROT_COEF;
 	if ((*data)->player->pov < 0)
-		(*data)->player->pov += 2 * M_PI;
+		(*data)->player->pov += (*data)->precomputed->radians[TWO_PI];
 	///////
 	(*data)->player->ray_coef_x = cos((*data)->player->pov);
 	(*data)->player->ray_coef_y = sin((*data)->player->pov);
@@ -53,8 +53,8 @@ void	rotate_right(t_data **data)
 void	rotate_left(t_data **data)
 {
 	(*data)->player->pov += FOV_STEP * ROT_COEF;
-	if ((*data)->player->pov >= 2 * M_PI)
-		(*data)->player->pov -= 2 * M_PI;
+	if ((*data)->player->pov >= (*data)->precomputed->radians[TWO_PI])
+		(*data)->player->pov -= (*data)->precomputed->radians[TWO_PI];
 	//////
 	(*data)->player->ray_coef_x = cos((*data)->player->pov);
 	(*data)->player->ray_coef_y = sin((*data)->player->pov);

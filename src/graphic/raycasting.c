@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/04 17:26:42 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/04 18:22:40 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	draw_rays(t_data *data)
 	{
 		data->player->pov -= FOV_STEP;
 		if (data->player->pov < 0)
-			data->player->pov += 2 * M_PI;
-		if (data->player->pov > 2 * M_PI)
-			data->player->pov -= (2 * M_PI);
+			data->player->pov += data->precomputed->radians[TWO_PI];
+		if (data->player->pov > data->precomputed->radians[TWO_PI])
+			data->player->pov -= (data->precomputed->radians[TWO_PI]);
 		ray = get_collision_coord(data);
 		draw_line(data, ray->x_end, ray->y_end);
 		free(ray);
@@ -71,7 +71,7 @@ int	get_pixel_from_sprite_x(t_data *data)
 
 int ft_get_color_from_texture(t_texture *texture, int x, int y)
 {
-    return (*(int *)(texture->addr + (y * texture->line_length + x * texture->bp8)));
+    return (*(int *)(texture->addr + (y * texture->line_length + x * texture->bits_per_pixel / 8)));
 }
 
 void	put_stripe_to_image(t_data *data, float wall_height_coef,
@@ -91,12 +91,14 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 	int x_max = stripe_index * STRIPE + STRIPE + 1;
 	int	y_max = data->precomputed->float_line + wall_height * 0.5;
 	float	half_wall_height = wall_height * 0.5;
+	color = 0x00000;
 	while (pixel_x < x_max)
 	{
 		pixel_y = data->precomputed->float_line - half_wall_height;
 		while (pixel_y < y_max)
 		{
-			color = ft_get_color_from_texture(data->textures[wall_dir], get_pixel_from_sprite_x(data), get_pixel_from_sprite_y(data, wall_height, pixel_y));
+			if (pixel_y % 2 == 0 || pixel_y % 2 == 0)
+				color = ft_get_color_from_texture(data->textures[wall_dir], get_pixel_from_sprite_x(data), get_pixel_from_sprite_y(data, wall_height, pixel_y));
 			my_mlx_pixel_put(data->image, pixel_x, pixel_y, color);
 			pixel_y++;
 		}
@@ -118,9 +120,9 @@ void	get_wall_height(t_data *data)
 	while (i < FOV)
 	{
 		if (data->player->pov < 0)
-			data->player->pov += 2 * M_PI;
-		if (data->player->pov > 2 * M_PI)
-			data->player->pov -= (2 * M_PI);
+			data->player->pov += data->precomputed->radians[TWO_PI];
+		if (data->player->pov > data->precomputed->radians[TWO_PI])
+			data->player->pov -= data->precomputed->radians[TWO_PI];
 		ray = get_collision_coord(data);
 		ray_len = get_ray_len(data, ray)
 			* cos(fabs(data->player->pov - mid_ray));

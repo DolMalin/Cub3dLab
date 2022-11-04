@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 13:43:45 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/04 17:59:47 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static t_bool	check_collision_y(t_data *data, t_ray *ray)
 	if (data->player->pov >= M_PI_2 && data->player->pov < M_PI)
 		if (data->map[(int)(ray->y_end - 1)][(int)floor(ray->x_end)] == '1')
 			return (true);
-	if (data->player->pov > M_PI && data->player->pov <= 3 * M_PI_2)
+	if (data->player->pov > M_PI && data->player->pov <= data->precomputed->radians[THREE_PI_ON_TWO])
 		if (data->map[(int)(ray->y_end)][(int)floor(ray->x_end)] == '1')
 			return (true);
-	if (data->player->pov > 3 * M_PI_2)
+	if (data->player->pov > data->precomputed->radians[THREE_PI_ON_TWO])
 		if (data->map[(int)(ray->y_end)][(int)floor(ray->x_end)] == '1')
 			return (true);
 	return (false);
@@ -45,10 +45,10 @@ static t_bool	check_collision_x(t_data *data, t_ray *ray)
 	if (data->player->pov > M_PI_2 && data->player->pov <= M_PI)
 		if (data->map[(int)floor(ray->y_end)][(int)(ray->x_end - 1)] == '1')
 			return (true);
-	if (data->player->pov >= M_PI && data->player->pov <= 3 * M_PI_2)
+	if (data->player->pov >= M_PI && data->player->pov <= data->precomputed->radians[THREE_PI_ON_TWO])
 		if (data->map[(int)floor(ray->y_end)][(int)(ray->x_end - 1)] == '1')
 			return (true);
-	if (data->player->pov > 3 * M_PI_2)
+	if (data->player->pov > data->precomputed->radians[THREE_PI_ON_TWO])
 		if (data->map[(int)floor(ray->y_end)][(int)(ray->x_end)] == '1')
 			return (true);
 	return (false);
@@ -98,7 +98,7 @@ static t_ray	*get_collision_x(t_data *data)
 	{
 		ray->x_end = get_fixed_ray_end(data, ray, 'x');
 		ray->dir = get_wall_dir(data, ray, 'x');
-		if (data->player->pov == M_PI_2 || data->player->pov == 3 * M_PI_2)
+		if (data->player->pov == M_PI_2 || data->player->pov == data->precomputed->radians[THREE_PI_ON_TWO])
 			return (ray);
 		ray->y_end = get_y_with_x(data, ray->x_end);
 		if (ray->y_end >= array_len((void **)data->map) || ray->y_end < 0)

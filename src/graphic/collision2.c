@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:07:48 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 11:55:57 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/04 17:50:39 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ float	get_fixed_ray_end(t_data *data, t_ray *ray, char dir)
 			return (floor(ray->y_end + 1));
 		return (ray->y_end);
 	}
-	if (data->player->pov == M_PI_2 || data->player->pov == 3 * M_PI_2)
+	if (data->player->pov == M_PI_2 || data->player->pov == data->precomputed->radians[THREE_PI_ON_TWO])
 		return (ray->x_end);
-	if (data->player->pov < M_PI_2 || data->player->pov > 3 * M_PI_2)
+	if (data->player->pov < M_PI_2 || data->player->pov > data->precomputed->radians[THREE_PI_ON_TWO])
 		return (floor(ray->x_end + 1));
 	else
 		return (ceil(ray->x_end - 1));
@@ -59,7 +59,7 @@ int	get_wall_dir(t_data *data, t_ray *ray, char dir)
 			return (NO);
 		return (ray->y_end);
 	}
-	if (data->player->pov < M_PI_2 || data->player->pov > 3 * M_PI_2)
+	if (data->player->pov < M_PI_2 || data->player->pov > data->precomputed->radians[THREE_PI_ON_TWO])
 		return (WE);
 	else
 		return (EA);

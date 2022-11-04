@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/04 17:19:20 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/04 18:08:35 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_texture	*init_texture(t_data *data, char *texture_path)
 		error(MEMALLOC);
 	texture->width = 100;
 	texture->height = 100;
-	// printf("%s\n", texture_path);
 	texture->ptr = mlx_xpm_file_to_image(data->mlx, texture_path, &texture->width, &texture->height);
 	if (!texture->ptr)
 		error(MEMALLOC);
@@ -67,7 +66,6 @@ t_texture	*init_texture(t_data *data, char *texture_path)
 			);
 	if (!texture->addr)
 		error(MEMALLOC);
-	texture->bp8 = texture->bits_per_pixel / 8;
 	return (texture);
 }
 
@@ -98,6 +96,23 @@ t_precomputed	*init_precomputed(t_data *data)
 	precomputed->float_line = FLOAT_LINE;
 	precomputed->fov_amplitude = FOV_AMPLITUDE;
 	precomputed->stripe = STRIPE;
+	precomputed->radians[PI_ON_SIX] = M_PI / 6;
+	precomputed->radians[PI_ON_FOUR] = M_PI / 4;
+	precomputed->radians[PI_ON_THREE] = M_PI / 3;
+	precomputed->radians[PI_ON_TWO] = M_PI / 2;
+	precomputed->radians[TWO_PI_ON_THREE] =  2 * M_PI / 3;
+	precomputed->radians[THREE_PI_ON_FOUR] =  3 * M_PI / 4;
+	precomputed->radians[FIVE_PI_ON_SIX] =  5 * M_PI / 6;
+	precomputed->radians[PI] = M_PI;
+	precomputed->radians[SEVEN_PI_ON_SIX] =  7 * M_PI / 6;
+	precomputed->radians[FIVE_PI_ON_FOUR] =  5 * M_PI / 4;
+	precomputed->radians[FOUR_PI_ON_THREE] =  4 * M_PI / 3;
+	precomputed->radians[THREE_PI_ON_TWO] =  3 * M_PI / 2;	
+	precomputed->radians[FIVE_PI_ON_THREE] =  5 * M_PI / 3;
+	precomputed->radians[SEVEN_PI_ON_FOUR] =  7 * M_PI / 4;
+	precomputed->radians[ELEVEN_PI_ON_SIX] =  11 * M_PI / 6;	
+	precomputed->radians[TWO_PI] = 2 * M_PI;
+
 	return (precomputed);
 }
 

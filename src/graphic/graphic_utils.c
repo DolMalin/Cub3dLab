@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:46:48 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/04 15:14:13 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/04 18:06:57 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
 	char	*dst;
 	int		offset;
 
-	offset = (y * image->line_length + x * (image->bits_per_pixel / 8));
+	offset = (y * image->line_length + x * image->bits_per_pixel / 8);
 	dst = image->addr + offset;
 	*(unsigned int *)dst = color;
 }
