@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 15:47:07 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/04 15:10:13 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	put_background_to_image(t_data *data)
 {
 	int		i;
 	int		j;
-	// int color;
 
 	i = 0;
 	
@@ -74,5 +73,7 @@ int	create_image(t_data *data)
 	raycasting(data);
 	put_mini_map_to_image(data);
 	put_player_to_minimap(data);
+	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->textures[NO]->ptr, 0, 0);
+	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->textures[EA]->ptr, 100, 0);
 	return (0);
 }

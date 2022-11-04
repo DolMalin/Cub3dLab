@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:46:48 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/26 13:33:51 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:14:13 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,3 +72,5 @@ void	draw_line(t_data *data, float end_x, float end_y)
 		pixels--;
 	}
 }
+
+

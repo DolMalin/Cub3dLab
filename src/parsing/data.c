@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 15:46:44 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/04 15:06:59 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,48 @@ void	init_window(t_data *data)
 		error(MEMALLOC);
 }
 
+t_texture	*init_texture(t_data *data, char *texture_path)
+{
+	t_texture	*texture;
+
+	(void)data;
+	(void)texture_path;
+
+	texture = malloc(sizeof(t_texture));
+	if (!texture)
+		error(MEMALLOC);
+	texture->width = 100;
+	texture->height = 100;
+	// printf("%s\n", texture_path);
+	texture->ptr = mlx_xpm_file_to_image(data->mlx, texture_path, &texture->width, &texture->height);
+	if (!texture->ptr)
+		error(MEMALLOC);
+	texture->addr = mlx_get_data_addr(
+			texture->ptr,
+			&texture->bits_per_pixel,
+			&texture->line_length,
+			&texture->endian
+			);
+	if (!texture->addr)
+		error(MEMALLOC);
+	return (texture);
+}
+
+t_texture **init_textures(t_data *data, char **textures_path)
+{
+	t_texture **textures;
+	// (void)data;
+	// (void)textures_path;
+	textures = malloc(sizeof(t_texture *) * 4);
+	if (!textures)
+		error(MEMALLOC);
+	textures[NO] = init_texture(data, textures_path[NO]);
+	textures[SO] = init_texture(data, textures_path[SO]);
+	textures[EA] = init_texture(data, textures_path[EA]);
+	textures[WE] = init_texture(data, textures_path[WE]);
+	return (textures);
+}
+
 t_data	*init_data(char *scene_file)
 {
 	t_data	*data;
@@ -62,6 +104,7 @@ t_data	*init_data(char *scene_file)
 	init_window(data);
 	data->player = init_player(data);
 	data->image = init_image(data);
+	data->textures = init_textures(data, data->textures_path);
 	free_array((void **)parsed_scene);
 	return (data);
 }

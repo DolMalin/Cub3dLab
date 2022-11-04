@@ -18,6 +18,7 @@
 # define FLOAT_LINE			WIN_HEIGHT/2
 # define STRIPE				WIN_WIDTH/FOV
 # define CUB_SIZE			1
+# define SPRITE_SIZE		100
 
 /****************DEFINES_KEYBOARD*********************/
 
@@ -60,8 +61,8 @@ typedef enum e_bool
 }			t_bool;
 
 
-// Why start x and y assuming that all the ray are starting from player pos?
-typedef struct	s_ray {
+typedef struct s_ray 
+{
 	float	x_end;
 	float	y_end;
 	int		dir;
@@ -70,7 +71,8 @@ typedef struct	s_ray {
 	t_bool	coll;
 }				t_ray;
 
-typedef struct	s_image {
+typedef struct s_image 
+{
 	void	*ptr;
 	char	*addr;
 	int		bits_per_pixel;
@@ -78,7 +80,19 @@ typedef struct	s_image {
 	int		endian;
 }				t_image;
 
-typedef struct s_player {
+typedef struct s_texture 
+{
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}				t_texture;
+
+typedef struct s_player 
+{
 	float	x;
 	float	y;
 	float	pov;
@@ -89,6 +103,7 @@ typedef struct s_player {
 typedef struct s_data
 {
 	char			**textures_path;
+	t_texture		**textures;
 	unsigned char	**colors;
 	int				color_ceil;
 	int				color_floor;
@@ -117,6 +132,8 @@ float			get_fixed_ray_end(t_data *data, t_ray *ray, char dir);
 float			get_ray_len(t_data *data, t_ray *ray);
 int				rgb_to_hex(unsigned char *rgb);
 int				get_wall_dir(t_data *data, t_ray *ray, char dir);
+int				get_pixel_from_sprite_x(t_data *data);
+int				get_pixel_from_sprite_y(float wall_height, int wall_cursor_y);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);
