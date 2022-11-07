@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 17:39:58 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/07 18:49:53 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,20 +103,17 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 	}
 }
 
-// float	get_fov_angles()
-// {
-// 	float fov_step_angle;
-// 	float fov_step_h;
-// 	float fov_step_v;
+float	get_fov_angles(int i)
+{
+	float fov_step_angle;
+	float fov_step_h;
+	float fov_step_v;
 	
-// 	fov_step_v = cos(FOV_AMPLITUDE);
-// 	fov_step_h = tan(FOV_AMPLITUDE * 0.0174533) / FOV_AMPLITUDE;
-// 	fov_step_angle = fov_step_h / fov_step_v;
-// 	printf("fov step angle %f\n", fov_step_angle);
-// 	printf("fov_step_v %f\n", fov_step_v);
-// 	printf("fov_step_h %f\n", fov_step_h);
-// 	return (fov_step_angle);
-// }
+	fov_step_v = cos(30 * 0.0174533);
+	fov_step_h = (2 * (i / (float)FOV) - 1) * tan (30 * 0.0174533);
+	fov_step_angle = atan(fov_step_h / fov_step_v);
+	return (fov_step_angle);
+}
 
 void	get_wall_height(t_data *data)
 {
@@ -138,7 +135,8 @@ void	get_wall_height(t_data *data)
 		ray = get_collision_coord(data, pov);
 		wall_height_coef = 1 / (get_ray_len(data, ray) * cos(fabs(pov - mid_ray)));
 		put_stripe_to_image(data, wall_height_coef, i, ray->dir, pov);
-		pov -= FOV_STEP;
+		// pov -= FOV_STEP;
+		pov = mid_ray - get_fov_angles(i);
 		i++;
 	}
 }

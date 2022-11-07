@@ -9,7 +9,7 @@
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF			10
 # define ROT_COEF			20
-# define STEP_COEF			0.1
+# define STEP_COEF			0.3
 # define WIN_WIDTH			1200
 # define WIN_HEIGHT			900
 # define FOV				600 // 60 deg
@@ -18,7 +18,7 @@
 # define FLOAT_LINE			WIN_HEIGHT * 0.5
 # define STRIPE				WIN_WIDTH / FOV
 # define CUB_SIZE			1
-# define SPRITE_SIZE		32
+# define SPRITE_SIZE		100
 # define HIT_BOX			0.1
 
 /****************DEFINES_RADIANS******************/
