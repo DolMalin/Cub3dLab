@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:40 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 13:23:54 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:54:51 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_events(int key, t_data *data)
 	if (key == ESCAPE_KC)
 		exit_program(data);
 	move_player(data, key);
-	// print_config(data);
+	print_config(data);
 	create_image(data);
 	return (0);
 }

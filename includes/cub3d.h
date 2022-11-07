@@ -9,16 +9,17 @@
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF			10
 # define ROT_COEF			20
-# define STEP_COEF			0.1
+# define STEP_COEF			0.2
 # define WIN_WIDTH			1024
-# define WIN_HEIGHT			768
-# define FOV				600
-# define FOV_STEP			0.002
+# define WIN_HEIGHT			1200
+# define FOV				900
+# define FOV_STEP			0.00175
 # define FOV_AMPLITUDE		FOV * FOV_STEP * 0.5
 # define FLOAT_LINE			WIN_HEIGHT * 0.5
 # define STRIPE				WIN_WIDTH / FOV
 # define CUB_SIZE			1
-# define SPRITE_SIZE		100
+# define SPRITE_SIZE		32
+# define HIT_BOX			0.1
 
 /****************DEFINES_KEYBOARD*********************/
 

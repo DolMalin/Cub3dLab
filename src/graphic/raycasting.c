@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:24 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:48:57 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,24 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 		pixel_y = data->precomputed->float_line - half_wall_height;
 		while (pixel_y < y_max)
 		{
-			// if (pixel_y % 2 == 0 )
+			if (pixel_y % 2 == 0 )
 				color = ft_get_color_from_texture(data->textures[wall_dir], get_pixel_from_sprite_x(data, pov), get_pixel_from_sprite_y(data, wall_height, pixel_y));
 			my_mlx_pixel_put(data->image, pixel_x, pixel_y, color);
 			pixel_y++;
 		}
 		pixel_x++;
 	}
+}
+
+float	get_fov_angles(float pov)
+{
+	float fov_step_angle;
+	float fov_step_h;
+	float fov_step_v;
+	
+	fov_step_v = cos(FOV_AMPLITUDE);
+	fov_step_h = tan(FOV_AMPLITUDE * M_PI/180) / FOV_AMPLITUDE;
+	fov_step_angle = 
 }
 
 void	get_wall_height(t_data *data)

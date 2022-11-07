@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 13:55:42 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:27:36 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,13 @@ t_ray	*get_collision_coord(t_data *data, float pov)
 
 	ray_vertical = get_collision_x(data, pov);
 	ray_horizontal = get_collision_y(data, pov);
+	// if on big axis return before to avoid overflow
 	ray_vertical->len = get_ray_len(data, ray_vertical);
 	ray_horizontal->len = get_ray_len(data, ray_horizontal);
+	if (!ray_horizontal->coll)
+		return (ray_vertical);
+	if (!ray_vertical->coll)
+		return (ray_horizontal);
 	if (ray_horizontal->len < ray_vertical->len)
 	{
 		free(ray_vertical);
