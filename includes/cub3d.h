@@ -9,10 +9,10 @@
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF			10
 # define ROT_COEF			20
-# define STEP_COEF			0.2
-# define WIN_WIDTH			1024
-# define WIN_HEIGHT			1200
-# define FOV				900
+# define STEP_COEF			0.1
+# define WIN_WIDTH			1200
+# define WIN_HEIGHT			900
+# define FOV				600
 # define FOV_STEP			0.00175
 # define FOV_AMPLITUDE		FOV * FOV_STEP * 0.5
 # define FLOAT_LINE			WIN_HEIGHT * 0.5
@@ -20,6 +20,13 @@
 # define CUB_SIZE			1
 # define SPRITE_SIZE		32
 # define HIT_BOX			0.1
+
+/****************DEFINES_RADIANS******************/
+
+#define TWO_PI 6.28318530718
+#define PI_ON_TWO 1.57079632679
+#define THREE_PI_ON_TWO 4.71238898038
+# define PI 3.14159265359
 
 /****************DEFINES_KEYBOARD*********************/
 
@@ -102,30 +109,12 @@ typedef struct s_player
 	float	ray_coef_y;
 }				t_player;
 
-#define PI_ON_SIX 0
-#define PI_ON_FOUR 1
-#define PI_ON_THREE 2
-#define PI_ON_TWO 3
-#define TWO_PI_ON_THREE 4
-#define THREE_PI_ON_FOUR 5
-#define FIVE_PI_ON_SIX 6
-#define PI 7
-#define SEVEN_PI_ON_SIX 8
-#define FIVE_PI_ON_FOUR 9
-#define FOUR_PI_ON_THREE 10
-#define THREE_PI_ON_TWO 11
-#define FIVE_PI_ON_THREE 12
-#define SEVEN_PI_ON_FOUR 13
-#define ELEVEN_PI_ON_SIX 14
-#define TWO_PI 15
-
 
 typedef struct s_precomputed
 {
 	float			float_line;
 	float			fov_amplitude;
-	float			stripe;
-	float			radians[16];
+	int				stripe;
 	int				*map_lines_len;
 }				t_precomputed;
 
@@ -137,6 +126,7 @@ typedef struct s_data
 	int				color_ceil;
 	int				color_floor;
 	char			**map;
+	int				y_max;
 	void			*mlx;
 	void			*mlx_win;
 	t_image			*image;
@@ -158,16 +148,10 @@ void    		raycasting(t_data *data);
 void			draw_line(t_data *data, float end_x, float end_y);
 float			get_y_with_x(t_data *data, float x, float pov);
 float			get_x_with_y(t_data *data, float y, float pov);
-
-float			get_fixed_ray_end(t_data *data, t_ray *ray, char dir, float pov);
-
-// float			get_fixed_ray_end(t_data *data, t_ray *ray, char dir);
+float			get_fixed_ray_end(t_ray *ray, char dir, float pov);
 float			get_ray_len(t_data *data, t_ray *ray);
 int				rgb_to_hex(unsigned char *rgb);
-
-int				get_wall_dir(t_data *data, t_ray *ray, char dir, float pov);
-
-// int				get_wall_dir(t_data *data, t_ray *ray, char dir);
+int				get_wall_dir(t_ray *ray, char dir, float pov);
 int				get_pixel_from_sprite_x(t_data *data, float pov);
 int				get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_y);
 
