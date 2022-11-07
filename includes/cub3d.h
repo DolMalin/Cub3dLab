@@ -125,6 +125,7 @@ typedef struct s_precomputed
 	float			fov_amplitude;
 	float			stripe;
 	float			radians[16];
+	int				*map_lines_len;
 }				t_precomputed;
 
 typedef struct s_data

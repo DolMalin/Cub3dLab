@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/04 17:59:47 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:57:32 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static t_bool	check_collision_x(t_data *data, t_ray *ray)
 	return (false);
 }
 
+
 static t_ray	*get_collision_y(t_data *data)
 {
 	t_ray	*ray;
@@ -72,7 +73,8 @@ static t_ray	*get_collision_y(t_data *data)
 		if (data->player->pov == M_PI || data->player->pov == 0)
 			return (ray);
 		ray->x_end = get_x_with_y(data, ray->y_end);
-		if (ray->x_end >= ft_strlen(data->map[(int)ray->y_end])
+		// if (ray->x_end >= ft_strlen(data->map[(int)ray->y_end])
+		if (ray->x_end >= data->precomputed->map_lines_len[(int)ray->y_end]
 			|| ray->x_end < 0)
 			return (ray);
 		if (ray->y_end > array_len((void **)data->map) || ray->y_end < 0)
@@ -103,7 +105,7 @@ static t_ray	*get_collision_x(t_data *data)
 		ray->y_end = get_y_with_x(data, ray->x_end);
 		if (ray->y_end >= array_len((void **)data->map) || ray->y_end < 0)
 			return (ray);
-		if (ray->x_end >= ft_strlen(data->map[(int)ray->y_end])
+		if (ray->x_end >= data->precomputed->map_lines_len[(int)ray->y_end]
 			|| ray->x_end < 0)
 			return (ray);
 		if (check_collision_x(data, ray))

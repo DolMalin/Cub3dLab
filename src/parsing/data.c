@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/04 18:08:35 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 12:53:15 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ t_precomputed	*init_precomputed(t_data *data)
 	precomputed = malloc(sizeof(precomputed));
 	if (!precomputed)
 		error(MEMALLOC);
-	precomputed->float_line = FLOAT_LINE;
-	precomputed->fov_amplitude = FOV_AMPLITUDE;
-	precomputed->stripe = STRIPE;
+		
+	precomputed->float_line = (float)FLOAT_LINE;
+	precomputed->fov_amplitude = (float)FOV_AMPLITUDE;
+	precomputed->stripe = (float)STRIPE;
 	precomputed->radians[PI_ON_SIX] = M_PI / 6;
 	precomputed->radians[PI_ON_FOUR] = M_PI / 4;
 	precomputed->radians[PI_ON_THREE] = M_PI / 3;
@@ -113,6 +114,11 @@ t_precomputed	*init_precomputed(t_data *data)
 	precomputed->radians[ELEVEN_PI_ON_SIX] =  11 * M_PI / 6;	
 	precomputed->radians[TWO_PI] = 2 * M_PI;
 
+	precomputed->map_lines_len = malloc(sizeof(int) * array_len((void **)data->map));
+	if (!precomputed->map_lines_len)
+		error(MEMALLOC);
+	for (size_t i = 0; i < array_len((void **)data->map); i++)
+		precomputed->map_lines_len[i] = ft_strlen(data->map[i]);
 	return (precomputed);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/04 18:22:40 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:02:53 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 	pixel_x = stripe_index * STRIPE;
 	pixel_y = data->precomputed->float_line - wall_height * 0.5;
 
-	int x_max = stripe_index * STRIPE + STRIPE + 1;
+	int x_max = stripe_index * data->precomputed->stripe + data->precomputed->stripe + 1;
 	int	y_max = data->precomputed->float_line + wall_height * 0.5;
 	float	half_wall_height = wall_height * 0.5;
 	color = 0x00000;
@@ -97,7 +97,7 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 		pixel_y = data->precomputed->float_line - half_wall_height;
 		while (pixel_y < y_max)
 		{
-			if (pixel_y % 2 == 0 || pixel_y % 2 == 0)
+			if (pixel_y % 2 == 0 )
 				color = ft_get_color_from_texture(data->textures[wall_dir], get_pixel_from_sprite_x(data), get_pixel_from_sprite_y(data, wall_height, pixel_y));
 			my_mlx_pixel_put(data->image, pixel_x, pixel_y, color);
 			pixel_y++;
