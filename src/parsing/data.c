@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 12:53:15 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:38:28 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,38 +87,23 @@ t_texture **init_textures(t_data *data, char **textures_path)
 t_precomputed	*init_precomputed(t_data *data)
 {
 	t_precomputed	*precomputed;
-
-	(void)data;
-
+	int				i;
+	
+	i = 0;
 	precomputed = malloc(sizeof(precomputed));
 	if (!precomputed)
 		error(MEMALLOC);
-		
 	precomputed->float_line = (float)FLOAT_LINE;
 	precomputed->fov_amplitude = (float)FOV_AMPLITUDE;
 	precomputed->stripe = (float)STRIPE;
-	precomputed->radians[PI_ON_SIX] = M_PI / 6;
-	precomputed->radians[PI_ON_FOUR] = M_PI / 4;
-	precomputed->radians[PI_ON_THREE] = M_PI / 3;
-	precomputed->radians[PI_ON_TWO] = M_PI / 2;
-	precomputed->radians[TWO_PI_ON_THREE] =  2 * M_PI / 3;
-	precomputed->radians[THREE_PI_ON_FOUR] =  3 * M_PI / 4;
-	precomputed->radians[FIVE_PI_ON_SIX] =  5 * M_PI / 6;
-	precomputed->radians[PI] = M_PI;
-	precomputed->radians[SEVEN_PI_ON_SIX] =  7 * M_PI / 6;
-	precomputed->radians[FIVE_PI_ON_FOUR] =  5 * M_PI / 4;
-	precomputed->radians[FOUR_PI_ON_THREE] =  4 * M_PI / 3;
-	precomputed->radians[THREE_PI_ON_TWO] =  3 * M_PI / 2;	
-	precomputed->radians[FIVE_PI_ON_THREE] =  5 * M_PI / 3;
-	precomputed->radians[SEVEN_PI_ON_FOUR] =  7 * M_PI / 4;
-	precomputed->radians[ELEVEN_PI_ON_SIX] =  11 * M_PI / 6;	
-	precomputed->radians[TWO_PI] = 2 * M_PI;
-
 	precomputed->map_lines_len = malloc(sizeof(int) * array_len((void **)data->map));
 	if (!precomputed->map_lines_len)
 		error(MEMALLOC);
-	for (size_t i = 0; i < array_len((void **)data->map); i++)
+	while (i < data->y_max)
+	{
 		precomputed->map_lines_len[i] = ft_strlen(data->map[i]);
+		i++;
+	}
 	return (precomputed);
 }
 
@@ -142,6 +127,7 @@ t_data	*init_data(char *scene_file)
 	data->player = init_player(data);
 	data->image = init_image(data);
 	data->textures = init_textures(data, data->textures_path);
+	data->y_max = array_len((void **)data->map);
 	data->precomputed = init_precomputed(data);
 	free_array((void **)parsed_scene);
 	return (data);

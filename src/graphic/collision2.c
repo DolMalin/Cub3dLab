@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:07:48 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 13:54:55 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:32:06 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,38 +29,38 @@ float	get_x_with_y(t_data *data, float y, float pov)
 	return (coef * (data->player->y - y) + data->player->x);
 }
 
-float	get_fixed_ray_end(t_data *data, t_ray *ray, char dir, float pov)
+float	get_fixed_ray_end(t_ray *ray, char dir, float pov)
 {
 	if (dir == 'y')
 	{
-		if (pov == M_PI || pov == 0)
+		if (pov == PI || pov == 0)
 			return (ray->y_end);
-		if (pov < M_PI)
+		if (pov < PI)
 			return (ceil(ray->y_end - 1));
 		else
 			return (floor(ray->y_end + 1));
 		return (ray->y_end);
 	}
-	if (pov == M_PI_2 || pov == data->precomputed->radians[THREE_PI_ON_TWO])
+	if (pov == PI_ON_TWO || pov == THREE_PI_ON_TWO)
 		return (ray->x_end);
-	if (pov < M_PI_2 || pov > data->precomputed->radians[THREE_PI_ON_TWO])
+	if (pov < PI_ON_TWO || pov > THREE_PI_ON_TWO)
 		return (floor(ray->x_end + 1));
 	else
 		return (ceil(ray->x_end - 1));
 	return (ray->x_end);
 }
 
-int	get_wall_dir(t_data *data, t_ray *ray, char dir, float pov)
+int	get_wall_dir(t_ray *ray, char dir, float pov)
 {
 	if (dir == 'y')
 	{
-		if (pov < M_PI)
+		if (pov < PI)
 			return (SO);
 		else
 			return (NO);
 		return (ray->y_end);
 	}
-	if (pov < M_PI_2 || pov > data->precomputed->radians[THREE_PI_ON_TWO])
+	if (pov < PI_ON_TWO || pov > THREE_PI_ON_TWO)
 		return (WE);
 	else
 		return (EA);

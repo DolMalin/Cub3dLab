@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 14:01:24 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:31:05 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	draw_rays(t_data *data)
 	{
 		data->player->pov -= FOV_STEP;
 		if (data->player->pov < 0)
-			data->player->pov += data->precomputed->radians[TWO_PI];
-		if (data->player->pov > data->precomputed->radians[TWO_PI])
-			data->player->pov -= (data->precomputed->radians[TWO_PI]);
+			data->player->pov += TWO_PI;
+		if (data->player->pov > TWO_PI)
+			data->player->pov -= TWO_PI;
 		ray = get_collision_coord(data, data->player->pov);
 		draw_line(data, ray->x_end, ray->y_end);
 		free(ray);
@@ -86,7 +86,7 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 	if (wall_height > WIN_HEIGHT)
 		wall_height = WIN_HEIGHT;
 	pixel_x = stripe_index * STRIPE;
-	// pixel_y = data->precomputed->float_line - (wall_height * 0.5);
+
 	pixel_y = data->precomputed->float_line - (wall_height * 0.5);
 
 	// printf("divide by two = %f | bitshift %f\n",(wall_height * 0.5), (float)((long)wall_height >> 1));
@@ -99,7 +99,7 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 		pixel_y = data->precomputed->float_line - half_wall_height;
 		while (pixel_y < y_max)
 		{
-			// if (pixel_y % 2 == 0 )
+			if (pixel_y % 2 == 0 )
 				color = ft_get_color_from_texture(data->textures[wall_dir], get_pixel_from_sprite_x(data, pov), get_pixel_from_sprite_y(data, wall_height, pixel_y));
 			my_mlx_pixel_put(data->image, pixel_x, pixel_y, color);
 			pixel_y++;
@@ -124,9 +124,9 @@ void	get_wall_height(t_data *data)
 	{
 		// printf("pov:%f\n", pov);
 		if (pov < 0)
-			pov += data->precomputed->radians[TWO_PI];
-		if (pov > data->precomputed->radians[TWO_PI])
-			pov -= data->precomputed->radians[TWO_PI];
+			pov += TWO_PI;
+		if (pov > TWO_PI)
+			pov -= TWO_PI;
 		ray = get_collision_coord(data, pov);
 		ray_len = get_ray_len(data, ray)
 			* cos(fabs(pov - mid_ray));
