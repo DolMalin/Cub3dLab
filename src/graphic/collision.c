@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 16:49:36 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:27:40 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static t_bool	check_collision_x(t_data *data, t_ray *ray, float pov)
 }
 
 
-static t_ray	*get_collision_y(t_data *data, float pov)
+static t_ray	*get_collision_y(t_data *data, float pov, t_ray *ray)
 {
-	t_ray	*ray;
+	// t_ray	*ray;
 
-	ray = malloc(sizeof(t_ray));
-	if (!ray)
-		error(MEMALLOC);
+	// ray = malloc(sizeof(t_ray));
+	// if (!ray)
+	// 	error(MEMALLOC);
 	ray->x_end = 1000000;
 	ray->y_end = data->player->y;
 	ray->angle = pov;
@@ -84,13 +84,13 @@ static t_ray	*get_collision_y(t_data *data, float pov)
 	return (ray);
 }
 
-static t_ray	*get_collision_x(t_data *data, float pov)
+static t_ray	*get_collision_x(t_data *data, float pov, t_ray *ray)
 {
-	t_ray	*ray;
+	// t_ray	*ray;
 
-	ray = malloc(sizeof(t_ray));
-	if (!ray)
-		error(MEMALLOC);
+	// ray = malloc(sizeof(t_ray));
+	// if (!ray)
+	// 	error(MEMALLOC);
 	ray->x_end = data->player->x;
 	ray->y_end = 1000000;
 	ray->angle = pov;
@@ -115,18 +115,15 @@ static t_ray	*get_collision_x(t_data *data, float pov)
 
 t_ray	*get_collision_coord(t_data *data, float pov)
 {
-	t_ray	*ray_horizontal;
-	t_ray	*ray_vertical;
-
-	ray_vertical = get_collision_x(data, pov);
-	ray_horizontal = get_collision_y(data, pov);
-	ray_vertical->len = get_ray_len(data, ray_vertical);
-	ray_horizontal->len = get_ray_len(data, ray_horizontal);
-	if (ray_horizontal->len < ray_vertical->len)
+	data->ray_vertical = get_collision_x(data, pov, data->ray_vertical);
+	data->ray_horizontal = get_collision_y(data, pov, data->ray_horizontal);
+	data->ray_vertical->len = get_ray_len(data, data->ray_vertical);
+	data->ray_horizontal->len = get_ray_len(data, data->ray_horizontal);
+	if (data->ray_horizontal->len < data->ray_vertical->len)
 	{
-		free(ray_vertical);
-		return (ray_horizontal);
+		// free(ray_vertical);
+		return (data->ray_horizontal);
 	}
-	free(ray_horizontal);
-	return (ray_vertical);
+	// free(ray_horizontal);
+	return (data->ray_vertical);
 }

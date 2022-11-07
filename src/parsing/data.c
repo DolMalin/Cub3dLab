@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 17:02:58 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:34:23 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,12 @@ t_data	*init_data(char *scene_file)
 	data->textures = init_textures(data, data->textures_path);
 	data->y_max = array_len((void **)data->map);
 	data->precomputed = init_precomputed(data);
+	data->ray_horizontal = malloc(sizeof(t_ray));
+	if (!data->ray_horizontal)
+		error(MEMALLOC);
+	data->ray_vertical = malloc(sizeof(t_ray));
+	if (!data->ray_vertical)
+		error(MEMALLOC);
 	free_array((void **)parsed_scene);
 	return (data);
 }
@@ -143,5 +149,7 @@ void	free_data(t_data *data)
 	free(data->image->addr);
 	free(data->image);
 	free(data->player);
+	free(data->ray_horizontal);
+	free(data->ray_vertical);
 	free(data);
 }

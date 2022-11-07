@@ -129,6 +129,8 @@ typedef struct s_data
 	void			*mlx;
 	void			*mlx_win;
 	t_image			*image;
+	t_ray			*ray_horizontal;
+	t_ray			*ray_vertical;
 	t_player		*player;
 	t_precomputed	*precomputed;
 }				t_data;
@@ -141,6 +143,7 @@ int				create_image(t_data *data);
 void			print_bigger(t_image *image, float x, float y, int color_code);
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
 
+// t_ray			*get_collision_coord(t_data *data, float pov);
 t_ray			*get_collision_coord(t_data *data, float pov);
 
 void    		raycasting(t_data *data);
@@ -156,12 +159,10 @@ int				get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_
 
 /****************ACTION*********************/
 void			run_game(t_data *data);
-
 int				move_player(t_data *data, int key);
 void			get_player_pos(t_data **data);
 void			update_player_pov(t_data **data);
 char			get_player_token(t_data *data);
-
 void			move_right(t_data **data);
 void			move_left(t_data **data);
 void			move_down(t_data **data);
