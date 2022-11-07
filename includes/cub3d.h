@@ -10,10 +10,10 @@
 # define PRINT_COEF			10
 # define ROT_COEF			20
 # define STEP_COEF			0.1
-# define WIN_WIDTH			1024
-# define WIN_HEIGHT			768
+# define WIN_WIDTH			1200
+# define WIN_HEIGHT			900
 # define FOV				600
-# define FOV_STEP			0.002
+# define FOV_STEP			0.00175
 # define FOV_AMPLITUDE		FOV * FOV_STEP * 0.5
 # define FLOAT_LINE			WIN_HEIGHT * 0.5
 # define STRIPE				WIN_WIDTH / FOV
@@ -113,7 +113,7 @@ typedef struct s_precomputed
 {
 	float			float_line;
 	float			fov_amplitude;
-	float			stripe;
+	int				stripe;
 	int				*map_lines_len;
 }				t_precomputed;
 
