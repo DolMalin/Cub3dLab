@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:07:48 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 15:32:06 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:49:43 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ float	get_y_with_x(t_data *data, float x, float pov)
 {
 	float	coef;
 
-	
 	coef = tan(pov);
 	return (coef * (data->player->x - x) + data->player->y);
 }

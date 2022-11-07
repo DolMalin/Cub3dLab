@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 15:42:37 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:49:36 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static t_ray	*get_collision_y(t_data *data, float pov)
 			return (ray);
 		if (check_collision_y(data, ray, pov))
 			ray->coll = true;
-		
 	}
 	return (ray);
 }
@@ -118,7 +117,6 @@ t_ray	*get_collision_coord(t_data *data, float pov)
 {
 	t_ray	*ray_horizontal;
 	t_ray	*ray_vertical;
-
 
 	ray_vertical = get_collision_x(data, pov);
 	ray_horizontal = get_collision_y(data, pov);

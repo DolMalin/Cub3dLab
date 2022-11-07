@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 16:18:19 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:02:58 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ t_precomputed	*init_precomputed(t_data *data)
 	int				i;
 	
 	i = 0;
-	precomputed = malloc(sizeof(precomputed));
+	precomputed = malloc(sizeof(t_precomputed));
 	if (!precomputed)
 		error(MEMALLOC);
 	precomputed->float_line = (float)FLOAT_LINE;
 	precomputed->fov_amplitude = (float)FOV_AMPLITUDE;
-	precomputed->stripe = STRIPE;
+	precomputed->stripe = WIN_WIDTH / FOV;
 	precomputed->map_lines_len = malloc(sizeof(int) * array_len((void **)data->map));
 	if (!precomputed->map_lines_len)
 		error(MEMALLOC);
