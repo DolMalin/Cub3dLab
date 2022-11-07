@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 17:06:03 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/07 17:40:08 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_precomputed	*init_precomputed(t_data *data)
 		error(MEMALLOC);
 	precomputed->float_line = (float)FLOAT_LINE;
 	precomputed->fov_amplitude = (float)FOV_AMPLITUDE;
-	precomputed->stripe = STRIPE;
+	precomputed->stripe = WIN_WIDTH / FOV;
 	precomputed->map_lines_len = malloc(sizeof(int) * array_len((void **)data->map));
 	if (!precomputed->map_lines_len)
 		error(MEMALLOC);
@@ -129,6 +129,12 @@ t_data	*init_data(char *scene_file)
 	data->textures = init_textures(data, data->textures_path);
 	data->y_max = array_len((void **)data->map);
 	data->precomputed = init_precomputed(data);
+	data->ray_horizontal = malloc(sizeof(t_ray));
+	if (!data->ray_horizontal)
+		error(MEMALLOC);
+	data->ray_vertical = malloc(sizeof(t_ray));
+	if (!data->ray_vertical)
+		error(MEMALLOC);
 	free_array((void **)parsed_scene);
 	return (data);
 }
@@ -143,5 +149,7 @@ void	free_data(t_data *data)
 	free(data->image->addr);
 	free(data->image);
 	free(data->player);
+	free(data->ray_horizontal);
+	free(data->ray_vertical);
 	free(data);
 }

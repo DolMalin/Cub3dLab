@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 17:34:16 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/07 17:39:58 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@ float	get_ray_len(t_data *data, t_ray *ray)
 	);
 }
 
-void	draw_rays(t_data *data)
-{
-	t_ray	*ray;
-	float	temp;
-	float	i;
+// void	draw_rays(t_data *data)
+// {
+// 	t_ray	*ray;
+// 	float	temp;
+// 	float	i;
 
-	temp = data->player->pov;
-	i = 0;
-	data->player->pov += data->precomputed->fov_amplitude;
-	while (i < FOV)
-	{
-		data->player->pov -= FOV_STEP;
-		if (data->player->pov < 0)
-			data->player->pov += TWO_PI;
-		if (data->player->pov > TWO_PI)
-			data->player->pov -= TWO_PI;
-		ray = get_collision_coord(data, data->player->pov);
-		draw_line(data, ray->x_end, ray->y_end);
-		free(ray);
-		i++;
-	}
-	data->player->pov = temp;
-}
+// 	temp = data->player->pov;
+// 	i = 0;
+// 	data->player->pov += data->precomputed->fov_amplitude;
+// 	while (i < FOV)
+// 	{
+// 		data->player->pov -= FOV_STEP;
+// 		if (data->player->pov < 0)
+// 			data->player->pov += TWO_PI;
+// 		if (data->player->pov > TWO_PI)
+// 			data->player->pov -= TWO_PI;
+// 		ray = get_collision_coord(data, data->player->pov);
+// 		draw_line(data, ray->x_end, ray->y_end);
+// 		free(ray);
+// 		i++;
+// 	}
+// 	data->player->pov = temp;
+// }
 
 int	get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_y)
 {
@@ -62,7 +62,7 @@ int	get_pixel_from_sprite_x(t_data *data, float pov)
 		pixel_x_sprite = (ray->x_end - floor(ray->x_end)) * SPRITE_SIZE;
 	else
 		pixel_x_sprite = (ray->y_end - floor(ray->y_end)) * SPRITE_SIZE; 
-	free(ray);
+	// free(ray);
 	return (pixel_x_sprite);
 }
 
@@ -138,7 +138,6 @@ void	get_wall_height(t_data *data)
 		ray = get_collision_coord(data, pov);
 		wall_height_coef = 1 / (get_ray_len(data, ray) * cos(fabs(pov - mid_ray)));
 		put_stripe_to_image(data, wall_height_coef, i, ray->dir, pov);
-		free(ray);
 		pov -= FOV_STEP;
 		i++;
 	}
@@ -147,6 +146,5 @@ void	get_wall_height(t_data *data)
 void	raycasting(t_data *data)
 {
 	get_wall_height(data);
-	// draw_rays(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
