@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 16:18:19 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:06:03 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_precomputed	*init_precomputed(t_data *data)
 	int				i;
 	
 	i = 0;
-	precomputed = malloc(sizeof(precomputed));
+	precomputed = malloc(sizeof(t_precomputed));
 	if (!precomputed)
 		error(MEMALLOC);
 	precomputed->float_line = (float)FLOAT_LINE;

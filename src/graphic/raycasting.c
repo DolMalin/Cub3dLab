@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 16:51:25 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/07 17:34:16 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,20 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 	}
 }
 
-float	get_fov_angles(float pov)
-{
-	float fov_step_angle;
-	float fov_step_h;
-	float fov_step_v;
+// float	get_fov_angles()
+// {
+// 	float fov_step_angle;
+// 	float fov_step_h;
+// 	float fov_step_v;
 	
-	fov_step_v = cos(FOV_AMPLITUDE);
-	fov_step_h = tan(FOV_AMPLITUDE * M_PI/180) / FOV_AMPLITUDE;
-	fov_step_angle = 
-}
+// 	fov_step_v = cos(FOV_AMPLITUDE);
+// 	fov_step_h = tan(FOV_AMPLITUDE * 0.0174533) / FOV_AMPLITUDE;
+// 	fov_step_angle = fov_step_h / fov_step_v;
+// 	printf("fov step angle %f\n", fov_step_angle);
+// 	printf("fov_step_v %f\n", fov_step_v);
+// 	printf("fov_step_h %f\n", fov_step_h);
+// 	return (fov_step_angle);
+// }
 
 void	get_wall_height(t_data *data)
 {
