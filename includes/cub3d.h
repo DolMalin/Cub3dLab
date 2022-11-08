@@ -12,7 +12,8 @@
 # define STEP_COEF			0.3
 # define WIN_WIDTH			1200
 # define WIN_HEIGHT			900
-# define FOV				600 // 60 deg
+# define FOV				60 // 60 deg
+# define RAYS				600
 # define FOV_STEP			0.00175 // 1 deg /10
 # define FOV_AMPLITUDE		FOV * FOV_STEP * 0.5
 # define FLOAT_LINE			WIN_HEIGHT * 0.5

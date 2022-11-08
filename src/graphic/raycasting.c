@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/08 11:30:47 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/08 12:01:32 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,7 @@ float	get_ray_len(t_data *data, t_ray *ray)
 	);
 }
 
-// void	draw_rays(t_data *data)
-// {
-// 	t_ray	*ray;
-// 	float	temp;
-// 	float	i;
 
-// 	temp = data->player->pov;
-// 	i = 0;
-// 	data->player->pov += data->precomputed->fov_amplitude;
-// 	while (i < FOV)
-// 	{
-// 		data->player->pov -= FOV_STEP;
-// 		if (data->player->pov < 0)
-// 			data->player->pov += TWO_PI;
-// 		if (data->player->pov > TWO_PI)
-// 			data->player->pov -= TWO_PI;
-// 		ray = get_collision_coord(data, data->player->pov);
-// 		draw_line(data, ray->x_end, ray->y_end);
-// 		free(ray);
-// 		i++;
-// 	}
-// 	data->player->pov = temp;
-// }
 
 int	get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_y)
 {
@@ -110,10 +88,58 @@ float	get_fov_angles(int i)
 	float fov_step_v;
 	
 	fov_step_v = cos(30 * 0.0174533);
-	fov_step_h = (2 * (i / (float)FOV) - 1) * tan (30 * 0.0174533);
+	fov_step_h = (2 * (i / (float)RAYS) - 1) * tan (30 * 0.0174533);
 	fov_step_angle = atan(fov_step_h / fov_step_v);
 	return (fov_step_angle);
 }
+
+void	draw_rays(t_data *data)
+{
+	t_ray	*ray;
+	float	mid_ray;
+	// float	i;
+	float	pov;
+
+	// i = 0;
+	mid_ray = data->player->pov;
+	pov = mid_ray + data->precomputed->fov_amplitude;
+	// while (i < RAYS)
+	// {
+	// 	if (pov < 0)
+	// 		pov += TWO_PI;
+	// 	if (pov > TWO_PI)
+	// 		pov -= TWO_PI;
+		ray = get_collision_coord(data, pov);
+		draw_line(data, ray->x_end, ray->y_end);
+	// 	// pov -= FOV_STEP;
+	// 	pov = mid_ray - get_fov_angles(i);
+	// 	i++;
+	// }
+}
+// {
+// 	t_ray	*ray;
+// 	float	temp;
+// 	float	i;
+
+// 	temp = data->player->pov;
+// 	i = 0;
+// 	data->player->pov += data->precomputed->fov_amplitude;
+// 	while (i < RAYS)
+// 	{
+// 		data->player->pov -= get_fov_angles(i);
+// 		if (data->player->pov < 0)
+// 			data->player->pov += TWO_PI;
+// 		if (data->player->pov > TWO_PI)
+// 			data->player->pov -= TWO_PI;
+// 		ray = get_collision_coord(data, data->player->pov);
+// 		draw_line(data, ray->x_end, ray->y_end);
+// 		free(ray);
+// 		i++;
+// 	}
+// 	data->player->pov = temp;
+
+	
+// }
 
 void	get_wall_height(t_data *data)
 {
@@ -126,7 +152,7 @@ void	get_wall_height(t_data *data)
 	i = 0;
 	mid_ray = data->player->pov;
 	pov = mid_ray + data->precomputed->fov_amplitude;
-	while (i < FOV)
+	while (i < RAYS)
 	{
 		if (pov < 0)
 			pov += TWO_PI;
@@ -144,5 +170,6 @@ void	get_wall_height(t_data *data)
 void	raycasting(t_data *data)
 {
 	get_wall_height(data);
+	draw_rays(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
