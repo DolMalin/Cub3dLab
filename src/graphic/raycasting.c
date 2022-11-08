@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 18:49:53 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/08 11:30:47 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 		pixel_y = data->precomputed->float_line - (wall_height * 0.5);
 		while (pixel_y < x_y_max[1])
 		{
-			if (pixel_y % 2 == 0 )
+			// if (pixel_y % 2 == 0 )
 				color = ft_get_color_from_texture(data->textures[wall_dir],
 					get_pixel_from_sprite_x(data, pov), 
 					get_pixel_from_sprite_y(data, wall_height, pixel_y));
