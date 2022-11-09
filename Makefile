@@ -6,7 +6,7 @@
 #    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/11/09 13:07:56 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/11/09 13:14:18 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ LIBFT = ./libft/libft.a \
 
 MLX = ./mlx/libmlx.a \
 
-PARSING_FILES 		=	data.c \
+PARSING_FILES 		=	init_data.c \
+						init_data2.c \
 						player.c \
 						parse_scene.c \
 						get_features_from_scene.c \

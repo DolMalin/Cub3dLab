@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:42:55 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/13 16:44:45 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:28:16 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ size_t	array_len(void **array)
 	return (i);
 }
 
-t_bool is_config_line(char *line)
+t_bool	is_config_line(char *line)
 {
 	char	*trim_line;
 	size_t	len;

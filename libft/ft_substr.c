@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:04:32 by aandric           #+#    #+#             */
-/*   Updated: 2022/10/06 15:23:55 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/09 13:39:21 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*subs;
-	// size_t	i;
 
 	if (!s || start >= (unsigned int)ft_strlen(s))
 		return (ft_calloc(1, 1));
@@ -25,7 +24,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		subs = malloc(sizeof(char) * ft_strlen(s) + 1);
 	if (!subs)
 		return (0);
-	// i = 0;
 	s = s + start;
 	ft_strlcpy(subs, (char *)s, len + 1);
 	return (subs);

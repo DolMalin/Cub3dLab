@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:44:57 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 14:16:56 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/09 13:28:35 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,6 @@ t_bool	is_empty_line(char *line)
 		}
 	}
 	return (true);
-}
-
-void	print_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	printf("\e[2J");
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-}
-
-void	print_config(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	printf("\e[2J");
-	while (data->map[i])
-	{
-		printf("%s\n", data->map[i]);
-		i++;
-	}
-	printf("\nx = %f, y = %f\n", data->player->x, data->player->y);
-	printf("POV Player = %f\n", data->player->pov);
-	printf("ray_coef x = %f \t ray_coef y = %f\n", data->player->ray_coef_x, data->player->ray_coef_y);
 }
 
 t_bool	ft_strisdigit(char *str)

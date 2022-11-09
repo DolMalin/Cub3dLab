@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:40 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 14:54:51 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/09 13:28:51 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	get_events(int key, t_data *data)
 	if (key == ESCAPE_KC)
 		exit_program(data);
 	move_player(data, key);
-	print_config(data);
 	create_image(data);
 	return (0);
 }
@@ -31,7 +30,6 @@ int	get_events(int key, t_data *data)
 void	run_game(t_data *data)
 {
 	create_image(data);
-	// mlx_loop_hook(data->mlx, create_image, data);
 	mlx_hook(data->mlx_win, 2, 0, get_events, data);
 	mlx_hook(data->mlx_win, 17, 0, exit_program, data);
 	mlx_loop(data->mlx);
