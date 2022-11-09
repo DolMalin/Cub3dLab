@@ -53,6 +53,11 @@
 # define G 1
 # define B 2
 
+/****************DEFINES_UTILS*********************/
+
+# define X 0
+# define Y 1
+
 /****************DEFINES_ERRORS*********************/
 
 # define ARGS "wrong arguments."
@@ -144,10 +149,7 @@ void print_map(char **map);
 int				create_image(t_data *data);
 void			print_bigger(t_image *image, float x, float y, int color_code);
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
-
-// t_ray			*get_collision_coord(t_data *data, float pov);
 t_ray			*get_collision_coord(t_data *data, float pov);
-
 void    		raycasting(t_data *data);
 void			draw_line(t_data *data, float end_x, float end_y);
 float			get_y_with_x(t_data *data, float x, float pov);
@@ -155,9 +157,11 @@ float			get_x_with_y(t_data *data, float y, float pov);
 float			get_fixed_ray_end(t_ray *ray, char dir, float pov);
 float			get_ray_len(t_data *data, t_ray *ray);
 int				rgb_to_hex(unsigned char *rgb);
+int 			ft_get_color_from_texture(t_texture *texture, int x, int y);
 int				get_wall_dir(t_ray *ray, char dir, float pov);
-int				get_pixel_from_sprite_x(t_data *data, float pov);
+int				get_pixel_from_sprite_x(t_ray *ray);
 int				get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_y);
+void			draw_walls(t_data *data);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);

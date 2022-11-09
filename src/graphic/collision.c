@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/08 11:34:03 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/09 12:38:56 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,8 @@ static t_bool	check_collision_x(t_data *data, t_ray *ray, float pov)
 	return (false);
 }
 
-
 static t_ray	*get_collision_y(t_data *data, float pov, t_ray *ray)
 {
-	// t_ray	*ray;
-
-	// ray = malloc(sizeof(t_ray));
-	// if (!ray)
-	// 	error(MEMALLOC);
 	ray->x_end = 1000000;
 	ray->y_end = data->player->y;
 	ray->angle = pov;
@@ -86,11 +80,6 @@ static t_ray	*get_collision_y(t_data *data, float pov, t_ray *ray)
 
 static t_ray	*get_collision_x(t_data *data, float pov, t_ray *ray)
 {
-	// t_ray	*ray;
-
-	// ray = malloc(sizeof(t_ray));
-	// if (!ray)
-	// 	error(MEMALLOC);
 	ray->x_end = data->player->x;
 	ray->y_end = 1000000;
 	ray->angle = pov;
@@ -120,10 +109,6 @@ t_ray	*get_collision_coord(t_data *data, float pov)
 	data->ray_vertical->len = get_ray_len(data, data->ray_vertical);
 	data->ray_horizontal->len = get_ray_len(data, data->ray_horizontal);
 	if (data->ray_horizontal->len < data->ray_vertical->len)
-	{
-		// free(ray_vertical);
 		return (data->ray_horizontal);
-	}
-	// free(ray_horizontal);
 	return (data->ray_vertical);
 }

@@ -6,7 +6,7 @@
 #    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/11/09 11:03:20 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/11/09 13:07:56 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ GRAPHIC_FILES 	=		create_image.c \
 						collision.c		\
 						collision2.c	\
 						colors.c		\
+						draw_walls.c
 
 UTILS_FILES 		=	utils1.c \
 						utils2.c \
@@ -95,7 +96,7 @@ OBJS = 			${SRC:.c=.o}
 HEADERS = 		includes/cub3d.h
 
 CMD = 			gcc
-FLAGS = 		-Wall -Werror -Wextra  -O3  # -g3 -fsanitize=address
+FLAGS = 		-Wall -Werror -Wextra  -O3   # -g3 -fsanitize=address
 
 LIB =			./libft/libft.a ./mlx/libmlx.a
 

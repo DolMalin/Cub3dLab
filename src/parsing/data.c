@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/08 11:51:43 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/09 13:10:23 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ t_texture	*init_texture(t_data *data, char *texture_path)
 {
 	t_texture	*texture;
 
-	(void)data;
-	(void)texture_path;
-
 	texture = malloc(sizeof(t_texture));
 	if (!texture)
 		error(MEMALLOC);
@@ -72,8 +69,7 @@ t_texture	*init_texture(t_data *data, char *texture_path)
 t_texture **init_textures(t_data *data, char **textures_path)
 {
 	t_texture **textures;
-	// (void)data;
-	// (void)textures_path;
+
 	textures = malloc(sizeof(t_texture *) * 4);
 	if (!textures)
 		error(MEMALLOC);
@@ -151,5 +147,9 @@ void	free_data(t_data *data)
 	free(data->player);
 	free(data->ray_horizontal);
 	free(data->ray_vertical);
+	free(data->precomputed->map_lines_len);
+	free(data->precomputed);
 	free(data);
+
+	/* FREE TEXTURES */
 }
