@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/08 12:01:32 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/09 11:07:22 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 float	get_ray_len(t_data *data, t_ray *ray)
 {
-	return (
-		sqrtf(((ray->y_end - data->player->y) * (ray->y_end - data->player->y))
-			+ ((ray->x_end - data->player->x) * (ray->x_end - data->player->x)))
-	);
+	return (sqrtf(((ray->y_end - data->player->y) * (ray->y_end - data->player->y))+ ((ray->x_end - data->player->x) * (ray->x_end - data->player->x))));
 }
 
 
@@ -46,17 +43,19 @@ int	get_pixel_from_sprite_x(t_data *data, float pov)
 
 int ft_get_color_from_texture(t_texture *texture, int x, int y)
 {
-    return (*(int *)(texture->addr + (y * texture->line_length + x * texture->bits_per_pixel / 8)));
+	if (x > texture->width || y > texture->height || x < 0 || y < 0)
+		return (0x0);
+	return (*(int *)(texture->addr + (y * texture->line_length + x * texture->bits_per_pixel / 8)));
+
 }
 
-void	put_stripe_to_image(t_data *data, float wall_height_coef,
-		int stripe_index, int wall_dir, float pov)
+void	put_stripe_to_image(t_data *data, float wall_height_coef, int stripe_index, int wall_dir, float pov)
 {
 	float	wall_height;
 	int		pixel_x;
 	int		pixel_y;
 	int		color;
-	int		x_y_max[2];
+	float	x_y_max[2];
 	
 	wall_height = wall_height_coef * WIN_HEIGHT;
 	if (wall_height > WIN_HEIGHT)
@@ -70,9 +69,8 @@ void	put_stripe_to_image(t_data *data, float wall_height_coef,
 		pixel_y = data->precomputed->float_line - (wall_height * 0.5);
 		while (pixel_y < x_y_max[1])
 		{
-			// if (pixel_y % 2 == 0 )
 				color = ft_get_color_from_texture(data->textures[wall_dir],
-					get_pixel_from_sprite_x(data, pov), 
+					get_pixel_from_sprite_x(data, pov),
 					get_pixel_from_sprite_y(data, wall_height, pixel_y));
 			my_mlx_pixel_put(data->image, pixel_x, pixel_y, color);
 			pixel_y++;
