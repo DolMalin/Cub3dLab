@@ -19,7 +19,7 @@
 # define FLOAT_LINE			WIN_HEIGHT * 0.5
 # define STRIPE				WIN_WIDTH / FOV
 # define CUB_SIZE			1
-# define SPRITE_SIZE		300
+# define SPRITE_SIZE		100
 # define HIT_BOX			0.8
 
 /****************DEFINES_RADIANS******************/
@@ -55,13 +55,13 @@
 
 /****************DEFINES_ERRORS*********************/
 
-# define ARGS "wrong arguments."
-# define CONFIG_STRUCT "wrong configuration lines or structure of scene."
-# define MAP "wrong map."
-# define TEXTURES "wrong textures paths or format."
-# define RGB_CODES "wrong RGB color codes."
-# define MEMALLOC "can't allocate memory."
-# define OPENFILE "can't open file."
+# define ARGS "Error: wrong arguments.\n"
+# define CONFIG_STRUCT "Error: wrong configuration lines or structure of scene.\n"
+# define MAP "Error: wrong map."
+# define TEXTURES "Error: wrong textures paths or format.\n"
+# define RGB_CODES "Error: wrong RGB color codes.\n"
+# define MEMALLOC "Error: can't allocate memory.\n"
+# define OPENFILE "Error: can't open file.\n"
 
 typedef enum e_bool
 {
@@ -153,11 +153,15 @@ void			draw_line(t_data *data, float end_x, float end_y);
 float			get_y_with_x(t_data *data, float x, float pov);
 float			get_x_with_y(t_data *data, float y, float pov);
 float			get_fixed_ray_end(t_ray *ray, char dir, float pov);
-float			get_ray_len(t_data *data, t_ray *ray);
+// float			get_ray_len(t_data *data, t_ray *ray);
+float			get_ray_len(float x_start, float x_end, float y_start, float y_end);
+
 int				rgb_to_hex(unsigned char *rgb);
 int				get_wall_dir(t_ray *ray, char dir, float pov);
 int				get_pixel_from_sprite_x(t_data *data, float pov);
 int				get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_y);
+float			get_dist(float pov, float y_start, float y_end);
+int				ft_get_color_from_texture(t_texture *texture, int x, int y);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);

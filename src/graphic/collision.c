@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/08 11:34:03 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/08 14:06:51 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,10 @@ t_ray	*get_collision_coord(t_data *data, float pov)
 {
 	data->ray_vertical = get_collision_x(data, pov, data->ray_vertical);
 	data->ray_horizontal = get_collision_y(data, pov, data->ray_horizontal);
-	data->ray_vertical->len = get_ray_len(data, data->ray_vertical);
-	data->ray_horizontal->len = get_ray_len(data, data->ray_horizontal);
+	// data->ray_vertical->len = get_ray_len(data, data->ray_vertical);
+	// data->ray_horizontal->len = get_ray_len(data, data->ray_horizontal);
+	data->ray_vertical->len = get_ray_len(data->player->x, data->ray_vertical->x_end, data->player->y, data->ray_vertical->y_end);
+	data->ray_horizontal->len = get_ray_len(data->player->x, data->ray_horizontal->x_end, data->player->y, data->ray_horizontal->y_end);
 	if (data->ray_horizontal->len < data->ray_vertical->len)
 	{
 		// free(ray_vertical);

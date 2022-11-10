@@ -6,20 +6,24 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/08 12:01:32 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/08 16:18:58 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-float	get_ray_len(t_data *data, t_ray *ray)
+// float	get_ray_len(t_data *data, t_ray *ray)
+float	get_ray_len(float x_start, float x_end, float y_start, float y_end)
 {
+	// return (
+	// 	sqrtf(((ray->y_end - data->player->y) * (ray->y_end - data->player->y))
+	// 		+ ((ray->x_end - data->player->x) * (ray->x_end - data->player->x)))
+	// );
 	return (
-		sqrtf(((ray->y_end - data->player->y) * (ray->y_end - data->player->y))
-			+ ((ray->x_end - data->player->x) * (ray->x_end - data->player->x)))
+		sqrtf(((y_end - y_start) * (y_end - y_start))
+			+ ((x_end - x_start) * (x_end - x_start)))
 	);
 }
-
 
 
 int	get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_y)
@@ -97,24 +101,24 @@ void	draw_rays(t_data *data)
 {
 	t_ray	*ray;
 	float	mid_ray;
-	// float	i;
+	float	i;
 	float	pov;
 
-	// i = 0;
+	i = 0;
 	mid_ray = data->player->pov;
 	pov = mid_ray + data->precomputed->fov_amplitude;
-	// while (i < RAYS)
-	// {
-	// 	if (pov < 0)
-	// 		pov += TWO_PI;
-	// 	if (pov > TWO_PI)
-	// 		pov -= TWO_PI;
+	while (i < RAYS)
+	{
+		if (pov < 0)
+			pov += TWO_PI;
+		if (pov > TWO_PI)
+			pov -= TWO_PI;
 		ray = get_collision_coord(data, pov);
 		draw_line(data, ray->x_end, ray->y_end);
-	// 	// pov -= FOV_STEP;
-	// 	pov = mid_ray - get_fov_angles(i);
-	// 	i++;
-	// }
+		// pov -= FOV_STEP;
+		pov = mid_ray - get_fov_angles(i);
+		i++;
+	}
 }
 // {
 // 	t_ray	*ray;
@@ -141,6 +145,8 @@ void	draw_rays(t_data *data)
 	
 // }
 
+
+
 void	get_wall_height(t_data *data)
 {
 	t_ray	*ray;
@@ -159,7 +165,7 @@ void	get_wall_height(t_data *data)
 		if (pov > TWO_PI)
 			pov -= TWO_PI;
 		ray = get_collision_coord(data, pov);
-		wall_height_coef = 1 / (get_ray_len(data, ray) * cos(fabs(pov - mid_ray)));
+		wall_height_coef = 1 / (get_ray_len(data->player->x, ray->x_end, data->player->y, ray->y_end) * cos(fabs(pov - mid_ray)));
 		put_stripe_to_image(data, wall_height_coef, i, ray->dir, pov);
 		// pov -= FOV_STEP;
 		pov = mid_ray - get_fov_angles(i);

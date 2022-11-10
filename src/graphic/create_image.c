@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 17:39:54 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 17:07:29 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	put_player_to_minimap(t_data *data)
 		data->image,
 		(data->player->x * PRINT_COEF) + 20,
 		(data->player->y * PRINT_COEF) + 20,
-		0xFFFFF
+		0x00000
 		);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
@@ -45,23 +45,33 @@ static void	put_mini_map_to_image(t_data *data)
 
 void	put_background_to_image(t_data *data)
 {
-	int		i;
-	int		j;
+	int		y;
+	int		x;
+	// int		color;
+	// int		floor_dist;
+	// float		pixel_dist;
 
-	i = 0;
-	
-	while (i < WIN_HEIGHT)
+	y = 0;
+	while (y < WIN_HEIGHT)
 	{
-		j = 0;
-		while (j < WIN_WIDTH)
+		x = 0;
+		while (x < WIN_WIDTH)
 		{
-			if (i / (WIN_HEIGHT * 0.5) <= 1)
-				my_mlx_pixel_put(data->image, j, i, data->color_ceil);
-			if (i / (WIN_HEIGHT * 0.5) > 1)
-				my_mlx_pixel_put(data->image, j, i, data->color_floor);
-			j++;
+			if (y / (WIN_HEIGHT * 0.5) <= 1)
+				my_mlx_pixel_put(data->image, x, y, data->color_ceil);
+			if (y / (WIN_HEIGHT * 0.5) > 1)
+			{
+				// pixel_dist = get_ray_len(WIN_WIDTH / 2, x, WIN_HEIGHT / 2, y);
+				
+				// printf("%f pixel dist\n", pixel_dist);
+				// floor_dist = WIN_HEIGHT * 0.5 * (1 / get_ray_len(0, abs((WIN_WIDTH / 2) - x), 0, (WIN_HEIGHT / 2) - y));
+				// color = ft_get_color_from_texture(data->textures[SO], get_pixel_from_sprite_x(data, data->player->pov), get_pixel_from_sprite_y(data, floor_dist, y));
+				// my_mlx_pixel_put(data->image, x, y, color);
+				my_mlx_pixel_put(data->image, x, y, data->color_floor);
+			}
+			x++;
 		}
-		i++;
+		y++;
 	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }

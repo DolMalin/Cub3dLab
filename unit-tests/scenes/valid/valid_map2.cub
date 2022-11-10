@@ -1,10 +1,10 @@
-NO ./textures/wallpaper_flowers.xpm 
-SO ./t extures/wallpaper_flowers.xpm      
-WE ./textures/wallpaper_flowers.xpm 
-EA ./textures/wallpaper_flowers.xpm
+NO ./textures/overlook_carpet.xpm 
+SO ./t extures/overlook_carpet.xpm      
+WE ./textures/overlook_carpet.xpm 
+EA ./textures/overlook_carpet.xpm
 
-C 128,128,133
-F 255,0,127
+C 125,125,135
+F 125,125,135
 
 1111111111111111111111
 1000000000000000000001
