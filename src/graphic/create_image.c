@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/10 17:07:29 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 17:09:59 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	put_mini_map_to_image(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }
 
-void	put_background_to_image(t_data *data)
+static void	put_background_to_image(t_data *data)
 {
 	int		y;
 	int		x;
@@ -51,8 +51,8 @@ void	put_background_to_image(t_data *data)
 	// int		floor_dist;
 	// float		pixel_dist;
 
-	y = 0;
-	while (y < WIN_HEIGHT)
+	i = 0;
+	while (i < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)

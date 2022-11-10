@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/09 13:29:40 by pdal-mol          #+#    #+#             */
+/*   Updated: 2022/11/10 17:09:27 by aandric          ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
 /************************LIBS**************************/
-
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
@@ -12,25 +23,20 @@
 # define STEP_COEF			0.3
 # define WIN_WIDTH			1200
 # define WIN_HEIGHT			900
-# define FOV				60 // 60 deg
+# define FOV				60
 # define RAYS				600
-# define FOV_STEP			0.00175 // 1 deg /10
-# define FOV_AMPLITUDE		FOV * FOV_STEP * 0.5
-# define FLOAT_LINE			WIN_HEIGHT * 0.5
-# define STRIPE				WIN_WIDTH / FOV
+# define FOV_STEP			0.00175
 # define CUB_SIZE			1
 # define SPRITE_SIZE		100
 # define HIT_BOX			0.8
 
 /****************DEFINES_RADIANS******************/
-
-#define TWO_PI 6.28318530718
-#define PI_ON_TWO 1.57079632679
-#define THREE_PI_ON_TWO 4.71238898038
+# define TWO_PI 6.28318530718
+# define PI_ON_TWO 1.57079632679
+# define THREE_PI_ON_TWO 4.71238898038
 # define PI 3.14159265359
 
 /****************DEFINES_KEYBOARD*********************/
-
 # define KB_D 2
 # define KB_A 0
 # define KB_W 13
@@ -40,7 +46,6 @@
 # define ESCAPE_KC 53
 
 /****************DEFINES_SCENE*********************/
-
 # define NO 0
 # define SO 1
 # define EA 2
@@ -53,24 +58,27 @@
 # define G 1
 # define B 2
 
+/****************DEFINES_UTILS*********************/
+# define X 0
+# define Y 1
+
 /****************DEFINES_ERRORS*********************/
+# define ARGS "wrong arguments."
+# define CONFIG_STRUCT "wrong configuration lines or structure of scene."
+# define MAP "wrong map."
+# define TEXTURES "wrong textures paths or format."
+# define RGB_CODES "wrong RGB color codes."
+# define MEMALLOC "can't allocate memory."
+# define OPENFILE "can't open file."
 
-# define ARGS "Error: wrong arguments.\n"
-# define CONFIG_STRUCT "Error: wrong configuration lines or structure of scene.\n"
-# define MAP "Error: wrong map."
-# define TEXTURES "Error: wrong textures paths or format.\n"
-# define RGB_CODES "Error: wrong RGB color codes.\n"
-# define MEMALLOC "Error: can't allocate memory.\n"
-# define OPENFILE "Error: can't open file.\n"
-
+/****************TYPEDEFS*********************/
 typedef enum e_bool
 {
 	false,
 	true
 }			t_bool;
 
-
-typedef struct s_ray 
+typedef struct s_ray
 {
 	float	x_end;
 	float	y_end;
@@ -80,7 +88,7 @@ typedef struct s_ray
 	t_bool	coll;
 }				t_ray;
 
-typedef struct s_image 
+typedef struct s_image
 {
 	void	*ptr;
 	char	*addr;
@@ -89,7 +97,7 @@ typedef struct s_image
 	int		endian;
 }				t_image;
 
-typedef struct s_texture 
+typedef struct s_texture
 {
 	void	*ptr;
 	char	*addr;
@@ -101,7 +109,7 @@ typedef struct s_texture
 
 }				t_texture;
 
-typedef struct s_player 
+typedef struct s_player
 {
 	float	x;
 	float	y;
@@ -109,7 +117,6 @@ typedef struct s_player
 	float	ray_coef_x;
 	float	ray_coef_y;
 }				t_player;
-
 
 typedef struct s_precomputed
 {
@@ -137,18 +144,12 @@ typedef struct s_data
 	t_precomputed	*precomputed;
 }				t_data;
 
-/******** TO REMOVE*********/
-void print_map(char **map);
-
 /****************GRAPHIC*********************/
 int				create_image(t_data *data);
 void			print_bigger(t_image *image, float x, float y, int color_code);
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
-
-// t_ray			*get_collision_coord(t_data *data, float pov);
 t_ray			*get_collision_coord(t_data *data, float pov);
-
-void    		raycasting(t_data *data);
+void			raycasting(t_data *data);
 void			draw_line(t_data *data, float end_x, float end_y);
 float			get_y_with_x(t_data *data, float x, float pov);
 float			get_x_with_y(t_data *data, float y, float pov);
@@ -157,11 +158,12 @@ float			get_fixed_ray_end(t_ray *ray, char dir, float pov);
 float			get_ray_len(float x_start, float x_end, float y_start, float y_end);
 
 int				rgb_to_hex(unsigned char *rgb);
-int				get_wall_dir(t_ray *ray, char dir, float pov);
-int				get_pixel_from_sprite_x(t_data *data, float pov);
-int				get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_y);
-float			get_dist(float pov, float y_start, float y_end);
 int				ft_get_color_from_texture(t_texture *texture, int x, int y);
+int				get_wall_dir(t_ray *ray, char dir, float pov);
+int				get_pixel_from_sprite_x(t_ray *ray);
+int				get_pixel_from_sprite_y(t_data *data, float wall_height,
+					int wall_cursor_y);
+void			draw_walls(t_data *data);
 
 /****************ACTION*********************/
 void			run_game(t_data *data);
@@ -196,6 +198,11 @@ char			**parse_scene_file(char *scene_file);
 char			*trim(char *line, char *charset);
 char			**trim_config_line(char **parsed_scene);
 t_player		*init_player(t_data *data);
+t_image			*init_image(t_data *data);
+void			init_window(t_data *data);
+t_texture		*init_texture(t_data *data, char *texture_path);
+t_texture		**init_textures(t_data *data, char **textures_path);
+t_precomputed	*init_precomputed(t_data *data);
 
 /****************UTILS*********************/
 int				lines_count(char *file);
@@ -206,11 +213,13 @@ void			free_unterminated_array(void **array, size_t n);
 t_bool			is_empty_line(char *line);
 t_bool			ft_strisdigit(char *str);
 t_bool			is_in_charset(char c, char *charset);
-t_bool			is_near_charset(char **unparsed_scene, size_t i, size_t j, char *charset);
+t_bool			is_near_charset(char **unparsed_scene, size_t i,
+					size_t j, char *charset);
 void			print_config(t_data *data);
 
 /****************ERRORS*********************/
-void	error(char *error_msg);
+void			error(char *error_msg);
 
-t_bool	is_near_void(char **unparsed_scene, size_t i, size_t j);
+t_bool			is_near_void(char **unparsed_scene, size_t i, size_t j);
+
 #endif
