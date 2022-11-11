@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:26:05 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 16:29:49 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:38:50 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,17 @@ int	get_max_x(char	**parsed_scene)
 	return (max_len);
 }
 
+char	*filter_map_line(char *line, int max_x)
+{
+	char	*output;
+
+	output = ft_strtrim(line, "\n");
+	if (!output)
+		return (MEMALLOC);
+	output = complete_line_with_space(output, max_x);
+	return (output);
+}
+
 char	**get_map(char	**parsed_scene)
 {
 	char	**map;
@@ -100,10 +111,7 @@ char	**get_map(char	**parsed_scene)
 	{
 		if (!is_config_line(parsed_scene[i]))
 		{
-			map[j] = ft_strtrim(parsed_scene[i], "\n");
-			if (!map[j])
-				return (NULL);
-			map[j] = complete_line_with_space(map[j], max_x);
+			map[j] = filter_map_line(parsed_scene[i], max_x);
 			j++;
 		}
 		i++;

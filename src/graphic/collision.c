@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 13:55:49 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 17:32:12 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ static t_ray	*get_collision_y(t_data *data, float pov, t_ray *ray)
 		ray->dir = get_wall_dir(ray, 'y', pov);
 		if (pov == PI || pov == 0)
 			return (ray);
-		ray->x_end = get_x_with_y(data, ray->y_end, pov);
-		if (ray->x_end >= data->precomputed->map_lines_len[(int)ray->y_end]
-			|| ray->x_end < 0)
-			return (ray);
+		ray->x_end = get_x_with_y(data, ray->y_end, pov);		
 		if (ray->y_end > data->y_max || ray->y_end < 0)
 			return (ray);
+		if (ray->x_end >= data->precomputed->map_lines_len[(int)ray->y_end]
+			|| ray->x_end < 0)
+				return (ray);
 		if (check_collision_y(data->map, ray, pov, data->y_max))
 			ray->coll = true;
 	}

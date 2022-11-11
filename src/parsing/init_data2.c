@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:14:22 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 13:53:07 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:39:43 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ t_texture	*init_texture(t_data *data, char *texture_path)
 	texture = malloc(sizeof(t_texture));
 	if (!texture)
 		error(MEMALLOC);
-	texture->width = 100;
-	texture->height = 100;
 	texture->ptr = mlx_xpm_file_to_image(data->mlx, texture_path,
 			&texture->width, &texture->height);
 	if (!texture->ptr)
@@ -93,8 +91,7 @@ t_precomputed	*init_precomputed(t_data *data)
 	precomputed->float_line = (float)(WIN_HEIGHT * 0.5);
 	precomputed->fov_amplitude = (float)(FOV * FOV_STEP * 0.5);
 	precomputed->stripe = WIN_WIDTH / RAYS;
-	precomputed->map_lines_len = malloc(sizeof(int)
-			* array_len((void **)data->map));
+	precomputed->map_lines_len = malloc(sizeof(int) * (data->y_max + 1));
 	if (!precomputed->map_lines_len)
 		error(MEMALLOC);
 	while (i < data->y_max)
@@ -102,5 +99,6 @@ t_precomputed	*init_precomputed(t_data *data)
 		precomputed->map_lines_len[i] = ft_strlen(data->map[i]);
 		i++;
 	}
+	precomputed->map_lines_len[i] = 0;
 	return (precomputed);
 }

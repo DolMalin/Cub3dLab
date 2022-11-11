@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:52:43 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/10 17:10:49 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 17:28:07 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ int	get_pixel_from_sprite_y(t_data *data, float wall_height, int wall_cursor_y)
 	int	temp;
 
 	temp = wall_cursor_y - (data->precomputed->float_line - wall_height * 0.5);
-	pixel_y_sprite = temp / wall_height * SPRITE_SIZE;
+	pixel_y_sprite = temp / wall_height * data->textures[NO]->width;
 	return (pixel_y_sprite);
 }
 
-int	get_pixel_from_sprite_x(t_ray *ray)
+int	get_pixel_from_sprite_x(t_data *data, t_ray *ray)
 {
 	int		pixel_x_sprite;
 
 	if (ray->dir == NO || ray->dir == SO)
-		pixel_x_sprite = (ray->x_end - floor(ray->x_end)) * SPRITE_SIZE;
+		pixel_x_sprite = (ray->x_end - floor(ray->x_end)) * data->textures[NO]->width;
 	else
-		pixel_x_sprite = (ray->y_end - floor(ray->y_end)) * SPRITE_SIZE;
+		pixel_x_sprite = (ray->y_end - floor(ray->y_end)) * data->textures[NO]->width;
 	return (pixel_x_sprite);
 }
 

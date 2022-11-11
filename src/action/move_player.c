@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:25 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 16:52:09 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 17:30:11 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	move_up(t_data *data)
 		* (STEP_COEF + HIT_BOX);
 	if (data->map[next_y_i][next_x_i] == '1')
 		return ;
-	// if (!can_move(data->map, data->player->x, data->player->y, data->player->ray_coef_x, data->player->ray_coef_y))
-	// 	return ;
 	data->player->x = next_x;
 	data->player->y = next_y;
 }
@@ -84,9 +82,8 @@ void	move_right(t_data *data)
 		* (STEP_COEF + HIT_BOX);
 	next_y_i = data->player->y + data->player->ray_coef_x
 		* (STEP_COEF + HIT_BOX);
-	// if (data->map[next_y_i][next_x_i] == '1')
-	// 	return ;
-	
+	if (data->map[next_y_i][next_x_i] == '1')
+		return ;
 	data->player->x = next_x;
 	data->player->y = next_y;
 }

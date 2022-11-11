@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:06:29 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 16:53:44 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 17:07:27 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	draw_wall_pixel(t_data *data, t_ray *ray, float wall_height,
 	int	x;
 	int	y;
 	
-	x = get_pixel_from_sprite_x(ray);
+	x = get_pixel_from_sprite_x(data, ray);
 	y = get_pixel_from_sprite_y(data, wall_height, pixels[Y]);
 	color = ft_get_color_from_texture(data->textures[ray->dir], x, y);
 	my_mlx_pixel_put(data->image, pixels[0], pixels[1], color);
