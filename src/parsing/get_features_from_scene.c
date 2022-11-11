@@ -6,19 +6,28 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:25:27 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/09 13:25:42 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:23:36 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	*remove_key(char *line, int key_end)
+char	*remove_key(char *line, char *key)
 {
 	char	*buff;
+	int		i;
+	int		key_len;
 
-	if (ft_strlen(&line[key_end]) == 0)
-		return (NULL);
-	buff = ft_strdup(&line[key_end]);
+	i = 0;
+	key_len = ft_strlen(key);
+	// if (ft_strlen(&line[key_end]) == 0)
+	// 	return (NULL);
+	while (ft_strncmp(line, key, key_len) != 0)
+		i++;
+	i += key_len;
+	while(is_in_charset(line[i], " \t\r"))
+		i++;
+	buff = ft_strdup(&line[i]);
 	if (!buff)
 		error(MEMALLOC);
 	return (buff);
@@ -32,11 +41,7 @@ char	*get_line_from_key(char **parsed_scene, char *key)
 	while (parsed_scene[i])
 	{
 		if (ft_strncmp(parsed_scene[i], key, ft_strlen(key)) == 0)
-		{
-			if (parsed_scene[i][0] == 'C' || parsed_scene[i][0] == 'F')
-				return (remove_key(parsed_scene[i], 1));
-			return (remove_key(parsed_scene[i], 2));
-		}
+				return (remove_key(parsed_scene[i], key));
 		i++;
 	}
 	return (NULL);

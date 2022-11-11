@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:14:22 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/09 13:36:31 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/11 13:53:07 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_image	*init_image(t_data *data)
 		error(MEMALLOC);
 	image->ptr = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!image->ptr)
-		error(MEMALLOC);
+		error(MLX);
 	image->addr = mlx_get_data_addr(
 			image->ptr,
 			&image->bits_per_pixel,
@@ -29,7 +29,7 @@ t_image	*init_image(t_data *data)
 			&image->endian
 			);
 	if (!image->addr)
-		error(MEMALLOC);
+		error(MLX);
 	return (image);
 }
 
@@ -37,10 +37,10 @@ void	init_window(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		error(MEMALLOC);
+		error(MLX);
 	data->mlx_win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
 	if (!data->mlx_win)
-		error(MEMALLOC);
+		error(MLX);
 }
 
 t_texture	*init_texture(t_data *data, char *texture_path)
@@ -55,7 +55,7 @@ t_texture	*init_texture(t_data *data, char *texture_path)
 	texture->ptr = mlx_xpm_file_to_image(data->mlx, texture_path,
 			&texture->width, &texture->height);
 	if (!texture->ptr)
-		error(MEMALLOC);
+		error(MLX);
 	texture->addr = mlx_get_data_addr(
 			texture->ptr,
 			&texture->bits_per_pixel,
@@ -63,7 +63,7 @@ t_texture	*init_texture(t_data *data, char *texture_path)
 			&texture->endian
 			);
 	if (!texture->addr)
-		error(MEMALLOC);
+		error(MLX);
 	return (texture);
 }
 
