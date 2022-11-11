@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:26:05 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 13:57:36 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/11 14:59:09 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**get_map(char	**parsed_scene)
 	{
 		if (!is_config_line(parsed_scene[i]))
 		{
-			map[j] = trim(parsed_scene[i], "\n");
+			map[j] = ft_strtrim(parsed_scene[i], "\n");
 			if (!map[j])
 				return (NULL);
 			j++;

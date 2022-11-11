@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:42:55 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 14:01:29 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:04:15 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_bool	is_config_line(char *line)
 	ret = false;
 	if (!line)
 		return (true);
-	trim_line = trim(line, " \t\r\n");
+	trim_line = ft_strtrim(line, " \t\r\n");
 	if (!trim_line)
 		return (false);
 	len = ft_strlen(trim_line);
