@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:29:40 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 16:51:36 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 17:59:41 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define RAYS				600
 # define FOV_STEP			0.00175
 # define CUB_SIZE			1
-# define SPRITE_SIZE		32
 # define HIT_BOX			0.1
 
 /****************DEFINES_RADIANS******************/
@@ -155,13 +154,12 @@ void			draw_line(t_data *data, float end_x, float end_y);
 float			get_y_with_x(t_data *data, float x, float pov);
 float			get_x_with_y(t_data *data, float y, float pov);
 float			get_fixed_ray_end(t_ray *ray, char dir, float pov);
-// float			get_ray_len(t_data *data, t_ray *ray);
-float			get_ray_len(float x_start, float x_end, float y_start, float y_end);
-
+float			get_ray_len(float x_start, float x_end, float y_start,
+					float y_end);
 int				rgb_to_hex(unsigned char *rgb);
 int				ft_get_color_from_texture(t_texture *texture, int x, int y);
 int				get_wall_dir(t_ray *ray, char dir, float pov);
-int				get_pixel_from_sprite_x(t_ray *ray);
+int				get_pixel_from_sprite_x(t_data *data, t_ray *ray);
 int				get_pixel_from_sprite_y(t_data *data, float wall_height,
 					int wall_cursor_y);
 void			draw_walls(t_data *data);
@@ -194,6 +192,7 @@ void			free_data(t_data *data);
 char			*get_line_from_key(char	**parsed_scene, char *key);
 unsigned char	**get_colors(char **parsed_scene);
 char			**get_textures_paths(char **parsed_scene);
+t_bool			is_near_void(char **unparsed_scene, size_t i, size_t j);
 char			**get_map(char	**parsed_scene);
 char			**parse_scene_file(char *scene_file);
 char			*trim(char *line, char *charset);
@@ -220,7 +219,5 @@ void			print_config(t_data *data);
 
 /****************ERRORS*********************/
 void			error(char *error_msg);
-
-t_bool			is_near_void(char **unparsed_scene, size_t i, size_t j);
 
 #endif

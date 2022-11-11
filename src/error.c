@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:40:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 13:51:05 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:53:28 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	error(char *error_msg)
 {	
-	printf("%s\n", error_msg);
+	printf("Error: %s\n", error_msg);
 	exit(EXIT_FAILURE);
 }

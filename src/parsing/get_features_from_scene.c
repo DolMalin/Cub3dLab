@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_features_from_scene.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:25:27 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 15:23:36 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:33:24 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ char	*remove_key(char *line, char *key)
 
 	i = 0;
 	key_len = ft_strlen(key);
-	// if (ft_strlen(&line[key_end]) == 0)
-	// 	return (NULL);
 	while (ft_strncmp(line, key, key_len) != 0)
 		i++;
 	i += key_len;
-	while(is_in_charset(line[i], " \t\r"))
+	while (is_in_charset(line[i], " \t\r"))
 		i++;
 	buff = ft_strdup(&line[i]);
 	if (!buff)
@@ -41,7 +39,7 @@ char	*get_line_from_key(char **parsed_scene, char *key)
 	while (parsed_scene[i])
 	{
 		if (ft_strncmp(parsed_scene[i], key, ft_strlen(key)) == 0)
-				return (remove_key(parsed_scene[i], key));
+			return (remove_key(parsed_scene[i], key));
 		i++;
 	}
 	return (NULL);

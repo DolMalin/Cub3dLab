@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:06:29 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 16:53:44 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 17:58:06 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	draw_wall_pixel(t_data *data, t_ray *ray, float wall_height,
 	int	color;
 	int	x;
 	int	y;
-	
-	x = get_pixel_from_sprite_x(ray);
+
+	x = get_pixel_from_sprite_x(data, ray);
 	y = get_pixel_from_sprite_y(data, wall_height, pixels[Y]);
 	color = ft_get_color_from_texture(data->textures[ray->dir], x, y);
 	my_mlx_pixel_put(data->image, pixels[0], pixels[1], color);
@@ -43,7 +43,7 @@ void	draw_stripe(t_data *data, float wall_height_coef, int stripe_index,
 		pixels[Y] = data->precomputed->float_line - (wall_height * 0.5);
 		while (pixels[Y] < pixels_max[Y])
 		{
-			if (pixels[Y] >= 0 )
+			if (pixels[Y] >= 0)
 				draw_wall_pixel(data, ray, wall_height, pixels);
 			pixels[Y]++;
 		}
@@ -81,7 +81,8 @@ void	draw_walls(t_data *data)
 		if (pov > TWO_PI)
 			pov -= TWO_PI;
 		ray = get_collision_coord(data, pov);
-		wall_height_coef = 1 / (get_ray_len(data->player->x, ray->x_end, data->player->y, ray->y_end)
+		wall_height_coef = 1 / (get_ray_len(data->player->x,
+					ray->x_end, data->player->y, ray->y_end)
 				* cos(fabs(pov - mid_ray)));
 		draw_stripe(data, wall_height_coef, i, ray);
 		pov = mid_ray - get_fov_angles(i);

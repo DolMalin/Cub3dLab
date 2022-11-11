@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:49 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/17 16:20:14 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 17:51:01 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,30 @@ static t_bool	check_one_player(char **map)
 	return (true);
 }
 
+static t_bool	check_valid_characters(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (!is_in_charset(map[i][j], "01NSEW "))
+				return (false);
+			j++;
+		}
+		i++;
+	}
+	return (true);
+}
+
 t_bool	check_player(char **map)
 {
+	if (!check_valid_characters(map))
+		return (false);
 	if (!check_one_player(map))
 		return (false);
 	if (!check_player_is_in_map(map))
