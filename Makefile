@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/11/10 17:17:23 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/11/11 16:25:32 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,7 @@ OBJS = 			${SRC:.c=.o}
 HEADERS = 		includes/cub3d.h
 
 CMD = 			gcc
-FLAGS = 		-Wall -Werror -Wextra  -O3    # -g3 -fsanitize=address
+FLAGS = 		-Wall -Werror -Wextra  -O3     -g3 -fsanitize=address
 
 LIB =			./libft/libft.a ./mlx/libmlx.a
 

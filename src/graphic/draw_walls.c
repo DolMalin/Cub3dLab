@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:06:29 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/10 17:30:42 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 16:53:44 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	draw_wall_pixel(t_data *data, t_ray *ray, float wall_height,
 	int	color;
 	int	x;
 	int	y;
-
+	
 	x = get_pixel_from_sprite_x(ray);
 	y = get_pixel_from_sprite_y(data, wall_height, pixels[Y]);
 	color = ft_get_color_from_texture(data->textures[ray->dir], x, y);
@@ -32,9 +32,7 @@ void	draw_stripe(t_data *data, float wall_height_coef, int stripe_index,
 	int		pixels[2];
 	float	pixels_max[2];
 
-	wall_height = wall_height_coef * WIN_HEIGHT;
-	if (wall_height > WIN_HEIGHT)
-		wall_height = WIN_HEIGHT;
+	wall_height = (int)(wall_height_coef * WIN_HEIGHT);
 	pixels[X] = stripe_index * data->precomputed->stripe;
 	pixels[Y] = data->precomputed->float_line - (wall_height * 0.5);
 	pixels_max[X] = stripe_index * data->precomputed->stripe
@@ -45,7 +43,8 @@ void	draw_stripe(t_data *data, float wall_height_coef, int stripe_index,
 		pixels[Y] = data->precomputed->float_line - (wall_height * 0.5);
 		while (pixels[Y] < pixels_max[Y])
 		{
-			draw_wall_pixel(data, ray, wall_height, pixels);
+			if (pixels[Y] >= 0 )
+				draw_wall_pixel(data, ray, wall_height, pixels);
 			pixels[Y]++;
 		}
 		pixels[X]++;

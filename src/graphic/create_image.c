@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/10 17:11:49 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 16:29:31 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ static void	put_background_to_image(t_data *data)
 {
 	int		y;
 	int		x;
-	// int		color;
-	// int		floor_dist;
-	// float		pixel_dist;
 
 	y = 0;
 	while (y < WIN_HEIGHT)
@@ -60,15 +57,7 @@ static void	put_background_to_image(t_data *data)
 			if (y / (WIN_HEIGHT * 0.5) <= 1)
 				my_mlx_pixel_put(data->image, x, y, data->color_ceil);
 			if (y / (WIN_HEIGHT * 0.5) > 1)
-			{
-				// pixel_dist = get_ray_len(WIN_WIDTH / 2, x, WIN_HEIGHT / 2, y);
-				
-				// printf("%f pixel dist\n", pixel_dist);
-				// floor_dist = WIN_HEIGHT * 0.5 * (1 / get_ray_len(0, abs((WIN_WIDTH / 2) - x), 0, (WIN_HEIGHT / 2) - y));
-				// color = ft_get_color_from_texture(data->textures[SO], get_pixel_from_sprite_x(data, data->player->pov), get_pixel_from_sprite_y(data, floor_dist, y));
-				// my_mlx_pixel_put(data->image, x, y, color);
 				my_mlx_pixel_put(data->image, x, y, data->color_floor);
-			}
 			x++;
 		}
 		y++;

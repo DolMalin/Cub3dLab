@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:29:40 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 12:18:53 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 16:51:36 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define RAYS				600
 # define FOV_STEP			0.00175
 # define CUB_SIZE			1
-# define SPRITE_SIZE		100
-# define HIT_BOX			0.8
+# define SPRITE_SIZE		32
+# define HIT_BOX			0.1
 
 /****************DEFINES_RADIANS******************/
 # define TWO_PI 6.28318530718

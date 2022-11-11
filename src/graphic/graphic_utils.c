@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:46:48 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/07 15:15:12 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 16:43:22 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
 	char	*dst;
 	int		offset;
 
+	if (x < 0 || x > (WIN_WIDTH - 1) || y < 0 || y > (WIN_HEIGHT - 1))
+		return ;
 	offset = (y * image->line_length + x * image->bits_per_pixel / 8);
 	dst = image->addr + offset;
 	*(unsigned int *)dst = color;
