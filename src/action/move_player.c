@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:25 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 12:20:22 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 12:49:54 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,9 @@ void	move_right(t_data *data)
 		* STEP_COEF;
 	next_y_i = data->player->y + data->player->ray_coef_y
 		* STEP_COEF;
-	if (data->map[next_y_i][next_x_i] == '1')
-		return ;
+	// if (data->map[next_y_i][next_x_i] == '1')
+	// 	return ;
+	
 	data->player->x = next_x;
 	data->player->y = next_y;
 }

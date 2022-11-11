@@ -6,50 +6,50 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/10 17:09:48 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 13:35:27 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static t_bool	check_collision_y(t_data *data, t_ray *ray, float pov)
+static t_bool	check_collision_y(char **map, t_ray *ray, float pov, int y_max)
 {
 	if (ray->y_end == 0 || ray->y_end == data->y_max)
 		return (true);
 	if (pov > 0 && pov <= PI_ON_TWO)
-		if (data->map[(int)(ray->y_end - 1)][(int)floor(ray->x_end)] == '1')
+		if (map[(int)(ray->y_end - 1)][(int)floor(ray->x_end)] == '1')
 			return (true);
 	if (pov >= PI_ON_TWO && pov < PI)
-		if (data->map[(int)(ray->y_end - 1)][(int)floor(ray->x_end)] == '1')
+		if (map[(int)(ray->y_end - 1)][(int)floor(ray->x_end)] == '1')
 			return (true);
 	if (pov > PI && pov <= THREE_PI_ON_TWO)
-		if (data->map[(int)(ray->y_end)][(int)floor(ray->x_end)] == '1')
+		if (map[(int)(ray->y_end)][(int)floor(ray->x_end)] == '1')
 			return (true);
 	if (pov > THREE_PI_ON_TWO)
-		if (data->map[(int)(ray->y_end)][(int)floor(ray->x_end)] == '1')
+		if (map[(int)(ray->y_end)][(int)floor(ray->x_end)] == '1')
 			return (true);
 	return (false);
 }
 
-static t_bool	check_collision_x(t_data *data, t_ray *ray, float pov)
+static t_bool	check_collision_x(char map, t_ray *ray, float pov)
 {
 	if (pov == 0 || pov == PI)
-		if (data->map[(int)ray->y_end][(int)ray->x_end] == '1')
+		if (map[(int)ray->y_end][(int)ray->x_end] == '1')
 			return (true);
 	if (ray->x_end == 0 || ray->x_end
-		== data->precomputed->map_lines_len[(int)floor(ray->y_end)])
+		== precomputed->map_lines_len[(int)floor(ray->y_end)])
 		return (true);
 	if (pov >= 0 && pov <= PI_ON_TWO)
-		if (data->map[(int)floor(ray->y_end)][(int)(ray->x_end)] == '1')
+		if (map[(int)floor(ray->y_end)][(int)(ray->x_end)] == '1')
 			return (true);
 	if (pov > PI_ON_TWO && pov <= M_PI)
-		if (data->map[(int)floor(ray->y_end)][(int)(ray->x_end - 1)] == '1')
+		if (map[(int)floor(ray->y_end)][(int)(ray->x_end - 1)] == '1')
 			return (true);
 	if (pov >= PI && pov <= THREE_PI_ON_TWO)
-		if (data->map[(int)floor(ray->y_end)][(int)(ray->x_end - 1)] == '1')
+		if (map[(int)floor(ray->y_end)][(int)(ray->x_end - 1)] == '1')
 			return (true);
 	if (pov > THREE_PI_ON_TWO)
-		if (data->map[(int)floor(ray->y_end)][(int)(ray->x_end)] == '1')
+		if (map[(int)floor(ray->y_end)][(int)(ray->x_end)] == '1')
 			return (true);
 	return (false);
 }
