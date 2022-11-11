@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_config_structure.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:41 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/17 16:20:00 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 14:45:06 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_bool	check_structure(char **scene)
 	int	i;
 
 	i = 0;
-	while (is_config_line(scene[i]) || str_is_in_charset(scene[i], " \n"))
+	while ((is_config_line(scene[i]) || str_is_in_charset(scene[i], " \n")) && scene[i])
 		i++;
 	while (scene[i])
 	{

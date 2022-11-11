@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:29:40 by pdal-mol          #+#    #+#             */
 /*   Updated: 2022/11/11 16:51:36 by aandric          ###   ########lyon.fr   */
@@ -70,6 +70,7 @@
 # define RGB_CODES "wrong RGB color codes."
 # define MEMALLOC "can't allocate memory."
 # define OPENFILE "can't open file."
+# define MLX "error while loading mlx."
 
 /****************TYPEDEFS*********************/
 typedef enum e_bool

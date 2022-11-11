@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:47 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/17 16:20:09 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 16:31:13 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ t_bool	check_map(char **scene)
 	char	**map;
 
 	map = get_map(scene);
+	if (!map)
+		return (false);
 	if (!check_map_len(scene))
 	{
 		free_array((void **)map);
