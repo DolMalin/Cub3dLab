@@ -1,7 +1,7 @@
 NO ./textures/overlook_carpet.xpm 
 SO ./t extures/overlook_carpet.xpm      
 WE ./textures/overlook_carpet.xpm 
-EA ./textures/overlook_carpet.xpm
+EA ./textures/wood.xpm
 
 C 125,125,135
 F 125,125,135
