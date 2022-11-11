@@ -6,101 +6,136 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:25 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/10 17:09:35 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 12:20:22 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	move_up(t_data **data)
+// t_bool	can_move(char **map, float x, float y, float ray_coef_x, float ray_coef_y)
+// {
+// 	int	next_x;
+// 	int	next_y;
+
+// 	next_x = x + ray_coef_x
+// 		* (STEP_COEF + HIT_BOX);
+// 	next_y = y - ray_coef_y
+// 		* (STEP_COEF + HIT_BOX);
+// 	if (map[next_y][next_x] == '1')
+// 		return (false);
+// 	next_x = x - ray_coef_x
+// 		* (STEP_COEF + HIT_BOX);
+// 	next_y = y + ray_coef_y
+// 		* (STEP_COEF + HIT_BOX);
+// 	if (map[next_y][next_x] == '1')
+// 		return (false);
+// 	next_x = x + ray_coef_x
+// 		* (STEP_COEF + HIT_BOX);
+// 	next_y = y + ray_coef_y
+// 		* (STEP_COEF + HIT_BOX);
+// 	if (map[next_y][next_x] == '1')
+// 		return (false);
+// 	next_x = x - ray_coef_x
+// 		* (STEP_COEF + HIT_BOX);
+// 	next_y = y - ray_coef_y
+// 		* (STEP_COEF + HIT_BOX);
+// 	if (map[next_y][next_x] == '1')
+// 		return (false);
+// 	return (true);
+	
+// }
+
+void	move_up(t_data *data)
 {
 	float	next_x;
 	float	next_y;
 	int		next_x_i;
 	int		next_y_i;
 
-	next_x = (*data)->player->x + (*data)->player->ray_coef_x * STEP_COEF;
-	next_y = (*data)->player->y - (*data)->player->ray_coef_y * STEP_COEF;
-	next_x_i = (*data)->player->x + (*data)->player->ray_coef_x
-		* (STEP_COEF + HIT_BOX);
-	next_y_i = (*data)->player->y - (*data)->player->ray_coef_y
-		* (STEP_COEF + HIT_BOX);
-	if ((*data)->map[next_y_i][next_x_i] == '1')
+	next_x = data->player->x + data->player->ray_coef_x * STEP_COEF;
+	next_y = data->player->y - data->player->ray_coef_y * STEP_COEF;
+	next_x_i = data->player->x + data->player->ray_coef_x
+		* STEP_COEF;
+	next_y_i = data->player->y - data->player->ray_coef_y
+		* STEP_COEF;
+	if (data->map[next_y_i][next_x_i] == '1')
 		return ;
-	(*data)->player->x = next_x;
-	(*data)->player->y = next_y;
+	// if (!can_move(data->map, data->player->x, data->player->y, data->player->ray_coef_x, data->player->ray_coef_y))
+	// 	return ;
+	data->player->x = next_x;
+	data->player->y = next_y;
 }
 
-void	move_down(t_data **data)
+void	move_down(t_data *data)
 {
 	float	next_x;
 	float	next_y;
 	int		next_x_i;
 	int		next_y_i;
 
-	next_x = (*data)->player->x - (*data)->player->ray_coef_x * STEP_COEF;
-	next_y = (*data)->player->y + (*data)->player->ray_coef_y * STEP_COEF;
-	next_x_i = (*data)->player->x - (*data)->player->ray_coef_x
-		* (STEP_COEF + HIT_BOX);
-	next_y_i = (*data)->player->y + (*data)->player->ray_coef_y
-		* (STEP_COEF + HIT_BOX);
-	if ((*data)->map[next_y_i][next_x_i] == '1')
+	next_x = data->player->x - data->player->ray_coef_x * STEP_COEF;
+	next_y = data->player->y + data->player->ray_coef_y * STEP_COEF;
+	next_x_i = data->player->x - data->player->ray_coef_x
+		* STEP_COEF;
+	next_y_i = data->player->y + data->player->ray_coef_y
+		* STEP_COEF;
+	if (data->map[next_y_i][next_x_i] == '1')
 		return ;
-	(*data)->player->x = next_x;
-	(*data)->player->y = next_y;
+	data->player->x = next_x;
+	data->player->y = next_y;
 }
 
-void	move_left(t_data **data)
+void	move_left(t_data *data)
 {
 	float	next_x;
 	float	next_y;
 	int		next_x_i;
 	int		next_y_i;
 
-	next_x = (*data)->player->x - (*data)->player->ray_coef_y * STEP_COEF;
-	next_y = (*data)->player->y - (*data)->player->ray_coef_x * STEP_COEF;
-	next_x_i = (*data)->player->x - (*data)->player->ray_coef_x
-		* (STEP_COEF + HIT_BOX);
-	next_y_i = (*data)->player->y - (*data)->player->ray_coef_y
-		* (STEP_COEF + HIT_BOX);
-	if ((*data)->map[next_y_i][next_x_i] == '1')
+	next_x = data->player->x - data->player->ray_coef_y * STEP_COEF;
+	next_y = data->player->y - data->player->ray_coef_x * STEP_COEF;
+	next_x_i = data->player->x - data->player->ray_coef_x
+		* STEP_COEF;
+	next_y_i = data->player->y - data->player->ray_coef_y
+		* STEP_COEF;
+	if (data->map[next_y_i][next_x_i] == '1')
 		return ;
-	(*data)->player->x = next_x;
-	(*data)->player->y = next_y;
+	data->player->x = next_x;
+	data->player->y = next_y;
 }
 
-void	move_right(t_data **data)
+void	move_right(t_data *data)
 {
 	float	next_x;
 	float	next_y;
 	int		next_x_i;
 	int		next_y_i;
 
-	next_x = (*data)->player->x + (*data)->player->ray_coef_y * STEP_COEF;
-	next_y = (*data)->player->y + (*data)->player->ray_coef_x * STEP_COEF;
-	next_x_i = (*data)->player->x + (*data)->player->ray_coef_x
-		* (STEP_COEF + HIT_BOX);
-	next_y_i = (*data)->player->y + (*data)->player->ray_coef_y
-		* (STEP_COEF + HIT_BOX);
-	if ((*data)->map[next_y_i][next_x_i] == '1')
+	next_x = data->player->x + data->player->ray_coef_y * STEP_COEF;
+	next_y = data->player->y + data->player->ray_coef_x * STEP_COEF;
+	next_x_i = data->player->x + data->player->ray_coef_x
+		* STEP_COEF;
+	next_y_i = data->player->y + data->player->ray_coef_y
+		* STEP_COEF;
+	if (data->map[next_y_i][next_x_i] == '1')
 		return ;
-	(*data)->player->x = next_x;
-	(*data)->player->y = next_y;
+	data->player->x = next_x;
+	data->player->y = next_y;
 }
 
 int	move_player(t_data *data, int key)
 {
 	if (key == KB_W)
-		move_up(&data);
+		move_up(data);
 	else if (key == KB_A)
-		move_left(&data);
+		move_left(data);
 	else if (key == KB_D)
-		move_right(&data);
+		move_right(data);
 	else if (key == KB_S)
-		move_down(&data);
+		move_down(data);
 	else if (key == KB_LEFT)
-		rotate_left(&data);
+		rotate_left(data);
 	else if (key == KB_RIGHT)
-		rotate_right(&data);
+		rotate_right(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:29:40 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/10 17:09:27 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 12:18:53 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,12 +171,12 @@ int				move_player(t_data *data, int key);
 void			get_player_pos(t_data **data);
 void			update_player_pov(t_data **data);
 char			get_player_token(t_data *data);
-void			move_right(t_data **data);
-void			move_left(t_data **data);
-void			move_down(t_data **data);
-void			move_up(t_data **data);
-void			rotate_left(t_data **data);
-void			rotate_right(t_data **data);
+void			move_right(t_data *data);
+void			move_left(t_data *data);
+void			move_down(t_data *data);
+void			move_up(t_data *data);
+void			rotate_left(t_data *data);
+void			rotate_right(t_data *data);
 
 /****************CHECK_INPUT*********************/
 t_bool			check_input(int ac, char **av);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:06:29 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/09 13:09:06 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:30:42 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	draw_walls(t_data *data)
 		if (pov > TWO_PI)
 			pov -= TWO_PI;
 		ray = get_collision_coord(data, pov);
-		wall_height_coef = 1 / (get_ray_len(data, ray)
+		wall_height_coef = 1 / (get_ray_len(data->player->x, ray->x_end, data->player->y, ray->y_end)
 				* cos(fabs(pov - mid_ray)));
 		draw_stripe(data, wall_height_coef, i, ray);
 		pov = mid_ray - get_fov_angles(i);
