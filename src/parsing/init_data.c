@@ -1,46 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.c                                             :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:10:07 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 14:14:46 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/09 13:25:04 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static t_image	*init_image(t_data *data)
+static t_ray	*create_ray(void)
 {
-	t_image	*image;
+	t_ray	*ray;
 
-	image = malloc(sizeof(t_image));
-	if (!image)
+	ray = malloc(sizeof(t_ray));
+	if (!ray)
 		error(MEMALLOC);
-	image->ptr = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!image->ptr)
-		error(MEMALLOC);
-	image->addr = mlx_get_data_addr(
-			image->ptr,
-			&image->bits_per_pixel,
-			&image->line_length,
-			&image->endian
-			);
-	if (!image->addr)
-		error(MEMALLOC);
-	return (image);
-}
-
-void	init_window(t_data *data)
-{
-	data->mlx = mlx_init();
-	if (!data->mlx)
-		error(MEMALLOC);
-	data->mlx_win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
-	if (!data->mlx_win)
-		error(MEMALLOC);
+	return (ray);
 }
 
 t_data	*init_data(char *scene_file)
@@ -56,10 +35,17 @@ t_data	*init_data(char *scene_file)
 		return (NULL);
 	data->textures_path = get_textures_paths(parsed_scene);
 	data->colors = get_colors(parsed_scene);
+	data->color_ceil = rgb_to_hex(data->colors[CEIL]);
+	data->color_floor = rgb_to_hex(data->colors[FLOOR]);
 	data->map = get_map(parsed_scene);
 	init_window(data);
 	data->player = init_player(data);
 	data->image = init_image(data);
+	data->textures = init_textures(data, data->textures_path);
+	data->y_max = array_len((void **)data->map);
+	data->precomputed = init_precomputed(data);
+	data->ray_horizontal = create_ray();
+	data->ray_vertical = create_ray();
 	free_array((void **)parsed_scene);
 	return (data);
 }
@@ -67,6 +53,7 @@ t_data	*init_data(char *scene_file)
 void	free_data(t_data *data)
 {
 	free_unterminated_array((void **)data->textures_path, 4);
+	free_unterminated_array((void **)data->textures, 4);
 	free_unterminated_array((void **)data->colors, 2);
 	free_array((void **)data->map);
 	mlx_destroy_window(data->mlx, data->mlx_win);
@@ -74,5 +61,9 @@ void	free_data(t_data *data)
 	free(data->image->addr);
 	free(data->image);
 	free(data->player);
+	free(data->ray_horizontal);
+	free(data->ray_vertical);
+	free(data->precomputed->map_lines_len);
+	free(data->precomputed);
 	free(data);
 }

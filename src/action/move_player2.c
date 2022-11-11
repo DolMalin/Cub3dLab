@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:34 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/02 16:53:37 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 12:19:50 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,20 @@ char	get_player_token(t_data *data)
 	return (0);
 }
 
-void	rotate_right(t_data **data)
+void	rotate_right(t_data *data)
 {
-	(*data)->player->pov -= FOV_STEP * ROT_COEF;
-	if ((*data)->player->pov < 0)
-		(*data)->player->pov += 2 * M_PI;
-	///////
-	(*data)->player->ray_coef_x = cos((*data)->player->pov);
-	(*data)->player->ray_coef_y = sin((*data)->player->pov);
+	data->player->pov -= FOV_STEP * ROT_COEF;
+	if (data->player->pov < 0)
+		data->player->pov += TWO_PI;
+	data->player->ray_coef_x = cos(data->player->pov);
+	data->player->ray_coef_y = sin(data->player->pov);
 }
 
-void	rotate_left(t_data **data)
+void	rotate_left(t_data *data)
 {
-	(*data)->player->pov += FOV_STEP * ROT_COEF;
-	if ((*data)->player->pov >= 2 * M_PI)
-		(*data)->player->pov -= 2 * M_PI;
-	//////
-	(*data)->player->ray_coef_x = cos((*data)->player->pov);
-	(*data)->player->ray_coef_y = sin((*data)->player->pov);
+	data->player->pov += FOV_STEP * ROT_COEF;
+	if (data->player->pov >= TWO_PI)
+		data->player->pov -= TWO_PI;
+	data->player->ray_coef_x = cos(data->player->pov);
+	data->player->ray_coef_y = sin(data->player->pov);
 }

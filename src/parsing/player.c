@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:14:26 by aandric           #+#    #+#             */
-/*   Updated: 2022/11/03 14:15:53 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/07 15:30:51 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ float	get_player_pov(t_data *data)
 
 	player_pov = get_player_token(data);
 	if (player_pov == 'N')
-		return (M_PI_2);
+		return (PI_ON_TWO);
 	if (player_pov == 'S')
-		return (3 * M_PI_2);
+		return (THREE_PI_ON_TWO);
 	if (player_pov == 'E')
-		return (2 * M_PI);
+		return (TWO_PI);
 	if (player_pov == 'W')
-		return (M_PI);
+		return (PI);
 	return (0);
 }
 

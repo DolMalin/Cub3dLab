@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_features_from_scene.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:25:27 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 13:50:33 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/09 13:25:42 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@ unsigned char	*get_color(char *line)
 	color[R] = (unsigned char)ft_atoi(splited_line[0]);
 	color[G] = (unsigned char)ft_atoi(splited_line[1]);
 	color[B] = (unsigned char)ft_atoi(splited_line[2]);
-	// color[R] = ft_atoi(splited_line[0]);
-	// color[G] = ft_atoi(splited_line[1]);
-	// color[B] = ft_atoi(splited_line[2]);
 	free_array((void **)splited_line);
 	free(line);
 	return (color);

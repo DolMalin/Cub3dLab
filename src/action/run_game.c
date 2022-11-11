@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:40:40 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/03 13:19:36 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:28:51 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	get_events(int key, t_data *data)
 	if (key == ESCAPE_KC)
 		exit_program(data);
 	move_player(data, key);
-	print_config(data);
 	create_image(data);
 	return (0);
 }

@@ -1,16 +1,16 @@
-NO ./textures/floor_overlook_hotel_1.xpm
-SO ./t extures/floor_overlook_hotel_2.xpm      
-WE ./textures/floor_overlook_hotel_1.xpm 
-EA ./textures/floor_overlook_hotel_2.xpm
+NO ./textures/overlook_carpet.xpm 
+SO ./t extures/overlook_carpet.xpm      
+WE ./textures/overlook_carpet.xpm 
+EA ./textures/overlook_carpet.xpm
 
-F 220,100,2
-C 225,30,2
+C 125,125,135
+F 125,125,135
 
 1111111111111111111111
 1000000000000000000001
 1000000000000000000001
 1000000000000000000001
-1000000N00000001111111
+1000000S00000001111111
 1000000000000001111001
 1000000000000001111111
 1000000000000000001001
