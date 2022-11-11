@@ -6,7 +6,7 @@
 #    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/11/11 16:25:32 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/11/11 18:00:12 by aandric          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,48 +56,12 @@ SRC_FILES 			=	main.c \
 			${addprefix action/, ${ACTION_FILES}} \
 			${addprefix graphic/, ${GRAPHIC_FILES}} \
 
-## ======================= TO REMOVE ======================= ##
-SRC_FILES_2 =	${addprefix parsing/, ${PARSING_FILES}} \
-				${addprefix utils/, ${UTILS_FILES}} \
-				${addprefix check_input/, ${CHECK_INPUT_FILES}} \
-				# ${addprefix action/, ${ACTION_FILES}} \
-				# ${addprefix graphic/, ${GRAPHIC_FILES}} \
-				error.c
-
-HEADERS_2 = includes/cub3d.h unit-tests/test.h
-
-## TEST PARSING
-TEST_PARSING_FILES =	\
-						test_parsing.c \
-						test_functions.c \
-						utils.c \
-						
-TEST_PARSING =			${addprefix unit-tests/, ${TEST_PARSING_FILES}}
-SRC_PARSING = 			${addprefix src/, ${SRC_FILES_2}}\
-						src/error.c \
-						${TEST_PARSING}\
-						
-OBJS_PARSING = 			${SRC_PARSING:.c=.o}
-
-## TEST INPUT
-TEST_INPUT_FILES =		test_input.c \
-						test_functions.c \
-						utils.c\
-					
-TEST_INPUT =			${addprefix unit-tests/, ${TEST_INPUT_FILES}}
-SRC_INPUT = 			${addprefix src/, ${SRC_FILES_2}}\
-						src/error.c \
-						${TEST_INPUT}
-OBJS_INPUT = 			${SRC_INPUT:.c=.o}
-
-## ========================================================= ##
-
 SRC = 			${addprefix src/, ${SRC_FILES}}
 OBJS = 			${SRC:.c=.o}
 HEADERS = 		includes/cub3d.h
 
 CMD = 			gcc
-FLAGS = 		-Wall -Werror -Wextra  -O3     -g3 -fsanitize=address
+FLAGS = 		-Wall -Werror -Wextra  -O3
 
 LIB =			./libft/libft.a ./mlx/libmlx.a
 
@@ -110,21 +74,6 @@ all: 			library $(NAME)
 
 $(NAME): 		$(OBJS) $(LIB) Makefile
 				$(CMD) $(FLAGS) $(OBJS) $(LIB) -o $(NAME) $(FLAGSX)
-
-
-## ======================= TO REMOVE ======================= ##
-test_parsing: 	$(OBJS_PARSING) libft $(LIBFT) Makefile
-				$(CMD) ${FLAGS} $(OBJS_PARSING) $(LIBFT) -o test
-
-test_input: 	$(OBJS_INPUT) libft $(LIBFT) Makefile
-				$(CMD) ${FLAGS} $(OBJS_INPUT) $(LIBFT) -o test
-
-testclean:
-			rm -rf $(OBJS_PARSING) $(OBJS_INPUT)
-			make clean -C ./libft
-			make clean -C ./mlx
-			rm -rf test
-## ========================================================= ##
 
 library: 
 					make -C ./libft

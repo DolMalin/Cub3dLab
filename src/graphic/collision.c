@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 17:32:12 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 17:57:26 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static t_bool	check_collision_y(char **map, t_ray *ray, float pov, int y_max)
 	return (false);
 }
 
-static t_bool	check_collision_x(char **map, t_ray *ray, float pov, int *map_lines_len)
+static t_bool	check_collision_x(char **map, t_ray *ray, float pov,
+	int *map_lines_len)
 {
 	if (pov == 0 || pov == PI)
 		if (map[(int)ray->y_end][(int)ray->x_end] == '1')
@@ -66,12 +67,12 @@ static t_ray	*get_collision_y(t_data *data, float pov, t_ray *ray)
 		ray->dir = get_wall_dir(ray, 'y', pov);
 		if (pov == PI || pov == 0)
 			return (ray);
-		ray->x_end = get_x_with_y(data, ray->y_end, pov);		
+		ray->x_end = get_x_with_y(data, ray->y_end, pov);
 		if (ray->y_end > data->y_max || ray->y_end < 0)
 			return (ray);
 		if (ray->x_end >= data->precomputed->map_lines_len[(int)ray->y_end]
 			|| ray->x_end < 0)
-				return (ray);
+			return (ray);
 		if (check_collision_y(data->map, ray, pov, data->y_max))
 			ray->coll = true;
 	}
@@ -96,7 +97,8 @@ static t_ray	*get_collision_x(t_data *data, float pov, t_ray *ray)
 		if (ray->x_end >= data->precomputed->map_lines_len[(int)ray->y_end]
 			|| ray->x_end < 0)
 			return (ray);
-		if (check_collision_x(data->map, ray, pov, data->precomputed->map_lines_len))
+		if (check_collision_x(data->map, ray, pov,
+				data->precomputed->map_lines_len))
 			ray->coll = true;
 	}
 	return (ray);
@@ -106,10 +108,12 @@ t_ray	*get_collision_coord(t_data *data, float pov)
 {
 	data->ray_vertical = get_collision_x(data, pov, data->ray_vertical);
 	data->ray_horizontal = get_collision_y(data, pov, data->ray_horizontal);
-	// data->ray_vertical->len = get_ray_len(data, data->ray_vertical);
-	// data->ray_horizontal->len = get_ray_len(data, data->ray_horizontal);
-	data->ray_vertical->len = get_ray_len(data->player->x, data->ray_vertical->x_end, data->player->y, data->ray_vertical->y_end);
-	data->ray_horizontal->len = get_ray_len(data->player->x, data->ray_horizontal->x_end, data->player->y, data->ray_horizontal->y_end);
+	data->ray_vertical->len = get_ray_len(
+			data->player->x, data->ray_vertical->x_end, data->player->y,
+			data->ray_vertical->y_end);
+	data->ray_horizontal->len = get_ray_len(
+			data->player->x, data->ray_horizontal->x_end,
+			data->player->y, data->ray_horizontal->y_end);
 	if (data->ray_horizontal->len < data->ray_vertical->len)
 		return (data->ray_horizontal);
 	return (data->ray_vertical);

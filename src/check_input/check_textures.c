@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:51 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 15:24:40 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:54:02 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_bool	check_textures(char **scene)
 			buffer = get_line_from_key(scene, "WE");
 		if (!buffer)
 			return (false);
-		
 		if (!check_texture(buffer))
 		{
 			free(buffer);
