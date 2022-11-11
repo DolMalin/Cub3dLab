@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:00:31 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 13:35:27 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 13:47:39 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_bool	check_collision_y(char **map, t_ray *ray, float pov, int y_max)
 {
-	if (ray->y_end == 0 || ray->y_end == data->y_max)
+	if (ray->y_end == 0 || ray->y_end == y_max)
 		return (true);
 	if (pov > 0 && pov <= PI_ON_TWO)
 		if (map[(int)(ray->y_end - 1)][(int)floor(ray->x_end)] == '1')
@@ -31,13 +31,13 @@ static t_bool	check_collision_y(char **map, t_ray *ray, float pov, int y_max)
 	return (false);
 }
 
-static t_bool	check_collision_x(char map, t_ray *ray, float pov)
+static t_bool	check_collision_x(char **map, t_ray *ray, float pov, int *map_lines_len)
 {
 	if (pov == 0 || pov == PI)
 		if (map[(int)ray->y_end][(int)ray->x_end] == '1')
 			return (true);
 	if (ray->x_end == 0 || ray->x_end
-		== precomputed->map_lines_len[(int)floor(ray->y_end)])
+		== map_lines_len[(int)floor(ray->y_end)])
 		return (true);
 	if (pov >= 0 && pov <= PI_ON_TWO)
 		if (map[(int)floor(ray->y_end)][(int)(ray->x_end)] == '1')
@@ -72,7 +72,7 @@ static t_ray	*get_collision_y(t_data *data, float pov, t_ray *ray)
 			return (ray);
 		if (ray->y_end > data->y_max || ray->y_end < 0)
 			return (ray);
-		if (check_collision_y(data, ray, pov))
+		if (check_collision_y(data->map, ray, pov, data->y_max))
 			ray->coll = true;
 	}
 	return (ray);
@@ -96,7 +96,7 @@ static t_ray	*get_collision_x(t_data *data, float pov, t_ray *ray)
 		if (ray->x_end >= data->precomputed->map_lines_len[(int)ray->y_end]
 			|| ray->x_end < 0)
 			return (ray);
-		if (check_collision_x(data, ray, pov))
+		if (check_collision_x(data->map, ray, pov, data->precomputed->map_lines_len))
 			ray->coll = true;
 	}
 	return (ray);
