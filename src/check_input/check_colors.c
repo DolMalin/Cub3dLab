@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:35 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/14 13:52:24 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/14 14:40:27 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ t_bool	check_colors(char **scene)
 		free_unterminated_array((void **)colors, 2);
 		return (false);
 	}
-	if (!check_color_code(colors[FLOOR]))
+	if (!check_color_codes(colors[FLOOR]))
 	{
 		free_unterminated_array((void **)colors, 2);
 		return (false);
 	}
-	if (!check_color_code(colors[CEIL]))
+	if (!check_color_codes(colors[CEIL]))
 	{
 		free_unterminated_array((void **)colors, 2);
 		return (false);

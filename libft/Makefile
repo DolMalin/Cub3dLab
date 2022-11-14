@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pdal-mol <dolmalinn@gmail.com>             +#+  +:+       +#+         #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/03 19:17:06 by aandric           #+#    #+#              #
-#    Updated: 2022/10/05 17:50:52 by pdal-mol         ###   ########.fr        #
+#    Updated: 2022/11/14 15:33:25 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ BONUS = ${BONUSSRCS:.c=.o}
 HEADER = libft.h
 
 CMD=gcc
-FLAGS=-Wall -Werror -Wextra
+FLAGS=-Wall -Werror -Wextra -o3
 
 %.o: %.c ${HEADER}
 	$(CMD) $(FLAGS) -c $< -o $@ 

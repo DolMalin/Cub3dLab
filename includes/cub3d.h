@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:29:40 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/14 11:53:55 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/14 15:00:27 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ t_bool			check_config_structure(char **scene);
 t_bool			check_map(char **unparsed_scene);
 t_bool			check_player(char **map);
 t_bool			check_colors(char **unparsed_scene);
-t_bool			check_color_code(char *color);
+t_bool			check_color_codes(char *color);
 t_bool			check_textures(char **scene);
 
 /****************PARSING*********************/
@@ -216,6 +216,8 @@ t_bool			is_in_charset(char c, char *charset);
 t_bool			is_near_charset(char **unparsed_scene, size_t i,
 					size_t j, char *charset);
 void			print_config(t_data *data);
+int				get_max_x(char	**parsed_scene);
+int				get_start_map(char **parsed_scene);
 
 /****************ERRORS*********************/
 void			error(char *error_msg);

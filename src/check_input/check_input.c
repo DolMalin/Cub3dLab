@@ -6,7 +6,7 @@
 /*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:45 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/14 14:10:18 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/14 15:32:44 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_bool	check_input(int ac, char **av)
 	char	**scene;
 
 	scene = parse_scene_file(av[1]);
-	
 	if (!scene)
 		error(MEMALLOC);
 	if (!check_arguments(ac, av))

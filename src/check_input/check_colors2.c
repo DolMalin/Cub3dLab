@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:38 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/10/17 16:19:54 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 14:43:02 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,33 @@ static t_bool	check_rgb_range(char *color)
 
 t_bool	check_color_code(char *color)
 {
+	char	*temp;
+
+	temp = ft_strtrim(color, " ");
+	if (!temp)
+		error(MEMALLOC);
+	if (ft_strlen(temp) > 3 || !ft_strisdigit(temp)
+		|| !check_rgb_range(temp))
+	{
+		free(temp);
+		return (false);
+	}
+	free(temp);
+	return (true);
+}
+
+t_bool	check_color_codes(char *color)
+{
 	char	**split_color;
 	int		i;
 
 	split_color = ft_split(color, ',');
+	if (!split_color)
+		error(MEMALLOC);
 	i = 0;
 	while (split_color[i])
 	{
-		if (ft_strlen(split_color[i]) > 3 || !ft_strisdigit(split_color[i])
-			|| !check_rgb_range(split_color[i]))
+		if (!check_color_code(split_color[i]))
 		{
 			free_array((void **)split_color);
 			return (false);
