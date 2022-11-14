@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_features_from_scene.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:25:27 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 17:33:24 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 14:46:07 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,37 +43,6 @@ char	*get_line_from_key(char **parsed_scene, char *key)
 		i++;
 	}
 	return (NULL);
-}
-
-unsigned char	*get_color(char *line)
-{
-	unsigned char	*color;
-	char			**splited_line;
-
-	splited_line = ft_split(line, ',');
-	if (!splited_line)
-		error(MEMALLOC);
-	color = malloc(sizeof(unsigned char) * 3);
-	if (!color)
-		return (NULL);
-	color[R] = (unsigned char)ft_atoi(splited_line[0]);
-	color[G] = (unsigned char)ft_atoi(splited_line[1]);
-	color[B] = (unsigned char)ft_atoi(splited_line[2]);
-	free_array((void **)splited_line);
-	free(line);
-	return (color);
-}
-
-unsigned char	**get_colors(char **parsed_scene)
-{
-	unsigned char	**colors;
-
-	colors = malloc(sizeof(char *) * 3);
-	if (!colors)
-		error(MEMALLOC);
-	colors[FLOOR] = get_color(get_line_from_key(parsed_scene, "F"));
-	colors[CEIL] = get_color(get_line_from_key(parsed_scene, "C"));
-	return (colors);
 }
 
 char	**get_textures_paths(char **parsed_scene)

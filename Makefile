@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+         #
+#    By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 13:19:38 by aandric           #+#    #+#              #
-#    Updated: 2022/11/11 18:00:12 by aandric          ###   ########lyon.fr    #
+#    Updated: 2022/11/14 15:15:31 by pdal-mol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ PARSING_FILES 		=	init_data.c \
 						parse_scene.c \
 						get_features_from_scene.c \
 						trim_config_line.c \
-						get_map.c
+						get_map.c \
+						colors.c
 				
 CHECK_INPUT_FILES 	=	check_input.c \
 						check_map.c \
@@ -61,7 +62,7 @@ OBJS = 			${SRC:.c=.o}
 HEADERS = 		includes/cub3d.h
 
 CMD = 			gcc
-FLAGS = 		-Wall -Werror -Wextra  -O3
+FLAGS = 		-Wall -Werror -Wextra  -O3 #-fsanitize=thread
 
 LIB =			./libft/libft.a ./mlx/libmlx.a
 
