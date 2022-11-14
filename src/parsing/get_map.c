@@ -3,27 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:26:05 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 17:38:50 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 14:18:16 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-size_t	map_len(char	**parsed_scene)
+int	map_len(char **parsed_scene)
 {
-	size_t	map_len;
-	size_t	i;
+	int	map_len;
+	int	i;
 
 	map_len = 0;
 	i = 0;
 	while (parsed_scene[i])
 	{
-		if (!is_config_line(parsed_scene[i]))
-			map_len++;
+		if (is_config_line(parsed_scene[i]) || parsed_scene[i][0] == '\n')
+			i++;
+		else 
+			break ;
+	}
+	while (parsed_scene[i])
+	{
 		i++;
+		map_len++;
+	}
+	i--;
+	while (parsed_scene[i] && parsed_scene[i][0] == '\n')
+	{
+		i--;
+		map_len--;
 	}
 	return (map_len);
 }
@@ -84,15 +96,19 @@ int	get_max_x(char	**parsed_scene)
 char	*filter_map_line(char *line, int max_x)
 {
 	char	*output;
-
-	output = ft_strtrim(line, "\n");
-	if (!output)
-		return (MEMALLOC);
+	
+	output = line;
+	if (ft_strlen(line) > 1)
+	{
+		output = ft_strtrim(line, "\n");
+		if (!output)
+			return (MEMALLOC);
+	}
 	output = complete_line_with_space(output, max_x);
 	return (output);
 }
 
-char	**get_map(char	**parsed_scene)
+char	**get_map(char **parsed_scene)
 {
 	char	**map;
 	int		i;
@@ -109,11 +125,15 @@ char	**get_map(char	**parsed_scene)
 	max_x = get_max_x(parsed_scene);
 	while (parsed_scene[i])
 	{
-		if (!is_config_line(parsed_scene[i]))
-		{
-			map[j] = filter_map_line(parsed_scene[i], max_x);
-			j++;
-		}
+		if (is_config_line(parsed_scene[i]) || parsed_scene[i][0] == '\n')
+			i++;
+		else
+			break;
+	}
+	while (j < map_len(parsed_scene))
+	{
+		map[j] = filter_map_line(parsed_scene[i], max_x);
+		j++;
 		i++;
 	}
 	map[j] = 0;

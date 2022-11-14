@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:49 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 17:51:01 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 14:17:51 by pdal-mol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static t_bool	check_valid_characters(char **map)
 	int	j;
 
 	i = 0;
+	
 	while (map[i])
 	{
 		j = 0;
