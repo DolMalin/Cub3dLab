@@ -6,7 +6,7 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:44:04 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 17:30:22 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 16:19:54 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	put_player_to_minimap(t_data *data)
 		data->image,
 		(data->player->x * PRINT_COEF) + 20,
 		(data->player->y * PRINT_COEF) + 20,
-		0x00000
+		0xFF0000
 		);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image->ptr, 0, 0);
 }

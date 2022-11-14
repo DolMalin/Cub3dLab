@@ -6,13 +6,13 @@
 /*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:06:29 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/11 17:58:06 by aandric          ###   ########lyon.fr   */
+/*   Updated: 2022/11/14 16:25:16 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	draw_wall_pixel(t_data *data, t_ray *ray, float wall_height,
+static void	draw_wall_pixel(t_data *data, t_ray *ray, float wall_height,
 	int pixels[2])
 {
 	int	color;
@@ -25,7 +25,7 @@ void	draw_wall_pixel(t_data *data, t_ray *ray, float wall_height,
 	my_mlx_pixel_put(data->image, pixels[0], pixels[1], color);
 }
 
-void	draw_stripe(t_data *data, float wall_height_coef, int stripe_index,
+static void	draw_stripe(t_data *data, float wall_height_coef, int stripe_index,
 	t_ray *ray)
 {
 	float	wall_height;

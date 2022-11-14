@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_colors2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:46:38 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/14 14:43:02 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:23:51 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_bool	check_rgb_range(char *color)
 	return (true);
 }
 
-t_bool	check_color_code(char *color)
+static t_bool	check_color_code(char *color)
 {
 	char	*temp;
 

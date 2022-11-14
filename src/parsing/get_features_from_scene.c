@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_features_from_scene.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:25:27 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/14 14:46:07 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:22:13 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**get_textures_paths(char **parsed_scene)
 
 	textures_paths = malloc(sizeof(char *) * 4);
 	if (!textures_paths)
-		return (NULL);
+		error(MEMALLOC);
 	textures_paths[NO] = get_line_from_key(parsed_scene, "NO");
 	textures_paths[SO] = get_line_from_key(parsed_scene, "SO");
 	textures_paths[EA] = get_line_from_key(parsed_scene, "EA");

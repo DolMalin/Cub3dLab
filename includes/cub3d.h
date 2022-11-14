@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdal-mol <pdal-mol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aandric <aandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:29:40 by pdal-mol          #+#    #+#             */
-/*   Updated: 2022/11/14 15:00:27 by pdal-mol         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:01:23 by aandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 /****************DEFINES_PREFERENCES******************/
 # define PRINT_COEF			10
-# define ROT_COEF			30
-# define STEP_COEF			0.3
+# define ROT_COEF			20
+# define STEP_COEF			0.1
 # define WIN_WIDTH			1200
 # define WIN_HEIGHT			900
 # define FOV				60
